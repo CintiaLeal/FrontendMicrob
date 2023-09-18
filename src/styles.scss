@@ -1,0 +1,26 @@
+.prueba {
+    background-color: #882222;
+    color: #a86f6f;
+}
+.button {
+    background-color: #882222;
+    color: #a86f6f;
+}
+.change-colors {
+
+    .mat-mdc-raised-button.mat-primary {
+        
+        background-color: #618C88;
+        color: #ffffff;
+    }
+   
+    .mat-mdc-raised-button.mat-accent{
+        background-color: #9BBFBC;
+        color: #ffffff;
+    }
+
+    .mat-toolbar.mat-primary{
+        background-color: #395941;
+        color: #ffffff;
+    }
+}

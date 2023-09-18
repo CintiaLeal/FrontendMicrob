@@ -1,0 +1,25 @@
+.registro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px); /* 100px es la distancia desde la parte superior */
+  }
+  
+  mat-card {
+    width: 500px;
+  }
+  
+  mat-card-title {
+    text-align: center;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  button {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
