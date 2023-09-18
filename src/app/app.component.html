@@ -3,7 +3,7 @@
     <mat-toolbar-row>
       <span class="mat-toolbar-logo">MICROB</span>
       <span class="mat-toolbar-divider"></span>
-      <button mat-icon-button routerLink="/"> 
+      <button mat-icon-button routerLink="/" > 
         <mat-icon>home</mat-icon>
       </button>
       <button mat-icon-button>
@@ -12,10 +12,7 @@
       <button mat-icon-button>
         <mat-icon>email</mat-icon>
       </button>
-      <button mat-icon-button>
-        <mat-icon>more_horiz</mat-icon>
-      </button>
-      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
 <mat-menu #menu="matMenu">
     <button mat-button routerLink="/registrarInstancia">Registrar Instancia</button>
     <button mat-button routerLink="/login">Iniciar Sesión</button>
