@@ -1,6 +1,7 @@
 # Directorios generados por Angular CLI
 node_modules/
 dist/
+.angular/
 
 # Archivos generados por Angular CLI
 *.js
