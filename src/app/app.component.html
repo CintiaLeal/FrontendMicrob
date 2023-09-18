@@ -1,11 +1,28 @@
 <div [ngClass]="{'change-colors': changeColors}">
-
-    <mat-toolbar color="primary">
-        <button mat-button routerLink="/registrarInstancia">Registrar Instancia</button>
-        <button mat-button routerLink="/login">Iniciar Sesión</button>
-        <button mat-button routerLink="/registrarUsuario">Registrar Usuario</button>
-      </mat-toolbar>
-
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span class="mat-toolbar-logo">MICROB</span>
+      <span class="mat-toolbar-divider"></span>
+      <button mat-icon-button routerLink="/"> 
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>email</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>more_horiz</mat-icon>
+      </button>
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+    <button mat-button routerLink="/registrarInstancia">Registrar Instancia</button>
+    <button mat-button routerLink="/login">Iniciar Sesión</button>
+    <button mat-button routerLink="/registrarUsuario">Registrar Usuario</button>
+</mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
 <router-outlet></router-outlet> 
 </div>

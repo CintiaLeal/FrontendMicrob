@@ -1,0 +1,29 @@
+# Directorios generados por Angular CLI
+node_modules/
+dist/
+
+# Archivos generados por Angular CLI
+*.js
+*.js.map
+*.css
+*.html
+
+# Otros archivos y directorios generados por herramientas
+e2e/
+.idea/
+*.log
+npm-debug.log
+yarn-error.log
+
+# Archivo de configuración personal de Angular CLI
+.angular-cli.json
+
+# Archivos de configuración de editor (por ejemplo, Visual Studio Code)
+.vscode/
+
+# Dependiendo de tu entorno, es posible que desees ignorar otros archivos y directorios,
+# como archivos de configuración de servidores o archivos de configuración local.
+# Añade esos archivos y directorios según sea necesario para tu aplicación.
+
+# Ignora cualquier archivo de respaldo creado por tu editor o IDE
+*~

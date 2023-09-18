@@ -35,12 +35,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { InicioComponent } from './page/inicio/inicio.component';
 @NgModule({
   declarations: [
     AppComponent,
     NuevaInstanciaComponent,
     LoginComponent,
-    RegistrarUsuarioComponent
+    RegistrarUsuarioComponent,
+    InicioComponent
   ],
   imports: [
     HttpClientModule,
