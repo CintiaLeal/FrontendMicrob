@@ -1,30 +1,42 @@
-# Directorios generados por Angular CLI
-node_modules/
-dist/
-.angular/
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Archivos generados por Angular CLI
-*.js
-*.js.map
-*.css
-*.html
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
 
-# Otros archivos y directorios generados por herramientas
-e2e/
-.idea/
-*.log
+# Node
+/node_modules
 npm-debug.log
 yarn-error.log
 
-# Archivo de configuración personal de Angular CLI
-.angular-cli.json
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# Archivos de configuración de editor (por ejemplo, Visual Studio Code)
-.vscode/
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
-# Dependiendo de tu entorno, es posible que desees ignorar otros archivos y directorios,
-# como archivos de configuración de servidores o archivos de configuración local.
-# Añade esos archivos y directorios según sea necesario para tu aplicación.
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
 
-# Ignora cualquier archivo de respaldo creado por tu editor o IDE
-*~
+# System files
+.DS_Store
+Thumbs.db

@@ -20,7 +20,7 @@ export class NuevaInstanciaComponent {
   });
 
   onRegistrar() {
-    console.log("llega a la funci");
+    console.log("llega a la funcion");
     let x: InstanciaNueva={
       nombre: this.registrarForm.controls["nombre"].value  ? this.registrarForm.controls["nombre"].value : " ",
       esquemaColores: 1,
