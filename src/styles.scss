@@ -24,3 +24,35 @@
         color: #ffffff;
     }
 }
+
+.modo-oscuro{
+
+    background-color: #1F2024;
+    .mat-mdc-raised-button.mat-primary {
+        
+        background-color: #090d0d;
+        color: #ffffff;
+    }
+   
+    .mat-mdc-raised-button.mat-accent{
+        background-color: #192a29;
+        color: #ffffff;
+    }
+
+    .mat-toolbar.mat-primary{
+        background-color: #090d0d;
+        color: #ffffff;
+    }
+    .mat-mdc-card {
+        --mdc-elevated-card-container-color: #4B4952;
+    }
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+        background-color: #6d6b74;
+    }
+    .search-container[_ngcontent-ng-c1987760739] {
+        background-color: #6d6b74;
+    }
+    .search-card[_ngcontent-ng-c1987760739] {
+        background-color: #6d6b74;
+    }
+}

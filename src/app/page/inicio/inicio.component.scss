@@ -6,7 +6,7 @@
   
   .tweets {
     flex: 1;
-    margin-right: 16px;
+    margin-right: 1px;
   }
   
   .tweet-card {
@@ -41,16 +41,9 @@
     justify-content: space-between;
     padding: 16px;
   }
-  
-  .tweets {
-    flex: 1;
-    margin-right: 16px;
+  .classcard{
+    width: 97%;
   }
-  
-  .user-panel {
-    width: 300px;
-  }
-  
   .search-container {
     width: 300px;
     padding: 16px;

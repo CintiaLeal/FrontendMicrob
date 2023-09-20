@@ -1,3 +1,4 @@
+<div [ngClass]="{'normal-mode': !modoOscuro, 'modo-oscuro': modoOscuro}">
 <div [ngClass]="{'change-colors': changeColors}">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
@@ -12,6 +13,9 @@
       <button mat-icon-button>
         <mat-icon>email</mat-icon>
       </button>
+      <button mat-icon-button (click)="toggleModoOscuro()">
+        <mat-icon>brightness_2</mat-icon>
+      </button>
       <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
 <mat-menu #menu="matMenu">
     <button mat-button routerLink="/registrarInstancia">Registrar Instancia</button>
@@ -20,6 +24,6 @@
 </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>
-
 <router-outlet></router-outlet> 
+</div>
 </div>

@@ -12,13 +12,18 @@ import { PartialObserver, Subscription, throwError } from 'rxjs';
 export class AppComponent implements OnInit {
   instancia: Instancia | null = null;
   changeColors = false;
+  modoOscuro = false;
 
   constructor(private instanciaService: LoginService) {}
 
   ngOnInit(): void {
     this.obtenerInstanciaConMayorId();
   }
+ 
 
+  toggleModoOscuro() {
+    this.modoOscuro = !this.modoOscuro;
+  }
   async obtenerInstanciaConMayorId() {
     this.instanciaService.obtenerInstanciaConMayorId().subscribe(
       (instancia) => {
@@ -39,4 +44,5 @@ export class AppComponent implements OnInit {
   toggleColors() {
     this.changeColors = !this.changeColors;
   }
+
 }

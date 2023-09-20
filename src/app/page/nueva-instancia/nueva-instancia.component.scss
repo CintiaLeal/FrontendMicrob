@@ -52,7 +52,9 @@
     margin-right: 10px; /* Espacio entre los cards (ajusta según tu diseño) */
   }
   .change-colors1 {
-
+    .mat-mdc-card{
+      background-color: #ffffff;
+    }
     .mat-mdc-raised-button.mat-primary {
         
         background-color: #618C88;
@@ -71,6 +73,7 @@
 }
 
 .change-colors2 {
+
   .mat-mdc-raised-button.mat-primary {
     background-color: #3f51b5;  /* Pink */
     color: #fff; /* White */
@@ -85,6 +88,9 @@
     background-color: #3f51b5;  /* Pink */
     color: #fff; /* White */
   }
+  .mat-mdc-card{
+    background-color: #ffffff;
+  }
 }
 
 
@@ -93,3 +99,7 @@
     font-size: 30px; /* Ajusta el tamaño del texto del botón según tu preferencia */
     padding: 20px 40px; /* Ajusta el relleno (padding) para aumentar el tamaño del botón */
   }
+
+  .mat-mdc-cardblanco{
+    --mdc-elevated-card-container-color: #fbfbfb;
+}
