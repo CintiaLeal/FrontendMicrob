@@ -13,21 +13,12 @@
           <input matInput placeholder="Nombre" formControlName="nombre" required>
         </mat-form-field>
   
-        <!-- Campo Tipo (desplegable) -->
-        <mat-form-field class="full-width">
-          <mat-label>Tipo</mat-label>
-          <mat-select required formControlName="tipo">
-            <mat-option value="tipo1">Tipo 1</mat-option>
-            <mat-option value="tipo2">Tipo 2</mat-option>
-            <mat-option value="tipo3">Tipo 3</mat-option>
-          </mat-select>
-        </mat-form-field>
 
         <mat-form-field class="full-width">
           <mat-label>Temas y Colores</mat-label>
           <mat-select required formControlName="esquemaColores">
-            <mat-option [value]="'comun'">Común</mat-option>
-            <mat-option [value]="'verde'">Verde</mat-option>
+            <mat-option [value]="'1'">Común</mat-option>
+            <mat-option [value]="'2'">Verde</mat-option>
           </mat-select>
         </mat-form-field>
         <div class="full-width" style="display: flex; justify-content: center; gap: 10px;">
@@ -77,11 +68,7 @@
           </div>
         </div>
         
-        
-        <!-- Campo País -->
-        <mat-form-field class="full-width">
-          <input matInput placeholder="País" formControlName="pais" required>
-        </mat-form-field>
+ 
   
         <!-- Campo Temática (desplegable) -->
         <mat-form-field class="full-width">

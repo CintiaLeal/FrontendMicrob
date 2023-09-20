@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   constructor(private instanciaService: LoginService) {}
 
   ngOnInit(): void {
-    this.obtenerInstanciaConMayorId();
+   // this.obtenerInstanciaConMayorId();
   }
  
 

@@ -5,13 +5,14 @@ import { Login } from '../modelos/login';
 import { ResponseI } from '../modelos/response.interface';
 import { Usuario } from '../modelos/usuario';
 import { Instancia } from '../modelos/instancia';
+import { InstanciaNueva } from "../modelos/instanciaNueva";
 @Injectable({
   providedIn: 'root'
 })
 
 export class LoginService {
 
-  url: string = "https://localhost:7166"; //URL BASE
+  url: string = "https://localhost:7131"; //URL BASE
     constructor(private http: HttpClient) { }
 
 
@@ -45,6 +46,26 @@ export class LoginService {
     return this.http.get<Instancia>(direccion);
   }
 
+  crearInstancias (instanciaNueva: InstanciaNueva ): Observable<ResponseI> {
+       // Crea un objeto que coincida con la estructura de tu clase Instancia
+       const instanciaData = {
+        logo: instanciaNueva.logo,
+        nombre: instanciaNueva.nombre,
+         tematica: instanciaNueva.tematica,
+         privacidad: instanciaNueva.privacidad,
+         esquemaColores: instanciaNueva.esquemaColores,
+         activo:instanciaNueva.activo,
+         url: instanciaNueva.url
+   
+       };
+       // Realiza la solicitud POST con el objeto instanciaData
+       let direccion = this.url + "/CreateInstance";
+       return this.http.post<any>(direccion, instanciaData); 
+     }
+
+  
+
+ 
   registrarInstancias(instancia: Instancia): Observable<ResponseI> {
     // Crea un objeto que coincida con la estructura de tu clase Instancia
     const instanciaData = {
@@ -62,4 +83,5 @@ export class LoginService {
     let direccion = this.url + "/instancia/guardar";
     return this.http.post<any>(direccion, instanciaData); 
   }
-  }
+  
+}
