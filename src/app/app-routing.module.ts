@@ -5,10 +5,12 @@ import { LoginComponent } from './page/login/login.component';
 import { RegistrarUsuarioComponent } from './page/registrar-usuario/registrar-usuario.component';
 import { InicioComponent } from './page/inicio/inicio.component';
 import { WebPrincipalComponent } from './page/webPrincipal/web-principal/web-principal.component';
+import { InicioUsuarioComponent } from './page/inicio-usuario/inicio-usuario.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: '', component: WebPrincipalComponent },
+  { path: 'inicioUsuario', component: InicioUsuarioComponent },
   { path: 'registrarInstancia', component: NuevaInstanciaComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrarUsuario', component: RegistrarUsuarioComponent }

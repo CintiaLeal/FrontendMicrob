@@ -37,6 +37,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InicioComponent } from './page/inicio/inicio.component';
 import { WebPrincipalComponent } from './page/webPrincipal/web-principal/web-principal.component';
+import { InicioUsuarioComponent } from './page/inicio-usuario/inicio-usuario.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { WebPrincipalComponent } from './page/webPrincipal/web-principal/web-pri
     LoginComponent,
     RegistrarUsuarioComponent,
     InicioComponent,
-    WebPrincipalComponent
+    WebPrincipalComponent,
+    InicioUsuarioComponent
   ],
   imports: [
     HttpClientModule,
