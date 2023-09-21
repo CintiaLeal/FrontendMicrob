@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .section {
+    
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    
+  }
+  
+  .section1 {
+    background-color: #ff5733;
+    width: 20%;
+     /* Color de fondo para la sección 1 */
+  }
+  
+  .section2 {
+    width: 100%;
+
+    background-color: #33ff57; /* Color de fondo para la sección 2 */
+    overflow-y: scroll; /* Habilita el desplazamiento vertical */
+    scrollbar-width: none; /* Oculta la barra de desplazamiento de Firefox */
+    -ms-overflow-style: none; /* Oculta la barra de desplazamiento de IE y Edge */
+  }
+  
+  .section2::-webkit-scrollbar {
+    width: 0px; /* Oculta la barra de desplazamiento de WebKit (Chrome, Safari) */
+  }
+  
+
+
+  .section3 {
+    width: 30%;
+    background-color: #5733ff; /* Color de fondo para la sección 3 */
+  }
+  
+  .scrollable-content {
+    height: 100%; /* Altura del contenedor scrollable */
+    padding: 16px; /* Añade espaciado al contenido si es necesario */
+    /* Agrega tu contenido scrollable aquí */
+  }
+  
+  //sacar lo qie no sirve
+
+  

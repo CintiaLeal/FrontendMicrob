@@ -68,6 +68,7 @@
     animation-duration: 2s; /* Duración de la animación */
     animation-timing-function: ease-in-out; /* Función de temporización */
     animation-iteration-count: infinite; /* Repetir infinitamente */
+    clip-path: inset(2% 2% 2% 3%);
    
   }
   .imgcontenido{
@@ -75,6 +76,7 @@
     width: 800px; /* Ancho deseado para el contenedor */
     height: 800px; /* Alto deseado para el contenedor */
     border: none;
+    clip-path: inset(2% 2% 2% 3%);
 
   }
   //INI ESTILOS PARA LOS DIV GRIS Y BLANCO
