@@ -1,11 +1,3 @@
-.prueba {
-    background-color: #882222;
-    color: #a86f6f;
-}
-.button {
-    background-color: #882222;
-    color: #a86f6f;
-}
 .change-colors {
 
     .mat-mdc-raised-button.mat-primary {
@@ -56,3 +48,77 @@
         background-color: #6d6b74;
     }
 }
+
+.header1 {
+    position: fixed; /* Establece la posición fija */
+    top: 0; /* Fija el encabezado en la parte superior de la ventana */
+    width: 100%; /* Haz que el encabezado ocupe todo el ancho */
+    background-color: #ffffff; /* Agrega el color de fondo que desees */
+    /* Otros estilos de diseño para tu encabezado */
+    z-index: 1000; /* Opcional: Asegura que el encabezado esté por encima de otros elementos */
+  }
+  /* Estilos para el header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(37, 37, 37, 0.8); /* Fondo con transparencia */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Espaciado interno */
+    z-index: 1000;
+  }
+  
+  /* Estilos para los botones centrados */
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Estilos para el espacio de login y el icono de ingresar */
+  .login-space {
+    margin-right: 20px; /* Espaciado en la esquina derecha */
+  }
+  
+  .icon-ingresar {
+    margin-left: 20px; /* Espaciado en la esquina izquierda */
+  }
+  
+  /* Estilos para los botones */
+  .button {
+    background-color: #007bff; /* Color de fondo de los botones */
+    color: #ffffff; /* Color de texto de los botones */
+    padding: 10px 20px; /* Espaciado interno de los botones */
+    margin: 0 5px; /* Espaciado entre los botones */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    text-decoration: none; /* Sin subrayado en el texto */
+  }
+  
+  /* Estilos para el icono de ingresar */
+  .ingresar-icon {
+    font-size: 24px;
+  }
+  
+  /* Estilos para el espacio de login */
+  .login {
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  
+  *{
+    margin:0;
+    padding:0;
+  }
+
+/*Ini Centrar btn header*/
+.example-spacer {
+    flex: 1 1 auto;
+  }
+ /*Fin Centrar btn header*/

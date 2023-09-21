@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './page/login/login.component';
 import { RegistrarUsuarioComponent } from './page/registrar-usuario/registrar-usuario.component';
 
-import { ThemeService } from './theme.service';
+
 
 import { MatMenuModule } from '@angular/material/menu'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -36,13 +36,15 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { InicioComponent } from './page/inicio/inicio.component';
+import { WebPrincipalComponent } from './page/webPrincipal/web-principal/web-principal.component';
 @NgModule({
   declarations: [
     AppComponent,
     NuevaInstanciaComponent,
     LoginComponent,
     RegistrarUsuarioComponent,
-    InicioComponent
+    InicioComponent,
+    WebPrincipalComponent
   ],
   imports: [
     HttpClientModule,
