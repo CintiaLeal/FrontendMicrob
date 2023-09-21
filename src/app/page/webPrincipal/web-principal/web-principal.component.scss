@@ -1,12 +1,198 @@
-.backgroundBody {
 
-  margin: 0; /* Elimina el margen predeterminado del cuerpo */
-  padding: 0; /* Elimina el relleno predeterminado del cuerpo */
-  background: url('/assets/img/1.png') no-repeat center center fixed; /* Ruta a tu imagen de fondo */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center center;
-  min-height: 100vh;
+.backgroundBody {
+    margin: 0;
+    padding: 0;
+    background: url('/assets/img/1.png') no-repeat center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%; /* Ancho deseado para el contenedor */
+    height: 600px; /* Alto deseado para el contenedor */
+    overflow: hidden;
+    clip-path: ellipse(76% 100% at 56% 0%);
+   
+  }
+  @keyframes move {
+    0% {
+      transform: rotate(0deg); /* Inicialmente sin rotación */
+    }
+    100% {
+      transform: rotate(360deg); /* Rotación continua en sentido horario */
+    }
+  }
+  @keyframes moveAstronauta {
+    0%, 100% {
+      transform: translateY(0); /* Sin traslación inicial o final */
+    }
+    25% {
+      transform: translateY(-5px); /* Traslación hacia arriba */
+    }
+    75% {
+      transform: translateY(5px); /* Traslación hacia abajo */
+    }
+  }
+  
+  .planeta1 {
+    background: url('/assets/img/Planeta1.png') no-repeat center center;
+    width: 230px; /* Ancho deseado para el contenedor */
+    height: 230px; /* Alto deseado para el contenedor */
+    border: none;
+    border-radius: 60%; /* Crea el efecto de círculo */
+    overflow: hidden;
+    animation-name: move;
+    animation-duration: 10s; /* Duración de la animación */
+    animation-timing-function: linear; /* Función de temporización lineal */
+    animation-iteration-count: infinite;
+  }
+  
+  .planeta2{
+    background: url('/assets/img/Planeta2.png') no-repeat center center;
+    width: 230px; /* Ancho deseado para el contenedor */
+    height: 230px; /* Alto deseado para el contenedor */
+    border: none;
+    border-radius: 60%; /* Crea el efecto de círculo */
+    overflow: hidden;
+    animation-name: move;
+    animation-duration: 10s; /* Duración de la animación */
+    animation-timing-function: linear; /* Función de temporización lineal */
+    animation-iteration-count: infinite;
+  }
+  .imgAstronauta{
+    background: url('/assets/img/astro.jpg') no-repeat center center;
+    width: 400px; /* Ancho deseado para el contenedor */
+    height: 450px; /* Alto deseado para el contenedor */
+    border: none;
+    border-radius: 60%; /* Crea el efecto de círculo */
+    overflow: hidden;
+    animation-name: moveAstronauta;
+    animation-duration: 2s; /* Duración de la animación */
+    animation-timing-function: ease-in-out; /* Función de temporización */
+    animation-iteration-count: infinite; /* Repetir infinitamente */
+   
+  }
+  .imgcontenido{
+    background: url('/assets/img/contenido.png') no-repeat center center;
+    width: 800px; /* Ancho deseado para el contenedor */
+    height: 800px; /* Alto deseado para el contenedor */
+    border: none;
+
+  }
+  //INI ESTILOS PARA LOS DIV GRIS Y BLANCO
+  /* Estilos para los divs */
+  .color-box {
+    margin: 60px;
+    border: none;
+    text-align: center;
+    padding: 0;
+  }
+  
+  /* Estilos para los fondos */
+  .white-bg {
+    background-color: #ffffff;
+  }
+  
+  .light-gray-bg {
+    margin: 0%;
+    background-color: #f0f0f0;
+  }
+  //FIN ESTILOS PARA LOS DIV GRIS Y BLANCO
+.backgroundPie {
+  background: url('/assets/img/pie.png') no-repeat center center;
+  object-fit: cover;
+  overflow: hidden;
+  width: 100%;
+  height: 300px; /* Cambiar la altura a 300px o el valor que desees */
+  clip-path: ellipse(76% 100% at 65% 100%);
 }
 
+  
+  .letraStylo {
+    font-family: 'Work Sans', sans-serif; /* Usar Baron como la fuente para h1 */
+  }
+
+/* Estilos para el contenedor */
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    border: none;
+}
+
+/* Estilos para los divs */
+.box {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 100%;/* Centra el contenido verticalmente */
+    border: none;
+  
+}
+.color-box[_ngcontent-ng-c2201125393] {
+    border: none;
+}
+/* Estilos adicionales según sea necesario */
+.box1 {
+    width: 40%;
+    height: 100%;
+    border: none;
+    text-align: left;
+    margin-left: 300px; 
+}
+
+.box2 {
+    text-align: left;
+    width: 60%;
+    height: 100%;
+    border: none;
+    margin-right: 780px; 
+  
+}
+
+/* Estilos adicionales según sea necesario */
+.box3 {
+    width: 40%;
+    height: 100%;
+    border: none;
+    text-align: left;
+    margin-left: 300px; 
+}
+
+.box4 {
+    text-align: left;
+    width: 60%;
+    height: 100%;
+    border: none;
+    margin-right: 30%; 
+    
+}
+.box5 {
+    width: 40%;
+    height: 100%;
+    border: none;
+    text-align: left;
+    margin-left: 6px; 
+}
+
+.box6 {
+    text-align: left;
+    width: 50%;
+    height: 100%;
+    border: none;
+    margin-left: 60px; 
+    
+}
+
+ 
+ 
+//Inicio botones
+.button-container {
+    display: flex;
+    margin-top: 1%;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espacio entre los botones */
+  }
+  
+ 
+  
+//Fin botones  
