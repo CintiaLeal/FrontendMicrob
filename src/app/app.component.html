@@ -1,40 +1,40 @@
-<div [ngClass]="{'normal-mode': !modoOscuro, 'modo-oscuro': modoOscuro}">
+<div *ngIf="true" [ngClass]="{'normal-mode': !modoOscuro, 'modo-oscuro': modoOscuro}">
   <div [ngClass]="{'change-colors': changeColors}">
     <div class="header">
-    
-        <mat-toolbar class="header" color="primary">
-          <mat-toolbar-row>
-            <span class="mat-toolbar-logo">MICROB</span>
-            <span class="example-spacer"></span>
-            <button mat-button   routerLink="/">
-              <a>Home</a>
-            </button>
-            <span class="example-spacer"></span>
-            <!-- Contenedor de botones centrados -->
-           
-            <button mat-button  >
-                <a>Servidores</a>
-              </button>
-              <span class="example-spacer"></span>
-              <button mat-button   routerLink="https://joinmastodon.org/es">
-                <a>Comunidad</a>
-              </button>
-              <span class="example-spacer"></span>
-              <button mat-button (click)="toggleModoOscuro()">
-                <mat-icon>brightness_2</mat-icon>
-              </button>
-              <span class="example-spacer"></span>
-              <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
-              <mat-menu #menu="matMenu">
-                <button mat-button routerLink="/registrarInstancia">Registrar Instancias</button>
-                <button mat-button routerLink="/login">Iniciar Sesión</button>
-                <button mat-button routerLink="/registrarUsuario">Registrar Usuario</button>
-              </mat-menu>
-         
-          </mat-toolbar-row>
-        </mat-toolbar>
-      </div>
+
+      <mat-toolbar class="header" color="primary">
+        <mat-toolbar-row>
+          <span class="mat-toolbar-logo">MICROB</span>
+          <span class="example-spacer"></span>
+          <button mat-button routerLink="/">
+            <a>Home</a>
+          </button>
+          <span class="example-spacer"></span>
+          <!-- Contenedor de botones centrados -->
+
+          <button mat-button>
+            <a>Servidores</a>
+          </button>
+          <span class="example-spacer"></span>
+          <button mat-button routerLink="https://joinmastodon.org/es">
+            <a>Comunidad</a>
+          </button>
+          <span class="example-spacer"></span>
+          <button mat-button (click)="toggleModoOscuro()">
+            <mat-icon>brightness_2</mat-icon>
+          </button>
+          <span class="example-spacer"></span>
+          <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-button routerLink="/registrarInstancia">Registrar Instancias</button>
+            <button mat-button routerLink="/login">Iniciar Sesión</button>
+            <button mat-button routerLink="/registrarUsuario">Registrar Usuario</button>
+          </mat-menu>
+
+        </mat-toolbar-row>
+      </mat-toolbar>
     </div>
   </div>
+</div>
 
 <router-outlet></router-outlet>

@@ -8,9 +8,8 @@
   .section {
     
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   
+    
     font-size: 24px;
     font-weight: bold;
     color: #fff;
@@ -18,15 +17,15 @@
   }
   
   .section1 {
-    background-color: #ff5733;
-    width: 20%;
+    background-color: #191B22;
+    width: 30%;
      /* Color de fondo para la sección 1 */
   }
   
   .section2 {
     width: 100%;
 
-    background-color: #33ff57; /* Color de fondo para la sección 2 */
+    background-color: #282C37; /* Color de fondo para la sección 2 */
     overflow-y: scroll; /* Habilita el desplazamiento vertical */
     scrollbar-width: none; /* Oculta la barra de desplazamiento de Firefox */
     -ms-overflow-style: none; /* Oculta la barra de desplazamiento de IE y Edge */
@@ -35,20 +34,67 @@
   .section2::-webkit-scrollbar {
     width: 0px; /* Oculta la barra de desplazamiento de WebKit (Chrome, Safari) */
   }
-  
 
-
-  .section3 {
-    width: 30%;
-    background-color: #5733ff; /* Color de fondo para la sección 3 */
-  }
-  
   .scrollable-content {
     height: 100%; /* Altura del contenedor scrollable */
     padding: 16px; /* Añade espaciado al contenido si es necesario */
     /* Agrega tu contenido scrollable aquí */
   }
   
-  //sacar lo qie no sirve
-
+  //INI  Menu 3 
+  .section3 {
+    width: 30%;
+    background-color: #191B22;
+    flex-direction: column;
+    height: 100vh; /* Establece la altura al 100% del viewport */
+    justify-content: space-between;
+    align-items: center;
+  }
   
+  .menu-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .menu-list li {
+    margin-bottom: 10px; /* Espacio entre elementos */
+  }
+  
+  .menu-list li a {
+    text-decoration: none;
+    color: #888; /* Color gris claro */
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-list li a:hover {
+    color: #333; /* Cambia el color al pasar el ratón por encima */
+  }
+  
+  .icon {
+    font-size: 24px; /* Tamaño del icono */
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+  }
+  
+  .text {
+    font-size: 18px; /* Tamaño del texto */
+  }
+  
+  
+//FIN Menu 3 
+  
+//INI IMG LOGO
+.imglogo {
+  background: url('/assets/img/astronauta2.webp') no-repeat center center;
+  width: 80px; /* Ancho deseado para el contenedor */
+  height: 80px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: inset(2% 2% 2% 3%);
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
+
+//FIN IMG LOGO

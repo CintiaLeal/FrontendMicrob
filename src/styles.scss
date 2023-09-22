@@ -63,13 +63,13 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(37, 37, 37, 0.8); /* Fondo con transparencia */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    background-color: rgba(37, 37, 37, 0); /* Fondo con transparencia */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px; /* Espaciado interno */
     z-index: 1000;
+    border: none;
   }
   
   /* Estilos para los botones centrados */
