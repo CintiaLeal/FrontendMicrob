@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="section section3"></div>
+  <div class="section costados"></div>
   <div class="section section1">
     <form class="example-form">
     </form>
-    <mat-card class="example-card">
+    <mat-card class="example-card posicion">
       <mat-card-header>
         <mat-card-title-group>
           <mat-card-title>Ana Lopez</mat-card-title>
@@ -12,22 +12,50 @@
         </mat-card-title-group>
       </mat-card-header>
       <br>
-      <mat-card-content>
+      <mat-card-content >
         <form class="example-form">
           <mat-form-field class="example-full-width a">
             <mat-label>Escribir</mat-label>
-            <input matInput #message maxlength="256" placeholder="Publica...">
-            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+            <input class="colorletras" matInput #message maxlength="256" placeholder="Publica...">
+            <mat-hint  align="end" class="colorletras">{{message.value.length}} / 256</mat-hint>
           </mat-form-field>
         </form>
-        <button mat-raised-button color="primary">Primary</button>
+        <button mat-raised-button color="primary">Publicar</button>
       </mat-card-content>
     </mat-card>
+
   </div>
 
   <div class="section section2">
     <div class="scrollable-content">
-     
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Grace Hopper</mat-card-title>
+          <mat-card-subtitle>@loremipsum</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
+            nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
+            Vivamus in pharetra urna, vel iaculis orci.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="example-button-row">
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon" >favorite</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">redo</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">chat_bubble</mat-icon>
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+      <br>
       <mat-card>
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
@@ -114,12 +142,29 @@
     </div>
   </div>
 
+
+
   <div class="sect section3">
-    <ul class="menu-list header">
-      <li>
-        <hr>
-      </li>
-    </ul>
+  <div class="caja">
+        <div class="tendencias-container">
+          <h2>Tendencias</h2>
+          <ul class="tendencias-list">
+            <li class="tendencia">
+              <span class="hashtag">#TendenciaUsuarios</span>
+              <span class="count">500K</span>
+            </li>
+            <li class="tendencia">
+              <span class="hashtag">#Tendencia2</span>
+              <span class="count">300K</span>
+            </li>
+            <li class="tendencia">
+              <span class="hashtag">#Tendencia22</span>
+              <span class="count">300K</span>
+            </li>
+          </ul>
+        </div>
+  </div>
+  <div class="caja3">
     <ul class="menu-list">
       <li>
         <a routerLink="/">
@@ -162,5 +207,7 @@
       </li>
     </ul>
   </div>
+    
+</div>
   
-    <div class="section section3"></div>
+    <div class="section costados"></div>
