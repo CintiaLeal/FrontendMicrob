@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class InicioUsuarioComponent {
 
+  constructor() { }
+
+  ngOnInit(): void {
+    localStorage.setItem("headerSioNo", 'false');
+  }
+  ngOnDestroy(): void {
+    localStorage.setItem("headerSioNo", 'true');
+  }
 }

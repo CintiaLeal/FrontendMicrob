@@ -1,11 +1,37 @@
 <div class="container">
-  <div class="section section1">Sección 1</div>
+  <div class="section section3"></div>
+  <div class="section section1">
+    <form class="example-form">
+    </form>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Ana Lopez</mat-card-title>
+          <mat-card-subtitle>@AnaLopez12</mat-card-subtitle>
+          <img class="imgPERFIL" >
+        </mat-card-title-group>
+      </mat-card-header>
+      <br>
+      <mat-card-content>
+        <form class="example-form">
+          <mat-form-field class="example-full-width a">
+            <mat-label>Escribir</mat-label>
+            <input matInput #message maxlength="256" placeholder="Publica...">
+            <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+          </mat-form-field>
+        </form>
+        <button mat-raised-button color="primary">Primary</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
   <div class="section section2">
     <div class="scrollable-content">
+     
       <mat-card>
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Lorem Ipsu</mat-card-title>
+          <mat-card-title>Grace Hopper</mat-card-title>
           <mat-card-subtitle>@loremipsum</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
@@ -14,31 +40,20 @@
             nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
             Vivamus in pharetra urna, vel iaculis orci.
           </p>
+          <img class="imgContenido">
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>Me gusta</button>
-          <button mat-button>Comentar</button>
-          <button mat-button>Compartir</button>
-        </mat-card-actions>
-      </mat-card>
-      <br>
-      <mat-card>
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Lorem Ipsum</mat-card-title>
-          <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
-            nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-            Vivamus in pharetra urna, vel iaculis orci.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>Me gusta</button>
-          <button mat-button>Comentar</button>
-          <button mat-button>Compartir</button>
+          <div class="example-button-row">
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">favorite</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">redo</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">chat_bubble</mat-icon>
+            </button>
+          </div>
         </mat-card-actions>
       </mat-card>
       <br>
@@ -56,64 +71,96 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>Me gusta</button>
-          <button mat-button>Comentar</button>
-          <button mat-button>Compartir</button>
+          <div class="example-button-row">
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon" >favorite</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">redo</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">chat_bubble</mat-icon>
+            </button>
+          </div>
         </mat-card-actions>
       </mat-card>
       <br>
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Grace Hopper</mat-card-title>
+          <mat-card-subtitle>@loremipsum</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Regístrate hoy mismo para comenzar tu viaje en Microb y únete a la conversación global. ¡Te estamos esperando! Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
+            Vivamus in pharetra urna, vel iaculis orci.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="example-button-row">
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon" >favorite</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">redo</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+              <mat-icon class="icon">chat_bubble</mat-icon>
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
-    <div class="section section3">
-      <ul class="menu-list">
-        <li>
-          <a routerLink="/">
-            <img class="imglogo" src="/assets/img/astronauta2.webp" alt="MICROB">
-          </a>
-        </li>
-        <li>
-          <hr>
-        </li>
-      </ul>
-      <ul class="menu-list">
-        <li>
-          <a routerLink="/">
-            <mat-icon class="icon">home</mat-icon>
-            <span class="text">Home</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/">
-            <mat-icon>notifications</mat-icon>
-            <span class="text">Notificaciones</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/">
-            <mat-icon class="icon">menu</mat-icon>
-            <span class="text">Menu</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/">
-            <mat-icon class="icon">favorite</mat-icon>
-            <span class="text">Favorito</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/">
-            <mat-icon>turned_in</mat-icon>
-            <span class="text">Guardados</span>
-          </a>
-        </li>
-        <li>
-          <hr>
-        </li>
-        <li>
-          <a routerLink="/">
-            <mat-icon>settings</mat-icon>
-            <span class="text">Ajustes</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+
+  <div class="sect section3">
+    <ul class="menu-list header">
+      <li>
+        <hr>
+      </li>
+    </ul>
+    <ul class="menu-list">
+      <li>
+        <a routerLink="/">
+          <mat-icon class="icon">home</mat-icon>
+          <span class="text">Home</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/">
+          <mat-icon class="icon">notifications</mat-icon>
+          <span class="text">Notificaciones</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/">
+          <mat-icon class="icon">menu</mat-icon>
+          <span class="text">Menu</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/">
+          <mat-icon class="icon">favorite</mat-icon>
+          <span class="text">Favorito</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/">
+          <mat-icon class="icon">turned_in</mat-icon>
+          <span class="text">Guardados</span>
+        </a>
+      </li>
+      <li>
+        <hr>
+      </li>
+      <li>
+        <a routerLink="/">
+          <mat-icon class="icon">settings</mat-icon>
+          <span class="text">Ajustes</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+    <div class="section section3"></div>

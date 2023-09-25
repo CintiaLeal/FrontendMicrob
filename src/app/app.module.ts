@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './page/login/login.component';
 import { RegistrarUsuarioComponent } from './page/registrar-usuario/registrar-usuario.component';
 
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { MatMenuModule } from '@angular/material/menu'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -72,6 +72,7 @@ import { InicioUsuarioComponent } from './page/inicio-usuario/inicio-usuario.com
     MatSelectModule,
     MatCheckboxModule,
     MatTableModule,
+    MatGridListModule,
     MatSnackBarModule,
     MatSlideToggleModule,
     FormsModule,

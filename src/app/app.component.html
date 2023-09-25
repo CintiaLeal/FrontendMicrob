@@ -1,4 +1,4 @@
-<div *ngIf="true" [ngClass]="{'normal-mode': !modoOscuro, 'modo-oscuro': modoOscuro}">
+<div *ngIf="funHeaderSioNo()" [ngClass]="{'normal-mode': !modoOscuro, 'modo-oscuro': modoOscuro}">
   <div [ngClass]="{'change-colors': changeColors}">
     <div class="header">
 

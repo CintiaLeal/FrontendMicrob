@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Instancia } from './modelos/instancia';
 import { LoginService } from './servicios/login.service';
-import { PartialObserver, Subscription, throwError } from 'rxjs';
+import { PartialObserver, Subject, Subscription, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,21 +12,27 @@ export class AppComponent implements OnInit {
   instancia: Instancia | null = null;
   changeColors = false;
   modoOscuro = false;
-  //Ini Header Fijo
 
-  //Fin Header Fijo
-  constructor(private instanciaService: LoginService) {}
+  constructor(private instanciaService: LoginService) {
+    localStorage.setItem("headerSioNo", 'true');
+  }
 
   ngOnInit(): void {
-   // this.obtenerInstanciaConMayorId();
+    this.funHeaderSioNo();
   }
- 
-//Ini Header Fijo
 
-//Fin Header Fijo
+  funHeaderSioNo() {
+    if (localStorage.getItem("headerSioNo") === 'true') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
   toggleModoOscuro() {
     this.modoOscuro = !this.modoOscuro;
   }
+  
   async obtenerInstanciaConMayorId() {
     this.instanciaService.obtenerInstanciaConMayorId().subscribe(
       (instancia) => {
@@ -35,7 +40,7 @@ export class AppComponent implements OnInit {
         if (this.instancia && this.instancia.esquemaColores === 'verde') {
           console.log(this.instancia.esquemaColores);
           this.toggleColors();
-        }else{
+        } else {
           this.changeColors = false;
         }
       },
@@ -49,8 +54,5 @@ export class AppComponent implements OnInit {
     this.changeColors = !this.changeColors;
   }
 
-}
-function HostListener(arg0: string, arg1: string[]): (target: AppComponent, propertyKey: "onScroll", descriptor: TypedPropertyDescriptor<(event: Event) => void>) => void | TypedPropertyDescriptor<(event: Event) => void> {
-  throw new Error('Function not implemented.');
 }
 

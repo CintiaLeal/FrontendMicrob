@@ -6,16 +6,23 @@
   }
   
   .section {
-    
     height: 100%;
-   
-    
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    
+  }
+  .mat-mdc-card {
+    --mdc-elevated-card-container-color: #242323;
+  }
+  //Contenido publicar
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
   }
   
+  .a {
+    width: 100%;
+    height: 200px;
+  }
+  //Contenido publicar
   .section1 {
     background-color: #191B22;
     width: 30%;
@@ -23,7 +30,7 @@
   }
   
   .section2 {
-    width: 100%;
+    width: 70%;
 
     background-color: #282C37; /* Color de fondo para la sección 2 */
     overflow-y: scroll; /* Habilita el desplazamiento vertical */
@@ -51,40 +58,36 @@
     align-items: center;
   }
   
-  .menu-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .menu-list li {
-    margin-bottom: 10px; /* Espacio entre elementos */
-  }
-  
-  .menu-list li a {
-    text-decoration: none;
-    color: #888; /* Color gris claro */
-    display: flex;
-    align-items: center;
-  }
-  
-  .menu-list li a:hover {
-    color: #333; /* Cambia el color al pasar el ratón por encima */
-  }
-  
-  .icon {
-    font-size: 24px; /* Tamaño del icono */
-    margin-right: 10px; /* Espacio entre el icono y el texto */
-  }
-  
-  .text {
-    font-size: 18px; /* Tamaño del texto */
-  }
-  
-  
+/* Estilo para la lista del encabezado */
+.menu-list.header {
+  list-style-type: none; /* Quita el punteo de la lista */
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px; /* Espacio entre el encabezado y el listado */
+}
+/* Estilo para los elementos de la lista */
+.menu-list li {
+  list-style-type: none;
+  margin: 5px 0;
+}
+
+/* Estilo para los enlaces */
+.menu-list a {
+  text-decoration: none;
+  list-style-type: none;
+  color: #807d7d; /* Cambia el color del texto según tu preferencia */
+  font-size: 18px; /* Tamaño de fuente más pequeño similar al de Twitter */
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo para los iconos */
+.icon {
+  margin-right: 5px; /* Espacio entre el icono y el texto */
+  font-size: 20px; /* Tamaño de icono más pequeño similar al de Twitter */
+  color: #fff;
+}
+
 //FIN Menu 3 
   
 //INI IMG LOGO
@@ -93,8 +96,55 @@
   width: 80px; /* Ancho deseado para el contenedor */
   height: 80px; /* Alto deseado para el contenedor */
   border: none;
+
   clip-path: inset(2% 2% 2% 3%);
   background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
 }
 
 //FIN IMG LOGO
+//INI IMG PERFIL
+.imgPERFIL{
+  background: url('/assets/img/perfil.jpg') no-repeat center center;
+  width: 80px; /* Ancho deseado para el contenedor */
+  height: 80px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: circle(50% at 50% 50%);
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
+.example-header-image {
+  background: url('/assets/img/perfil.jpg') no-repeat center center;
+  background-size: cover;
+}
+//FIN IMG PERFIL
+//INI IMG CONTENIDO POST
+.imgContenido{
+  background: url('/assets/img/contenido.png') no-repeat center center;
+  width: 600px; /* Ancho deseado para el contenedor */
+  height: 600px; /* Alto deseado para el contenedor */
+  border: none;
+  margin-left: 3%;
+  margin-right: 5%;
+  align-items: center;
+  clip-path: inset(2% 1% 2% 2%);
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
+//FIN IMG CONTENIDO POST
+
+//TEXTOS INI
+p{
+  font-size: 16px;
+  color: #fff;
+}
+mat-card-title{
+  font-size: 16px;
+  color: #fff;
+}
+mat-card-subtitle{
+  font-size: 15px;
+  color: #a19c9c;
+}
+//TEXTO FIN
+.mat-toolbar {
+  background-color: #242323;
+  color: var(--mat-toolbar-container-text-color);
+}
