@@ -129,6 +129,15 @@
   background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
 
 }
+
+.imgIconoInstancia{
+  background: url('/assets/img/tl.webp') no-repeat center center;
+  width: 200px; /* Ancho deseado para el contenedor */
+  height: 100px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: inset(8% 1% 6% 1%);
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
 //FIN IMG CONTENIDO POST
 
 //TEXTOS INI
@@ -162,7 +171,14 @@ mat-card-subtitle{
 }
 .caja3 {
   width: 80%; /* Ancho deseado */
-  margin-top: 200px; /* Espacio entre los div (ajusta según necesites) */
+  margin-top: 300px; /* Espacio entre los div (ajusta según necesites) */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.caja4 { //Parte del icono de la instancia
+  width: 80%; /* Ancho deseado */
+  margin-top: 100%; /* Espacio entre los div (ajusta según necesites) */
   margin-left: 10px;
   margin-right: 10px;
 }
