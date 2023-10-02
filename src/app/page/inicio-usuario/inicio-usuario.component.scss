@@ -30,7 +30,7 @@
   }
   
   .section2 {
-    width: 70%;
+    width: 60%;
     background-color: #282C37; /* Color de fondo para la sección 2 */
     overflow-y: scroll; /* Habilita el desplazamiento vertical */
     scrollbar-width: none; /* Oculta la barra de desplazamiento de Firefox */
@@ -76,7 +76,7 @@
   text-decoration: none;
   list-style-type: none;
   color: #807d7d; /* Cambia el color del texto según tu preferencia */
-  font-size: 22px; /* Tamaño de fuente más pequeño similar al de Twitter */
+  font-size: 20px; /* Tamaño de fuente más pequeño similar al de Twitter */
   display: flex;
   align-items: center;
 }
@@ -84,9 +84,10 @@
 /* Estilo para los iconos */
 .icon {
   margin-right: 5px; /* Espacio entre el icono y el texto */
-  font-size: 22px; /* Tamaño de icono más pequeño similar al de Twitter */
+  font-size: 20px; /* Tamaño de icono más pequeño similar al de Twitter */
   color: #807d7d;
 }
+
 
 //FIN Menu 3 
   

@@ -38,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InicioComponent } from './page/inicio/inicio.component';
 import { WebPrincipalComponent } from './page/webPrincipal/web-principal/web-principal.component';
 import { InicioUsuarioComponent } from './page/inicio-usuario/inicio-usuario.component';
+import { VerInstanciaComponent } from './page/webPrincipal/ver-instancia/ver-instancia.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { InicioUsuarioComponent } from './page/inicio-usuario/inicio-usuario.com
     RegistrarUsuarioComponent,
     InicioComponent,
     WebPrincipalComponent,
-    InicioUsuarioComponent
+    InicioUsuarioComponent,
+    VerInstanciaComponent
   ],
   imports: [
     HttpClientModule,

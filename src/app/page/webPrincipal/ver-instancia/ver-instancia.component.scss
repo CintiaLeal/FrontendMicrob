@@ -1,0 +1,121 @@
+.backgroundBody {
+    margin: 0;
+    padding: 0;
+    background: url('/assets/img/Fondo2.png') no-repeat center center;
+    background-size: cover;
+    width: 100%; /* Ancho deseado para el contenedor */
+    height: 500px; /* Alto deseado para el contenedor */
+    overflow: hidden;
+
+  }
+
+  .example-card {
+    width: 8cm;
+    height: 9cm;
+    display: flex;
+    flex-direction: column; /* Apila los elementos en dirección vertical */
+    justify-content: space-between; /* Coloca los elementos en el inicio y al final */
+    overflow: hidden; 
+  }
+  
+
+  .Netherlands-🇳🇱-1-hex { color: #9BA7BF; }
+.Netherlands-🇳🇱-2-hex { color: #0F1926; }
+.Netherlands-🇳🇱-3-hex { color: #2E4159; }
+.Netherlands-🇳🇱-4-hex { color: #566D8C; }
+.Netherlands-🇳🇱-5-hex { color: #BF8136; }
+
+.divIcons{
+  
+}
+.icon{
+  color:#BF8136;
+  font-size: 40px;
+  width: 100%;
+  height: 100%;
+}
+.textoIcons{
+  color:#2E4159;
+  font-size: 30px;
+  width: 100%;
+  height: 100%;
+}
+
+example-card{
+  align-items: center;
+}
+ 
+.imgPORTADA{
+  background: url('/assets/img/Fondo.png') no-repeat;
+  width: 7cm; /* Ancho deseado para el contenedor */
+  height: 4cm; /* Alto deseado para el contenedor */
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
+.btn{
+  background-color:#2E4159;
+  color: rgb(255, 255, 255);
+}
+.mat-card-actions {
+  margin-top: auto; /* Empuja el contenedor de acciones al final de la tarjeta */
+}
+//DIV
+.container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+
+}
+.alineacionDesplegables {
+  display: flex;
+  justify-content: RIGHT;
+  margin-right: 15%;
+  align-items: center; /* Centra verticalmente */
+}
+
+.desplegables{
+  margin-left: 10px;
+}
+
+.first {
+  margin: 10px;
+    width: 25%;
+    display: inline-block;
+  align-items: center;
+
+}
+
+.second {
+  margin: 10px;
+    width: 25%;
+    display: inline-block;
+    align-items: center;
+
+}
+
+.third {
+  margin: 10px;
+    width: 25%;
+    display: inline-block;
+
+}
+
+@media screen and (max-width: 500px) {
+
+    .first,
+    .second,
+    .third {
+        width: 70%;
+    }
+    .alineacionDesplegables {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Centra verticalmente */
+    }
+
+    .imgPORTADA{
+
+      width: 5cm; /* Ancho deseado para el contenedor */
+      height: 2cm; /* Alto deseado para el contenedor */
+      background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+    }
+}

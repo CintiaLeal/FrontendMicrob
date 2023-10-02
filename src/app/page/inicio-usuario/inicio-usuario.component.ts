@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class InicioUsuarioComponent {
 
+  contenidoVisible: string = 'home'; // Inicialmente, muestra el primer contenido
+
+  mostrarContenido(contenido: string) {
+    this.contenidoVisible = contenido;
+  }
   constructor() { }
 
   ngOnInit(): void {
