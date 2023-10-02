@@ -12,8 +12,15 @@
         <mat-form-field class="full-width">
           <input matInput placeholder="Nombre" formControlName="nombre" required>
         </mat-form-field>
-  
-
+        <div class="Centrartitulo">
+          <button type="button" mat-raised-button (click)="fileInput.click()">IMG</button>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
+          <span class="file-name"></span>
+      </div>
+      <div>
+        <img [src]="base64Image" alt="Imagen">
+      </div>
+      
         <mat-form-field class="full-width">
           <mat-label>Temas y Colores</mat-label>
           <mat-select required formControlName="esquemaColores">
