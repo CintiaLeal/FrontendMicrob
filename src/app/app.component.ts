@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Instancia } from './modelos/instancia';
-import { LoginService } from './servicios/login.service';
+import { AppService } from './servicios/app.service';
 import { PartialObserver, Subject, Subscription, throwError } from 'rxjs';
 
 @Component({
@@ -12,13 +12,17 @@ export class AppComponent implements OnInit {
   instancia: Instancia | null = null;
   changeColors = false;
   modoOscuro = false;
+  tipoUsuario: string = 'administrador';
 
-  constructor(private instanciaService: LoginService) {
+  constructor(private instanciaService: AppService) {
     localStorage.setItem("headerSioNo", 'true');
   }
 
   ngOnInit(): void {
     this.funHeaderSioNo();
+     // Recuperar el tipo de usuario del localStorage (si está almacenado)
+     localStorage.getItem('tipoUsuario'); // || 'noAutenticado';
+     this.cambiarTipoUsuario(this.tipoUsuario);
   }
 
   funHeaderSioNo() {
@@ -31,6 +35,7 @@ export class AppComponent implements OnInit {
   
   toggleModoOscuro() {
     this.modoOscuro = !this.modoOscuro;
+
   }
   
   async obtenerInstanciaConMayorId() {
@@ -54,5 +59,13 @@ export class AppComponent implements OnInit {
     this.changeColors = !this.changeColors;
   }
 
+
+
+
+  // Función para cambiar el tipo de usuario y almacenarlo en localStorage
+  cambiarTipoUsuario(tipo: string) {
+    this.tipoUsuario = tipo;
+    localStorage.setItem('tipoUsuario', tipo);
+  }
 }
 

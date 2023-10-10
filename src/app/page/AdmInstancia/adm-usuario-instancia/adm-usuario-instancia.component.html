@@ -1,0 +1,50 @@
+
+<h1>USUARIOS DE LA INSTANCIA</h1>
+<div class="table-container">
+
+    <table mat-table [dataSource]="dataSource"
+       class="mat-elevation-z8">
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.nombre }} </mat-cell>
+      </ng-container>
+  
+      <!-- Apellido Column -->
+      <ng-container matColumnDef="apellido">
+        <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.apellido }} </mat-cell>
+      </ng-container>
+  
+      <!-- Nombre de Usuario Column -->
+      <ng-container matColumnDef="usuario">
+        <mat-header-cell *matHeaderCellDef> Nombre de Usuario </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.usuario }} </mat-cell>
+      </ng-container>
+  
+      <!-- Correo Column -->
+      <ng-container matColumnDef="correo">
+        <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.correo }} </mat-cell>
+      </ng-container>
+  
+      <!-- Botón de Borrar Column -->
+      <ng-container matColumnDef="borrar">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="eliminarRegistro(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+    </table>
+  
+    <!-- Paginador -->
+    <mat-paginator [pageSizeOptions]="[10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+  

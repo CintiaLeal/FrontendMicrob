@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Usuario } from 'src/app/modelos/usuario';
 
-import { LoginService } from 'src/app/servicios/login.service';
+import { AppService } from 'src/app/servicios/app.service';
 @Component({
   selector: 'app-registrar-usuario',
   templateUrl: './registrar-usuario.component.html',
@@ -12,20 +12,28 @@ import { LoginService } from 'src/app/servicios/login.service';
 })
 export class RegistrarUsuarioComponent {
   registrarForm = new FormGroup({
-    nombre: new FormControl('',Validators.required),
-    correo: new FormControl('',Validators.required),
-    pass: new FormControl('',Validators.required)
-  });
-  constructor(private api: LoginService, private alerta: MatSnackBar ){ }
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/)
+    ]),
+    confirmPassword: new FormControl('', Validators.required)
+});
+
+  constructor(private api: AppService, private alerta: MatSnackBar ){ }
  
   onRegistrar() {
-    let x: Usuario={
-      nombre: this.registrarForm.controls["nombre"].value  ? this.registrarForm.controls["nombre"].value : " ",
-      correo: this.registrarForm.controls["correo"].value  ? this.registrarForm.controls["correo"].value : " ",
-      pass: this.registrarForm.controls["pass"].value  ? this.registrarForm.controls["pass"].value : " "
-    }
+    let x: Usuario = {
+      firstName: this.registrarForm.controls['firstName'].value  ? this.registrarForm.controls["firstName"].value : " ",
+      lastName: this.registrarForm.controls['lastName'].value ? this.registrarForm.controls["lastName"].value : " ",
+      email: this.registrarForm.controls['email'].value ? this.registrarForm.controls["email"].value : " ",
+      password: this.registrarForm.controls['password'].value ? this.registrarForm.controls["password"].value : " ",
+      confirmPassword: this.registrarForm.controls['confirmPassword'].value ? this.registrarForm.controls["confirmPassword"].value : " "
+  };
    
-    this.api.registrar(x).subscribe(data => {
+    this.api.registrarUsuario(x).subscribe(data => {
       console.log(data);
     });
     this.alerta.open("Creada con éxito", "OK!");

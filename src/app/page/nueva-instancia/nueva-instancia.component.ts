@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Instancia } from '../../modelos/instancia';
 import { InstanciaNueva } from '../../modelos/instanciaNueva';
-import { LoginService } from '../../servicios/login.service';
+import { AppService } from '../../servicios/app.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { Observable, subscribeOn, Subscriber } from 'rxjs';
@@ -14,7 +14,7 @@ import { Observable, subscribeOn, Subscriber } from 'rxjs';
 })
 export class NuevaInstanciaComponent {
   public base64Image: any;
-  constructor(private api: LoginService, private alerta: MatSnackBar ){ }
+  constructor(private api: AppService, private alerta: MatSnackBar ){ }
 //FORM desde el HTML
   registrarForm = new FormGroup({
     nombre: new FormControl('',Validators.required),

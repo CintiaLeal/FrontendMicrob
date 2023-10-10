@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -33,12 +32,16 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { InicioComponent } from './page/inicio/inicio.component';
 import { WebPrincipalComponent } from './page/webPrincipal/web-principal/web-principal.component';
 import { InicioUsuarioComponent } from './page/inicio-usuario/inicio-usuario.component';
 import { VerInstanciaComponent } from './page/webPrincipal/ver-instancia/ver-instancia.component';
+import { InicioAdminInstanciaComponent } from './page/AdmInstancia/inicio-admin-instancia/inicio-admin-instancia.component';
+import { AdmUsuarioInstanciaComponent } from './page/AdmInstancia/adm-usuario-instancia/adm-usuario-instancia.component';
+import { AdmPublicacionesReportadasComponent } from './page/AdmInstancia/adm-publicaciones-reportadas/adm-publicaciones-reportadas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +51,10 @@ import { VerInstanciaComponent } from './page/webPrincipal/ver-instancia/ver-ins
     InicioComponent,
     WebPrincipalComponent,
     InicioUsuarioComponent,
-    VerInstanciaComponent
+    VerInstanciaComponent,
+    InicioAdminInstanciaComponent,
+    AdmUsuarioInstanciaComponent,
+    AdmPublicacionesReportadasComponent
   ],
   imports: [
     HttpClientModule,
@@ -63,6 +69,9 @@ import { VerInstanciaComponent } from './page/webPrincipal/ver-instancia/ver-ins
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
     MatToolbarModule,
     MatMenuModule,
     MatExpansionModule,
@@ -78,7 +87,9 @@ import { VerInstanciaComponent } from './page/webPrincipal/ver-instancia/ver-ins
     MatSnackBarModule,
     MatSlideToggleModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

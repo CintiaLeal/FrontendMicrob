@@ -1,40 +1,39 @@
-<div *ngIf="funHeaderSioNo()" [ngClass]="{'normal-mode': !modoOscuro, 'modo-oscuro': modoOscuro}">
-  <div [ngClass]="{'change-colors': changeColors}">
-    <div class="header">
+<p>
+  <!-- Encabezado para usuarios no autenticados -->
+  <mat-toolbar color="primary" *ngIf="tipoUsuario === 'noAutenticado'">
+    <span>My App (No Autenticado)</span>
+  </mat-toolbar>
 
-      <mat-toolbar class="header" color="primary">
-        <mat-toolbar-row>
-          <span class="mat-toolbar-logo">MICROB</span>
-          <span class="example-spacer"></span>
-          <button mat-button routerLink="/">
-            <a>Home</a>
-          </button>
-          <span class="example-spacer"></span>
-          <!-- Contenedor de botones centrados -->
+  <!-- Encabezado para usuarios comunes -->
+  <mat-toolbar color="primary" *ngIf="tipoUsuario === 'usuarioComun'">
+    <button mat-icon-button class="example-icon" aria-label="Menú">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App (Usuario Común)</span>
+    <span class="example-spacer"></span>
+    <mat-form-field class="example-search">
+      <input matInput placeholder="Buscar">
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </mat-toolbar>
 
-          <button mat-button>
-            <a>Servidores</a>
-          </button>
-          <span class="example-spacer"></span>
-          <button mat-button routerLink="https://joinmastodon.org/es">
-            <a>Comunidad</a>
-          </button>
-          <span class="example-spacer"></span>
-          <button mat-button (click)="toggleModoOscuro()">
-            <mat-icon>brightness_2</mat-icon>
-          </button>
-          <span class="example-spacer"></span>
-          <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_horiz</mat-icon></button>
-          <mat-menu #menu="matMenu">
-            <button mat-button routerLink="/registrarInstancia">Registrar Instancias</button>
-            <button mat-button routerLink="/login">Iniciar Sesión</button>
-            <button mat-button routerLink="/registrarUsuario">Registrar Usuario</button>
-          </mat-menu>
+  <!-- Encabezado para administradores -->
+  <mat-toolbar color="primary" *ngIf="tipoUsuario === 'administrador'">
+    <a mat-button routerLink="/inicioAdm"><mat-icon>home</mat-icon></a>
+    <span>Administración de Instancia</span>
+    <span class="example-spacer"></span>
 
-        </mat-toolbar-row>
-      </mat-toolbar>
-    </div>
-  </div>
-</div>
+      <!-- Enlace "Usuarios" con routerLink -->
+  <a mat-button routerLink="/admUsuario">Usuarios</a>
+
+  <!-- Enlace "Reporte" con routerLink -->
+  <a mat-button routerLink="/admPublicaciones">Reporte</a>
+
+  <!-- Icono de "Cerrar Sesión" -->
+ 
+  </mat-toolbar>
+</p>
 
 <router-outlet></router-outlet>

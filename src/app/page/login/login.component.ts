@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
-import { LoginService } from 'src/app/servicios/login.service';
+import { AppService } from 'src/app/servicios/app.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +16,7 @@ export class LoginComponent {
     contrasenia: new FormControl('', Validators.required)
   });*/
 /*
-  constructor(private api: LoginService, private router: Router, private app: AppComponent) { }
+  constructor(private api: AppService, private router: Router, private app: AppComponent) { }
 
   onLogin() {
     let x: Login = {

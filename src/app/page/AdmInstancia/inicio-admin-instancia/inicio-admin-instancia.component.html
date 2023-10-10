@@ -1,0 +1,79 @@
+<mat-stepper orientation="vertical">
+  <mat-step>
+    <ng-template matStepLabel>Información</ng-template>
+    <ng-template matStepContent>
+      <div class="seccion">
+        <div class="icono-alerta">
+         
+          <mat-icon class="icono"  matBadge="15" matBadgeColor="warn">error</mat-icon>
+        </div>
+
+        
+        <div class="contenido">
+          <p class="titulo">23 Publicaciones reportadas</p>
+        </div>
+        <div class="icono-usuarios">
+          <mat-icon class="icono">people</mat-icon>
+        </div>
+        <div class="contenido">
+          <p class="titulo">230 Usuarios</p>
+        </div>
+      </div>      
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Modificar</ng-template>
+    <ng-template matStepContent>
+      <br>
+      <form class="example-form">
+        <div class="half">
+          <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput #message maxlength="50">
+            <mat-hint align="start"><strong></strong> </mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Privacidad</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let filtro of foods" [value]="filtro.value">
+                {{filtro.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <span class="example-spacer"></span>
+          <mat-form-field>
+            <mat-label>Tematicas</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let tematicas of tematicas" [value]="tematicas.value">
+                {{tematicas.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <mat-slide-toggle>Activar</mat-slide-toggle>
+          </div>
+
+        </div>
+        <div class="half">
+          <mat-form-field class="example-full-width">
+            <mat-label>Descripción</mat-label>
+            <input matInput #message maxlength="100">
+            <mat-hint align="start"><strong></strong> </mat-hint>
+            <mat-hint align="end">{{message.value.length}} / 100</mat-hint>
+          </mat-form-field>
+    
+          <button type="button" mat-raised-button (click)="fileInput.click()">Cambiar Logo</button>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
+          <span class="file-name"></span>
+     <br>
+        <img [src]="base64Image" alt="Imagen" class="img">
+      </div>
+      </form>
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Crear</ng-template>
+    <p>This content was rendered eagerly</p>
+    <button mat-button matStepperPrevious>Back</button>
+  </mat-step>
+</mat-stepper>
