@@ -52,4 +52,5 @@ export class AdmUsuarioInstanciaComponent implements OnInit {
   cambiarPagina(event: any): void {
     // Puedes agregar lógica personalizada aquí si lo necesitas
   }
+  
 }

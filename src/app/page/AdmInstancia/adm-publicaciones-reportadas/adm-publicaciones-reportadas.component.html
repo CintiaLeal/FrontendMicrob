@@ -1,0 +1,37 @@
+
+<div class="table-container">
+    <table mat-table [dataSource]="dataSource"
+       class="mat-elevation-z8">
+      <ng-container matColumnDef="Fecha">
+        <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.Fecha}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="UsuarioEmisor">
+        <mat-header-cell *matHeaderCellDef> Usuario responsable </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.UsuarioEmisor}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="Categoria">
+        <mat-header-cell *matHeaderCellDef> Categoria </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.Categoria }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="borrar">
+        <mat-header-cell *matHeaderCellDef> Detalle </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-button (click)="openDialog()">
+            <mat-icon>info</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+  </div>

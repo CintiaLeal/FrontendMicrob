@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   instancia: Instancia | null = null;
   changeColors = false;
   modoOscuro = false;
-  tipoUsuario: string = 'administrador';
+  tipoUsuario: string = 'noAutenticado';
 
   constructor(private instanciaService: AppService) {
     localStorage.setItem("headerSioNo", 'true');
