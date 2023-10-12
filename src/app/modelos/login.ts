@@ -1,9 +1,9 @@
 export class Login {
-    public correo: string;
-    public contrasenia: string;
+    public email: string;
+    public password: string;
 
-    constructor(correo: string, contrasenia: string) {
-        this.correo = correo;
-        this.contrasenia = contrasenia;
+    constructor(email: string, password: string) {
+        this.email = email;
+        this.password = password;
     }
 }

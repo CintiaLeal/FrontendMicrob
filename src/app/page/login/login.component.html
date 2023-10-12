@@ -5,18 +5,14 @@
         <mat-card-title>Iniciar sesión</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form>
-        <!--   <mat-form-field>
+      <form [formGroup]="loginForm">
+          <mat-form-field>
             <input matInput placeholder="Correo electrónico" type="email" formControlName="email">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Contraseña" type="password" formControlName="contrasenia">
+            <input matInput placeholder="Contraseña" type="password" formControlName="password">
           </mat-form-field>
-          <button mat-raised-button color="primary">Iniciar sesión</button>
-         
-          // @ts-ignore
-          <button mat-raised-button color="primary" (click)="onLogin()">Iniciar sesión</button>
-          -->
+          <button mat-raised-button color="primary" (click)="onLogin()">Iniciar sesión</button>        
         </form>
         <p class="registro-link">¿No tienes una cuenta? <a href="/registrarUsuario">Registrarse</a></p>
       </mat-card-content>

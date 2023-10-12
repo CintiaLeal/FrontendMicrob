@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Instancia } from './modelos/instancia';
 import { AppService } from './servicios/app.service';
 import { PartialObserver, Subject, Subscription, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
   modoOscuro = false;
   tipoUsuario: string = 'noAutenticado';
 
-  constructor(private instanciaService: AppService) {
+  constructor(private instanciaService: AppService,private router: Router) {
     localStorage.setItem("headerSioNo", 'true');
   }
 
@@ -59,13 +60,15 @@ export class AppComponent implements OnInit {
     this.changeColors = !this.changeColors;
   }
 
-
-
-
-  // Función para cambiar el tipo de usuario y almacenarlo en localStorage
+// Función para cambiar el tipo de usuario y almacenarlo en localStorage
   cambiarTipoUsuario(tipo: string) {
     this.tipoUsuario = tipo;
     localStorage.setItem('tipoUsuario', tipo);
+  }
+
+  logout() {
+    localStorage.removeItem("token")
+    this.router.navigate(['/login']);
   }
 }
 

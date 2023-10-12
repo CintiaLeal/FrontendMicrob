@@ -3,6 +3,8 @@
   <mat-toolbar color="primary" *ngIf="tipoUsuario === 'noAutenticado'">
     <span>My App (No Autenticado)</span>
     <a mat-button routerLink="/login"><mat-icon>login</mat-icon></a>
+    <a mat-button (click)="logout()">Cerrar Sesion</a>
+
   </mat-toolbar>
 
   <!-- Encabezado para usuarios comunes -->
@@ -17,6 +19,8 @@
       <button mat-icon-button matSuffix>
         <mat-icon>search</mat-icon>
       </button>
+    <a mat-button (click)="logout()">Cerrar Sesion</a>
+
     </mat-form-field>
   </mat-toolbar>
 
@@ -25,6 +29,8 @@
     <a mat-button routerLink="/inicioAdm"><mat-icon>home</mat-icon></a>
     <a mat-button routerLink="/admUsuario">Usuarios</a>
     <a mat-button routerLink="/admPublicaciones">Reportes</a>
+    <a mat-button (click)="logout()">Cerrar Sesion</a>
+    
     <span class="example-spacer"></span>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>logout</mat-icon>
