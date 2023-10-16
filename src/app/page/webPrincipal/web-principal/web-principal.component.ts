@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./web-principal.component.scss']
 })
 export class WebPrincipalComponent {
+  ngOnInit(): void {
+    localStorage.setItem('token', '');
+  }
 
 }

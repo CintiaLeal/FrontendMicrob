@@ -6,10 +6,7 @@
   }
   .section {
     height: 100%;
-    background-color: #191B22;
-  }
-  .mat-mdc-card {
-    --mdc-elevated-card-container-color: #242323;
+
   }
   //Contenido publicar
   .example-form {
@@ -24,14 +21,14 @@
   }
   //Contenido publicar
   .section1 {
-    background-color: #191B22;
+    
     width: 30%;
      /* Color de fondo para la sección 1 */
   }
   
   .section2 {
     width: 60%;
-    background-color: #282C37; /* Color de fondo para la sección 2 */
+     /* Color de fondo para la sección 2 */
     overflow-y: scroll; /* Habilita el desplazamiento vertical */
     scrollbar-width: none; /* Oculta la barra de desplazamiento de Firefox */
     -ms-overflow-style: none; /* Oculta la barra de desplazamiento de IE y Edge */
@@ -42,7 +39,7 @@
   }
 
   .scrollable-content {
-    height: 100%; /* Altura del contenedor scrollable */
+    height: 100vh; /* Altura del contenedor scrollable */
     padding: 16px; /* Añade espaciado al contenido si es necesario */
     /* Agrega tu contenido scrollable aquí */
   }
@@ -50,7 +47,7 @@
   //INI  Menu 3 
   .section3 {
     width: 30%;
-    background-color: #191B22;
+    
     flex-direction: column;
     height: 100vh; /* Establece la altura al 100% del viewport */
     justify-content: space-between;
@@ -68,7 +65,7 @@
 /* Estilo para los elementos de la lista */
 .menu-list li {
   list-style-type: none;
-  margin-top: 30px ;
+  margin-top: 10% ;
 }
 
 /* Estilo para los enlaces */
@@ -85,7 +82,7 @@
 .icon {
   margin-right: 5px; /* Espacio entre el icono y el texto */
   font-size: 20px; /* Tamaño de icono más pequeño similar al de Twitter */
-  color: #807d7d;
+  
 }
 
 
@@ -120,7 +117,7 @@
 //INI IMG CONTENIDO POST
 .imgContenido{
   background: url('/assets/img/contenido.png') no-repeat center center;
-  width: 600px; /* Ancho deseado para el contenedor */
+  width: 500px; /* Ancho deseado para el contenedor */
   height: 600px; /* Alto deseado para el contenedor */
   border: none;
   margin-left: 3%;
@@ -141,28 +138,15 @@
 }
 //FIN IMG CONTENIDO POST
 
-//TEXTOS INI
-p{
-  font-size: 16px;
-  color: #fff;
-}
-mat-card-title{
-  font-size: 16px;
-  color: #fff;
-}
-mat-card-subtitle{
-  font-size: 15px;
-  color: #a19c9c;
-}
 
 .textTitulo{
   font-size: 18px;
-  color: #a19c9c;
+
   font-weight: bold;
 }
 //TEXTO FIN
 .mat-toolbar {
-  background-color: #242323;
+
   color: var(--mat-toolbar-container-text-color);
 }
 
@@ -172,7 +156,7 @@ mat-card-subtitle{
 }
 .caja3 {
   width: 80%; /* Ancho deseado */
-  margin-top: 300px; /* Espacio entre los div (ajusta según necesites) */
+  margin-top: 50%; /* Espacio entre los div (ajusta según necesites) */
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -186,17 +170,17 @@ mat-card-subtitle{
 
 ///INI TENDENCIA tendencia 
 .tendencias-container {
-  background-color: #242323;
+ 
   padding: 16px;
   border-radius: 8px;
   margin-left: 5%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
 }
 
 .tendencias-container h2 {
   font-size: 18px;
   margin-bottom: 12px;
-  color: #fdfdfd;
+
 }
 
 .tendencias-list {
@@ -210,14 +194,12 @@ mat-card-subtitle{
   margin-bottom: 8px;
   padding: 4px;
   border-radius: 4px;
-  background-color: #242323;
+  
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.tendencia:hover {
-  background-color: #242323;
-}
+
 
 .hashtag {
   font-size: 16px;
@@ -226,11 +208,9 @@ mat-card-subtitle{
 
 .count {
   font-size: 14px;
-  color: #d8d1d1; /* Color de Twitter para el recuento */
+ 
 }
-.colorletras{
-  color: #d8d1d1;
-}
+
 //Fin tendecia
 
 .costados{
