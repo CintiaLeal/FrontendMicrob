@@ -42,6 +42,7 @@ import { VerInstanciaComponent } from './page/webPrincipal/ver-instancia/ver-ins
 import { InicioAdminInstanciaComponent } from './page/AdmInstancia/inicio-admin-instancia/inicio-admin-instancia.component';
 import { AdmUsuarioInstanciaComponent } from './page/AdmInstancia/adm-usuario-instancia/adm-usuario-instancia.component';
 import { AdmPublicacionesReportadasComponent } from './page/AdmInstancia/adm-publicaciones-reportadas/adm-publicaciones-reportadas.component';
+import { CodndnComponent } from './codndn/codndn.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ import { AdmPublicacionesReportadasComponent } from './page/AdmInstancia/adm-pub
     VerInstanciaComponent,
     InicioAdminInstanciaComponent,
     AdmUsuarioInstanciaComponent,
-    AdmPublicacionesReportadasComponent
+    AdmPublicacionesReportadasComponent,
+    CodndnComponent
   ],
   imports: [
     HttpClientModule,

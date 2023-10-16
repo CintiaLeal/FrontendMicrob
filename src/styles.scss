@@ -53,7 +53,7 @@
     position: fixed; /* Establece la posición fija */
     top: 0; /* Fija el encabezado en la parte superior de la ventana */
     width: 100%; /* Haz que el encabezado ocupe todo el ancho */
-    background-color: #ffffff; /* Agrega el color de fondo que desees */
+    background-color: #a14848; /* Agrega el color de fondo que desees */
     /* Otros estilos de diseño para tu encabezado */
     z-index: 1000; /* Opcional: Asegura que el encabezado esté por encima de otros elementos */
   }
@@ -71,7 +71,20 @@
     z-index: 1000;
     border: none;
   }
-  
+  .mat-toolbar {
+    background:#000000;
+    color: var(--mat-toolbar-container-text-color);
+    --mat-toolbar-container-text-color: rgba(255, 255, 255, 0.87);
+}
+
+.mat-toolbar[_ngcontent-ng-c3808393383] {
+  background: #000000;
+  color: var(--mat-toolbar-container-text-color);
+  --mat-toolbar-container-text-color: rgba(255, 255, 255, 0.87);
+
+}
+
+
   /* Estilos para los botones centrados */
   .buttons {
     display: flex;
@@ -117,8 +130,21 @@
     padding:0;
   }
 
-/*Ini Centrar btn header*/
-.example-spacer {
-    flex: 1 1 auto;
+  .custom-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5cm; 
   }
- /*Fin Centrar btn header*/
+  
+  .btn-container {
+    display: flex;
+    gap: 10px; /* Ajusta el valor según la separación deseada entre los botones */
+  }
+  
+  .btn-header {
+    /* Agrega cualquier estilo adicional que desees para los botones */
+  }
+  
+
+

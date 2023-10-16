@@ -20,12 +20,15 @@ export class VerInstanciaComponent implements OnInit {
   tematicaSeleccionada: string | null = null;
     //Para listar las instancias
     public instancias: Instancia[] = [];
-  ngOnInit(): void {
+  
+    ngOnInit(): void {
 
     this.api.getInstancia().subscribe({
+      
       next: value => this.instancias = value,
       error: err => { alert('Error al cargar las instancias: ' + err) }
     });
+    console.log(this.instancias);
   }
 
   //Para los desplegables

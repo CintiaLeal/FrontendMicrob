@@ -15,19 +15,6 @@ export class AppService {
   url: string = "https://localhost:7131"; //URL BASE
     constructor(private http: HttpClient) { }
 
-
-   /*  //login 
-  loginByEmail(form: Login) {
-    console.log(form)
-    let userdata: Login = {
-      correo: form.correo,
-      contrasenia: form.contrasenia
-    }
-    console.log(userdata);
-    let direccion = this.url + "/Authenticate/login"; //URL ESPECIFICA
-    return this.http.post<any>(direccion, form);
-  }*/
-
   
   registrarUsuario(form: Usuario): Observable<ResponseI> {
     let direccion = this.url + "/Account/Registration";
@@ -52,7 +39,7 @@ export class AppService {
          privacidad: instanciaNueva.privacidad,
          esquemaColores: instanciaNueva.esquemaColores,
          activo:instanciaNueva.activo,
-         url: instanciaNueva.url
+         dominio: instanciaNueva.dominio
    
        };
        // Realiza la solicitud POST con el objeto instanciaData
@@ -61,26 +48,9 @@ export class AppService {
      }
 
      getInstancia(): Observable<Instancia[]> {
-      return this.http.get<Instancia[]>(this.url+"/GetInstances");
+      return this.http.get<Instancia[]>(this.url+"/Instance/GetInstances");
     }
 
  
-  registrarInstancias(instancia: Instancia): Observable<ResponseI> {
-    // Crea un objeto que coincida con la estructura de tu clase Instancia
-    const instanciaData = {
-     logo: instancia.logo,
-      nombre: instancia.nombre,
-      tipo: instancia.tipo,
-      tematica: instancia.tematica,
-      pais: instancia.pais,
-      esquemaColores: instancia.esquemaColores,
-      activo:instancia.activo,
-      url: instancia.url
-
-    };
-    // Realiza la solicitud POST con el objeto instanciaData
-    let direccion = this.url + "/instancia/guardar";
-    return this.http.post<any>(direccion, instanciaData); 
-  }
   
 }

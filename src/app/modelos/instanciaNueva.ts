@@ -5,7 +5,7 @@ export class InstanciaNueva {
  
     public esquemaColores: number;
     public activo: boolean; // Added field
-    public url: string; // Added field
+    public dominio: string; // Added field
    public logo: string; // Added field
     public privacidad: number;
 
@@ -25,7 +25,7 @@ export class InstanciaNueva {
         tematica: string,
         esquemaColores: number,
        activo: boolean, // Added parameter
-       url: string, // Added parameter
+       dominio: string, // Added parameter
         logo: string, // Added parameter
         privacidad:number
     ) {
@@ -35,7 +35,19 @@ export class InstanciaNueva {
         this.privacidad = privacidad;
         this.esquemaColores = esquemaColores;
         this.activo = activo; // Initialize the added fields
-        this.url = url; // Initialize the added fields
+        this.dominio = dominio; // Initialize the added fields
         this.logo = logo; // Initialize the added fields
     }
 }
+
+/*
+  {
+    "tenantInstanceId": 2,
+    --"nombre": "AllMusic",
+    "dominio": "entidad1.com",
+    --"logo": "ruta/al/logo1.png",
+    --"activo": true,
+    --"tematica": "Tema 1",
+    --"esquemaColores": 0,
+    --"privacidad": 0
+  } */

@@ -16,7 +16,7 @@
     </mat-form-field>
     <mat-form-field class="desplegables">
       <mat-label>Tematicas</mat-label>
-      <mat-select [(ngModel)]="tematicaSeleccionada" (change)="aplicarFiltro()">
+      <mat-select >
         <mat-option *ngFor="let tematicas of tematicas" [value]="tematicas.value">
           {{tematicas.viewValue}}
         </mat-option>
@@ -27,8 +27,8 @@
   <div class="container">
     <div class="items-container">
       <div class="item" *ngFor="let x of instancias">
-        <div *ngIf="(tematicaSeleccionada === null || x.tematica.toLowerCase() === tematicaSeleccionada.toLowerCase())">
-          <mat-card class="example-card">
+        <div>
+          <mat-card >
           <mat-card-header>
             <img mat-card-image class="imgPORTADA" src={{x.logo}} />
           </mat-card-header>

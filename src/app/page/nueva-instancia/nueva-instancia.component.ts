@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Instancia } from '../../modelos/instancia';
-import { InstanciaNueva } from '../../modelos/instanciaNueva';
 import { AppService } from '../../servicios/app.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -25,12 +24,12 @@ export class NuevaInstanciaComponent {
 
   onRegistrar() {
     console.log("llega a la funcion");
-    let x: InstanciaNueva={
+    let x: Instancia={
       nombre: this.registrarForm.controls["nombre"].value  ? this.registrarForm.controls["nombre"].value : " ",
       esquemaColores: 1,
       tematica: this.registrarForm.controls["tematica"].value  ? this.registrarForm.controls["tematica"].value : " ",
       logo:  this.base64Image,
-      url:  "logo ",
+      dominio:  "logo ",
       activo:true,
       privacidad:1
 

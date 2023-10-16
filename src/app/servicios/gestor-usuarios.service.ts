@@ -11,6 +11,7 @@ import { InstanciaNueva } from "../modelos/instanciaNueva";
 })
 export class GestorUsuariosService {
 
+  
   url: string = "https://localhost:7131"; //URL BASE
   constructor(private http: HttpClient) { }
 

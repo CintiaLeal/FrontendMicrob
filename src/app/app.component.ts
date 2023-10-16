@@ -48,24 +48,7 @@ export class AppComponent implements OnInit {
     this.modoOscuro = !this.modoOscuro;
 
   }
-  
-  async obtenerInstanciaConMayorId() {
-    this.instanciaService.obtenerInstanciaConMayorId().subscribe(
-      (instancia) => {
-        this.instancia = instancia;
-        if (this.instancia && this.instancia.esquemaColores === 'verde') {
-          console.log(this.instancia.esquemaColores);
-          this.toggleColors();
-        } else {
-          this.changeColors = false;
-        }
-      },
-      (error) => {
-        console.error('Error al obtener la instancia con mayor ID:', error);
-      }
-    );
-  }
-
+ 
   toggleColors() {
     this.changeColors = !this.changeColors;
   }
@@ -91,8 +74,8 @@ export class AppComponent implements OnInit {
       localStorage.setItem('tipoUsuario', rolUsuario);
     } else {
       // Si no hay token (o es inválido), establece "sinlogin" como el tipo de usuario.
-      this.tipoUsuario = 'sinlogin';
-      localStorage.setItem('tipoUsuario', 'sinlogin');
+      this.tipoUsuario = 'noAutenticado';
+      localStorage.setItem('tipoUsuario', 'noAutenticado');
     }
   }
   
