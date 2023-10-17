@@ -10,17 +10,8 @@ export class Instancia{
   public dominio: string; // Added field
  public logo: string; // Added field
   public privacidad: number;
+  public description: string;
 
- /*{
-"tenantInstanceId": 3,
-"nombre": "string",
-"url": "string",
-"logo": "string",
-"activo": true,
-"tematica": "string",
-"esquemaColores": 0,
-"privacidad": 0
-}*/
   constructor(
     //  id: number,
       nombre: string,
@@ -29,7 +20,8 @@ export class Instancia{
      activo: boolean, // Added parameter
      dominio: string, // Added parameter
       logo: string, // Added parameter
-      privacidad:number
+      privacidad:number,
+      description: string
   ) {
     //  this.id = id;
       this.nombre = nombre;
@@ -39,17 +31,6 @@ export class Instancia{
       this.activo = activo; // Initialize the added fields
       this.dominio = dominio; // Initialize the added fields
       this.logo = logo; // Initialize the added fields
+      this.description = description;
   }
 }
-
-/*
-{
-  "tenantInstanceId": 2,
-  --"nombre": "AllMusic",
-  "dominio": "entidad1.com",
-  --"logo": "ruta/al/logo1.png",
-  --"activo": true,
-  --"tematica": "Tema 1",
-  --"esquemaColores": 0,
-  --"privacidad": 0
-} */

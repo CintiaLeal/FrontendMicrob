@@ -16,6 +16,8 @@ export class AdmPublicacionesReportadasComponent {
   columnas: string[] = ['Fecha', 'UsuarioEmisor', 'Categoria','borrar'];
   dataSource = new MatTableDataSource<any>([]);
   panelOpenState = false;
+  tipoU: string | null = null;
+
   constructor(public dialog: MatDialog) {}
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator; // Añadir el signo de exclamación (!) aquí
 
@@ -43,6 +45,7 @@ export class AdmPublicacionesReportadasComponent {
       { Fecha: '09/09/2023', UsuarioEmisor: '@Perez', Categoria: 'Agradecimiento' }
     ];
     this.dataSource.paginator = this.paginator;
+    this.tipoU = localStorage.getItem('tipoUsuario');
   }
 
   eliminarRegistro(registro: any): void {

@@ -1,27 +1,25 @@
 
-<div class="table-container">
-
-  
-    <table mat-table [dataSource]="dataSource"
+  <div  class="table-container" >
+    <table mat-table [dataSource]="usuarios"
        class="mat-elevation-z8">
       <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.nombre }} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{ row.firstName }} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="apellido">
         <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.apellido }} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{ row.lastName }} </mat-cell>
       </ng-container>
   
-      <ng-container matColumnDef="usuario">
-        <mat-header-cell *matHeaderCellDef> Nombre de Usuario </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.usuario }} </mat-cell>
+      <ng-container matColumnDef="rol">
+        <mat-header-cell *matHeaderCellDef> Rol </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.role }} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="correo">
         <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.correo }} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{ row.email }} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="borrar">
@@ -42,3 +40,14 @@
     </mat-paginator>
   </div>
   
+  <div *ngIf="tipoU === '1Instance-Administrator'">
+    <div class="contenedorError">
+      <div class="cajaError">
+        <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+      </div>
+      <div class="cajaError"><img class="imgError"></div>
+      <div class="cajaError">
+        <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
+      </div>
+    </div>
+  </div>

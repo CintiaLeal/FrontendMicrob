@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { Instancia } from 'src/app/modelos/instancia';
 import { AppService } from 'src/app/servicios/app.service';
+import { Router } from '@angular/router';
+import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
 
 interface Filtro {
   value: string;
@@ -16,10 +19,10 @@ interface Tematica {
   styleUrls: ['./ver-instancia.component.scss']
 })
 export class VerInstanciaComponent implements OnInit {
-  constructor(private api: AppService ){ }
+  constructor(private api: AppService, private router: Router ){ }
   tematicaSeleccionada: string | null = null;
     //Para listar las instancias
-    public instancias: Instancia[] = [];
+    public instancias: InstanciaRetorno[] = [];
   
     ngOnInit(): void {
 
@@ -54,4 +57,8 @@ export class VerInstanciaComponent implements OnInit {
     }
   }
 
+  navegarAOtroComponente(x:any) {
+    localStorage.setItem("idInstancia", x);
+    this.router.navigate(['/registrarUsuario']);
+  }
 }

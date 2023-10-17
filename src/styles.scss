@@ -136,7 +136,27 @@
     align-items: center;
     height: 2.5cm; 
   }
-  
+  .custHeader {
+    display: flex;
+    height: 2.5cm; 
+  }
+  a{
+    margin-right: 10%;
+  }
+  .aCerrar{
+    display: flex;
+    justify-content:right;
+    align-items: right;
+    margin-right: 30%;
+  }
+  .imgHeader{
+   margin-right: 4%;
+    width: 80px; /* Ancho deseado para el contenedor */
+    height: 80px; /* Alto deseado para el contenedor */
+    border: none;
+    clip-path: circle(50% at 50% 50%);
+    background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+  }
   .btn-container {
     display: flex;
     gap: 10px; /* Ajusta el valor según la separación deseada entre los botones */

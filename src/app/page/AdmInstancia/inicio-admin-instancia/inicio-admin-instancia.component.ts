@@ -1,5 +1,9 @@
 import { Observable, subscribeOn, Subscriber } from 'rxjs';
 import { Component } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
+import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
+import { AppService } from 'src/app/servicios/app.service';
+import { GestorUsuariosService } from 'src/app/servicios/gestor-usuarios.service';
 
 interface Filtro {
   value: string;
@@ -17,6 +21,11 @@ interface Tematica {
 export class InicioAdminInstanciaComponent {
   public base64Image: any;
   panelOpenState = false;
+  tipoU: string | null = null;
+  idinstancia: string | null = null;
+  instanciaActual: InstanciaRetorno | null=null;
+  tokenActual: string | null=null;
+
    //Para los desplegables
    foods: Filtro[] = [
     {value: 'opcion0', viewValue: 'Todas'},
@@ -32,6 +41,23 @@ export class InicioAdminInstanciaComponent {
 
   hidden = false;
 
+  constructor(private app:AppComponent,private api: GestorUsuariosService, private api2: AppService) {
+    this.tipoU = localStorage.getItem('tipoUsuario');
+    this.app.ngOnInit();
+   }
+
+  ngOnInit(): void {
+    this.idinstancia = localStorage.getItem('idInstancia');
+    this.tokenActual = localStorage.getItem('token') ?? '';
+    this.tipoU = localStorage.getItem('tipoUsuario');
+    //window.location.reload();
+    this.api2.getInstanciaPorId(this.idinstancia).subscribe({
+      next: value => this.instanciaActual = value,
+      error: err => { alert('Error al cargar las instancias: ' + err) }
+    });
+    this.app.cambiarUsuarioSegunToken(this.tokenActual);
+  }
+  
   toggleBadgeVisibility() {
     this.hidden = !this.hidden;
   }

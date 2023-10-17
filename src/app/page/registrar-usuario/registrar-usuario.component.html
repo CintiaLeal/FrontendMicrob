@@ -21,6 +21,14 @@
         <mat-form-field>
           <input matInput placeholder="Repetir Contraseña" formControlName="confirmPassword" type="password">
         </mat-form-field>
+        <div class="Centrartitulo">
+          <button type="button" mat-raised-button (click)="fileInput.click()">IMG</button>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
+          <span class="file-name"></span>
+      </div>
+      <div>
+        <img [src]="base64Image" alt="Imagen">
+      </div>
         <button mat-raised-button color="primary" (click)="onRegistrar()">Registrarse</button>
       </form>
     </mat-card-content>

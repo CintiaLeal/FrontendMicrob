@@ -29,9 +29,10 @@ export class NuevaInstanciaComponent {
       esquemaColores: 1,
       tematica: this.registrarForm.controls["tematica"].value  ? this.registrarForm.controls["tematica"].value : " ",
       logo:  this.base64Image,
-      dominio:  "logo ",
+      dominio:  "lodko.com",
       activo:true,
-      privacidad:1
+      privacidad:1,
+      description: "Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input"
 
     }
    

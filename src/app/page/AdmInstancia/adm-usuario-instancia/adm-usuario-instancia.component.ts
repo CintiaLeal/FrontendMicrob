@@ -2,6 +2,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Usuario } from 'src/app/modelos/usuario';
+import { GestorUsuariosService } from 'src/app/servicios/gestor-usuarios.service';
 
 @Component({
   selector: 'app-adm-usuario-instancia',
@@ -9,12 +11,13 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./adm-usuario-instancia.component.scss']
 })
 export class AdmUsuarioInstanciaComponent implements OnInit {
-
-  columnas: string[] = ['nombre', 'apellido', 'usuario', 'correo', 'borrar'];
+  tipoU: string | null = null;
+  columnas: string[] = ['nombre', 'apellido', 'rol', 'correo', 'borrar'];
   dataSource = new MatTableDataSource<any>([]);
-
+  public usuarios: Usuario[] = [];
+  constructor(private api: GestorUsuariosService ){ }
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator; // Añadir el signo de exclamación (!) aquí
-
+/*
   ngOnInit() {
     this.dataSource.data = [
       { nombre: 'Juan', apellido: 'Perez', usuario: 'juan123', correo: 'juan@example.com' },
@@ -39,6 +42,18 @@ export class AdmUsuarioInstanciaComponent implements OnInit {
       { nombre: 'Lucia', apellido: 'Chavez', usuario: 'lucia444', correo: 'lucia@example.com' },
     ];
     this.dataSource.paginator = this.paginator;
+    this.tipoU = localStorage.getItem('tipoUsuario');
+  }
+*/
+ 
+    ngOnInit(): void {
+
+    this.api.obtenerUsuarios().subscribe({
+      
+      next: value => this.usuarios = value,
+      error: err => { alert('Error al cargar los Usuarios: ' + err) }
+    });
+    console.log(this.usuarios);
   }
 
   eliminarRegistro(registro: any): void {

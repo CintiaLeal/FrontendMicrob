@@ -1,5 +1,5 @@
 
-<div class="table-container">
+<div class="table-container" >
     <table mat-table [dataSource]="dataSource"
        class="mat-elevation-z8">
       <ng-container matColumnDef="Fecha">
@@ -34,4 +34,16 @@
       aria-label="Select page of periodic elements">
     </mat-paginator>
 
+  </div>
+
+  <div *ngIf="tipoU !== '1Instance-Administrator'">
+    <div class="contenedorError">
+      <div class="cajaError">
+        <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+      </div>
+      <div class="cajaError"><img class="imgError"></div>
+      <div class="cajaError">
+        <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
+      </div>
+    </div>
   </div>

@@ -15,6 +15,7 @@ export class LoginComponent {
   tipoUsuario: string | null = null;
   tokens: string | null = null;
   tipoU: { [key: string]: string } | null = null;
+  idT: string | null= null;
 
 
   loginForm = new FormGroup({
@@ -26,30 +27,38 @@ export class LoginComponent {
   constructor(private api: GestorUsuariosService, private router: Router, private app: AppComponent) { this.jwtHelper = new JwtHelperService(); }
   
   ngOnInit(): void {
-    localStorage.setItem('token', '');
+    
+    
   }
 
 
   onLogin() {
+    this.idT = localStorage.getItem("idInstancia");
     let x: Login = {
       email: this.loginForm.controls["email"].value ? this.loginForm.controls["email"].value : " ",
       password: this.loginForm.controls["password"].value ? this.loginForm.controls["password"].value : " "
     }
-
-    this.api.loginByEmail(x).subscribe(data => {
+    this.api.loginByEmail(x,this.idT).subscribe(data => {
       localStorage.setItem("token", data.token);
       this.tokens = data.token;
-      localStorage.setItem("tipoUsuario", 'true');
       this.tipoU = this.jwtHelper.decodeToken(data.token);
-    
+      localStorage.setItem("email", x.email);
+      this.app.cambiarTipoUsuario(data.token);
       if (this.tipoU && 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' in this.tipoU) {
         if (this.tipoU['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Common-User') {
+          localStorage.setItem("tipoUsuario", 'Common-User'); 
+          this.app.cambiarTipoUsuario(data.token); 
           this.router.navigate(['/inicioUsuario']);
+          
         } else if (this.tipoU['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Instance-Administrator') {
+          localStorage.setItem("tipoUsuario", 'Instance-Administrator');
+         this.app.cambiarTipoUsuario(data.token);  
           this.router.navigate(['/inicioAdm']);
         }
       }
+      this.decodeToken(data.token);
     });
+    
   }    
 //Common-User Moderator Platform-Administrator Instance-Administrator 
 

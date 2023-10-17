@@ -10,6 +10,8 @@ import { VerInstanciaComponent } from './page/webPrincipal/ver-instancia/ver-ins
 import { InicioAdminInstanciaComponent } from './page/AdmInstancia/inicio-admin-instancia/inicio-admin-instancia.component';
 import { AdmUsuarioInstanciaComponent } from './page/AdmInstancia/adm-usuario-instancia/adm-usuario-instancia.component';
 import { AdmPublicacionesReportadasComponent } from './page/AdmInstancia/adm-publicaciones-reportadas/adm-publicaciones-reportadas.component';
+import { InicioAdmPlataformaComponent } from './page/AdmPlataforma/inicio-adm-plataforma/inicio-adm-plataforma.component';
+import { AdmPlataformaGestorInstanciaComponent } from './page/AdmPlataforma/adm-plataforma-gestor-instancia/adm-plataforma-gestor-instancia.component';
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: '', component: WebPrincipalComponent },
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: 'verInstancia', component: VerInstanciaComponent },
   { path: 'inicioAdm', component: InicioAdminInstanciaComponent },
   { path: 'admUsuario', component: AdmUsuarioInstanciaComponent },
-  { path: 'admPublicaciones', component: AdmPublicacionesReportadasComponent }
+  { path: 'admPublicaciones', component: AdmPublicacionesReportadasComponent },
+  { path: 'inicioAdmPlataforma', component: InicioAdmPlataformaComponent },
+  { path: 'inicioAdmPlataformaGestorInstancia', component: AdmPlataformaGestorInstanciaComponent }
 ];
 
 @NgModule({

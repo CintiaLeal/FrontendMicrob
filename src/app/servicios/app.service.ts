@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Login } from '../modelos/login';
 import { ResponseI } from '../modelos/response.interface';
 import { Usuario } from '../modelos/usuario';
 import { Instancia } from '../modelos/instancia';
 import { InstanciaNueva } from "../modelos/instanciaNueva";
+import { InstanciaRetorno } from '../modelos/instanciaRetorno';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +16,13 @@ export class AppService {
   url: string = "https://localhost:7131"; //URL BASE
     constructor(private http: HttpClient) { }
 
-  
-  registrarUsuario(form: Usuario): Observable<ResponseI> {
+    
+  registrarUsuario(form: Usuario, x:any): Observable<ResponseI> {
     let direccion = this.url + "/Account/Registration";
-    return this.http.post<any>(direccion, form); 
+    const headers = new HttpHeaders({
+      'tenant': x
+    });
+    return this.http.post<any>(direccion, form,{ headers: headers }); 
   }
 
   obtenerInstancias(): Observable<Instancia[]> {
@@ -30,27 +34,25 @@ export class AppService {
     return this.http.get<Instancia>(direccion);
   }
 
-  crearInstancias (instanciaNueva: InstanciaNueva ): Observable<ResponseI> {
-       // Crea un objeto que coincida con la estructura de tu clase Instancia
-       const instanciaData = {
-        logo: instanciaNueva.logo,
-        nombre: instanciaNueva.nombre,
-         tematica: instanciaNueva.tematica,
-         privacidad: instanciaNueva.privacidad,
-         esquemaColores: instanciaNueva.esquemaColores,
-         activo:instanciaNueva.activo,
-         dominio: instanciaNueva.dominio
-   
-       };
+  crearInstancias (instanciaNueva: Instancia): Observable<ResponseI> {
+    const headers = new HttpHeaders({
+      'userEmail': 'anabrown@example.com'
+    });
+
        // Realiza la solicitud POST con el objeto instanciaData
-       let direccion = this.url + "/CreateInstance";
-       return this.http.post<any>(direccion, instanciaData); 
+       let direccion = this.url + "/Instance/CreateInstance?userEmail=anabrown%40example.com";
+       return this.http.post<any>(direccion, instanciaNueva); 
      }
 
-     getInstancia(): Observable<Instancia[]> {
-      return this.http.get<Instancia[]>(this.url+"/Instance/GetInstances");
+     getInstancia(): Observable<InstanciaRetorno[]> {
+      return this.http.get<InstanciaRetorno[]>(this.url+"/Instance/GetActiveInstances");
     }
 
+    getInstanciaPorId(x: any): Observable<InstanciaRetorno> {
+      const url = `${this.url}/Instance/GetInstanceById?instanceId=${x}`;
+      return this.http.get<InstanciaRetorno>(url);
+    }
+    
  
   
 }

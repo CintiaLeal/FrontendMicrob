@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="tipoU === 'Common-User'">
   <div class="section costados"></div>
   <div class="section section1">
     <form class="example-form">
@@ -6,9 +6,9 @@
     <mat-card class="example-card posicion">
       <mat-card-header>
         <mat-card-title-group>
-          <mat-card-title>Ana Lopez</mat-card-title>
-          <mat-card-subtitle>@AnaLopez12</mat-card-subtitle>
-          <img class="imgPERFIL">
+          <mat-card-title>{{usuario?.firstName}}</mat-card-title>
+          <mat-card-subtitle>@{{usuario?.firstName}}{{usuario?.lastName}}</mat-card-subtitle>
+          <img class="imgPERFIL" src={{usuario?.profileImage}}>
         </mat-card-title-group>
       </mat-card-header>
       <br>
@@ -268,25 +268,19 @@
     <div class="caja3">
       <ul class="menu-list">
         <li>
-          <a  (click)="mostrarContenido('home')">
+          <a (click)="mostrarContenido('home')">
             <mat-icon class="icon">home</mat-icon>
             <span class="text">Home</span>
           </a>
         </li>
         <li>
-          <a   (click)="mostrarContenido('notificacion')">
+          <a (click)="mostrarContenido('notificacion')">
             <mat-icon class="icon">notifications</mat-icon>
             <span class="text">Notificaciones</span>
           </a>
         </li>
         <li>
-          <a routerLink="/">
-            <mat-icon class="icon">menu</mat-icon>
-            <span class="text">Menu</span>
-          </a>
-        </li>
-        <li>
-          <a  (click)="mostrarContenido('favorito')">
+          <a (click)="mostrarContenido('favorito')">
             <mat-icon class="icon">favorite</mat-icon>
             <span class="text">Favorito</span>
           </a>
@@ -295,12 +289,29 @@
           <hr>
         </li>
         <li>
-          <a routerLink="/">
-            <mat-icon class="icon">settings</mat-icon>
+          <a>
+            <mat-icon class="icon" [matMenuTriggerFor]="menu">settings</mat-icon>
             <span class="text">Ajustes</span>
           </a>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Modificar</button>
+            <button mat-menu-item>Modificar</button>
+          </mat-menu>
         </li>
       </ul>
     </div>
-
   </div>
+</div>
+
+<div *ngIf="tipoU !== 'Common-User'">
+  <div class="contenedorError">
+    <div class="cajaError">
+      <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+    </div>
+    <div class="cajaError"><img class="imgError"></div>
+    <div class="cajaError">
+      <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
+    </div>
+  </div>
+
+</div>

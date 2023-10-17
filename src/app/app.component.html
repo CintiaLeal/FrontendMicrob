@@ -1,3 +1,6 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;500;700&display=swap">
+
 <p>
   <mat-toolbar *ngIf="tipoUsuario === 'noAutenticado'" class="custom-header">
     <div class="btn-container">
@@ -10,29 +13,22 @@
   
 
   <!-- Encabezado para usuarios comunes -->
-  <mat-toolbar class="header" *ngIf="tipoUsuario === 'Common-User'">
-    <button mat-icon-button class="example-icon" aria-label="Menú">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App (Usuario Común)</span>
+  <mat-toolbar  *ngIf="tipoUsuario === 'Common-User'" class="custHeader">
+    <img class="imgHeader" src={{instanciaActual?.logo}}>
+    <a>{{instanciaActual?.nombre}}</a>
     <span class="example-spacer"></span>
-    
-    <a mat-button (click)="logout()">Cerrar Sesion</a>
-
-   
+    <a  class="aCerrar" mat-button (click)="logout()">Cerrar Sesión</a>
   </mat-toolbar>
 
   <!-- Encabezado para administradores -->
-  <mat-toolbar color="header" *ngIf="tipoUsuario === 'Instance-Administrator'">
-    <a mat-button routerLink="/inicioAdm"><mat-icon>home</mat-icon></a>
+  <mat-toolbar   *ngIf="tipoUsuario === 'Instance-Administrator'" class="custHeader" >
+    <img class="imgHeader" src={{instanciaActual?.logo}}>
+    <a>{{instanciaActual?.nombre}}</a>
+ 
     <a mat-button routerLink="/admUsuario">Usuarios</a>
     <a mat-button routerLink="/admPublicaciones">Reportes</a>
-    <a mat-button (click)="logout()">Cerrar Sesion</a>
-    
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>logout</mat-icon>
-    </button>
+    <a mat-button class="aCerrar" (click)="logout()">Cerrar Sesión</a>   
   </mat-toolbar>
 </p>
 
