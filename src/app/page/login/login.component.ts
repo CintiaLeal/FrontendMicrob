@@ -38,26 +38,24 @@ export class LoginComponent {
       email: this.loginForm.controls["email"].value ? this.loginForm.controls["email"].value : " ",
       password: this.loginForm.controls["password"].value ? this.loginForm.controls["password"].value : " "
     }
-    this.api.loginByEmail(x,this.idT).subscribe(data => {
+    this.api.loginByEmail(x,2).subscribe(data => {
       localStorage.setItem("token", data.token);
       this.tokens = data.token;
-      this.tipoU = this.jwtHelper.decodeToken(data.token);
       localStorage.setItem("email", x.email);
-      this.app.cambiarTipoUsuario(data.token);
+      
       if (this.tipoU && 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' in this.tipoU) {
         if (this.tipoU['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Common-User') {
+          this.app.cambiarTipoUsuario(data.token);
           localStorage.setItem("tipoUsuario", 'Common-User'); 
-          this.app.cambiarTipoUsuario(data.token); 
-          this.router.navigate(['/inicioUsuario']);
-          
+          this.router.navigate(['/inicioUsuario']);         
         } else if (this.tipoU['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Instance-Administrator') {
-          localStorage.setItem("tipoUsuario", 'Instance-Administrator');
-         this.app.cambiarTipoUsuario(data.token);  
+          this.app.cambiarTipoUsuario(data.token);
+          localStorage.setItem("tipoUsuario", 'Instance-Administrator');      
           this.router.navigate(['/inicioAdm']);
         }
       }
-      this.decodeToken(data.token);
     });
+    
     
   }    
 //Common-User Moderator Platform-Administrator Instance-Administrator 

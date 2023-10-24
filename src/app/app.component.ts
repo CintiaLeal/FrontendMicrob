@@ -15,14 +15,16 @@ import { GestorUsuariosService } from './servicios/gestor-usuarios.service';
 export class AppComponent implements OnInit {
   jwtHelper: any;
   instancia: Instancia | null = null;
-  changeColors = false;
+  esquemaColor1: boolean = true;
   modoOscuro = false;
   tipoUsuario: string  = '';
   tokenActual: string = '';
   idinstancia: any | null = null;
   instanciaActual: InstanciaRetorno | null=null;
-  
+  colores: any| null = null;
   email: string | null = null;
+  esquemaColores:any| null =null;
+  reloadHtml: boolean = false;
 
   constructor(private instanciaService: AppService,private router: Router,private api: GestorUsuariosService, private api2: AppService) {
     localStorage.setItem("headerSioNo", 'true');
@@ -34,11 +36,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.funHeaderSioNo();
+    this.colores = 'esquemaColor1';
+    
   
      // Recuperar el tipo de usuario del localStorage (si está almacenado)
      this.cambiarUsuarioSegunToken(this.tokenActual); 
-  }
 
+     this.reloadComponent();
+  }
+  reloadComponent() {
+    this.reloadHtml = true;
+  }
+  
   funHeaderSioNo() {
     if (localStorage.getItem("headerSioNo") === 'true') {
       return true;
@@ -52,9 +61,6 @@ export class AppComponent implements OnInit {
 
   }
  
-  toggleColors() {
-    this.changeColors = !this.changeColors;
-  }
 
 // Función para cambiar el tipo de usuario y almacenarlo en localStorage
   cambiarTipoUsuario(tipo: string) {
@@ -65,50 +71,65 @@ export class AppComponent implements OnInit {
   logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("idInstancia");
-    this.router.navigate(['/login']);
+    localStorage.removeItem("esquemaColores");
+    localStorage.removeItem("valorURL");
 
+    localStorage.setItem('tipoUsuario', 'noAutenticado');
+    this.router.navigate(['/']);
     this.ngOnInit();
   }
-
   cambiarUsuarioSegunToken(token: string) {
     if (token) {
       localStorage.removeItem("tipoUsuario");
-      // Si hay un token válido, decodifica el token y obtén el rol del usuario.
       const decodedToken = this.jwtHelper.decodeToken(token);
       const rolUsuario = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       this.tipoUsuario = rolUsuario;
       localStorage.setItem('tipoUsuario', rolUsuario);
-
-     /* this.idinstancia = localStorage.getItem('idInstancia');
-
-      this.api2.getInstanciaPorId(this.idinstancia).subscribe({
-        next: value => this.instanciaActual = value,
-        error: err => { alert('Error al cargar las instancias: ' + err) }
-      });*/
+      this.email = localStorage.getItem('email');
+      
       if (this.email) {
         this.api.obtenerInfoUsuario(this.email).subscribe(
           (value) => {
-            this.idinstancia = value.tenantInstanceId; // Asigna el valor a this.idinstancia
-            localStorage.setItem('idInstancia', this.idinstancia); // Almacena en el localStorage
+            if (value && value.tenantInstanceId) { // Verifica si 'value' y 'tenantInstanceId' existen
+              this.idinstancia = value.tenantInstanceId;
+              localStorage.setItem('idInstancia', this.idinstancia);
+            } else {
+              console.error('Error: tenantInstanceId no encontrado en el valor obtenido.');
+            }
           },
           (error) => {
             alert('Error al cargar las instancias: ' + error);
           }
         );
-      
+  /*
+        this.idinstancia = localStorage.getItem('idInstancia');
+        if (this.idinstancia) { // Verifica si 'idinstancia' existe
+          this.api2.getInstanciaPorId(this.idinstancia).subscribe({
+            next: value => {
+              this.instanciaActual = value;
+              if (this.instanciaActual && this.instanciaActual.esquemaColores !== undefined) {
+                localStorage.setItem('esquemaColores', this.instanciaActual.esquemaColores.toString());
+              }
+            },
+            error: err => {
+              alert('Error al cargar las instancias: ' + err);
+            }
+          });
+        } else {
+          console.error('Error: idInstancia no encontrado en el localStorage.');
+        }*/
       }
-
-
     } else {
-      // Si no hay token (o es inválido), establece "sinlogin" como el tipo de usuario.
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      localStorage.removeItem("tipoUsuario");
+      localStorage.removeItem("idInstancia");
+      localStorage.removeItem("esquemaColores");
       this.tipoUsuario = 'noAutenticado';
       localStorage.setItem('tipoUsuario', 'noAutenticado');
     }
-    
   }
-
   
 }
 

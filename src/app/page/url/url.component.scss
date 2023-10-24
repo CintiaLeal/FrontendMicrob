@@ -1,0 +1,246 @@
+
+
+  /* Estilo 1 */
+.change-colors-style-1 {
+    .mat-mdc-raised-button.mat-primary {
+      background-color: #618C88;
+      color: #ffffff;
+    }
+  
+    .mat-mdc-raised-button.mat-accent {
+      background-color: #9BBFBC;
+      color: #ffffff;
+    }
+  
+    .mat-toolbar.mat-primary {
+      background-color: #395941;
+      color: #ffffff;
+    }
+  }
+  
+  /* Estilo 2 */
+  .change-colors-style-2 {
+
+    .mat-mdc-raised-button.mat-primary {
+      background-color: #45858C;
+      color: #ffffff;
+    }
+  
+    .mat-mdc-raised-button.mat-accent {
+      background-color: #A6A48F;
+      color: #ffffff;
+    }
+  
+    .mat-toolbar.mat-primary {
+      background-color: #FFCC33;
+      color: #ffffff;
+    }
+    .mat-background {
+      background-color: #FFCC33;
+      /* Cambia esto al color de fondo deseado */
+        /* Otras propiedades de estilo si es necesario */
+    }
+  }/* Anula el color de fondo predeterminado en Angular Material */
+.mat-card, .mat-dialog-container, .mat-toolbar {
+    background-color: #A6A48F;
+    /* Reemplaza 'tu-color-aqui' con tu color de fondo deseado */
+  }
+  .div1{
+    background-color: #BFAA84;
+    height: 30px;
+    margin-top: -1%;
+    display: flex; /* Establece un contexto de flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+
+  }
+  .div2{
+    background-color: #A6A48F; 
+    height: 20px;
+    margin-top: -1%;
+    display: flex; /* Establece un contexto de flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+
+  }
+  .div3{
+    background-color: #45858C;
+    height: 20px;
+    display: flex; /* Establece un contexto de flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+
+  }
+  //alineaciones de los 2 div 
+  .container {
+    display: flex;
+ margin-top: -5%;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    height: 100vh; /* Establece la altura al 100% del viewport */
+  }
+  
+  .box {
+    width: 50%;
+  
+    text-align: center;
+   
+  }
+  
+  //fin slinrsviord
+  .letraStylo {
+    margin: 1%;
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+    color: #401801;
+    font-size: 45px;
+  }
+  .img{
+    clip-path: circle(50% at 50% 50%);
+    width: 150px; /* Ancho deseado para el contenedor */
+    height: 150px; /* Alto deseado para el contenedor */
+  }
+
+
+
+
+  .Green-and-Blue-Neon-Light-with-Tropical-Leaves-1-hex { color: #011C40; }
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-2-hex { color: #03658C; }
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-3-hex { color: #04B2D9; }
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-4-hex { color: #04D9B2; }
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-5-hex { color: #04D98B; }
+.Ocean-View-1-hex { color: #45858C; }
+.Ocean-View-2-hex { color: #A6A48F; }
+.Ocean-View-3-hex { color: #BFAA84; }
+.Ocean-View-4-hex { color: #401801; }
+.Ocean-View-5-hex { color: #A6460F; }
+
+.Netherlands-🇳🇱-1-hex { color: #9BA7BF; }
+.Netherlands-🇳🇱-2-hex { color: #0F1926; }
+.Netherlands-🇳🇱-3-hex { color: #2E4159; }
+.Netherlands-🇳🇱-4-hex { color: #566D8C; }
+.Netherlands-🇳🇱-5-hex { color: #BF8136; }
+
+.btn{
+    -mdc-protected-button-container-color: #45858C; ;  
+}
+
+.login-container {
+    display: flex;
+    margin-top: -3%;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px); /* 100px es la distancia desde la parte superior */
+  }
+  
+  mat-card {
+    width: 500px;
+  }
+  
+  mat-card-title {
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+    font-size: 30px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  button {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+
+
+  /* Estilos para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos para el contenedor principal */
+  .contenedor {
+    display: flex;
+    margin-top: -10%;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    height: 100px; /* Establece la altura al 100% del viewport */
+  }
+  
+  /* Estilos para los divs */
+   .div-derecho{
+    width: 40%;
+    height: 10px;
+    margin-top: 20%;
+    margin-left: -20%;
+
+  } 
+  .div-izquierdo{
+    width: 40%;
+    height: 10px;
+    margin-top: 10%;
+    margin-right: -30%;
+  } 
+  .div-abajo {
+    width: 80%;
+    margin:20%
+  }
+  
+  .div-izquierdo, .div-derecho {
+    flex: 1;
+  }
+  
+  .div-abajo {
+    flex: 2;
+  }
+  
+
+  
+  //SECCION ERROR
+//INI IMG ERROR
+.imgError {
+    background: url('/assets/img/error.png') no-repeat center center;
+    width: 350px; /* Ancho deseado para el contenedor */
+    height: 350px; /* Alto deseado para el contenedor */
+    border: none;
+    background-size: 350px 350px; /* Establece el tamaño de la imagen deseado */
+    clip-path: inset(1% 1% 1% 1%);
+    --mdc-protected-button-container-color:#2E4159;
+  }
+  
+  .btnError{
+    --mdc-protected-button-container-color: #2E4159;
+    --mdc-protected-button-label-text-color: #fff;
+    width: 30%;
+    font-family: 'Kanit', sans-serif; 
+    font-size: 30px;
+  
+  }
+  .h1Error{
+    font-family: 'Kanit', sans-serif; 
+    font-size: 40px;
+  }
+  .contenedorError {
+    display: flex;
+    margin-top: -4%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Esto centra verticalmente en la ventana del navegador */
+  }
+  
+  .cajaError {
+    width: 80%;
+    height:auto;
+    text-align: center;
+    padding: 20px;
+    margin: 10px 0;
+  }
+  
+
+
+  //FIN SECCION ERROR 

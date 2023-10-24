@@ -59,6 +59,7 @@ export class VerInstanciaComponent implements OnInit {
 
   navegarAOtroComponente(x:any) {
     localStorage.setItem("idInstancia", x);
-    this.router.navigate(['/registrarUsuario']);
+
+    this.router.navigate(['/' + x]);
   }
 }

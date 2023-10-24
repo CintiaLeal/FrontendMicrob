@@ -45,6 +45,11 @@ import { AdmPublicacionesReportadasComponent } from './page/AdmInstancia/adm-pub
 import { CodndnComponent } from './codndn/codndn.component';
 import { InicioAdmPlataformaComponent } from './page/AdmPlataforma/inicio-adm-plataforma/inicio-adm-plataforma.component';
 import { AdmPlataformaGestorInstanciaComponent } from './page/AdmPlataforma/adm-plataforma-gestor-instancia/adm-plataforma-gestor-instancia.component';
+import { URLComponent } from './page/url/url.component';
+import { HeaderComponent } from './page/headerpage/header/header.component';
+import { HeaderPlatformAdministratorComponent } from './page/headerpage/header-platform-administrator/header-platform-administrator.component';
+import { HeaderModeratorComponent } from './page/headerpage/header-moderator/header-moderator.component';
+import { HeaderInstanceAdministratorComponent } from './page/headerpage/header-instance-administrator/header-instance-administrator.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +65,12 @@ import { AdmPlataformaGestorInstanciaComponent } from './page/AdmPlataforma/adm-
     AdmPublicacionesReportadasComponent,
     CodndnComponent,
     InicioAdmPlataformaComponent,
-    AdmPlataformaGestorInstanciaComponent
+    AdmPlataformaGestorInstanciaComponent,
+    URLComponent,
+    HeaderComponent,
+    HeaderPlatformAdministratorComponent,
+    HeaderModeratorComponent,
+    HeaderInstanceAdministratorComponent
   ],
   imports: [
     HttpClientModule,

@@ -18,7 +18,7 @@ export class GestorUsuariosService {
 
  //Inicio Login por email 
   loginByEmail(form: Login, x:any) {
-    console.log("llega"+x);
+    console.log("llega"+ x);
     const headers = new HttpHeaders({
       'tenant': x
     });

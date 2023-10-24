@@ -52,6 +52,8 @@ export class AppService {
       const url = `${this.url}/Instance/GetInstanceById?instanceId=${x}`;
       return this.http.get<InstanciaRetorno>(url);
     }
+
+    
     
  
   
