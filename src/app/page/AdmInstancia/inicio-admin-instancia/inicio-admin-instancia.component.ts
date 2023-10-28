@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
 import { AppService } from 'src/app/servicios/app.service';
-import { GestorUsuariosService } from 'src/app/servicios/gestor-usuarios.service';
 
 interface Filtro {
   value: string;
@@ -41,7 +40,7 @@ export class InicioAdminInstanciaComponent {
 
   hidden = false;
 
-  constructor(private app:AppComponent,private api: GestorUsuariosService, private api2: AppService) {
+  constructor(private app:AppComponent, private api: AppService) {
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.app.ngOnInit();
    }
@@ -51,11 +50,11 @@ export class InicioAdminInstanciaComponent {
     this.tokenActual = localStorage.getItem('token') ?? '';
     this.tipoU = localStorage.getItem('tipoUsuario');
     //window.location.reload();
-    this.api2.getInstanciaPorId(this.idinstancia).subscribe({
+    this.api.getInstanciaPorId(this.idinstancia).subscribe({
       next: value => this.instanciaActual = value,
       error: err => { alert('Error al cargar las instancias: ' + err) }
     });
-    this.app.cambiarUsuarioSegunToken(this.tokenActual);
+    //this.app.cambiarUsuarioSegunToken(this.tokenActual);
   }
   
   toggleBadgeVisibility() {

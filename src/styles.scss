@@ -15,3 +15,253 @@
   }
 }
 
+.Ocean-View-1-hex {
+  color: #45858C; /* Cambia a tu color deseado */
+}
+
+.Ocean-View-2-hex {
+  color: #A6A48F; /* Cambia a tu color deseado */
+}
+
+.Ocean-View-3-hex {
+  color: #BFAA84; /* Cambia a tu color deseado */
+}
+
+.Ocean-View-4-hex {
+  color: #401801; /* Cambia a tu color deseado */
+}
+
+.Ocean-View-5-hex {
+  color: #A6460F; /* Cambia a tu color deseado */
+}
+
+
+
+
+
+.change-colors {
+
+    .mat-mdc-raised-button.mat-primary {
+        
+        background-color: #618C88;
+        color: #ffffff;
+    }
+   
+    .mat-mdc-raised-button.mat-accent{
+        background-color: #9BBFBC;
+        color: #ffffff;
+    }
+
+    .mat-toolbar.mat-primary{
+        background-color: #395941;
+        color: #ffffff;
+    }
+
+    /* Cambia los colores del tema de Angular Material */
+/* Estos son solo ejemplos; ajusta los colores según tus necesidades */
+
+/* Cambia el color principal (Primary) */
+.mat-primary {
+  background-color: #618C88 !important;
+  color: #ffffff !important;
+}
+
+/* Cambia el color de acento (Accent) */
+.mat-accent {
+  background-color: #9BBFBC !important;
+  color: #ffffff !important;
+}
+
+/* Cambia el color de advertencia (Warning) */
+.mat-warn {
+  background-color: #FF0000 !important;
+  color: #ffffff !important;
+}
+
+/* Cambia el color de fondo del cuerpo de la página */
+.mat-typography {
+  background-color: #F0F0F0 !important;
+  color: #000000 !important;
+}
+
+/* Cambia el color del fondo del encabezado de la barra de herramientas */
+.mat-toolbar {
+  background-color: #395941 !important;
+  color: #ffffff !important;
+}
+
+}
+
+  /* Estilo PRINCIPAL */
+  .change-colors-style-0 {
+    .mat-mdc-raised-button.mat-primary {
+      background-color: #2E4159;
+      color: #ffffff;
+    }
+  
+    .mat-mdc-raised-button.mat-accent {
+      background-color: #566D8C;
+      color: #ffffff;
+    }
+  
+    .mat-toolbar.mat-primary {
+      background-color: #BF8136; 
+      color: #ffffff;
+    }
+ 
+  }
+
+  .Netherlands-🇳🇱-1-hex { color: #9BA7BF; }
+  .Netherlands-🇳🇱-2-hex { color: #0F1926; }
+  .Netherlands-🇳🇱-3-hex { color: #2E4159; }
+  .Netherlands-🇳🇱-4-hex { color: #566D8C; }
+  .Netherlands-🇳🇱-5-hex { color: #BF8136; }
+.modo-oscuro{
+
+    background-color: #1F2024;
+    .mat-mdc-raised-button.mat-primary {
+        
+        background-color: #090d0d;
+        color: #ffffff;
+    }
+   
+    .mat-mdc-raised-button.mat-accent{
+        background-color: #192a29;
+        color: #ffffff;
+    }
+
+    .mat-toolbar.mat-primary{
+        background-color: #090d0d;
+        color: #ffffff;
+    }
+    .mat-mdc-card {
+        --mdc-elevated-card-container-color: #4B4952;
+    }
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+        background-color: #6d6b74;
+    }
+    .search-container[_ngcontent-ng-c1987760739] {
+        background-color: #6d6b74;
+    }
+    .search-card[_ngcontent-ng-c1987760739] {
+        background-color: #6d6b74;
+    }
+}
+
+.header1 {
+    position: fixed; /* Establece la posición fija */
+    top: 0; /* Fija el encabezado en la parte superior de la ventana */
+    width: 100%; /* Haz que el encabezado ocupe todo el ancho */
+    background-color: #a14848; /* Agrega el color de fondo que desees */
+    /* Otros estilos de diseño para tu encabezado */
+    z-index: 1000; /* Opcional: Asegura que el encabezado esté por encima de otros elementos */
+  }
+  /* Estilos para el header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(37, 37, 37, 0); /* Fondo con transparencia */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Espaciado interno */
+    z-index: 1000;
+    border: none;
+  }
+  .mat-toolbar {
+    background:#000000;
+    color: var(--mat-toolbar-container-text-color);
+    --mat-toolbar-container-text-color: rgba(255, 255, 255, 0.87);
+}
+
+.mat-toolbar[_ngcontent-ng-c3808393383] {
+  background: #000000;
+  color: var(--mat-toolbar-container-text-color);
+  --mat-toolbar-container-text-color: rgba(255, 255, 255, 0.87);
+
+}
+
+
+  /* Estilos para los botones centrados */
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Estilos para el espacio de login y el icono de ingresar */
+  .login-space {
+    margin-right: 20px; /* Espaciado en la esquina derecha */
+  }
+  
+  .icon-ingresar {
+    margin-left: 20px; /* Espaciado en la esquina izquierda */
+  }
+  
+  /* Estilos para los botones */
+  .button {
+    background-color: #007bff; /* Color de fondo de los botones */
+    color: #ffffff; /* Color de texto de los botones */
+    padding: 10px 20px; /* Espaciado interno de los botones */
+    margin: 0 5px; /* Espaciado entre los botones */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    text-decoration: none; /* Sin subrayado en el texto */
+  }
+  
+  /* Estilos para el icono de ingresar */
+  .ingresar-icon {
+    font-size: 24px;
+  }
+  
+  /* Estilos para el espacio de login */
+  .login {
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  
+  *{
+    margin:0;
+    padding:0;
+  }
+
+  .custom-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5cm; 
+  }
+  .custHeader {
+    display: flex;
+    height: 2.5cm; 
+  }
+  a{
+    margin-right: 10%;
+  }
+  .aCerrar{
+    display: flex;
+    justify-content:right;
+    align-items: right;
+    margin-right: 30%;
+  }
+  .imgHeader{
+   margin-right: 4%;
+    width: 80px; /* Ancho deseado para el contenedor */
+    height: 80px; /* Alto deseado para el contenedor */
+    border: none;
+    clip-path: circle(50% at 50% 50%);
+    background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+  }
+  .btn-container {
+    display: flex;
+    gap: 10px; /* Ajusta el valor según la separación deseada entre los botones */
+  }
+  
+
+  
+
+

@@ -13,6 +13,7 @@ import { AdmPublicacionesReportadasComponent } from './page/AdmInstancia/adm-pub
 import { InicioAdmPlataformaComponent } from './page/AdmPlataforma/inicio-adm-plataforma/inicio-adm-plataforma.component';
 import { AdmPlataformaGestorInstanciaComponent } from './page/AdmPlataforma/adm-plataforma-gestor-instancia/adm-plataforma-gestor-instancia.component';
 import { URLComponent } from './page/url/url.component';
+
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: '', component: WebPrincipalComponent },

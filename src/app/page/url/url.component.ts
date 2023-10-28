@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { AppComponent } from 'src/app/app.component';
 import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
 import { Login } from 'src/app/modelos/login';
 import { AppService } from 'src/app/servicios/app.service';
-import { GestorUsuariosService } from 'src/app/servicios/gestor-usuarios.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -23,12 +21,12 @@ export class URLComponent {
   esquemaColor1: boolean = true;
   tipoUsuario: string | null = null;
   loginForm = new FormGroup({
-    email: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
   jwtHelper: any;
   
-  constructor( private app: AppComponent,private router: Router,private route: ActivatedRoute,private api: AppService,private api2: GestorUsuariosService) {this.jwtHelper = new JwtHelperService();}
+  constructor( private app: AppComponent,private router: Router,private route: ActivatedRoute,private api: AppService) {this.jwtHelper = new JwtHelperService();}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -52,13 +50,13 @@ export class URLComponent {
 
   onLogin() {
     let x: Login = {
-      email: this.loginForm.controls["email"].value ? this.loginForm.controls["email"].value : " ",
+      username: this.loginForm.controls["username"].value ? this.loginForm.controls["username"].value : " ",
       password: this.loginForm.controls["password"].value ? this.loginForm.controls["password"].value : " "
     }
-    this.api2.loginByEmail(x,this.valorURL).subscribe(data => {
+    this.api.loginByEmail(x,this.valorURL).subscribe(data => {
       localStorage.setItem("token", data.token);
       this.tokens = data.token;
-      localStorage.setItem("email", x.email);
+      localStorage.setItem("userName", x.username);
       
       const decodedToken = this.jwtHelper.decodeToken(this.tokens);
       this.tipoUsuario = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];

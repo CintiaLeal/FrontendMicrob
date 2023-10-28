@@ -1,3 +1,36 @@
+.image-container {
+  position: relative;
+  display: inline-block;
+  max-width: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+  max-height: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+  overflow: hidden;
+}
+
+.img {
+  width: 100px; /* Ajusta el ancho máximo según tus preferencias */
+  height: 100px; /* Ajusta el alto máximo según tus preferencias */
+  object-fit: cover;
+}
+
+
+.remove-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-button mat-icon {
+  font-size: 16px; /* Ajusta el tamaño de la cruz según tus preferencias */
+}
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -26,6 +59,9 @@
     width: 30%;
      /* Color de fondo para la sección 1 */
   }
+  .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
+    height: 200px;
+}
   
   .section2 {
     width: 60%;
@@ -104,8 +140,8 @@
 //INI IMG PERFIL
 .imgPERFIL{
   background: url('/assets/img/perfil.jpg') no-repeat center center;
-  width: 80px; /* Ancho deseado para el contenedor */
-  height: 80px; /* Alto deseado para el contenedor */
+  width: 60px; /* Ancho deseado para el contenedor */
+  height: 60px; /* Alto deseado para el contenedor */
   border: none;
   clip-path: circle(50% at 50% 50%);
   background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */

@@ -1,26 +1,38 @@
+<app-header></app-header>
 <div class="container" *ngIf="tipoU === 'Common-User'">
   <div class="section costados"></div>
   <div class="section section1">
-    <form class="example-form">
-    </form>
     <mat-card class="example-card posicion">
       <mat-card-header>
         <mat-card-title-group>
           <mat-card-title>{{usuario?.firstName}}</mat-card-title>
-          <mat-card-subtitle>@{{usuario?.firstName}}{{usuario?.lastName}}</mat-card-subtitle>
+          <mat-card-subtitle>{{usuario?.userName}}</mat-card-subtitle>
           <img class="imgPERFIL" src={{usuario?.profileImage}}>
         </mat-card-title-group>
       </mat-card-header>
       <br>
       <mat-card-content>
-        <form class="example-form">
+        <form [formGroup]="registrarForm">
           <mat-form-field class="example-full-width a">
             <mat-label>Escribir</mat-label>
-            <input class="colorletras" matInput #message maxlength="256" placeholder="Publica...">
-            <mat-hint align="end" class="colorletras">{{message.value.length}} / 256</mat-hint>
+            <textarea class="colorletras a " matInput [value]="inputText" maxlength="250" formControlName="text"
+              placeholder="Publica..."></textarea>
           </mat-form-field>
+          <div *ngIf="base64Image" class="image-container">
+            <img [src]="base64Image" alt="Imagen" class="img">
+            <button (click)="removeImage()" class="remove-button">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
+          <button type="button" mat-raised-button (click)="fileInput.click()" *ngIf="!base64Image">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+          <div>
+            <button mat-raised-button color="primary" (click)="newPost()"
+              [disabled]="!registrarForm.get('text')?.value">Publicar</button>
+          </div>
         </form>
-        <button mat-raised-button color="primary">Publicar</button>
       </mat-card-content>
     </mat-card>
   </div>
@@ -230,6 +242,47 @@
         </mat-card>
       </div>
     </div>
+    <div *ngIf="contenidoVisible === 'perfil'">
+      <div class="scrollable-content">
+        <div class="">
+
+        <img class="imgPERFIL" src={{usuario?.profileImage}}>
+        <h1>{{usuario?.firstName}}</h1>
+        <h4>{{usuario?.userName}}</h4>
+        <h4>{{usuario?.biography}}</h4>
+        <mat-icon class="icon">calendar_month</mat-icon>
+        </div><h4>{{usuario?.birthday}}</h4>
+        <br>
+        <mat-card>
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Grace Hopper</mat-card-title>
+            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Regístrate hoy mismo para comenzar tu viaje en Microb y únete a la conversación global. ¡Te estamos
+              esperando! Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
+              Vivamus in pharetra urna, vel iaculis orci.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="example-button-row">
+              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                <mat-icon class="icon">favorite</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                <mat-icon class="icon">redo</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                <mat-icon class="icon">chat_bubble</mat-icon>
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+    </div>
 
     <div *ngIf="contenidoVisible === 'notificacion'">
       <div class="scrollable-content">
@@ -271,6 +324,12 @@
           <a (click)="mostrarContenido('home')">
             <mat-icon class="icon">home</mat-icon>
             <span class="text">Home</span>
+          </a>
+        </li>
+        <li>
+          <a (click)="mostrarContenido('perfil')">
+            <mat-icon class="icon">person</mat-icon>
+            <span class="text">Mi Perfil</span>
           </a>
         </li>
         <li>

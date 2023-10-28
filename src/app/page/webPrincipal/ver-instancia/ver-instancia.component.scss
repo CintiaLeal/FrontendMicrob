@@ -98,3 +98,26 @@
       grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
     }
 }
+
+//header
+/* Estilo para la barra de herramientas (toolbar) */
+.mat-toolbar {
+  background-color: #2E4159; /* Color de fondo */
+  height: 3cm; /* Grosor de 4 centímetros */
+  display: flex;
+  justify-content: center; /* Centrar los elementos horizontalmente */
+  align-items: center; /* Centrar los elementos verticalmente */
+}
+
+/* Estilo para los botones en la barra de herramientas */
+.mat-toolbar button {
+ // background-color: #1A2B3F; /* Color de fondo más oscuro para los botones */
+  color: white; /* Color del texto en los botones */
+  margin: 0 1rem; /* Espacio entre los botones */
+  border-radius: 0.5rem; /* Bordes redondeados para los botones */
+}
+
+/* Estilo para el botón activo */
+.mat-toolbar button.router-link-active {
+  background-color: #FF5722; /* Cambiar el color de fondo para el botón activo */
+}

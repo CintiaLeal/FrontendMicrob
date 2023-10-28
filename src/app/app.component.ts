@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Instancia } from './modelos/instancia';
 import { AppService } from './servicios/app.service';
-import { PartialObserver, Subject, Subscription, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { InstanciaRetorno } from './modelos/instanciaRetorno';
-import { GestorUsuariosService } from './servicios/gestor-usuarios.service';
+
 
 @Component({
   selector: 'app-root',
@@ -26,7 +25,7 @@ export class AppComponent implements OnInit {
   esquemaColores:any| null =null;
   reloadHtml: boolean = false;
 
-  constructor(private instanciaService: AppService,private router: Router,private api: GestorUsuariosService, private api2: AppService) {
+  constructor(private instanciaService: AppService,private router: Router, private api: AppService) {
     localStorage.setItem("headerSioNo", 'true');
     this.jwtHelper = new JwtHelperService();
     this.tokenActual = localStorage.getItem('token') ?? '';
@@ -40,10 +39,11 @@ export class AppComponent implements OnInit {
     
   
      // Recuperar el tipo de usuario del localStorage (si está almacenado)
-     this.cambiarUsuarioSegunToken(this.tokenActual); 
+     //this.cambiarUsuarioSegunToken(this.tokenActual); 
 
      this.reloadComponent();
   }
+
   reloadComponent() {
     this.reloadHtml = true;
   }
@@ -58,7 +58,6 @@ export class AppComponent implements OnInit {
   
   toggleModoOscuro() {
     this.modoOscuro = !this.modoOscuro;
-
   }
  
 
@@ -79,7 +78,7 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/']);
     this.ngOnInit();
   }
-  cambiarUsuarioSegunToken(token: string) {
+ /* cambiarUsuarioSegunToken(token: string) {
     if (token) {
       localStorage.removeItem("tipoUsuario");
       const decodedToken = this.jwtHelper.decodeToken(token);
@@ -102,23 +101,6 @@ export class AppComponent implements OnInit {
             alert('Error al cargar las instancias: ' + error);
           }
         );
-  /*
-        this.idinstancia = localStorage.getItem('idInstancia');
-        if (this.idinstancia) { // Verifica si 'idinstancia' existe
-          this.api2.getInstanciaPorId(this.idinstancia).subscribe({
-            next: value => {
-              this.instanciaActual = value;
-              if (this.instanciaActual && this.instanciaActual.esquemaColores !== undefined) {
-                localStorage.setItem('esquemaColores', this.instanciaActual.esquemaColores.toString());
-              }
-            },
-            error: err => {
-              alert('Error al cargar las instancias: ' + err);
-            }
-          });
-        } else {
-          console.error('Error: idInstancia no encontrado en el localStorage.');
-        }*/
       }
     } else {
       localStorage.removeItem("token");
@@ -129,7 +111,7 @@ export class AppComponent implements OnInit {
       this.tipoUsuario = 'noAutenticado';
       localStorage.setItem('tipoUsuario', 'noAutenticado');
     }
-  }
+  }*/
   
 }
 

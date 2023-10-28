@@ -1,7 +1,7 @@
 
 .backgroundBody {
     margin-top: -2%;
-    background: url('/assets/img/1.png') no-repeat center center;
+    background: url('/assets/img/principal.png') no-repeat center center;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -199,3 +199,25 @@
 }
   
 
+//header
+/* Estilo para la barra de herramientas (toolbar) */
+.mat-toolbar {
+  background-color: #2E4159; /* Color de fondo */
+  height: 3cm; /* Grosor de 4 centímetros */
+  display: flex;
+  justify-content: center; /* Centrar los elementos horizontalmente */
+  align-items: center; /* Centrar los elementos verticalmente */
+}
+
+/* Estilo para los botones en la barra de herramientas */
+.mat-toolbar button {
+ // background-color: #1A2B3F; /* Color de fondo más oscuro para los botones */
+  color: white; /* Color del texto en los botones */
+  margin: 0 1rem; /* Espacio entre los botones */
+  border-radius: 0.5rem; /* Bordes redondeados para los botones */
+}
+
+/* Estilo para el botón activo */
+.mat-toolbar button.router-link-active {
+  background-color: #FF5722; /* Cambiar el color de fondo para el botón activo */
+}

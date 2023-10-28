@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Usuario } from 'src/app/modelos/usuario';
-import { GestorUsuariosService } from 'src/app/servicios/gestor-usuarios.service';
+import { AppService } from 'src/app/servicios/app.service';
 
 @Component({
   selector: 'app-adm-usuario-instancia',
@@ -15,7 +15,7 @@ export class AdmUsuarioInstanciaComponent implements OnInit {
   columnas: string[] = ['nombre', 'apellido', 'rol', 'correo', 'borrar'];
   dataSource = new MatTableDataSource<any>([]);
   public usuarios: Usuario[] = [];
-  constructor(private api: GestorUsuariosService ){ }
+  constructor(private api: AppService ){ }
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator; // Añadir el signo de exclamación (!) aquí
 /*
   ngOnInit() {

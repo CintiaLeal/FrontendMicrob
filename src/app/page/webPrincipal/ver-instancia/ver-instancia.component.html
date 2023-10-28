@@ -1,5 +1,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;500;700&display=swap">
+<mat-toolbar>
+  <button class="btn-header" mat-button routerLink="/">Inicio</button>
+  <button class="btn-header" mat-button routerLink="/verInstancia">Comunidad</button>
+</mat-toolbar>
 <body>
   <div class="backgroundBody">
   </div>
@@ -41,7 +45,7 @@
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button (click)="navegarAOtroComponente(x.tenantInstanceId)" class="btn">Crear cuenta</button>
+            <button mat-button (click)="navegarAOtroComponente(x.tenantInstanceId)" class="btn">Unirme ya</button>
           </mat-card-actions>
         </mat-card>
       </div>
