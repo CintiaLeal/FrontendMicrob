@@ -25,7 +25,7 @@ export class RegistrarUsuarioComponent {
   constructor(private api: AppService, private alerta: MatSnackBar ){ }
  
   onRegistrar() {
-    let x: Usuario = {
+   /* let x: Usuario = {
       firstName: this.registrarForm.controls['firstName'].value  ? this.registrarForm.controls["firstName"].value : " ",
       lastName: this.registrarForm.controls['lastName'].value ? this.registrarForm.controls["lastName"].value : " ",
       email: this.registrarForm.controls['email'].value ? this.registrarForm.controls["email"].value : " ",
@@ -41,7 +41,7 @@ export class RegistrarUsuarioComponent {
       console.log(data);
     });
     this.alerta.open("Creada con éxito", "OK!");
-
+*/
   }
 
   //INI PARA IMG COM BASE 64

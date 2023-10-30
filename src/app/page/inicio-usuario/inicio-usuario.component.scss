@@ -74,7 +74,7 @@
   .section2::-webkit-scrollbar {
     width: 0px; /* Oculta la barra de desplazamiento de WebKit (Chrome, Safari) */
   }
-
+ 
   .scrollable-content {
     height: 100vh; /* Altura del contenedor scrollable */
     padding: 16px; /* Añade espaciado al contenido si es necesario */
@@ -104,7 +104,10 @@
   list-style-type: none;
   margin-top: 10% ;
 }
-
+.menu-list li :hover {
+  color: #007bff; /* Cambia el color al pasar el ratón por encima */
+  cursor: pointer; /* Cambia el cursor a "mano con el dedito" */
+}
 /* Estilo para los enlaces */
 .menu-list a {
   text-decoration: none;
@@ -122,7 +125,18 @@
   
 }
 
-
+.textoMiPerfil{
+  color: #050505;
+  margin-top: -11%;
+}
+.textoMiPerfilArroba{
+  color:#807d7d;
+  margin-top: -3%;
+  font-size: 14px;
+}
+.iconDiaCumple {
+  vertical-align: middle;
+}
 //FIN Menu 3 
   
 //INI IMG LOGO
@@ -137,6 +151,37 @@
 }
 
 //FIN IMG LOGO
+.divPerfilcolor{
+  width: 100%;
+  background-color: #2E4159;
+  height: 100%;
+}
+.imgPostUser{
+  width: 40px; /* Ancho deseado para el contenedor */
+  height: 40px; /* Alto deseado para el contenedor */
+  border: none;
+
+  clip-path: circle(50% at 50% 50%);
+  align-items:end;
+}
+.imgPerfilUser{
+  clip-path: circle(50% at 50% 50%);
+  width: 150px; /* Ancho deseado para el contenedor */
+  height: 150px; /* Alto deseado para el contenedor */
+  border: none;
+  margin-top: -10%;
+  align-items:end;
+}
+.perfil-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; /* Alinea verticalmente si es necesario */
+}
+.perfil-containerImgUser {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; /* Alinea verticalmente si es necesario */
+}
 //INI IMG PERFIL
 .imgPERFIL{
   background: url('/assets/img/perfil.jpg') no-repeat center center;
@@ -146,6 +191,7 @@
   clip-path: circle(50% at 50% 50%);
   background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
 }
+
 .example-header-image {
   background: url('/assets/img/perfil.jpg') no-repeat center center;
   background-size: cover;
@@ -153,14 +199,14 @@
 //FIN IMG PERFIL
 //INI IMG CONTENIDO POST
 .imgContenido{
-  background: url('/assets/img/contenido.png') no-repeat center center;
+  background:no-repeat center center;
   width: 500px; /* Ancho deseado para el contenedor */
-  height: 600px; /* Alto deseado para el contenedor */
+  height: 300px; /* Alto deseado para el contenedor */
   border: none;
-  margin-left: 3%;
-  margin-right: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
   align-items: center;
-  clip-path: inset(2% 1% 2% 2%);
+  clip-path: inset(2% 2% 2% 2%);
   background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
 
 }
@@ -178,12 +224,10 @@
 
 .textTitulo{
   font-size: 18px;
-
   font-weight: bold;
 }
 //TEXTO FIN
 .mat-toolbar {
-
   color: var(--mat-toolbar-container-text-color);
 }
 
@@ -297,4 +341,22 @@
   text-align: center;
   padding: 20px;
   margin: 10px 0;
+}
+
+@media screen and (max-width: 900px) {
+  .imgContenido {
+      max-width: 100%;
+      height: auto;
+      margin-left: 3%;
+      margin-right: 5%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .imgContenido {
+      max-width: 100%;
+      height: auto;
+      margin-left: 2%;
+      margin-right: 2%;
+  }
 }

@@ -1,2 +1,6 @@
-
+<div [ngClass]="{'normal-mode': !modoOscuro, 'modo-oscuro': modoOscuro}">
+    <div [ngClass]="{'change-colors': changeColors, 'change-colors2': !changeColors}">
 <router-outlet></router-outlet>
+
+</div>
+</div>

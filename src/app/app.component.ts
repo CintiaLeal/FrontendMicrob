@@ -24,7 +24,8 @@ export class AppComponent implements OnInit {
   email: string | null = null;
   esquemaColores:any| null =null;
   reloadHtml: boolean = false;
-
+  changeColors = true;
+  modoOscuroLocalSt: any | null = null;
   constructor(private instanciaService: AppService,private router: Router, private api: AppService) {
     localStorage.setItem("headerSioNo", 'true');
     this.jwtHelper = new JwtHelperService();
@@ -32,17 +33,50 @@ export class AppComponent implements OnInit {
     this.email = localStorage.getItem('email');
 
   }
-
+/*
   ngOnInit(): void {
-    this.funHeaderSioNo();
-    this.colores = 'esquemaColor1';
-    
-  
-     // Recuperar el tipo de usuario del localStorage (si está almacenado)
-     //this.cambiarUsuarioSegunToken(this.tokenActual); 
+   this.idinstancia = localStorage.getItem('idInstancia');
 
-     this.reloadComponent();
+  if (this.idinstancia) {
+    this.api.getInstanciaPorId(this.idinstancia).subscribe({
+      next: value => this.instanciaActual = value,
+      error: err => {
+    }
+  });
+
+}}*/
+ngOnInit(): void {
+  this.idinstancia = localStorage.getItem('idInstancia');
+
+  if (this.idinstancia) {
+    this.api.getInstanciaPorId(this.idinstancia).subscribe({
+      next: (value) => {
+        this.instanciaActual = value;
+
+        if (this.instanciaActual.esquemaColores === 1) {
+          console.log("llego al onlogin" + this.instanciaActual.esquemaColores);
+          this.changeColors = true;
+        } else {
+          this.changeColors = false;
+        }
+      },
+      error: (err) => {
+        // Maneja los errores aquí si es necesario.
+      }
+    });
   }
+}
+
+  /*
+  
+ this.modoOscuroLocalSt = localStorage.getItem('modoOscuro');
+if(this.modoOscuroLocalSt){
+  console.log("llego al componente");
+  this.toggleModoOscuro();
+}*/
+ 
+  
+
 
   reloadComponent() {
     this.reloadHtml = true;

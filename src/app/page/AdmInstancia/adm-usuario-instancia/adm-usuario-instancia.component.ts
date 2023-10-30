@@ -47,12 +47,12 @@ export class AdmUsuarioInstanciaComponent implements OnInit {
 */
  
     ngOnInit(): void {
-
+/*
     this.api.obtenerUsuarios().subscribe({
       next: value => this.usuarios = value,
       error: err => { alert('Error al cargar los Usuarios: ' + err) }
     });
-    console.log(this.usuarios);
+    console.log(this.usuarios);*/
   }
 
   eliminarRegistro(registro: any): void {

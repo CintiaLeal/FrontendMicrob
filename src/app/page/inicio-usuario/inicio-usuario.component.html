@@ -5,9 +5,9 @@
     <mat-card class="example-card posicion">
       <mat-card-header>
         <mat-card-title-group>
-          <mat-card-title>{{usuario?.firstName}}</mat-card-title>
+          <mat-card-title>{{usuario?.firstName}} </mat-card-title>
           <mat-card-subtitle>{{usuario?.userName}}</mat-card-subtitle>
-          <img class="imgPERFIL" src={{usuario?.profileImage}}>
+          <img class="imgPERFIL" src={{usuario?.profileImage}} *ngIf="contenidoVisible !== 'perfil'">
         </mat-card-title-group>
       </mat-card-header>
       <br>
@@ -25,9 +25,9 @@
             </button>
           </div>
           <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
-          <button type="button" mat-raised-button (click)="fileInput.click()" *ngIf="!base64Image">
+          <a type="button" (click)="fileInput.click()" *ngIf="!base64Image">
             <mat-icon>attach_file</mat-icon>
-          </button>
+          </a>
           <div>
             <button mat-raised-button color="primary" (click)="newPost()"
               [disabled]="!registrarForm.get('text')?.value">Publicar</button>
@@ -39,121 +39,40 @@
 
   <div class="section section2">
     <div *ngIf="contenidoVisible === 'home'">
-      <div class="scrollable-content">
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
-              nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-        <br>
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
-              nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-            <img class="imgContenido">
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-        <br>
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
-              nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-        <br>
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              Regístrate hoy mismo para comenzar tu viaje en Microb y únete a la conversación global. ¡Te estamos
-              esperando! Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
+      <div class="scrollable-content" #scrollableContent>
+        <div *ngFor="let x of inicioTodosPost">
+          <br>
+          <mat-card>
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"><img class="imgPostUser" src={{x.userOwner.profileImage}}>
+              </div>
+              <mat-card-title> {{x.userOwner.firstName}}</mat-card-title>
+              <mat-card-subtitle> {{x.userOwner.userName}} | {{ x.created | date:'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                {{x.text}}
+              </p>
+              <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="example-button-row">
+                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                  <mat-icon class="icon">favorite</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                  <mat-icon class="icon">redo</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                  <mat-icon class="icon">chat_bubble</mat-icon>
+                </button>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+        </div>
       </div>
     </div>
+  
 
     <div *ngIf="contenidoVisible === 'favorito'">
       <div class="scrollable-content">
@@ -245,42 +164,59 @@
     <div *ngIf="contenidoVisible === 'perfil'">
       <div class="scrollable-content">
         <div class="">
-
-        <img class="imgPERFIL" src={{usuario?.profileImage}}>
-        <h1>{{usuario?.firstName}}</h1>
-        <h4>{{usuario?.userName}}</h4>
-        <h4>{{usuario?.biography}}</h4>
-        <mat-icon class="icon">calendar_month</mat-icon>
-        </div><h4>{{usuario?.birthday}}</h4>
-        <br>
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              Regístrate hoy mismo para comenzar tu viaje en Microb y únete a la conversación global. ¡Te estamos
-              esperando! Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-
+          <div class="divPerfilcolor">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+          <div class="perfil-containerImgUser">
+            <img class="imgPerfilUser" src={{usuario?.profileImage}}>
+          </div>
+          <h1 class="textoMiPerfil">{{usuario?.firstName}} {{usuario?.lastName}}</h1>
+          <h4 class="textoMiPerfilArroba" >{{usuario?.userName}}</h4>
+          <div>
+            <p >{{usuario?.biography}}</p>
+          </div>
+          <h4>
+            <mat-icon class="iconDiaCumple">calendar_month</mat-icon>
+            {{ usuario?.birthday | date:'dd/MM/yyyy' }}
+          </h4>          
+          <p>Seguidores 1{{usuario?.followUsers}}</p>
+        </div>
+        <hr>
+        <div *ngFor="let x of misPost">
+          <br>
+          <mat-card>
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"><img class="imgPostUser" src={{usuario?.profileImage}}>
+              </div>
+              <mat-card-title> {{usuario?.firstName}}</mat-card-title>
+              <mat-card-subtitle> {{usuario?.userName}} | {{ x.created | date:'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                {{x.text}}
+              </p>
+              <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="example-button-row">
+                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                  <mat-icon class="icon">favorite</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                  <mat-icon class="icon">redo</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                  <mat-icon class="icon">chat_bubble</mat-icon>
+                </button>
+              </div>
+            </mat-card-actions>
+          </mat-card>
+        </div>
       </div>
     </div>
 
@@ -322,7 +258,7 @@
       <ul class="menu-list">
         <li>
           <a (click)="mostrarContenido('home')">
-            <mat-icon class="icon">home</mat-icon>
+            <mat-icon class="icon" (click)="getPosteosInicio()">home</mat-icon>
             <span class="text">Home</span>
           </a>
         </li>

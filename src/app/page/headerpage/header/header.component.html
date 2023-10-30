@@ -1,6 +1,15 @@
-<!-- Encabezado para usuarios comunes -->
-<mat-toolbar>
-	<a>{{instanciaActual?.nombre}}</a>
-    <span class="example-spacer"></span>
-    <a  class="aCerrar" mat-button (click)="logout()">Cerrar Sesión</a>
-</mat-toolbar>
+
+<p>
+    <mat-toolbar color="primary">
+    <img class="img" src={{instanciaActualParaHeader?.logo}}>
+      <span>{{instanciaActualParaHeader?.nombre}} </span>
+      <button (click)="toggleModoOscuro()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>brightness_2</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+</p>

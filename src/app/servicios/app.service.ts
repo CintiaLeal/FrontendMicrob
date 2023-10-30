@@ -67,9 +67,12 @@ export class AppService {
 }
 //Fin Login por email
 
-obtenerUsuarios(): Observable<Usuario[]> {
+obtenerUsuarios(x:any): Observable<UsuarioRetorno[]> {
+  const headers = new HttpHeaders({
+    'tenant': x
+  });
 let direccion = this.url + "/Account/GetUsersByInstance";
-return this.http.get<Usuario[]>(direccion);
+return this.http.get<UsuarioRetorno[]>(direccion,{ headers: headers });
 }
 
 obtenerInfoUsuario(userName: string, x:any): Observable<UsuarioRetorno> {
@@ -91,12 +94,13 @@ newPost(form: any, x: any, userName: any) {
   return this.http.post<any>(direccion, form, { headers: headers, params: params });
 }
 
-getMisPost(userName: string, x:any): Observable<Post> {
+getMisPost(x:any, userName: string): Observable<Post[]> {
   const headers = new HttpHeaders({
     'tenant': x
   });
 let direccion = this.url + "/Post/GetPostByUser?userName=" + encodeURIComponent(userName);
-return this.http.get<Post>(direccion,{ headers: headers });
+return this.http.get<Post[]>(direccion,{ headers: headers });
+
 }
 
 }

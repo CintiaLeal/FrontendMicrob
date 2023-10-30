@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
+
 import { AppService } from 'src/app/servicios/app.service';
 import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
 import { UsuarioRetorno } from 'src/app/modelos/usuarioRetorno';
@@ -6,6 +7,10 @@ import { AppComponent } from 'src/app/app.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscriber } from 'rxjs';
+import {Post} from 'src/app/modelos/post';
+import { PostTodos } from 'src/app/modelos/postTodos';
+
+
 
 @Component({
   selector: 'app-inicio-usuario',
@@ -15,6 +20,7 @@ import { Subscriber } from 'rxjs';
 export class InicioUsuarioComponent {
   public base64Image: any;
   public idInstancia:any;
+   misPost: Post[] = [];
   contenidoVisible: string = 'home'; // Inicialmente, muestra el primer contenido
   tipoU: string | null = null;
   userName: string | null = null;
@@ -22,15 +28,16 @@ export class InicioUsuarioComponent {
   instanciaActual: InstanciaRetorno | null=null;
   tokenActual: string | null=null;
   idInstanciaLocalHost: any;
-
   inputText: any;
-
+  inicioTodosPost:Post[] = [];
+  private scrollPos = 0;
+  
   mostrarContenido(contenido: string) {
     this.contenidoVisible = contenido;
     
   }
 
-  constructor( private api: AppService, private app:AppComponent) {
+  constructor( private api: AppService, private app:AppComponent,private el: ElementRef, private renderer: Renderer2) {
     this.tipoU = localStorage.getItem('tipoUsuario');
    }
    registrarForm = new FormGroup({
@@ -48,7 +55,6 @@ export class InicioUsuarioComponent {
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.userName = localStorage.getItem('userName');
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
-
     if (this.userName) {
       this.api.obtenerInfoUsuario(this.userName,this.idInstanciaLocalHost).subscribe(
         (value) => {
@@ -59,40 +65,98 @@ export class InicioUsuarioComponent {
           alert('Error al cargar las instancias: ' + error);
         }
       );
-    
     }
 
+    this.getMisPost();
+    this.getPosteosInicio();
   }
+ 
+  
+  
+  
   newPost() {
     const textValue = this.registrarForm.controls['text'].value   ? this.registrarForm.controls["text"].value : " ";
     let hashtags = [];
-    
-    // Busca y extrae los hashtags del texto
     const hashtagRegex = /#(\w+)/g;
     let match;
     while ((match = hashtagRegex.exec(textValue))) {
       hashtags.push(match[1]);
     }
-
     let x: any = {
       text: textValue ? textValue : " ",
       attachment: this.base64Image,
       isSanctioned: false,
       hashtag: hashtags // Agrega los hashtags al array
     };
-  
-  console.log(x);
     this.idInstancia=localStorage.getItem('idInstancia');
-
     this.api.newPost(x, this.idInstanciaLocalHost ,this.userName).subscribe(data => {
       console.log(data);
+      this.getMisPost();
+      this.getPosteosInicio();
     });
     this.base64Image = '';
     this.registrarForm.controls['text'].reset();
-    
-
   }
 
+  getMisPost() {
+    if (this.userName) {
+      this.api.getMisPost(this.idInstanciaLocalHost, this.userName).subscribe({
+        next: (value: Post[]) => {
+          // Ordena los posts por fecha en orden descendente (de más reciente a más antiguo)
+          this.misPost = value.sort((a, b) => {
+            return new Date(b.created).getTime() - new Date(a.created).getTime();
+          });
+        },
+        error: (err) => {
+          console.error('Error al obtener los posts:', err);
+        },
+      });
+    } else {
+      console.error('El nombre de usuario es nulo.');
+    }
+  }
+  /*
+  getPosteosInicio() {
+    // 1. Obtener todos los usuarios de la instancia
+    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
+      // 2. Para cada usuario, obtener sus posts
+      for (const usuario of users) {
+        this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
+          // 3. Agregar los posts del usuario actual a la lista de posts
+          this.inicioTodosPost.push(...posts);
+        });
+      console.log(this.inicioTodosPost);
+      }
+    });
+  }*/
+  getPosteosInicio() {
+    this.inicioTodosPost = [];
+    // 1. Obtener todos los suarios de la instancia
+    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
+      // 2. Para cada usuario, obtener sus posts
+      for (const usuario of users) {
+        this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
+          // 3. Agregar los posts del usuario actual a la lista de posts
+          for (const post of posts) {
+            post.userOwner = usuario; // Asigna el usuario al post
+          }
+          this.inicioTodosPost.push(...posts);
+          
+          // 4. Ordenar los posts por fecha (de más reciente a más antiguo)
+          this.inicioTodosPost.sort((a, b) => {
+            const dateA = new Date(a.created).getTime();
+            const dateB = new Date(b.created).getTime();
+            return dateB - dateA;
+          });
+        });
+      }
+      console.log(this.inicioTodosPost);
+    });
+  }
+  
+  
+  
+  
   removeImage(){
     this.base64Image = '';
   }
@@ -135,5 +199,36 @@ showImage() {
     return 'ruta_a_imagen_predeterminada_o_mensaje_de_error';
   }
 }
+
+checkForNewPosts() {
+  if (this.userName) {
+    // Obtiene la última fecha de creación de un post en la lista actual
+    const lastPostTime = this.misPost.length > 0 ? new Date(this.misPost[0].created) : null;
+    
+    // Realiza una solicitud HTTP para obtener nuevos posts
+    this.api.getMisPost(this.idInstanciaLocalHost, this.userName).subscribe({
+      next: (value: Post[]) => {
+        // Filtra solo los nuevos posts (los que tienen una fecha de creación más reciente que lastPostTime)
+        const newPosts = value.filter((post) => {
+          const postTime = new Date(post.created);
+          return lastPostTime === null || postTime > lastPostTime;
+        });
+
+        if (newPosts.length > 0) {
+          // Agrega los nuevos posts al principio del array
+          this.misPost.unshift(...newPosts);
+        }
+      },
+      error: (err) => {
+        console.error('Error al obtener los posts:', err);
+      },
+    });
+  } else {
+    console.error('El nombre de usuario es nulo.');
+  }
+}
+
+
+
 
 }

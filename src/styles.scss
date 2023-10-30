@@ -1,115 +1,78 @@
 .change-colors {
   .mat-mdc-raised-button.mat-primary {
-    background-color: #45858C; /* Cambia a tu color deseado */
-    color: #ffffff; /* Cambia a tu color deseado */
+      background-color: #04B2D9; 
+      color: #ffffff;
   }
 
-  .mat-mdc-raised-button.mat-accent {
-    background-color: #A6A48F; /* Cambia a tu color deseado */
-    color: #ffffff; /* Cambia a tu color deseado */
+  .mat-mdc-raised-button.mat-accent{
+      background-color:#04D9B2; 
+      color: #ffffff;
   }
 
-  .mat-toolbar.mat-primary {
-    background-color: #BFAA84; /* Cambia a tu color deseado */
-    color: #ffffff; /* Cambia a tu color deseado */
+  .mat-toolbar.mat-primary{
+      background-color:  #011C40;
+      color: #ffffff;
   }
+  .mat-mdc-raised-button.mat-primary {
+    --mdc-protected-button-container-color: #011C40;
+    --mdc-protected-button-label-text-color: #fff;
 }
 
-.Ocean-View-1-hex {
-  color: #45858C; /* Cambia a tu color deseado */
-}
-
-.Ocean-View-2-hex {
-  color: #A6A48F; /* Cambia a tu color deseado */
-}
-
-.Ocean-View-3-hex {
-  color: #BFAA84; /* Cambia a tu color deseado */
-}
-
-.Ocean-View-4-hex {
-  color: #401801; /* Cambia a tu color deseado */
-}
-
-.Ocean-View-5-hex {
-  color: #A6460F; /* Cambia a tu color deseado */
-}
-
-
-
-
-
-.change-colors {
-
-    .mat-mdc-raised-button.mat-primary {
-        
-        background-color: #618C88;
-        color: #ffffff;
-    }
-   
-    .mat-mdc-raised-button.mat-accent{
-        background-color: #9BBFBC;
-        color: #ffffff;
-    }
-
-    .mat-toolbar.mat-primary{
-        background-color: #395941;
-        color: #ffffff;
-    }
-
-    /* Cambia los colores del tema de Angular Material */
-/* Estos son solo ejemplos; ajusta los colores según tus necesidades */
-
-/* Cambia el color principal (Primary) */
-.mat-primary {
-  background-color: #618C88 !important;
-  color: #ffffff !important;
-}
-
-/* Cambia el color de acento (Accent) */
-.mat-accent {
-  background-color: #9BBFBC !important;
-  color: #ffffff !important;
-}
-
-/* Cambia el color de advertencia (Warning) */
-.mat-warn {
-  background-color: #FF0000 !important;
-  color: #ffffff !important;
-}
-
-/* Cambia el color de fondo del cuerpo de la página */
-.mat-typography {
-  background-color: #F0F0F0 !important;
-  color: #000000 !important;
-}
-
-/* Cambia el color del fondo del encabezado de la barra de herramientas */
 .mat-toolbar {
-  background-color: #395941 !important;
-  color: #ffffff !important;
+  background: #011C40;
+  color: #03658C;
+}
+.divPerfilcolor[_ngcontent-ng-c49352310] {
+  width: 100%;
+  background-color:  #04D98B;
+  height: 100%;
+}
+.mat-step-icon-selected {
+  background-color:  #011C40;
+  color: white;
 }
 
 }
+/*
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-1-hex { color: #011C40; }
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-2-hex { color: #03658C; }
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-3-hex { color: #04B2D9; }
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-4-hex { color: #04D9B2; }
+.Green-and-Blue-Neon-Light-with-Tropical-Leaves-5-hex { color: #04D98B; }
+*/
 
-  /* Estilo PRINCIPAL */
-  .change-colors-style-0 {
-    .mat-mdc-raised-button.mat-primary {
-      background-color: #2E4159;
-      color: #ffffff;
-    }
-  
-    .mat-mdc-raised-button.mat-accent {
-      background-color: #566D8C;
-      color: #ffffff;
-    }
-  
-    .mat-toolbar.mat-primary {
-      background-color: #BF8136; 
-      color: #ffffff;
-    }
- 
-  }
+.change-colors2 {
+.mat-mdc-raised-button.mat-primary {
+    background-color: #A6460F;
+    color: #ffffff;
+}
+
+.mat-mdc-raised-button.mat-accent{
+    background-color: #45858C;
+    color: #ffffff;
+}
+
+.mat-toolbar.mat-primary{
+    background-color: #45858C;
+    color: #ffffff;
+}
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color:#45858C;
+  --mdc-protected-button-label-text-color: #fff;
+}
+
+.divPerfilcolor[_ngcontent-ng-c49352310] {
+  width: 100%;
+  background-color:  #A6460F;
+  height: 100%;
+}
+
+.mat-step-icon-selected {
+  background-color: #551919;
+  color: white;
+}
+}
+
 
   .Netherlands-🇳🇱-1-hex { color: #9BA7BF; }
   .Netherlands-🇳🇱-2-hex { color: #0F1926; }

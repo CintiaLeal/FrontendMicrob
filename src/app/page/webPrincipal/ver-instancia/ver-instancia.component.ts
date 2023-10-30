@@ -4,6 +4,7 @@ import { Instancia } from 'src/app/modelos/instancia';
 import { AppService } from 'src/app/servicios/app.service';
 import { Router } from '@angular/router';
 import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
+import { AppComponent } from 'src/app/app.component';
 
 interface Filtro {
   value: string;
@@ -19,7 +20,7 @@ interface Tematica {
   styleUrls: ['./ver-instancia.component.scss']
 })
 export class VerInstanciaComponent implements OnInit {
-  constructor(private api: AppService, private router: Router ){ }
+  constructor(private api: AppService, private router: Router, private app:AppComponent ){ }
   tematicaSeleccionada: string | null = null;
     //Para listar las instancias
     public instancias: InstanciaRetorno[] = [];
@@ -59,7 +60,8 @@ export class VerInstanciaComponent implements OnInit {
 
   navegarAOtroComponente(x:any) {
     localStorage.setItem("idInstancia", x);
-
+    console.log("aca llego");
+    this.app.ngOnInit();
     this.router.navigate(['/' + x]);
   }
 }

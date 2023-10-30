@@ -1,16 +1,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;500;700&display=swap">
-
 <div *ngIf="errorEncontrado === 0">
-    <div *ngIf="instanciaActual?.esquemaColores === 1" class="body1">
-        <div>
-            <div class="div1"></div>
-            <div class="div2"></div>
-            <div class="div3"></div>
-        </div>
-    </div>
+    <p>
+        <mat-toolbar color="primary">
+            <button mat-stroked-button  routerLink="/verInstancia">Ver a todas las comunidades</button>
+        </mat-toolbar>
+    </p>
 
-    <div [ngClass]="{'change-colors-style-1': esquemaColor1}">
+    <div >
         <div class="container">
         <div class="box">
             <div class="contenedor">
@@ -21,7 +18,7 @@
                 </div>
             </div>
             <div class="div-abajo">
-                <p>juan123u@example.com Passwordxyz1- Lope imput wol inti oel dna sd lore input,mput wol inti oel dna sd lore input. Lput wol inti oel dna sd lore input </p>
+                <p>{{instanciaActual?.description}}</p>
             </div>
         </div>
         <div class="box">
@@ -40,7 +37,7 @@
                             </mat-form-field>
                             <button mat-raised-button color="primary" class="btn" (click)="onLogin()">Iniciar sesión</button>
                         </form>
-                        <p class="registro-link">¿No tienes una cuenta? <a href="/registrarUsuario">Registrarse</a></p>
+                        <p class="registro-link">¿No tienes una cuenta? <a (click)="openDialog()">Registrarse</a></p>
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -58,5 +55,5 @@
           <div class="cajaError">
             <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
           </div>
-      
+         
 </div>

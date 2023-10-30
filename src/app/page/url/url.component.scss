@@ -1,76 +1,4 @@
 
-
-  /* Estilo 1 */
-.change-colors-style-1 {
-    .mat-mdc-raised-button.mat-primary {
-      background-color: #618C88;
-      color: #ffffff;
-    }
-  
-    .mat-mdc-raised-button.mat-accent {
-      background-color: #9BBFBC;
-      color: #ffffff;
-    }
-  
-    .mat-toolbar.mat-primary {
-      background-color: #395941;
-      color: #ffffff;
-    }
-  }
-  
-  /* Estilo 2 */
-  .change-colors-style-2 {
-
-    .mat-mdc-raised-button.mat-primary {
-      background-color: #45858C;
-      color: #ffffff;
-    }
-  
-    .mat-mdc-raised-button.mat-accent {
-      background-color: #A6A48F;
-      color: #ffffff;
-    }
-  
-    .mat-toolbar.mat-primary {
-      background-color: #FFCC33;
-      color: #ffffff;
-    }
-    .mat-background {
-      background-color: #FFCC33;
-      /* Cambia esto al color de fondo deseado */
-        /* Otras propiedades de estilo si es necesario */
-    }
-  }/* Anula el color de fondo predeterminado en Angular Material */
-.mat-card, .mat-dialog-container, .mat-toolbar {
-    background-color: #A6A48F;
-    /* Reemplaza 'tu-color-aqui' con tu color de fondo deseado */
-  }
-  .div1{
-    background-color: #BFAA84;
-    height: 30px;
-    margin-top: -1%;
-    display: flex; /* Establece un contexto de flexbox */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-
-  }
-  .div2{
-    background-color: #A6A48F; 
-    height: 20px;
-    margin-top: -1%;
-    display: flex; /* Establece un contexto de flexbox */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-
-  }
-  .div3{
-    background-color: #45858C;
-    height: 20px;
-    display: flex; /* Establece un contexto de flexbox */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-
-  }
   //alineaciones de los 2 div 
   .container {
     display: flex;
@@ -103,28 +31,6 @@
 
 
 
-
-  .Green-and-Blue-Neon-Light-with-Tropical-Leaves-1-hex { color: #011C40; }
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-2-hex { color: #03658C; }
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-3-hex { color: #04B2D9; }
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-4-hex { color: #04D9B2; }
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-5-hex { color: #04D98B; }
-.Ocean-View-1-hex { color: #45858C; }
-.Ocean-View-2-hex { color: #A6A48F; }
-.Ocean-View-3-hex { color: #BFAA84; }
-.Ocean-View-4-hex { color: #401801; }
-.Ocean-View-5-hex { color: #A6460F; }
-
-.Netherlands-🇳🇱-1-hex { color: #9BA7BF; }
-.Netherlands-🇳🇱-2-hex { color: #0F1926; }
-.Netherlands-🇳🇱-3-hex { color: #2E4159; }
-.Netherlands-🇳🇱-4-hex { color: #566D8C; }
-.Netherlands-🇳🇱-5-hex { color: #BF8136; }
-
-.btn{
-    -mdc-protected-button-container-color: #45858C; ;  
-}
-
 .login-container {
     display: flex;
     margin-top: -3%;
@@ -150,6 +56,7 @@
   
   button {
     width: 100%;
+    border:none;
     margin-top: 20px;
   }
 
@@ -241,6 +148,53 @@ body {
     margin: 10px 0;
   }
   
+  .mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-mdc-form-field {
+    margin-top: 16px;
+  }
+
+  .example-full-width{
+    width: 100%;
+  }
+  .mat-mdc-form-field-infix {
+    width: 100%;
+    margin: 2%;
+
+}
+
+///
+.image-container {
+  position: relative;
+  display: inline-block;
+  max-width: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+  max-height: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+  overflow: hidden;
+}
+
+.img {
+  width: 100px; /* Ajusta el ancho máximo según tus preferencias */
+  height: 100px; /* Ajusta el alto máximo según tus preferencias */
+  object-fit: cover;
+}
 
 
-  //FIN SECCION ERROR 
+.remove-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-button mat-icon {
+  font-size: 16px; /* Ajusta el tamaño de la cruz según tus preferencias */
+}

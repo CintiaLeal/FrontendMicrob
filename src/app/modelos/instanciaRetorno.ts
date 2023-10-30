@@ -2,7 +2,7 @@ export class InstanciaRetorno {
     public tenantInstanceId: number;
     public nombre: string;
     public tematica: string;
- 
+    public description: string;
     public esquemaColores: number;
     public activo: boolean; // Added field
     public dominio: string; // Added field
@@ -17,7 +17,8 @@ export class InstanciaRetorno {
        activo: boolean, // Added parameter
        dominio: string, // Added parameter
         logo: string, // Added parameter
-        privacidad:number
+        privacidad:number,
+        description: string
     ) {
         this.tenantInstanceId = tenantInstanceId;
         this.nombre = nombre;
@@ -27,5 +28,6 @@ export class InstanciaRetorno {
         this.activo = activo; // Initialize the added fields
         this.dominio = dominio; // Initialize the added fields
         this.logo = logo; // Initialize the added fields
+        this.description = description;
     }
 }
