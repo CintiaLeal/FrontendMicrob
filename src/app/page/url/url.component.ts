@@ -96,7 +96,7 @@ export class URLComponent {
           break;
         case 'Moderator':
           localStorage.setItem("tipoUsuario", 'Moderator');  
-          this.router.navigate(['/ruta_para_moderador']);
+          this.router.navigate(['/inicioUsuario']);
           break;
         case 'Common-User':
           localStorage.setItem("tipoUsuario", 'Common-User');  

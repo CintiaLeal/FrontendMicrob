@@ -1,5 +1,7 @@
-<app-header></app-header>
-<div class="container" *ngIf="tipoU === 'Common-User'">
+
+<app-header *ngIf="tipoU === 'Common-User'"></app-header>
+<app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
+<div class="container" *ngIf="tipoU === 'Common-User' || tipoU === 'Moderator'">
   <div class="section costados"></div>
   <div class="section section1">
     <mat-card class="example-card posicion">
@@ -298,7 +300,7 @@
   </div>
 </div>
 
-<div *ngIf="tipoU !== 'Common-User'">
+<div *ngIf="tipoU !== 'Common-User' && tipoU !== 'Moderator'">
   <div class="contenedorError">
     <div class="cajaError">
       <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>

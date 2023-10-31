@@ -13,7 +13,7 @@ import { AdmPublicacionesReportadasComponent } from './page/AdmInstancia/adm-pub
 import { InicioAdmPlataformaComponent } from './page/AdmPlataforma/inicio-adm-plataforma/inicio-adm-plataforma.component';
 import { AdmPlataformaGestorInstanciaComponent } from './page/AdmPlataforma/adm-plataforma-gestor-instancia/adm-plataforma-gestor-instancia.component';
 import { URLComponent } from './page/url/url.component';
-
+import { ModeradorAdmComponent } from './page/moderador-adm/moderador-adm.component';
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: '', component: WebPrincipalComponent },
@@ -27,7 +27,8 @@ const routes: Routes = [
   { path: 'admPublicaciones', component: AdmPublicacionesReportadasComponent },
   { path: 'inicioAdmPlataforma', component: InicioAdmPlataformaComponent },
   { path: 'inicioAdmPlataformaGestorInstancia', component: AdmPlataformaGestorInstanciaComponent },
-  { path: ':valorURL', component: URLComponent }
+  { path: 'moderadormodo', component: ModeradorAdmComponent },
+  { path: ':valorURL', component: URLComponent },
 ];
 
 @NgModule({

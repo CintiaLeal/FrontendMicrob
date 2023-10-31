@@ -54,6 +54,10 @@
   margin-left: 10px;
 }
 
+.mat-mdc-card-content {
+  height: 130px;
+  width: 100%;
+}
 .container {
   display: flex;
   justify-content: center;
@@ -70,7 +74,9 @@ mat-mdc-card-content{
   flex-wrap: wrap;
   justify-content: flex-start; /* Alinear los elementos a la izquierda */
 }
-
+.mat-mdc-button:not(:disabled) {
+  color: white;
+}
 .item {
   margin: 5px; /* Ajusta el margen para acercar los elementos */
   padding: 10px; /* Añade un espacio interno entre los elementos */
@@ -85,7 +91,7 @@ mat-mdc-card-content{
 
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
 
     .alineacionDesplegables {
       display: flex;

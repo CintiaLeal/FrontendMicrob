@@ -50,7 +50,7 @@ import { HeaderComponent } from './page/headerpage/header/header.component';
 import { HeaderPlatformAdministratorComponent } from './page/headerpage/header-platform-administrator/header-platform-administrator.component';
 import { HeaderModeratorComponent } from './page/headerpage/header-moderator/header-moderator.component';
 import { HeaderInstanceAdministratorComponent } from './page/headerpage/header-instance-administrator/header-instance-administrator.component';
-import { ModeradorAdmComponent } from './moderador-adm/moderador-adm.component';
+import { ModeradorAdmComponent } from './page/moderador-adm/moderador-adm.component';
 
 @NgModule({
   declarations: [
