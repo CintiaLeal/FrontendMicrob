@@ -51,7 +51,8 @@ import { HeaderPlatformAdministratorComponent } from './page/headerpage/header-p
 import { HeaderModeratorComponent } from './page/headerpage/header-moderator/header-moderator.component';
 import { HeaderInstanceAdministratorComponent } from './page/headerpage/header-instance-administrator/header-instance-administrator.component';
 import { ModeradorAdmComponent } from './page/moderador-adm/moderador-adm.component';
-
+import { VerDetalleInstanciaComponent } from './page/AdmPlataforma/ver-detalle-instancia/ver-detalle-instancia.component';
+import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-instancia/modificar-instancia.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +74,9 @@ import { ModeradorAdmComponent } from './page/moderador-adm/moderador-adm.compon
     HeaderPlatformAdministratorComponent,
     HeaderModeratorComponent,
     HeaderInstanceAdministratorComponent,
-    ModeradorAdmComponent
+    ModeradorAdmComponent,
+    ModificarInstanciaComponent,
+    VerDetalleInstanciaComponent
   ],
   imports: [
     HttpClientModule,

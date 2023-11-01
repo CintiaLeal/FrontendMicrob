@@ -117,13 +117,12 @@ export class URLComponent implements OnInit {
       localStorage.setItem("token", data.token);
       this.tokens = data.token; 
       localStorage.setItem("userName", x.username);
-      
       const decodedToken = this.jwtHelper.decodeToken(this.tokens);
       this.tipoUsuario = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
       switch (this.tipoUsuario) {
         case 'Platform-Administrator':
           localStorage.setItem("tipoUsuario", 'Platform-Administrator');  
-          this.router.navigate(['/ruta_para_administrador_de_plataforma']);
+          this.router.navigate(['/inicioAdmPlataforma']);
           break;
         case 'Instance-Administrator':
           localStorage.setItem("tipoUsuario", 'Instance-Administrator');  

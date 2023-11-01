@@ -62,7 +62,6 @@ export class AppService {
 
  //Inicio Login por email 
  loginByEmail(form: Login, x:any) {
-  console.log("llega"+ x);
   const headers = new HttpHeaders({
     'tenant': x
   });
@@ -112,8 +111,13 @@ newComentarioPost(form: any, x: any, userName: any, postId:any){
     'tenant': x,
   });
   const params = new HttpParams().set('userName', userName); 
-  //https://localhost:7131/Post/CreateComment?postId=1&userName=ana12@todoPelis
   const direccion = this.url + "/Post/CreateComment?postId="+postId+"&"+"userName="+userName;
   return this.http.post<any>(direccion, form, { headers: headers, params: params });
+}
+
+ModificarInstancias (instanciaNueva: Instancia): Observable<ResponseI> {  
+  // Realiza la solicitud POST con el objeto instanciaData
+  let direccion = this.url + "/Instance/ModifyInstance";
+  return this.http.put<any>(direccion, instanciaNueva); 
 }
 }

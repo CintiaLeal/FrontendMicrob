@@ -1,4 +1,18 @@
+<app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
+<div *ngIf="tipoU === 'Platform-Administrator'">
 <p>inicio-adm-plataforma works!</p>
 
 
 <button mat-raised-button routerLink="/inicioAdmPlataformaGestorInstancia" color="primary">Ir gestionar Instancias</button>
+</div>
+<div *ngIf="tipoU !== 'Platform-Administrator'">
+    <div class="contenedorError">
+      <div class="cajaError">
+        <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+      </div>
+      <div class="cajaError"><img class="imgError"></div>
+      <div class="cajaError">
+        <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
+      </div>
+    </div>
+</div>

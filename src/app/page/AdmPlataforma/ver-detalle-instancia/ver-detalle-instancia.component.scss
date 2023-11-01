@@ -1,0 +1,121 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .color-pickers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .color-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .preview {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px; /* Espacio desde el encabezado a los botones */
+  }
+  
+  /* Estilos para los botones */
+  .custom-button {
+    min-width: 120px; /* Ancho mínimo de los botones */
+  }
+  .card-container {
+    display: flex; /* Utilizamos flexbox para alinear los cards */
+    justify-content: space-between; /* Los cards se separan horizontalmente */
+  }
+  
+  .card {
+    flex: 1; /* Los cards se expanden para ocupar el espacio disponible */
+    margin-right: 10px; /* Espacio entre los cards (ajusta según tu diseño) */
+  }
+  .change-colors1 {
+    .mat-mdc-card{
+      background-color: #ffffff;
+    }
+    .mat-mdc-raised-button.mat-primary {
+        
+        background-color: #618C88;
+        color: #ffffff;
+    }
+   
+    .mat-mdc-raised-button.mat-accent{
+        background-color: #9BBFBC;
+        color: #ffffff;
+    }
+
+    .mat-toolbar.mat-primary{
+        background-color: #395941;
+        color: #ffffff;
+    }
+}
+
+.change-colors2 {
+
+  .mat-mdc-raised-button.mat-primary {
+    background-color: #3f51b5;  /* Pink */
+    color: #fff; /* White */
+  }
+
+  .mat-mdc-raised-button.mat-accent {
+    background-color: #e91e63; /* Indigo */
+    color: #fff; /* White */
+  }
+
+  .mat-toolbar.mat-primary {
+    background-color: #3f51b5;  /* Pink */
+    color: #fff; /* White */
+  }
+  .mat-mdc-card{
+    background-color: #ffffff;
+  }
+}
+
+
+
+.my-custom-button {
+    font-size: 30px; /* Ajusta el tamaño del texto del botón según tu preferencia */
+    padding: 20px 40px; /* Ajusta el relleno (padding) para aumentar el tamaño del botón */
+  }
+
+  .mat-mdc-cardblanco{
+    --mdc-elevated-card-container-color: #fbfbfb;
+}
+
+.button {
+  width: 100%;
+  margin-top: 20px;
+  color: white;
+  margin-bottom: 5px;
+  background-color: black;
+}
+
+.readonly-wrapper {
+  cursor: not-allowed;
+}
+
+.readonly-wrapper.readonly-block {
+  pointer-events: none;
+}

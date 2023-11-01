@@ -14,6 +14,8 @@ import { InicioAdmPlataformaComponent } from './page/AdmPlataforma/inicio-adm-pl
 import { AdmPlataformaGestorInstanciaComponent } from './page/AdmPlataforma/adm-plataforma-gestor-instancia/adm-plataforma-gestor-instancia.component';
 import { URLComponent } from './page/url/url.component';
 import { ModeradorAdmComponent } from './page/moderador-adm/moderador-adm.component';
+import { VerDetalleInstanciaComponent } from './page/AdmPlataforma/ver-detalle-instancia/ver-detalle-instancia.component';
+import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-instancia/modificar-instancia.component';
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: '', component: WebPrincipalComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'inicioAdmPlataforma', component: InicioAdmPlataformaComponent },
   { path: 'inicioAdmPlataformaGestorInstancia', component: AdmPlataformaGestorInstanciaComponent },
   { path: 'moderadormodo', component: ModeradorAdmComponent },
+  { path: 'verInstanciaDetalle', component: VerDetalleInstanciaComponent },
+  { path: 'modificarInstancia', component: ModificarInstanciaComponent },
   { path: ':valorURL', component: URLComponent },
 ];
 

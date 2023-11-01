@@ -1,0 +1,104 @@
+<mat-card class="container">
+    <p>
+        <mat-toolbar style="background-color: black;">
+          <mat-toolbar-row>
+            <mat-card-title>Editar Instancia</mat-card-title>
+          </mat-toolbar-row>
+        </mat-toolbar>
+    </p>
+    <mat-card-content>
+      <form [formGroup]="ModifyForm">
+        <!-- Campo Nombre -->
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nombre" formControlName="nombre" [(ngModel)]="Nombre" required>
+        </mat-form-field>
+
+        <div class="Centrartitulo">
+          <button type="button" mat-icon-button matTooltip="Add an image" matTooltipPosition = "after" (click)="fileInput.click()">
+            <mat-icon>image</mat-icon>
+          </button>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo" [(ngModel)]="base64Image" >
+          <span class="file-name"></span>
+      </div>
+      <div>
+        <img class="full-width" [src]="base64Image" alt="Imagen">
+      </div>
+      <br>
+
+        <mat-form-field class="full-width">
+          <mat-label>Temas y Colores</mat-label>
+          <mat-select required formControlName="esquemaColores" [(ngModel)] = "Esquemas">
+            <mat-option value ="1">Común</mat-option>
+            <mat-option value ="2">Verde</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="full-width" style="display: flex; justify-content: center; gap: 10px;">
+          <div class="card-container change-colors2">
+            <mat-card class="example-card">
+              <p>
+                <mat-toolbar color="primary">
+                  <mat-toolbar-row>
+                    <span>My App</span>
+                    <span class="example-spacer"></span>
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                      <mat-icon>menu</mat-icon>
+                    </button>
+                  </mat-toolbar-row>
+                </mat-toolbar>
+              </p>
+              <section>
+                <div class="button-container">
+                  <button mat-raised-button class="custom-button">Basic</button>
+                  <button mat-raised-button color="primary" class="custom-button">Primary</button>
+                  <button mat-raised-button color="accent" class="custom-button">Accent</button>
+                </div>
+              </section>
+            </mat-card>
+          </div>
+          <div class="card-container change-colors1">
+            <mat-card class="example-card">
+              <p>
+                <mat-toolbar color="primary">
+                  <mat-toolbar-row>
+                    <span>My App</span>
+                    <span class="example-spacer"></span>
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                      <mat-icon>menu</mat-icon>
+                    </button>
+                  </mat-toolbar-row>
+                </mat-toolbar>
+              </p>
+              <section>
+                <div class="button-container">
+                  <button mat-raised-button class="custom-button">Basic</button>
+                  <button mat-raised-button color="primary" class="custom-button">Primary</button>
+                  <button mat-raised-button color="accent" class="custom-button">Accent</button>
+                </div>
+              </section>
+            </mat-card>
+          </div>
+        </div>
+        
+ 
+  
+        <!-- Campo Temática (desplegable) -->
+        <mat-form-field class="full-width">
+          <mat-label>Temática</mat-label>
+          <mat-select required formControlName="tematica" [(ngModel)] = "Tematica" >
+            <mat-option value="Fútbol">Fútbol</mat-option>
+            <mat-option value="Música">Música</mat-option>
+            <mat-option value="Películas">Películas</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+<!-- Botón de Guardar -->
+<mat-card-actions>
+    <button  class="button" mat-button-lg color="primary"  (click)="onRegistrar()"  >Guardar</button>
+    <button  class="button" mat-button-lg color="primary"  routerLink="/inicioAdmPlataformaGestorInstancia"  >Volver</button>
+</mat-card-actions>
+
+    </form>
+</mat-card-content>
+</mat-card>
+  
