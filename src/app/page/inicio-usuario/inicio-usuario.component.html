@@ -44,7 +44,7 @@
       <div class="scrollable-content" #scrollableContent>
         <div *ngFor="let x of inicioTodosPost">
           <br>
-          <mat-card>
+          <mat-card >
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"><img class="imgPostUser" src={{x.userOwner.profileImage}}>
               </div>
@@ -56,25 +56,59 @@
                 {{x.text}}
               </p>
               <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
+              <hr>
+              <p>34 ❤</p>
             </mat-card-content>
             <mat-card-actions>
               <div class="example-button-row">
-                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                  <mat-icon class="icon">favorite</mat-icon>
-                </button>
-                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                  <mat-icon class="icon">redo</mat-icon>
-                </button>
-                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+               
+                <button mat-icon-button (click)="toggleExpansionPanel()" (click)="mostrarContenido('comentarPost')">
                   <mat-icon class="icon">chat_bubble</mat-icon>
-                </button>
+                </button> 
+                        
               </div>
+              <a>
+                <mat-icon class="icon">favorite</mat-icon>
+                <span class="text" >Favorito</span>
+              </a>    
             </mat-card-actions>
+            <mat-accordion>              
+              <mat-expansion-panel [expanded]="panelOpenState" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <form [formGroup]="newComentario">
+                        <mat-form-field >
+                        
+                          <input matInput [value]="inputText" (keydown.space)="$event.stopPropagation()" formControlName="textComentario"   >
+                        </mat-form-field>
+                              <div *ngIf="imgComentario" class="image-containerComentario">
+                                <img [src]="imgComentario" alt="Imagen" class="imgComentario">
+                                <button (click)="removeImageComentario()" class="remove-button">
+                                  <mat-icon>close</mat-icon>
+                                </button>
+                              </div>
+                              <input hidden (change)="onFileSelectedImgComentario($event)" #fileInput type="file" formControlName="logo">
+                              <a type="button" (click)="fileInput.click()" *ngIf="!imgComentario">
+                                <mat-icon>attach_file</mat-icon> x.likes mg s
+                              </a>
+                              <button type="button" [disabled]="!newComentario.get('textComentario')?.value" (click)="newComentarioPost(x.postId)">
+                                <mat-icon>arrow_forward</mat-icon>
+                              </button>
+                              
+                    </form>
+                  </mat-panel-title>                    
+                </mat-expansion-panel-header>
+                <p>This is the primary content of the panel.</p>
+                <p>This is the primary content of the panel.</p>
+              </mat-expansion-panel>
+            </mat-accordion>
           </mat-card>
         </div>
       </div>
     </div>
-  
+    <div *ngIf="contenidoVisible === 'comentarPost'">
+    <p>comentarpost</p>
+    </div>
 
     <div *ngIf="contenidoVisible === 'favorito'">
       <div class="scrollable-content">

@@ -17,5 +17,5 @@ export class ModeradorAdmComponent {
   ngOnInit(): void {
     this.tipoU = localStorage.getItem('tipoUsuario');
   }
-  
+
 }

@@ -47,6 +47,7 @@ export class VerInstanciaComponent implements OnInit {
     {value: 'Fútbol', viewValue: 'Fútbol'},
     {value: 'Películas', viewValue: 'Películas'}
   ];
+
   aplicarFiltro() {
     // Si se selecciona "Todas", mostrar todas las instancias
     if (this.tematicaSeleccionada === '1') {
@@ -58,10 +59,11 @@ export class VerInstanciaComponent implements OnInit {
     }
   }
 
-  navegarAOtroComponente(x:any) {
+  navegarAOtroComponente(x:any,y:any) {
     localStorage.setItem("idInstancia", x);
+    localStorage.setItem("valorURL", y);
     console.log("aca llego");
     this.app.ngOnInit();
-    this.router.navigate(['/' + x]);
+    this.router.navigate(['/' + y]);
   }
 }

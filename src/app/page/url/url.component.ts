@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
@@ -37,12 +37,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './url.component.html',
   styleUrls: ['./url.component.scss']
 })
-export class URLComponent {
+export class URLComponent implements OnInit {
   valorURL: string | null=null;
   instanciaActual: InstanciaRetorno | null=null;
   errorEncontrado: number = 0;
   tokens: string | null = null;
   tipoU: any| null = null;
+  valorIdInstania: any | null=null;
 
   tipoUsuario: string | null = null;
   loginForm = new FormGroup({
@@ -56,21 +57,55 @@ export class URLComponent {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.valorURL = params['valorURL'];
+      if (this.valorURL !== null) {
+        localStorage.setItem('valorURL', this.valorURL);
+        this.api.getInstanciaPorURL(this.valorURL).subscribe({
+          next: value => {
+            this.instanciaActual = value;
+            this.valorIdInstania = value.tenantInstanceId;
+            this.app.ngOnInit();
+            localStorage.setItem("idInstancia", this.valorIdInstania); 
+          },
+          error: err => {
+            this.errorEncontrado = 1; 
+          }
+        });
+      } else {
+        this.errorEncontrado = 1; 
+      }
     });
 
-    if (this.valorURL !== null) {
+ /*   if (this.valorURL !== null) {
       localStorage.setItem('valorURL', this.valorURL);
 
-      this.api.getInstanciaPorId(this.valorURL).subscribe({
+      this.api.getInstanciaPorURL(this.valorURL).subscribe({
         next: value => this.instanciaActual = value,
+        
         error: err => {
           this.errorEncontrado = 1; // Establecer errorEncontrado en 1 en caso de error
         }
       });
     } else {
       this.errorEncontrado = 1; // Establecer errorEncontrado en 1 si no se encuentra valorURL
+    }*/
+    if (this.valorURL !== null) {
+      localStorage.setItem('valorURL', this.valorURL);
+      this.api.getInstanciaPorURL(this.valorURL).subscribe({
+        next: value => {
+          this.instanciaActual = value;
+          this.valorIdInstania = value.tenantInstanceId;
+          this.app.ngOnInit();
+          localStorage.setItem("idInstancia", this.valorIdInstania); 
+        },
+        error: err => {
+          this.errorEncontrado = 1; 
+        }
+      });
+    } else {
+      this.errorEncontrado = 1; 
     }
   }
+  
 
 
   onLogin() {
@@ -78,9 +113,9 @@ export class URLComponent {
       username: this.loginForm.controls["username"].value ? this.loginForm.controls["username"].value : " ",
       password: this.loginForm.controls["password"].value ? this.loginForm.controls["password"].value : " "
     }
-    this.api.loginByEmail(x,this.valorURL).subscribe(data => {
+    this.api.loginByEmail(x,this.valorIdInstania).subscribe(data => {
       localStorage.setItem("token", data.token);
-      this.tokens = data.token;
+      this.tokens = data.token; 
       localStorage.setItem("userName", x.username);
       
       const decodedToken = this.jwtHelper.decodeToken(this.tokens);

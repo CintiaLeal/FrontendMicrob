@@ -54,6 +54,10 @@ export class AppService {
     return this.http.get<InstanciaRetorno>(url);
   }
 
+  getInstanciaPorURL(x:any):Observable<InstanciaRetorno> {
+    const url = `${this.url}/Instance/GetInstanceByDomain?domain=${x}`;
+    return this.http.get<InstanciaRetorno>(url);
+  }
 
 
  //Inicio Login por email 
@@ -103,4 +107,13 @@ return this.http.get<Post[]>(direccion,{ headers: headers });
 
 }
 
+newComentarioPost(form: any, x: any, userName: any, postId:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  const params = new HttpParams().set('userName', userName); 
+  //https://localhost:7131/Post/CreateComment?postId=1&userName=ana12@todoPelis
+  const direccion = this.url + "/Post/CreateComment?postId="+postId+"&"+"userName="+userName;
+  return this.http.post<any>(direccion, form, { headers: headers, params: params });
+}
 }

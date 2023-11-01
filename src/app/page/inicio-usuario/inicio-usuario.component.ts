@@ -19,6 +19,7 @@ import { PostTodos } from 'src/app/modelos/postTodos';
 })
 export class InicioUsuarioComponent {
   public base64Image: any;
+  public imgComentario: any;
   public idInstancia:any;
    misPost: Post[] = [];
   contenidoVisible: string = 'home'; // Inicialmente, muestra el primer contenido
@@ -31,7 +32,7 @@ export class InicioUsuarioComponent {
   inputText: any;
   inicioTodosPost:Post[] = [];
   private scrollPos = 0;
-  
+  panelOpenState = false;
   mostrarContenido(contenido: string) {
     this.contenidoVisible = contenido;
     
@@ -43,6 +44,9 @@ export class InicioUsuarioComponent {
    registrarForm = new FormGroup({
     text: new FormControl('', Validators.required),
 });
+newComentario = new FormGroup({
+  textComentario: new FormControl('', Validators.required),
+});
    
   onInputChange(event: any) {
     const text = event.target.value;
@@ -50,6 +54,75 @@ export class InicioUsuarioComponent {
     this.inputText = text.replace(regex, (match: any) => `<span class="hashtag">${match}</span>`);
   }
 
+  //EXPANCION COMENTARIOS
+  toggleExpansionPanel() {
+    this.panelOpenState = !this.panelOpenState;
+  }
+  stopPropagation(event: Event): void {
+    event.stopPropagation();
+  }  
+
+  newComentarioPost(postId:any){
+    const textValue = this.newComentario.controls['textComentario'].value   ? this.newComentario.controls["textComentario"].value : " ";
+    let hashtags = [];
+    const hashtagRegex = /#(\w+)/g;
+    let match;
+    while ((match = hashtagRegex.exec(textValue))) {
+      hashtags.push(match[1]);
+    }
+    let x: any = {
+      text: textValue ? textValue : " ",
+      attachment: this.imgComentario,
+      isSanctioned: false,
+      hashtag: hashtags 
+    };
+    this.idInstancia=localStorage.getItem('idInstancia');
+    this.api.newComentarioPost(x, this.idInstanciaLocalHost ,this.userName, postId).subscribe(data => {
+    });
+    this.imgComentario = '';
+    this.newComentario.controls['textComentario'].reset();
+
+  }
+  removeImageComentario(){
+    this.imgComentario = '';
+  }
+
+  convertToBase64ImgComentario(file: File) {
+    console.log(file);
+    const observable = new Observable((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    })
+  
+    observable.subscribe((d) => {
+      this.imgComentario = d;
+    })
+  }
+  
+readFileImgComentario(file: File, subscriber: Subscriber<any>) {
+  const fileReader = new FileReader();
+  fileReader.readAsDataURL(file)
+
+  fileReader.onload = () => {
+    subscriber.next(fileReader.result)
+    subscriber.complete()
+  }
+  fileReader.onerror = () => {
+    subscriber.error()
+  }
+}
+
+onFileSelectedImgComentario(event: any): void {
+   this.convertToBase64ImgComentario(event.target.files[0]);
+ }
+//FIN PARA IMG COM BASE 64
+showImageImgComentario() {
+  if (this.imgComentario) {
+    return `data:image/png;base64,${this.imgComentario}`;
+  } else {
+    return 'ruta_a_imagen_predeterminada_o_mensaje_de_error';
+  }
+}
+  //EXPANCION COMENTARIOS
   ngOnInit(): void {
     this.tokenActual = localStorage.getItem('token') ?? '';
     this.tipoU = localStorage.getItem('tipoUsuario');
@@ -115,20 +188,7 @@ export class InicioUsuarioComponent {
       console.error('El nombre de usuario es nulo.');
     }
   }
-  /*
-  getPosteosInicio() {
-    // 1. Obtener todos los usuarios de la instancia
-    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
-      // 2. Para cada usuario, obtener sus posts
-      for (const usuario of users) {
-        this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
-          // 3. Agregar los posts del usuario actual a la lista de posts
-          this.inicioTodosPost.push(...posts);
-        });
-      console.log(this.inicioTodosPost);
-      }
-    });
-  }*/
+
   getPosteosInicio() {
     this.inicioTodosPost = [];
     // 1. Obtener todos los suarios de la instancia
@@ -160,6 +220,7 @@ export class InicioUsuarioComponent {
   removeImage(){
     this.base64Image = '';
   }
+  
 //INI PARA IMG COM BASE 64
 convertToBase64(file: File) {
   console.log(file);
@@ -169,7 +230,7 @@ convertToBase64(file: File) {
 
   observable.subscribe((d) => {
     this.base64Image = d;
-    console.log(this.base64Image);
+    //console.log(this.base64Image);
   })
 }
 
