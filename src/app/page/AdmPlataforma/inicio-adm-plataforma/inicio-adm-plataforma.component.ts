@@ -15,6 +15,5 @@ export class InicioAdmPlataformaComponent {
 
   ngOnInit(): void {
     this.tipoU = localStorage.getItem('tipoUsuario');
-
   }
 }

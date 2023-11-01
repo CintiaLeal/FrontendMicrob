@@ -30,8 +30,8 @@ const routes: Routes = [
   { path: 'inicioAdmPlataforma', component: InicioAdmPlataformaComponent },
   { path: 'inicioAdmPlataformaGestorInstancia', component: AdmPlataformaGestorInstanciaComponent },
   { path: 'moderadormodo', component: ModeradorAdmComponent },
-  { path: 'verInstanciaDetalle', component: VerDetalleInstanciaComponent },
-  { path: 'modificarInstancia', component: ModificarInstanciaComponent },
+  { path: 'ModificarInstancia/:Id', component: ModificarInstanciaComponent },
+  { path: 'VerDetalleInstancia/:Id', component: VerDetalleInstanciaComponent },
   { path: ':valorURL', component: URLComponent },
 ];
 
