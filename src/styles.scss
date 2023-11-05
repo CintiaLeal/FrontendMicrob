@@ -31,7 +31,11 @@
   background-color:  #011C40;
   color: white;
 }
-
+.mat-mdc-mini-fab.mat-accent {
+  --mdc-fab-container-color:   #04D98B;
+  --mdc-fab-icon-color: white;
+  --mat-mdc-fab-color: #fff;
+}
 }
 /*
 .Green-and-Blue-Neon-Light-with-Tropical-Leaves-1-hex { color: #011C40; }
@@ -70,6 +74,11 @@
 .mat-step-icon-selected {
   background-color: #551919;
   color: white;
+}
+.mat-mdc-mini-fab.mat-accent {
+  --mdc-fab-container-color:   #A6460F;
+  --mdc-fab-icon-color: white;
+  --mat-mdc-fab-color: #fff;
 }
 }
 

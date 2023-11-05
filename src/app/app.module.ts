@@ -33,7 +33,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import {MatBadgeModule} from '@angular/material/badge';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InicioComponent } from './page/inicio/inicio.component';
 import { WebPrincipalComponent } from './page/webPrincipal/web-principal/web-principal.component';
@@ -111,7 +111,8 @@ import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-inst
     FormsModule,
     ReactiveFormsModule,
     MatPaginatorModule,
-    MatDividerModule
+    MatDividerModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,3 @@
-
 <app-header *ngIf="tipoU === 'Common-User'"></app-header>
 <app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
 <div class="container" *ngIf="tipoU === 'Common-User' || tipoU === 'Moderator'">
@@ -44,73 +43,72 @@
       <div class="scrollable-content" #scrollableContent>
         <div *ngFor="let x of inicioTodosPost">
           <br>
-          <mat-card >
+          <mat-card>
             <mat-card-header>
-              <div mat-card-avatar class="example-header-image"><img class="imgPostUser" src={{x.userOwner.profileImage}}>
+              <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
+                  src={{x.userOwner.profileImage}}>
               </div>
               <mat-card-title> {{x.userOwner.firstName}}</mat-card-title>
-              <mat-card-subtitle> {{x.userOwner.userName}} | {{ x.created | date:'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+              <mat-card-subtitle >
+                {{ x.userOwner.userName }} | {{ x.created | date:'dd/MM/yyyy' }}
+              </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <p>
                 {{x.text}}
               </p>
               <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
-              <hr>
-              <p>34 ❤</p>
-              <div>
+              <p class="mgPost">{{ x.likes.length }} ❤</p>
 
-              </div>
             </mat-card-content>
             <mat-card-actions>
               <div class="example-button-row">
-               
-                <button mat-icon-button (click)="toggleExpansionPanel()" (click)="mostrarContenido('comentarPost')">
+                <button mat-icon-button>
+                  <mat-icon class="icon">favorite</mat-icon>
+                </button>
+                <button mat-icon-button>
+                  <mat-icon class="icon">favorite</mat-icon>
+                </button>
+                <button mat-icon-button (click)="alternarVisibilidad(x.postId)">
                   <mat-icon class="icon">chat_bubble</mat-icon>
-                </button> 
-                        
+                </button>
               </div>
-              <a>
-                <mat-icon class="icon">favorite</mat-icon>
-                <span class="text" >Favorito</span>
-              </a>    
             </mat-card-actions>
-            <mat-accordion>              
-              <mat-expansion-panel [expanded]="panelOpenState" hideToggle>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    <form [formGroup]="newComentario">
-                        <mat-form-field >
-                        
-                          <input matInput [value]="inputText" (keydown.space)="$event.stopPropagation()" formControlName="textComentario"   >
-                        </mat-form-field>
-                              <div *ngIf="imgComentario" class="image-containerComentario">
-                                <img [src]="imgComentario" alt="Imagen" class="imgComentario">
-                                <button (click)="removeImageComentario()" class="remove-button">
-                                  <mat-icon>close</mat-icon>
-                                </button>
-                              </div>
-                              <input hidden (change)="onFileSelectedImgComentario($event)" #fileInput type="file" formControlName="logo">
-                              <a type="button" (click)="fileInput.click()" *ngIf="!imgComentario">
-                                <mat-icon>attach_file</mat-icon> x.likes mg s
-                              </a>
-                              <button type="button" [disabled]="!newComentario.get('textComentario')?.value" (click)="newComentarioPost(x.postId)">
-                                <mat-icon>arrow_forward</mat-icon>
-                              </button>
-                              
-                    </form>
-                  </mat-panel-title>                    
-                </mat-expansion-panel-header>
-                <p>This is the primary content of the panel.</p>
-                <p>This is the primary content of the panel.</p>
-              </mat-expansion-panel>
-            </mat-accordion>
+
+            <div *ngIf="mostrarDiv[x.postId]">
+              <mat-card-content>
+                <form [formGroup]="newComentario">
+                  <input class="x" formControlName="textComentario">
+                  <button mat-mini-fab color="accent" [disabled]="!newComentario.get('textComentario')?.value"
+                    (click)="newComentarioPost(x.postId)">
+                    <mat-icon>arrow_forward</mat-icon>
+                  </button>
+                </form>
+                <mat-card-content>
+                  <div *ngFor="let comentario of x.comments">
+                    <br>
+                    <mat-card>
+                      
+                    <mat-card-header>
+                      <mat-card-title>{{comentario.userOwner.firstName}}</mat-card-title>
+                      <mat-card-subtitle>
+                        {{comentario.userOwner.userName}} | {{comentario.created | date:'dd/MM/yyyy HH:mm'}}
+                      </mat-card-subtitle>
+                    </mat-card-header>
+                    {{ comentario.text }}
+                    
+                    </mat-card>
+                  </div>
+                </mat-card-content>
+
+              </mat-card-content>
+            </div>
           </mat-card>
         </div>
       </div>
     </div>
     <div *ngIf="contenidoVisible === 'comentarPost'">
-    <p>comentarpost</p>
+      <p>comentarpost</p>
     </div>
 
     <div *ngIf="contenidoVisible === 'favorito'">
@@ -215,14 +213,14 @@
             <img class="imgPerfilUser" src={{usuario?.profileImage}}>
           </div>
           <h1 class="textoMiPerfil">{{usuario?.firstName}} {{usuario?.lastName}}</h1>
-          <h4 class="textoMiPerfilArroba" >{{usuario?.userName}}</h4>
+          <h4 class="textoMiPerfilArroba">{{usuario?.userName}}</h4>
           <div>
-            <p >{{usuario?.biography}}</p>
+            <p>{{usuario?.biography}}</p>
           </div>
           <h4>
             <mat-icon class="iconDiaCumple">calendar_month</mat-icon>
             {{ usuario?.birthday | date:'dd/MM/yyyy' }}
-          </h4>          
+          </h4>
           <p>Seguidores 1{{usuario?.followUsers}}</p>
         </div>
         <hr>
@@ -296,8 +294,9 @@
     <div class="caja3">
       <ul class="menu-list">
         <li>
-          <a (click)="mostrarContenido('home')">
-            <mat-icon class="icon" (click)="getPosteosInicio()">home</mat-icon>
+          <a (click)="mostrarContenido('home'); mostrarBange('home'); getPosteosInicio();">
+            <mat-icon *ngIf="contador > 0" [matBadge]="contador" class="icon" (click)="getPosteosInicio()">home</mat-icon>
+  <mat-icon *ngIf="contador === 0" class="icon" (click)="getPosteosInicio()">home</mat-icon>
             <span class="text">Home</span>
           </a>
         </li>

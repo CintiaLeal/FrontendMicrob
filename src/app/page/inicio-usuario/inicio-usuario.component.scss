@@ -237,6 +237,13 @@
   background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
 
 }
+.x{
+  height: 35px;
+  width: 90%;
+  border-radius: 3px;
+}
+
+
 
 .imgIconoInstancia{
   background: url('/assets/img/tl.webp') no-repeat center center;
@@ -370,6 +377,10 @@
   margin: 10px 0;
 }
 
+.mgPost{
+font-size: 13px;
+color: #807d7d;
+}
 
 
 mat-card-content {

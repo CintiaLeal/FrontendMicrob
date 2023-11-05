@@ -6,7 +6,7 @@ export class Post {
     public userOwner: any;
     public isSanctioned: boolean;
     public created: Date;
-    public comments: any[]; // Puedes reemplazar 'any[]' con un modelo de comentario si es necesario
+    public comments: Post[]; // Puedes reemplazar 'any[]' con un modelo de comentario si es necesario
     public likes: any[];    // Puedes reemplazar 'any[]' con un modelo de "like" si es necesario
     public hashtag: string[]; // Un array de cadenas para representar hashtags
   
@@ -18,7 +18,7 @@ export class Post {
       userOwner: any,
       isSanctioned: boolean,
       created: Date,
-      comments: any[],
+      comments: Post[],
       likes: any[],
       hashtag: string[]
     ) {

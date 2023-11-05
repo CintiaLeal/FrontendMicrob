@@ -31,8 +31,13 @@ export class InicioUsuarioComponent {
   idInstanciaLocalHost: any;
   inputText: any;
   inicioTodosPost:Post[] = [];
+  inicioTodosPost1:Post[] = [];
   private scrollPos = 0;
   panelOpenState = false;
+  mostrarDiv: Record<number, boolean> = {}; 
+  contador: number = 0;
+  mostrarBadge: boolean = true;
+
   mostrarContenido(contenido: string) {
     this.contenidoVisible = contenido;
     
@@ -40,6 +45,7 @@ export class InicioUsuarioComponent {
 
   constructor( private api: AppService, private app:AppComponent,private el: ElementRef, private renderer: Renderer2) {
     this.tipoU = localStorage.getItem('tipoUsuario');
+    
    }
    registrarForm = new FormGroup({
     text: new FormControl('', Validators.required),
@@ -53,6 +59,8 @@ newComentario = new FormGroup({
     const regex = /#(\w+)/g;
     this.inputText = text.replace(regex, (match: any) => `<span class="hashtag">${match}</span>`);
   }
+ 
+ 
 
   //EXPANCION COMENTARIOS
   toggleExpansionPanel() {
@@ -61,7 +69,14 @@ newComentario = new FormGroup({
   stopPropagation(event: Event): void {
     event.stopPropagation();
   }  
-
+  mostrarBange(seccion: string) {
+    if (seccion === 'home') {
+      this.contador = 0;
+      this.mostrarBadge = false;
+      // Resto de la lógica para mostrar el contenido de 'home'
+    }
+    // Otras secciones y lógica
+  }
   newComentarioPost(postId:any){
     const textValue = this.newComentario.controls['textComentario'].value   ? this.newComentario.controls["textComentario"].value : " ";
     let hashtags = [];
@@ -77,6 +92,7 @@ newComentario = new FormGroup({
       hashtag: hashtags 
     };
     this.idInstancia=localStorage.getItem('idInstancia');
+    
     this.api.newComentarioPost(x, this.idInstanciaLocalHost ,this.userName, postId).subscribe(data => {
     });
     this.imgComentario = '';
@@ -88,7 +104,7 @@ newComentario = new FormGroup({
   }
 
   convertToBase64ImgComentario(file: File) {
-    console.log(file);
+
     const observable = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     })
@@ -132,7 +148,7 @@ showImageImgComentario() {
       this.api.obtenerInfoUsuario(this.userName,this.idInstanciaLocalHost).subscribe(
         (value) => {
           this.usuario = value; // Asigna el valor de 'value' a this.usuario
-          console.log(this.usuario);
+        
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
@@ -142,8 +158,34 @@ showImageImgComentario() {
 
     this.getMisPost();
     this.getPosteosInicio();
+    this. getPosteosInicio1();  
+    setInterval(() => {
+      this.tengoNewPostParaVer();
+    }, 3000); // 3000 milisegundos = 3 segundos
+  
+
+    
   }
- 
+  
+  alternarVisibilidad(postId: number) {
+    this.mostrarDiv[postId] = !this.mostrarDiv[postId];
+  }
+
+  tengoNewPostParaVer() {
+    // Almacena los posts actuales en una variable separada
+    const postsActuales = this.inicioTodosPost1;
+    
+    // Llama a getPosteosInicio para actualizar this.inicioTodosPost
+    this.getPosteosInicio1();
+    
+    // Compara los posts actuales con los nuevos
+    const diferencia = postsActuales.length - this.inicioTodosPost.length;
+  
+    // Actualiza la variable contador con la diferencia
+    this.contador = diferencia;
+
+  }
+  
   
   
   
@@ -163,7 +205,7 @@ showImageImgComentario() {
     };
     this.idInstancia=localStorage.getItem('idInstancia');
     this.api.newPost(x, this.idInstanciaLocalHost ,this.userName).subscribe(data => {
-      console.log(data);
+      
       this.getMisPost();
       this.getPosteosInicio();
     });
@@ -213,7 +255,30 @@ showImageImgComentario() {
       console.log(this.inicioTodosPost);
     });
   }
-  
+  getPosteosInicio1() {
+    this.inicioTodosPost1 = [];
+    // 1. Obtener todos los suarios de la instancia
+    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
+      // 2. Para cada usuario, obtener sus posts
+      for (const usuario of users) {
+        this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
+          // 3. Agregar los posts del usuario actual a la lista de posts
+          for (const post of posts) {
+            post.userOwner = usuario; // Asigna el usuario al post
+          }
+          this.inicioTodosPost1.push(...posts);
+          
+          // 4. Ordenar los posts por fecha (de más reciente a más antiguo)
+          this.inicioTodosPost1.sort((a, b) => {
+            const dateA = new Date(a.created).getTime();
+            const dateB = new Date(b.created).getTime();
+            return dateB - dateA;
+          });
+        });
+      }
+     
+    });
+  }
   
   
   
@@ -223,14 +288,14 @@ showImageImgComentario() {
   
 //INI PARA IMG COM BASE 64
 convertToBase64(file: File) {
-  console.log(file);
+  
   const observable = new Observable((subscriber: Subscriber<any>) => {
     this.readFile(file, subscriber);
   })
 
   observable.subscribe((d) => {
     this.base64Image = d;
-    //console.log(this.base64Image);
+
   })
 }
 

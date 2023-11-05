@@ -110,9 +110,10 @@ newComentarioPost(form: any, x: any, userName: any, postId:any){
   const headers = new HttpHeaders({
     'tenant': x,
   });
-  const params = new HttpParams().set('userName', userName); 
+ // const params = new HttpParams().set('userName', userName); 
   const direccion = this.url + "/Post/CreateComment?postId="+postId+"&"+"userName="+userName;
-  return this.http.post<any>(direccion, form, { headers: headers, params: params });
+//return this.http.post<any>(direccion, form, { headers: headers, params: params });
+return this.http.post<any>(direccion, form, { headers: headers });
 }
 
 ModificarInstancias (instanciaNueva: Instancia): Observable<ResponseI> {  
