@@ -120,28 +120,7 @@
     }
 }
 
-.header1 {
-    position: fixed; /* Establece la posición fija */
-    top: 0; /* Fija el encabezado en la parte superior de la ventana */
-    width: 100%; /* Haz que el encabezado ocupe todo el ancho */
-    background-color: #a14848; /* Agrega el color de fondo que desees */
-    /* Otros estilos de diseño para tu encabezado */
-    z-index: 1000; /* Opcional: Asegura que el encabezado esté por encima de otros elementos */
-  }
-  /* Estilos para el header */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(37, 37, 37, 0); /* Fondo con transparencia */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; /* Espaciado interno */
-    z-index: 1000;
-    border: none;
-  }
+
   .mat-toolbar {
     background:#000000;
     color: var(--mat-toolbar-container-text-color);
@@ -156,12 +135,7 @@
 }
 
 
-  /* Estilos para los botones centrados */
-  .buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+ 
   
   /* Estilos para el espacio de login y el icono de ingresar */
   .login-space {
