@@ -198,3 +198,42 @@ body {
 .remove-button mat-icon {
   font-size: 16px; /* Ajusta el tamaño de la cruz según tus preferencias */
 }
+
+@media screen and (max-width: 900px) {
+  h1{
+    font-size: 14px;
+  }
+  p{
+    font-size: 10px;
+    margin-right: 10px;
+  }
+  .mdc-evolution-chip__text-label {
+    font-size: 10px;
+  }
+  .img{
+    clip-path: circle(50% at 50% 50%);
+    width: 70px; /* Ancho deseado para el contenedor */
+    height: 70px; /* Alto deseado para el contenedor */
+    margin-right: 70px;
+  }
+}
+@media screen and (max-width: 500px) {
+  h1{
+    font-size: 12px;
+  }
+  p{
+    font-size: 10px;
+    margin-right: 10px;
+  }
+   .mdc-evolution-chip__text-label {
+    font-size: 10px;
+  }
+  .img{
+    clip-path: circle(50% at 50% 50%);
+    width: 70px; /* Ancho deseado para el contenedor */
+    height: 70px; /* Alto deseado para el contenedor */
+    margin-right: 70px;
+  }
+
+
+}

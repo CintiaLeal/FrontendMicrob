@@ -20,6 +20,9 @@ export class VerDetalleInstanciaComponent {
   public Nombre:any;
   public Tematica:any;
   public Esquemas:any;
+  public Dominio:any;
+  public Description:any;
+  tipoU: string | null = null;
   constructor(private api: AppService, private alerta: MatSnackBar,private rutaActiva: ActivatedRoute ){ }
 //FORM desde el HTML
     ModifyForm = new FormGroup({
@@ -27,18 +30,23 @@ export class VerDetalleInstanciaComponent {
     esquemaColores: new FormControl('',Validators.required),
     tematica: new FormControl('',Validators.required),
     logo: new FormControl('',Validators.required),
+    dominio:new FormControl('',Validators.required),
+    description: new FormControl('',Validators.required),
   });
 
 
   ngOnInit() {
     this.getInstancias(); 
+    this.tipoU = localStorage.getItem('tipoUsuario');
   }
   public getInstancias(){
-    this.api.getInstanciaPorId(this.rutaActiva.snapshot.params['Id']).subscribe(userData=>{
+    this.api.getInstanciaPorURL(this.rutaActiva.snapshot.params['Dominio']).subscribe(userData=>{
       this.Nombre = userData.nombre;
       this.Tematica = userData.tematica;
       this.base64Image = userData.logo;
       this.Esquemas = userData.esquemaColores;
+      this.Dominio = userData.dominio;
+      this.Description = userData.description;
     })  
   }
 

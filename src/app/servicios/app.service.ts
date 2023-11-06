@@ -8,6 +8,7 @@ import { Instancia } from '../modelos/instancia';
 import { InstanciaRetorno } from '../modelos/instanciaRetorno';
 import { UsuarioRetorno } from '../modelos/usuarioRetorno';
 import {Post} from '../modelos/post';
+import { InstanciaModificada } from '../modelos/InstanciaModficada';
 @Injectable({
   providedIn: 'root'
 })
@@ -116,9 +117,11 @@ newComentarioPost(form: any, x: any, userName: any, postId:any){
 return this.http.post<any>(direccion, form, { headers: headers });
 }
 
-ModificarInstancias (instanciaNueva: Instancia): Observable<ResponseI> {  
-  // Realiza la solicitud POST con el objeto instanciaData
+ModificarInstancias (instanciaNueva: InstanciaModificada, x:any): Observable<ResponseI> {  
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
   let direccion = this.url + "/Instance/ModifyInstance";
-  return this.http.put<any>(direccion, instanciaNueva); 
+  return this.http.put<any>(direccion, instanciaNueva,{ headers: headers }); 
 }
 }

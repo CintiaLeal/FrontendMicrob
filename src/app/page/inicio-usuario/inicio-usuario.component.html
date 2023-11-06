@@ -63,13 +63,9 @@
             </mat-card-content>
             <mat-card-actions>
               <div class="example-button-row">
-                <button mat-icon-button>
-                  <mat-icon class="icon">favorite</mat-icon>
-                </button>
                 <button mat-icon-button [color]="buttonClicked ? 'warn' : buttonColor" (click)="cambiarColor()">
                   <mat-icon class="icon">favorite</mat-icon>
-                </button>
-                
+                </button>             
                 <button mat-icon-button (click)="alternarVisibilidad(x.postId)">
                   <mat-icon class="icon">chat_bubble</mat-icon>
                 </button>

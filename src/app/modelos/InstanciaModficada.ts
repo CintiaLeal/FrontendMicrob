@@ -1,5 +1,5 @@
 export class InstanciaModificada {
-    public tenantInstanceId: number;
+    
     public nombre: string;
     public tematica: string;
  
@@ -11,7 +11,7 @@ export class InstanciaModificada {
     public description:string;
 
     constructor(
-       tenantInstanceId: number,
+  
         nombre: string,
         tematica: string,
         esquemaColores: number,
@@ -21,7 +21,7 @@ export class InstanciaModificada {
         privacidad:number,
         description:string
     ) {
-        this.tenantInstanceId = tenantInstanceId;
+       
         this.nombre = nombre;
         this.tematica = tematica;
         this.privacidad = privacidad;

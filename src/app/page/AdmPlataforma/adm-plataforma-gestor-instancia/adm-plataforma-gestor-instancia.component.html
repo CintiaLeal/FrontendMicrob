@@ -1,6 +1,7 @@
-<div>
+<app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
+<div *ngIf="tipoU === 'Platform-Administrator'">
     <p>
-        <mat-toolbar style="color: black;">
+        <mat-toolbar style="color: white;">
           <mat-toolbar-row>
             <mat-card-title class="center-content">Gestion de Instancias</mat-card-title>
           </mat-toolbar-row>
@@ -13,6 +14,7 @@
           </mat-toolbar-row>
         </mat-toolbar>
     </p>   
+    
 <div class="table-container">
     <table mat-table [dataSource]="dataSource"
        class="mat-elevation-z8">
@@ -57,14 +59,26 @@
           </button>
         </mat-cell>
       </ng-container>
-      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-header-row *matHeaderRowDef="columnas" ></mat-header-row>
       <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
     </table>
+  </div>
+</div>
+<div>
+  <mat-paginator [pageSizeOptions]="[10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
 
-    <mat-paginator [pageSizeOptions]="[10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of periodic elements">
-    </mat-paginator>
-
+<div *ngIf="tipoU !== 'Platform-Administrator'">
+  <div class="contenedorError">
+    <div class="cajaError">
+      <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+    </div>
+    <div class="cajaError"><img class="imgError"></div>
+    <div class="cajaError">
+      <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
+    </div>
   </div>
 </div>

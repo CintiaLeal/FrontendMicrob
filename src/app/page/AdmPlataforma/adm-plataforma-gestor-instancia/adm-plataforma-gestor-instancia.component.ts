@@ -24,6 +24,7 @@ export class AdmPlataformaGestorInstanciaComponent {
   dataSource = new MatTableDataSource<any>([]);
   panelOpenState = false;
   Projects =  new Observable<Array<InstanciaRetorno>>();
+  tipoU: string | null = null;
 
   constructor(public dialog: MatDialog,private api: AppService, private alerta: MatSnackBar,private router: Router) {
   }
@@ -32,7 +33,8 @@ export class AdmPlataformaGestorInstanciaComponent {
   
   ngOnInit() {
     this.getInstancias();
-    this.dataSource.paginator = this.paginator;
+    //this.dataSource.paginator = this.paginator;
+    this.tipoU = localStorage.getItem('tipoUsuario');
   }
 
   public getInstancias(){
@@ -62,13 +64,20 @@ export class AdmPlataformaGestorInstanciaComponent {
   }
 
   navigateTo(row: InstanciaRetorno) {
-    this.router.navigate(['/ModificarInstancia/'+row.tenantInstanceId]);
+    this.router.navigate(['/ModificarInstancia/'+row.dominio]);
   }
   
   navigateToDetails(row: InstanciaRetorno) {
-    this.router.navigate(['VerDetalleInstancia/'+row.tenantInstanceId]);
+    this.router.navigate(['VerDetalleInstancia/'+row.dominio]);
   } 
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  } 
+  
   }
+
+  
 
 
 

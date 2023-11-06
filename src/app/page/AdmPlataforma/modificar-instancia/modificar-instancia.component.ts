@@ -24,6 +24,10 @@ export class ModificarInstanciaComponent {
   public Tematica:any;
   public Esquemas:any;
   public tenantInstanceId :any;
+  public Dominio:any;
+  public Description:any;
+  instanciaActual: InstanciaRetorno | null=null;
+  tipoU: string | null = null;
   constructor(private api: AppService, private alerta: MatSnackBar,private rutaActiva: ActivatedRoute ,private router:Router){ }
 //FORM desde el HTML
     ModifyForm = new FormGroup({
@@ -31,38 +35,41 @@ export class ModificarInstanciaComponent {
     esquemaColores: new FormControl('',Validators.required),
     tematica: new FormControl('',Validators.required),
     logo: new FormControl('',Validators.required),
+    description: new FormControl('',Validators.required),
   });
 
 
   ngOnInit() {
     this.getInstancias();
+    this.tipoU = localStorage.getItem('tipoUsuario');
   }
   public getInstancias(){
-    this.api.getInstanciaPorId(this.rutaActiva.snapshot.params['Id']).subscribe(userData=>{
+    this.api.getInstanciaPorURL(this.rutaActiva.snapshot.params['Dominio']).subscribe(userData=>{
       this.Nombre = userData.nombre;
       this.Tematica = userData.tematica;
       this.base64Image = userData.logo;
       this.Esquemas = userData.esquemaColores;
       this.tenantInstanceId = userData.tenantInstanceId;
+      this.Dominio = userData.dominio;
+      this.Description = userData.description;
     })  
   }
 
   onRegistrar() {
     console.log("llega a la funcion");
-    let x: InstanciaModificada={
-      tenantInstanceId:this.tenantInstanceId,
+    let x: InstanciaModificada={  
       nombre: this.ModifyForm.controls["nombre"].value  ? this.ModifyForm.controls["nombre"].value : " ",
       esquemaColores: 1,
       tematica: this.ModifyForm.controls["tematica"].value  ? this.ModifyForm.controls["tematica"].value : " ",
       logo:  this.base64Image,
-      dominio:  "lodko.com",
+      dominio: this.Dominio,
       activo:true,
       privacidad:1,
-      description: "Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input"
-
+      description: this.Description
     }
    
-    this.api.ModificarInstancias(x).subscribe(data => {
+    
+    this.api.ModificarInstancias(x,this.tenantInstanceId).subscribe(data => {
       console.log(data);
     });
     this.alerta.open("Modificada con éxito", "OK!");

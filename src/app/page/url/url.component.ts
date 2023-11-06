@@ -32,6 +32,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Usuario } from 'src/app/modelos/usuario';
 import { Observable, subscribeOn, Subscriber } from 'rxjs';
 import { CommonModule } from '@angular/common';
+
+
 @Component({
   selector: 'app-url',
   templateUrl: './url.component.html',
@@ -45,6 +47,7 @@ export class URLComponent implements OnInit {
   tipoU: any| null = null;
   valorIdInstania: any | null=null;
 
+  //loginredsocial
   tipoUsuario: string | null = null;
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -105,8 +108,6 @@ export class URLComponent implements OnInit {
       this.errorEncontrado = 1; 
     }
   }
-  
-
 
   onLogin() {
     let x: Login = {
@@ -122,7 +123,7 @@ export class URLComponent implements OnInit {
       switch (this.tipoUsuario) {
         case 'Platform-Administrator':
           localStorage.setItem("tipoUsuario", 'Platform-Administrator');  
-          this.router.navigate(['/inicioAdmPlataforma']);
+          this.router.navigate(['/inicioAdmPlataformaGestorInstancia']);
           break;
         case 'Instance-Administrator':
           localStorage.setItem("tipoUsuario", 'Instance-Administrator');  

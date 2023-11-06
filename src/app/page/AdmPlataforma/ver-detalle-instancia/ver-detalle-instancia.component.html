@@ -1,3 +1,5 @@
+<app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
+<div *ngIf="tipoU === 'Platform-Administrator'">
 <mat-card class="container">
     <p>
         <mat-toolbar style="background-color: black;">
@@ -12,6 +14,14 @@
         <mat-form-field class="full-width">
           <input matInput placeholder="Nombre" formControlName="nombre" [(ngModel)]="Nombre"  readonly>
         </mat-form-field>
+        
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Dominio" formControlName="dominio" [(ngModel)]="Dominio" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Descripcion" formControlName="description" [(ngModel)]="Description" readonly>
+        </mat-form-field>
 
         <div class="Centrartitulo">
           <button type="button" mat-icon-button matTooltip="Add an image" matTooltipPosition = "after" (click)="fileInput.click()" disabled>
@@ -20,7 +30,7 @@
           <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo" [(ngModel)]="base64Image" >
           <span class="file-name"></span>
       </div>
-      <div>
+      <div *ngIf="base64Image != null">
         <img class="full-width" [src]="base64Image" alt="Imagen">
       </div>
       <br>
@@ -43,4 +53,16 @@
     </form>
 </mat-card-content>
 </mat-card>
-  
+</div>  
+
+<div *ngIf="tipoU !== 'Platform-Administrator'">
+  <div class="contenedorError">
+    <div class="cajaError">
+      <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+    </div>
+    <div class="cajaError"><img class="imgError"></div>
+    <div class="cajaError">
+      <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
+    </div>
+  </div>
+</div>

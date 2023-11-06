@@ -53,6 +53,25 @@ import { HeaderInstanceAdministratorComponent } from './page/headerpage/header-i
 import { ModeradorAdmComponent } from './page/moderador-adm/moderador-adm.component';
 import { VerDetalleInstanciaComponent } from './page/AdmPlataforma/ver-detalle-instancia/ver-detalle-instancia.component';
 import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-instancia/modificar-instancia.component';
+import { SocialAuthService, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+import { LoginRedSocialComponent } from './page/login-red-social/login-red-social.component';
+import { MatNativeDateModule} from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+
+const config: SocialAuthServiceConfig = {
+  autoLogin: false, // Configura esto según tus necesidades
+  providers: [
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider('TUC_ID_DE_CLIENTE_DE_GOOGLE'),
+    },
+  ],
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +95,8 @@ import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-inst
     HeaderInstanceAdministratorComponent,
     ModeradorAdmComponent,
     ModificarInstanciaComponent,
-    VerDetalleInstanciaComponent
+    VerDetalleInstanciaComponent,
+    LoginRedSocialComponent
   ],
   imports: [
     HttpClientModule,
@@ -112,9 +132,28 @@ import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-inst
     ReactiveFormsModule,
     MatPaginatorModule,
     MatDividerModule,
-    MatBadgeModule
+    MatBadgeModule,
+    SocialLoginModule,
+    MatNativeDateModule,
+    MatTooltipModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false, // Puedes configurar otras opciones aquí
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('projects/microbuy-404320/logs/cloudaudit.googleapis.com%2Factivity'),
+          },
+          // Agrega otros proveedores si los necesitas
+        ],
+      } as SocialAuthServiceConfig,
+    },
+    SocialAuthService,
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

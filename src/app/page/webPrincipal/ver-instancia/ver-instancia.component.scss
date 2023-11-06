@@ -91,7 +91,7 @@ mat-mdc-card-content{
 
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 500px) {
 
     .alineacionDesplegables {
       display: flex;
@@ -107,8 +107,31 @@ mat-mdc-card-content{
     .item {
       grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
     }
+    p{
+      font-size: 10px;
+    }
 }
+@media screen and (max-width: 900px) {
 
+  .alineacionDesplegables {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra verticalmente */
+  }
+
+  .imgPORTADA{
+    width: 5cm; /* Ancho deseado para el contenedor */
+    height: 2cm; /* Alto deseado para el contenedor */
+    background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+  }
+  .item {
+    grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
+  }
+  p{
+    font-size: 5px;
+  }
+  
+}
 //header
 /* Estilo para la barra de herramientas (toolbar) */
 .mat-toolbar {
