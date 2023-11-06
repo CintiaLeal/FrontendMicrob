@@ -406,6 +406,14 @@ mat-expansion-panel-header{
       margin-left: 3%;
       margin-right: 5%;
   }
+
+  mat-card-subtitle{
+    font-size: 10px; 
+  }
+  .imgPerfilUser{
+    width: 80px;
+    height: 80px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -414,5 +422,13 @@ mat-expansion-panel-header{
       height: auto;
       margin-left: 2%;
       margin-right: 2%;
+  }
+
+  mat-card-subtitle{
+    font-size: 10px; 
+  }
+  .imgPerfilUser{
+    width: 80px;
+    height: 80px;
   }
 }

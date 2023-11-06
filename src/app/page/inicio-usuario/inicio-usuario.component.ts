@@ -7,7 +7,7 @@ import { AppComponent } from 'src/app/app.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscriber } from 'rxjs';
-import {Post} from 'src/app/modelos/post';
+import { Post } from 'src/app/modelos/post';
 import { PostTodos } from 'src/app/modelos/postTodos';
 
 
@@ -20,47 +20,52 @@ import { PostTodos } from 'src/app/modelos/postTodos';
 export class InicioUsuarioComponent {
   public base64Image: any;
   public imgComentario: any;
-  public idInstancia:any;
-   misPost: Post[] = [];
+  public idInstancia: any;
+  misPost: Post[] = [];
   contenidoVisible: string = 'home'; // Inicialmente, muestra el primer contenido
   tipoU: string | null = null;
   userName: string | null = null;
-  usuario: UsuarioRetorno | null =null;
-  instanciaActual: InstanciaRetorno | null=null;
-  tokenActual: string | null=null;
+  usuario: UsuarioRetorno | null = null;
+  instanciaActual: InstanciaRetorno | null = null;
+  tokenActual: string | null = null;
   idInstanciaLocalHost: any;
   inputText: any;
-  inicioTodosPost:Post[] = [];
-  inicioTodosPost1:Post[] = [];
+  inicioTodosPost: Post[] = [];
+  inicioTodosPost1: Post[] = [];
   private scrollPos = 0;
   panelOpenState = false;
-  mostrarDiv: Record<number, boolean> = {}; 
+  mostrarDiv: Record<number, boolean> = {};
   contador: number = 0;
   mostrarBadge: boolean = true;
+  buttonColor = 'primary';
 
+  // Variable para controlar si el botón se ha hecho clic o no
+  buttonClicked = false;
+  constructor(private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
+    this.tipoU = localStorage.getItem('tipoUsuario');
+
+  }
+  registrarForm = new FormGroup({
+    text: new FormControl('', Validators.required),
+  });
+  newComentario = new FormGroup({
+    textComentario: new FormControl('', Validators.required),
+  });
   mostrarContenido(contenido: string) {
     this.contenidoVisible = contenido;
-    
-  }
 
-  constructor( private api: AppService, private app:AppComponent,private el: ElementRef, private renderer: Renderer2) {
-    this.tipoU = localStorage.getItem('tipoUsuario');
-    
-   }
-   registrarForm = new FormGroup({
-    text: new FormControl('', Validators.required),
-});
-newComentario = new FormGroup({
-  textComentario: new FormControl('', Validators.required),
-});
-   
+  }
+  cambiarColor() {
+    this.buttonColor = 'warn'; // Cambiar a color rojo ('warn') al hacer clic
+    this.buttonClicked = true;
+  }
   onInputChange(event: any) {
     const text = event.target.value;
     const regex = /#(\w+)/g;
     this.inputText = text.replace(regex, (match: any) => `<span class="hashtag">${match}</span>`);
   }
- 
- 
+
+
 
   //EXPANCION COMENTARIOS
   toggleExpansionPanel() {
@@ -68,7 +73,7 @@ newComentario = new FormGroup({
   }
   stopPropagation(event: Event): void {
     event.stopPropagation();
-  }  
+  }
   mostrarBange(seccion: string) {
     if (seccion === 'home') {
       this.contador = 0;
@@ -77,8 +82,8 @@ newComentario = new FormGroup({
     }
     // Otras secciones y lógica
   }
-  newComentarioPost(postId:any){
-    const textValue = this.newComentario.controls['textComentario'].value   ? this.newComentario.controls["textComentario"].value : " ";
+  newComentarioPost(postId: any) {
+    const textValue = this.newComentario.controls['textComentario'].value ? this.newComentario.controls["textComentario"].value : " ";
     let hashtags = [];
     const hashtagRegex = /#(\w+)/g;
     let match;
@@ -89,17 +94,17 @@ newComentario = new FormGroup({
       text: textValue ? textValue : " ",
       attachment: this.imgComentario,
       isSanctioned: false,
-      hashtag: hashtags 
+      hashtag: hashtags
     };
-    this.idInstancia=localStorage.getItem('idInstancia');
-    
-    this.api.newComentarioPost(x, this.idInstanciaLocalHost ,this.userName, postId).subscribe(data => {
+    this.idInstancia = localStorage.getItem('idInstancia');
+
+    this.api.newComentarioPost(x, this.idInstanciaLocalHost, this.userName, postId).subscribe(data => {
     });
     this.imgComentario = '';
     this.newComentario.controls['textComentario'].reset();
 
   }
-  removeImageComentario(){
+  removeImageComentario() {
     this.imgComentario = '';
   }
 
@@ -108,36 +113,36 @@ newComentario = new FormGroup({
     const observable = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     })
-  
+
     observable.subscribe((d) => {
       this.imgComentario = d;
     })
   }
-  
-readFileImgComentario(file: File, subscriber: Subscriber<any>) {
-  const fileReader = new FileReader();
-  fileReader.readAsDataURL(file)
 
-  fileReader.onload = () => {
-    subscriber.next(fileReader.result)
-    subscriber.complete()
-  }
-  fileReader.onerror = () => {
-    subscriber.error()
-  }
-}
+  readFileImgComentario(file: File, subscriber: Subscriber<any>) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file)
 
-onFileSelectedImgComentario(event: any): void {
-   this.convertToBase64ImgComentario(event.target.files[0]);
- }
-//FIN PARA IMG COM BASE 64
-showImageImgComentario() {
-  if (this.imgComentario) {
-    return `data:image/png;base64,${this.imgComentario}`;
-  } else {
-    return 'ruta_a_imagen_predeterminada_o_mensaje_de_error';
+    fileReader.onload = () => {
+      subscriber.next(fileReader.result)
+      subscriber.complete()
+    }
+    fileReader.onerror = () => {
+      subscriber.error()
+    }
   }
-}
+
+  onFileSelectedImgComentario(event: any): void {
+    this.convertToBase64ImgComentario(event.target.files[0]);
+  }
+  //FIN PARA IMG COM BASE 64
+  showImageImgComentario() {
+    if (this.imgComentario) {
+      return `data:image/png;base64,${this.imgComentario}`;
+    } else {
+      return 'ruta_a_imagen_predeterminada_o_mensaje_de_error';
+    }
+  }
   //EXPANCION COMENTARIOS
   ngOnInit(): void {
     this.tokenActual = localStorage.getItem('token') ?? '';
@@ -145,10 +150,10 @@ showImageImgComentario() {
     this.userName = localStorage.getItem('userName');
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
     if (this.userName) {
-      this.api.obtenerInfoUsuario(this.userName,this.idInstanciaLocalHost).subscribe(
+      this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
         (value) => {
           this.usuario = value; // Asigna el valor de 'value' a this.usuario
-        
+
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
@@ -158,15 +163,15 @@ showImageImgComentario() {
 
     this.getMisPost();
     this.getPosteosInicio();
-    this. getPosteosInicio1();  
+    this.getPosteosInicio1();
     setInterval(() => {
       this.tengoNewPostParaVer();
     }, 3000); // 3000 milisegundos = 3 segundos
-  
 
-    
+
+
   }
-  
+
   alternarVisibilidad(postId: number) {
     this.mostrarDiv[postId] = !this.mostrarDiv[postId];
   }
@@ -174,23 +179,23 @@ showImageImgComentario() {
   tengoNewPostParaVer() {
     // Almacena los posts actuales en una variable separada
     const postsActuales = this.inicioTodosPost1;
-    
+
     // Llama a getPosteosInicio para actualizar this.inicioTodosPost
     this.getPosteosInicio1();
-    
+
     // Compara los posts actuales con los nuevos
     const diferencia = postsActuales.length - this.inicioTodosPost.length;
-  
+
     // Actualiza la variable contador con la diferencia
     this.contador = diferencia;
 
   }
-  
-  
-  
-  
+
+
+
+
   newPost() {
-    const textValue = this.registrarForm.controls['text'].value   ? this.registrarForm.controls["text"].value : " ";
+    const textValue = this.registrarForm.controls['text'].value ? this.registrarForm.controls["text"].value : " ";
     let hashtags = [];
     const hashtagRegex = /#(\w+)/g;
     let match;
@@ -203,9 +208,9 @@ showImageImgComentario() {
       isSanctioned: false,
       hashtag: hashtags // Agrega los hashtags al array
     };
-    this.idInstancia=localStorage.getItem('idInstancia');
-    this.api.newPost(x, this.idInstanciaLocalHost ,this.userName).subscribe(data => {
-      
+    this.idInstancia = localStorage.getItem('idInstancia');
+    this.api.newPost(x, this.idInstanciaLocalHost, this.userName).subscribe(data => {
+
       this.getMisPost();
       this.getPosteosInicio();
     });
@@ -243,7 +248,7 @@ showImageImgComentario() {
             post.userOwner = usuario; // Asigna el usuario al post
           }
           this.inicioTodosPost.push(...posts);
-          
+
           // 4. Ordenar los posts por fecha (de más reciente a más antiguo)
           this.inicioTodosPost.sort((a, b) => {
             const dateA = new Date(a.created).getTime();
@@ -267,7 +272,7 @@ showImageImgComentario() {
             post.userOwner = usuario; // Asigna el usuario al post
           }
           this.inicioTodosPost1.push(...posts);
-          
+
           // 4. Ordenar los posts por fecha (de más reciente a más antiguo)
           this.inicioTodosPost1.sort((a, b) => {
             const dateA = new Date(a.created).getTime();
@@ -276,83 +281,83 @@ showImageImgComentario() {
           });
         });
       }
-     
+
     });
   }
-  
-  
-  
-  removeImage(){
+
+
+
+  removeImage() {
     this.base64Image = '';
   }
-  
-//INI PARA IMG COM BASE 64
-convertToBase64(file: File) {
-  
-  const observable = new Observable((subscriber: Subscriber<any>) => {
-    this.readFile(file, subscriber);
-  })
 
-  observable.subscribe((d) => {
-    this.base64Image = d;
+  //INI PARA IMG COM BASE 64
+  convertToBase64(file: File) {
 
-  })
-}
+    const observable = new Observable((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    })
 
-readFile(file: File, subscriber: Subscriber<any>) {
-  const fileReader = new FileReader();
-  fileReader.readAsDataURL(file)
+    observable.subscribe((d) => {
+      this.base64Image = d;
 
-  fileReader.onload = () => {
-    subscriber.next(fileReader.result)
-    subscriber.complete()
+    })
   }
-  fileReader.onerror = () => {
-    subscriber.error()
-  }
-}
 
-onFileSelected(event: any): void {
-   this.convertToBase64(event.target.files[0]);
- }
-//FIN PARA IMG COM BASE 64
-showImage() {
-  if (this.base64Image) {
-    // Devuelve la imagen base64 como una URL de datos
-    return `data:image/png;base64,${this.base64Image}`;
-  } else {
-    // Puedes establecer una URL de imagen predeterminada o un mensaje de error aquí
-    return 'ruta_a_imagen_predeterminada_o_mensaje_de_error';
-  }
-}
+  readFile(file: File, subscriber: Subscriber<any>) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file)
 
-checkForNewPosts() {
-  if (this.userName) {
-    // Obtiene la última fecha de creación de un post en la lista actual
-    const lastPostTime = this.misPost.length > 0 ? new Date(this.misPost[0].created) : null;
-    
-    // Realiza una solicitud HTTP para obtener nuevos posts
-    this.api.getMisPost(this.idInstanciaLocalHost, this.userName).subscribe({
-      next: (value: Post[]) => {
-        // Filtra solo los nuevos posts (los que tienen una fecha de creación más reciente que lastPostTime)
-        const newPosts = value.filter((post) => {
-          const postTime = new Date(post.created);
-          return lastPostTime === null || postTime > lastPostTime;
-        });
-
-        if (newPosts.length > 0) {
-          // Agrega los nuevos posts al principio del array
-          this.misPost.unshift(...newPosts);
-        }
-      },
-      error: (err) => {
-        console.error('Error al obtener los posts:', err);
-      },
-    });
-  } else {
-    console.error('El nombre de usuario es nulo.');
+    fileReader.onload = () => {
+      subscriber.next(fileReader.result)
+      subscriber.complete()
+    }
+    fileReader.onerror = () => {
+      subscriber.error()
+    }
   }
-}
+
+  onFileSelected(event: any): void {
+    this.convertToBase64(event.target.files[0]);
+  }
+  //FIN PARA IMG COM BASE 64
+  showImage() {
+    if (this.base64Image) {
+      // Devuelve la imagen base64 como una URL de datos
+      return `data:image/png;base64,${this.base64Image}`;
+    } else {
+      // Puedes establecer una URL de imagen predeterminada o un mensaje de error aquí
+      return 'ruta_a_imagen_predeterminada_o_mensaje_de_error';
+    }
+  }
+
+  checkForNewPosts() {
+    if (this.userName) {
+      // Obtiene la última fecha de creación de un post en la lista actual
+      const lastPostTime = this.misPost.length > 0 ? new Date(this.misPost[0].created) : null;
+
+      // Realiza una solicitud HTTP para obtener nuevos posts
+      this.api.getMisPost(this.idInstanciaLocalHost, this.userName).subscribe({
+        next: (value: Post[]) => {
+          // Filtra solo los nuevos posts (los que tienen una fecha de creación más reciente que lastPostTime)
+          const newPosts = value.filter((post) => {
+            const postTime = new Date(post.created);
+            return lastPostTime === null || postTime > lastPostTime;
+          });
+
+          if (newPosts.length > 0) {
+            // Agrega los nuevos posts al principio del array
+            this.misPost.unshift(...newPosts);
+          }
+        },
+        error: (err) => {
+          console.error('Error al obtener los posts:', err);
+        },
+      });
+    } else {
+      console.error('El nombre de usuario es nulo.');
+    }
+  }
 
 
 
