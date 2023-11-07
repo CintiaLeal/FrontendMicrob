@@ -1,53 +1,52 @@
+<app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
+<app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
 
-  <div  class="table-container" >
-    <table mat-table [dataSource]="usuarios"
-       class="mat-elevation-z8">
-      <ng-container matColumnDef="nombre">
-        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.firstName }} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="apellido">
-        <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.lastName }} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="rol">
-        <mat-header-cell *matHeaderCellDef> Rol </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.role }} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="correo">
-        <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.email }} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="borrar">
-        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-        <mat-cell *matCellDef="let row">
-          <button mat-icon-button (click)="eliminarRegistro(row)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: columnas;"></mat-row>
-    </table>
+<div class="table-container">
+  <table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
+    </ng-container>
 
-    <mat-paginator [pageSizeOptions]="[10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of periodic elements">
-    </mat-paginator>
-  </div>
-  
-  <div *ngIf="tipoU === '1Instance-Administrator'">
-    <div class="contenedorError">
-      <div class="cajaError">
-        <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
-      </div>
-      <div class="cajaError"><img class="imgError"></div>
-      <div class="cajaError">
-        <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
-      </div>
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.lastName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rol">
+      <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.userName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="correo">
+      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="borrar">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnas"></mat-row>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+</div>
+
+<div *ngIf="tipoU === '1Instance-Administrator'">
+  <div class="contenedorError">
+    <div class="cajaError">
+      <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+    </div>
+    <div class="cajaError"><img class="imgError"></div>
+    <div class="cajaError">
+      <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
     </div>
   </div>
+</div>

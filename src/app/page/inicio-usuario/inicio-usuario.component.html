@@ -58,15 +58,15 @@
                 {{x.text}}
               </p>
               <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
-              <p class="mgPost">{{ x.likes.length }} ❤</p>
-
+              <a (click)="openDialog(x.postId)" class="mgPost">{{ x.likes.length }} ❤</a>
+              
             </mat-card-content>
             <mat-card-actions>
               <div class="example-button-row">
-                <button mat-icon-button [color]="buttonClicked ? 'warn' : buttonColor" (click)="cambiarColor()">
+                <button mat-icon-button [ngClass]="{'color-rojo': colorRojoMap[x.postId]}" (click)="alternarVisibilidad(x.postId) ; addLink(x.postId)">
                   <mat-icon class="icon">favorite</mat-icon>
-                </button>             
-                <button mat-icon-button (click)="alternarVisibilidad(x.postId)">
+                </button>     
+                <button mat-icon-button (click)="mostrarDivComentario(x.postId)">
                   <mat-icon class="icon">chat_bubble</mat-icon>
                 </button>
               </div>
@@ -87,13 +87,17 @@
                     <mat-card>
                       
                     <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
+                        src={{comentario.userOwner.profileImage}}>
+                    </div>
                       <mat-card-title>{{comentario.userOwner.firstName}}</mat-card-title>
                       <mat-card-subtitle>
                         {{comentario.userOwner.userName}} | {{comentario.created | date:'dd/MM/yyyy HH:mm'}}
                       </mat-card-subtitle>
                     </mat-card-header>
+                    <p  class="pComentario">
                     {{ comentario.text }}
-                    
+                  </p>
                     </mat-card>
                   </div>
                 </mat-card-content>

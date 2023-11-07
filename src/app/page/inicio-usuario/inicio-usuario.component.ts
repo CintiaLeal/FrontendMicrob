@@ -1,14 +1,35 @@
-import { Component, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
+import { Component, Inject,ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
 
 import { AppService } from 'src/app/servicios/app.service';
 import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
 import { UsuarioRetorno } from 'src/app/modelos/usuarioRetorno';
 import { AppComponent } from 'src/app/app.component';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscriber } from 'rxjs';
 import { Post } from 'src/app/modelos/post';
 import { PostTodos } from 'src/app/modelos/postTodos';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 
@@ -37,11 +58,12 @@ export class InicioUsuarioComponent {
   mostrarDiv: Record<number, boolean> = {};
   contador: number = 0;
   mostrarBadge: boolean = true;
-  buttonColor = 'primary';
+  inicioTodosLikes: any;
+  public colorRojoMap: { [postId: number]: boolean } = {};
 
   // Variable para controlar si el botón se ha hecho clic o no
   buttonClicked = false;
-  constructor(private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
+  constructor(public dialog: MatDialog,private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
     this.tipoU = localStorage.getItem('tipoUsuario');
 
   }
@@ -55,9 +77,9 @@ export class InicioUsuarioComponent {
     this.contenidoVisible = contenido;
 
   }
-  cambiarColor() {
-    this.buttonColor = 'warn'; // Cambiar a color rojo ('warn') al hacer clic
-    this.buttonClicked = true;
+  alternarVisibilidad(postId: number) {
+    // Cambia el estado del botón correspondiente al postId
+    this.colorRojoMap[postId] = !this.colorRojoMap[postId];
   }
   onInputChange(event: any) {
     const text = event.target.value;
@@ -66,7 +88,28 @@ export class InicioUsuarioComponent {
   }
 
 
-
+  addLink(postId: any) {
+    // Obtener la instancia y el nombre de usuario
+    this.idInstancia = localStorage.getItem('idInstancia');
+    this.userName = localStorage.getItem('userName');
+  
+    // Verificar que tengas el ID de instancia y el nombre de usuario
+    if (!this.idInstancia || !this.userName) {
+      console.error('Falta el ID de instancia o el nombre de usuario.');
+      return;
+    }
+  
+    // Realizar la solicitud POST para agregar el like
+    this.api.darLikes(this.idInstancia, this.userName, postId).subscribe(
+      (data: any) => {
+        // Manejar la respuesta si es necesario
+      },
+      (error: any) => {
+        console.error('Error al agregar el like:', error);
+      }
+    );
+  }
+  
   //EXPANCION COMENTARIOS
   toggleExpansionPanel() {
     this.panelOpenState = !this.panelOpenState;
@@ -168,14 +211,11 @@ export class InicioUsuarioComponent {
       this.tengoNewPostParaVer();
     }, 3000); // 3000 milisegundos = 3 segundos
 
-
-
   }
-
-  alternarVisibilidad(postId: number) {
+  mostrarDivComentario(postId: number) {
     this.mostrarDiv[postId] = !this.mostrarDiv[postId];
   }
-
+ 
   tengoNewPostParaVer() {
     // Almacena los posts actuales en una variable separada
     const postsActuales = this.inicioTodosPost1;
@@ -358,8 +398,121 @@ export class InicioUsuarioComponent {
       console.error('El nombre de usuario es nulo.');
     }
   }
+  openDialog(postId: any) {
+    const dialogRef = this.dialog.open(DialogContentExample, {
+      data: { postId: postId } // Pasar el valor de postId como dato al diálogo
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      // Puedes acceder al valor de postId aquí si es necesario.
+    });
+  }
 
-
+  lediomg(postId: any, userName: any): number {
+    this.inicioTodosLikes = []; // Array para almacenar todos los likes
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+    let dioMeGusta = 0; // Inicializamos como 0, que significa que no dio "me gusta"
+  
+    // 1. Obtener todos los usuarios de la instancia
+    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
+      // 2. Para cada usuario, obtener sus posts
+      for (const usuario of users) {
+        this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
+          // 3. Buscar el post específico por su postId
+          const post = posts.find((p) => p.postId === postId);
+          if (post) {
+            // 4. Obtener los likes del post y agregarlos al array de likes
+            if (post.likes && post.likes.length > 0) {
+              this.inicioTodosLikes.push(...post.likes);
+  
+              // 5. Verificar si el usuario le dio "me gusta"
+              if (post.likes.some((like) => like.userName === userName)) {
+                dioMeGusta = 1; // El usuario le dio "me gusta", establecemos como 1
+              }
+            }
+          }
+        });
+      }
+    });
+  
+    return dioMeGusta;
+    
+  }
+  
+  
+  
 
 
 }
+
+@Component({
+  selector: 'mgUsuarios',
+  templateUrl: 'mgUsuarios.html',
+  standalone: true,
+  styleUrls: ['./inicio-usuario.component.scss'],
+  imports: [  MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatGridListModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatDividerModule,
+    CommonModule]
+  })
+  export class DialogContentExample {
+    postId: any; // Declarar la propiedad postId
+    inicioTodosPost1: any;
+    inicioTodosLikes: any;
+    idInstanciaLocalHost: any;
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any,private api: AppService) {
+      this.postId = data.postId;
+    }
+  
+    ngOnInit(): void {
+
+  this.getPosteosInicio1(this.postId);
+ }
+
+    getPosteosInicio1(postId: any) {
+      this.inicioTodosLikes = []; // Array para almacenar todos los likes
+      this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+      // 1. Obtener todos los suarios de la instancia
+      this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
+        // 2. Para cada usuario, obtener sus posts
+        for (const usuario of users) {
+          this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
+            // 3. Buscar el post específico por su postId
+            const post = posts.find((p) => p.postId === postId);
+            if (post) {
+              // 4. Obtener los likes del post y agregarlos al array de likes
+              if (post.likes && post.likes.length > 0) {
+                this.inicioTodosLikes.push(...post.likes);
+              }
+            }
+          });
+          console.log(this.inicioTodosLikes);
+        }
+      });
+    }
+    
+    
+  }

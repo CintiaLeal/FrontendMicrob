@@ -124,4 +124,17 @@ ModificarInstancias (instanciaNueva: InstanciaModificada, x:any): Observable<Res
   let direccion = this.url + "/Instance/ModifyInstance";
   return this.http.put<any>(direccion, instanciaNueva,{ headers: headers }); 
 }
+
+darLikes(x: any, userName: any, postId: any) {
+  // URL de la solicitud
+  const direccion = this.url + "/Post/AddLikeToPost?postId=" + postId + "&userName=" + userName;
+
+  // Configurar los encabezados
+  const headers = new HttpHeaders().set('tenant', x);
+
+  // Realizar la solicitud HTTP POST
+  return this.http.post(direccion, null, { headers: headers });
+}
+
+
 }

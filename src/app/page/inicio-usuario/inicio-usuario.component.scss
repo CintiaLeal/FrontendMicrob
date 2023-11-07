@@ -12,7 +12,9 @@
   object-fit: cover;
 }
 //
-
+.color-rojo {
+  color: red;
+}
 
 .b {
   width: 100%;
@@ -398,6 +400,19 @@ mat-expansion-panel {
 
 mat-expansion-panel-header{
   height: 90px;
+}
+
+.divSeccionMg{
+  width: 600px;
+  height: 100px;
+  margin: 1px;
+  max-height: 200px; /* Establece la altura máxima que desees */
+  overflow-y: auto;
+}
+
+.pComentario{
+  margin-left: 10px;
+  margin-right: 10px;
 }
 @media screen and (max-width: 900px) {
   .imgContenido {
