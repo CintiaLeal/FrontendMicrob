@@ -1,8 +1,9 @@
 
 <p>
     <mat-toolbar color="primary">
-    <img class="img"  *ngIf="instanciaActualParaHeader?.logo" src={{instanciaActualParaHeader?.logo}}>
-      <span>{{instanciaActualParaHeader?.nombre}} </span>
+     
+        <img class="img" *ngIf="instanciaActualParaHeader?.logo" [src]="instanciaActualParaHeader?.logo">
+      <span routerLink="/inicioUsuario">{{instanciaActualParaHeader?.nombre}} </span>
       <button (click)="toggleModoOscuro()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>brightness_2</mat-icon>
       </button>

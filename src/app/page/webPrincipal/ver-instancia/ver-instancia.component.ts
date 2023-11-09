@@ -55,7 +55,7 @@ export class VerInstanciaComponent implements OnInit {
       this.ngOnInit();
     } else {
       // Aplicar filtro basado en la temática seleccionada
-      this.instancias = this.instancias.filter(x => x.tematica === this.tematicaSeleccionada);
+     //this.instancias = this.instancias.filter(x => x.tematica === this.tematicaSeleccionada);
     }
   }
 

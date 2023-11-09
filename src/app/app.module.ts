@@ -61,7 +61,8 @@ import {
 import { LoginRedSocialComponent } from './page/login-red-social/login-red-social.component';
 import { MatNativeDateModule} from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { ModificarUsuarioComponent } from './page/modificar-usuario/modificar-usuario.component';
 
 const config: SocialAuthServiceConfig = {
   autoLogin: false, // Configura esto según tus necesidades
@@ -74,6 +75,7 @@ const config: SocialAuthServiceConfig = {
 };
 @NgModule({
   declarations: [
+
     AppComponent,
     NuevaInstanciaComponent,
     LoginComponent,
@@ -96,7 +98,8 @@ const config: SocialAuthServiceConfig = {
     ModeradorAdmComponent,
     ModificarInstanciaComponent,
     VerDetalleInstanciaComponent,
-    LoginRedSocialComponent
+    LoginRedSocialComponent,
+    ModificarUsuarioComponent
   ],
   imports: [
     HttpClientModule,
@@ -135,7 +138,10 @@ const config: SocialAuthServiceConfig = {
     MatBadgeModule,
     SocialLoginModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    BrowserModule
+  
+
   ],
   providers: [
     {

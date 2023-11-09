@@ -114,3 +114,44 @@
   margin-bottom: 5px;
   background-color: black;
 }
+.change-colors1 {
+  .mat-mdc-card{
+    background-color: #ffffff;
+  }
+  .mat-mdc-raised-button.mat-primary {
+      
+      background-color: #A6460F; 
+      color: #ffffff;
+  }
+ 
+  .mat-mdc-raised-button.mat-accent{
+      background-color: #BFAA84;
+      color: #ffffff;
+  }
+
+  .mat-toolbar.mat-primary{
+      background-color: #45858C;
+      color: #ffffff;
+  }
+}
+
+.change-colors2 {
+
+.mat-mdc-raised-button.mat-primary {
+  background-color:  #04D9B2;   /* Pink */
+  color: #fff; /* White */
+}
+
+.mat-mdc-raised-button.mat-accent {
+  background-color: #04B2D9;/* Indigo */
+  color: #fff; /* White */
+}
+
+.mat-toolbar.mat-primary {
+  background-color:  #011C40;  /* Pink */
+  color: #fff; /* White */
+}
+.mat-mdc-card{
+  background-color: #ffffff;
+}
+}

@@ -1,33 +1,44 @@
 export class InstanciaRetorno {
     public tenantInstanceId: number;
     public nombre: string;
-    public tematica: string;
+    public tematica: Tematica; // Cambiar el tipo de tematica a la nueva clase
     public description: string;
     public esquemaColores: number;
-    public activo: boolean; // Added field
-    public dominio: string; // Added field
-   public logo: string; // Added field
+    public activo: boolean;
+    public dominio: string;
+    public logo: string;
     public privacidad: number;
-
+  
     constructor(
-       tenantInstanceId: number,
-        nombre: string,
-        tematica: string,
-        esquemaColores: number,
-       activo: boolean, // Added parameter
-       dominio: string, // Added parameter
-        logo: string, // Added parameter
-        privacidad:number,
-        description: string
+      tenantInstanceId: number,
+      nombre: string,
+      tematica: Tematica,
+      esquemaColores: number,
+      activo: boolean,
+      dominio: string,
+      logo: string,
+      privacidad: number,
+      description: string
     ) {
-        this.tenantInstanceId = tenantInstanceId;
-        this.nombre = nombre;
-        this.tematica = tematica;
-        this.privacidad = privacidad;
-        this.esquemaColores = esquemaColores;
-        this.activo = activo; // Initialize the added fields
-        this.dominio = dominio; // Initialize the added fields
-        this.logo = logo; // Initialize the added fields
-        this.description = description;
+      this.tenantInstanceId = tenantInstanceId;
+      this.nombre = nombre;
+      this.tematica = tematica;
+      this.privacidad = privacidad;
+      this.esquemaColores = esquemaColores;
+      this.activo = activo;
+      this.dominio = dominio;
+      this.logo = logo;
+      this.description = description;
     }
-}
+  }
+  
+  export class Tematica {
+    public id: number;
+    public name: string;
+  
+    constructor(id: number, name: string) {
+      this.id = id;
+      this.name = name;
+    }
+  }
+  

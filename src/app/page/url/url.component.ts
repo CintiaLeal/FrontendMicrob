@@ -229,11 +229,26 @@ export class DialogContentExampleDialog {
   public base64Image: any;
   idInstancia: any | null = null;
   public birthday: Date | null =null;
+  listCitys: any;
 
   constructor(private _formBuilder: FormBuilder,private api: AppService) {}
 
+  ngOnInit(): void {
+    this.getCitys();
+  }
+
+  getCitys() {
+    this.api.getCity().subscribe(
+      (data: any[]) => {
+        this.listCitys = data;  // Guarda el array en la variable listCitys
+      },
+      error => {
+        console.error('Error al obtener las ciudades', error);
+      }
+    );
+  }
   onRegistrar() {
-      let x: Usuario = {
+      let x: any = {
         firstName: this.registrarForm.controls['firstName'].value ? this.registrarForm.controls["firstName"].value : " ",
         lastName: this.registrarForm.controls['lastName'].value ? this.registrarForm.controls["lastName"].value : " ",
         email: this.registrarForm.controls['email'].value ? this.registrarForm.controls["email"].value : " ",
@@ -243,7 +258,9 @@ export class DialogContentExampleDialog {
         role: 'Common-User',
         biography: this.registrarForm.controls['biography'].value ? this.registrarForm.controls["biography"].value : " ",
         occupation: this.registrarForm.controls['occupation'].value ? this.registrarForm.controls["occupation"].value : " ",
-        city: this.registrarForm.controls['city'].value ? this.registrarForm.controls["city"].value : " ",
+        city: {
+          name: this.registrarForm.controls['city'].value ? this.registrarForm.controls["city"].value : " "
+        },
         birthday: this.registrarForm.controls['birthday'].value ? this.registrarForm.controls["birthday"].value : " ",
         isSanctioned: false,
         username: this.registrarForm.controls['username'].value ? this.registrarForm.controls["username"].value : " ",

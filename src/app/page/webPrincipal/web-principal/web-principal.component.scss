@@ -120,11 +120,18 @@
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
     border: none;
-}
 
+}
+.boxprueba {
+margin-top:-9%;
+  text-align: center;
+  line-height: 100%;/* Centra el contenido verticalmente */
+  border: none;
+
+}
 /* Estilos para los divs */
 .box {
-   
+
     text-align: center;
     line-height: 100%;/* Centra el contenido verticalmente */
     border: none;
@@ -135,6 +142,7 @@
 }
 /* Estilos adicionales según sea necesario */
 .box1 {
+
     width: 40%;
     height: 100%;
     border: none;

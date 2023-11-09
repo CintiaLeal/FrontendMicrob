@@ -1,4 +1,4 @@
-import { Component, Inject,ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
+import { Component, Inject, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
 
 import { AppService } from 'src/app/servicios/app.service';
 import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
@@ -63,7 +63,7 @@ export class InicioUsuarioComponent {
 
   // Variable para controlar si el botón se ha hecho clic o no
   buttonClicked = false;
-  constructor(public dialog: MatDialog,private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
+  constructor(public dialog: MatDialog, private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
     this.tipoU = localStorage.getItem('tipoUsuario');
 
   }
@@ -92,13 +92,13 @@ export class InicioUsuarioComponent {
     // Obtener la instancia y el nombre de usuario
     this.idInstancia = localStorage.getItem('idInstancia');
     this.userName = localStorage.getItem('userName');
-  
+
     // Verificar que tengas el ID de instancia y el nombre de usuario
     if (!this.idInstancia || !this.userName) {
       console.error('Falta el ID de instancia o el nombre de usuario.');
       return;
     }
-  
+
     // Realizar la solicitud POST para agregar el like
     this.api.darLikes(this.idInstancia, this.userName, postId).subscribe(
       (data: any) => {
@@ -109,7 +109,7 @@ export class InicioUsuarioComponent {
       }
     );
   }
-  
+
   //EXPANCION COMENTARIOS
   toggleExpansionPanel() {
     this.panelOpenState = !this.panelOpenState;
@@ -125,6 +125,8 @@ export class InicioUsuarioComponent {
     }
     // Otras secciones y lógica
   }
+
+
   newComentarioPost(postId: any) {
     const textValue = this.newComentario.controls['textComentario'].value ? this.newComentario.controls["textComentario"].value : " ";
     let hashtags = [];
@@ -215,7 +217,7 @@ export class InicioUsuarioComponent {
   mostrarDivComentario(postId: number) {
     this.mostrarDiv[postId] = !this.mostrarDiv[postId];
   }
- 
+
   tengoNewPostParaVer() {
     // Almacena los posts actuales en una variable separada
     const postsActuales = this.inicioTodosPost1;
@@ -402,7 +404,7 @@ export class InicioUsuarioComponent {
     const dialogRef = this.dialog.open(DialogContentExample, {
       data: { postId: postId } // Pasar el valor de postId como dato al diálogo
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       // Puedes acceder al valor de postId aquí si es necesario.
@@ -413,7 +415,7 @@ export class InicioUsuarioComponent {
     this.inicioTodosLikes = []; // Array para almacenar todos los likes
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
     let dioMeGusta = 0; // Inicializamos como 0, que significa que no dio "me gusta"
-  
+
     // 1. Obtener todos los usuarios de la instancia
     this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
       // 2. Para cada usuario, obtener sus posts
@@ -425,7 +427,7 @@ export class InicioUsuarioComponent {
             // 4. Obtener los likes del post y agregarlos al array de likes
             if (post.likes && post.likes.length > 0) {
               this.inicioTodosLikes.push(...post.likes);
-  
+
               // 5. Verificar si el usuario le dio "me gusta"
               if (post.likes.some((like) => like.userName === userName)) {
                 dioMeGusta = 1; // El usuario le dio "me gusta", establecemos como 1
@@ -435,13 +437,13 @@ export class InicioUsuarioComponent {
         });
       }
     });
-  
+
     return dioMeGusta;
-    
+
   }
-  
-  
-  
+
+
+
 
 
 }
@@ -451,7 +453,7 @@ export class InicioUsuarioComponent {
   templateUrl: 'mgUsuarios.html',
   standalone: true,
   styleUrls: ['./inicio-usuario.component.scss'],
-  imports: [  MatCardModule,
+  imports: [MatCardModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
@@ -477,42 +479,45 @@ export class InicioUsuarioComponent {
     MatPaginatorModule,
     MatDividerModule,
     CommonModule]
-  })
-  export class DialogContentExample {
-    postId: any; // Declarar la propiedad postId
-    inicioTodosPost1: any;
-    inicioTodosLikes: any;
-    idInstanciaLocalHost: any;
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any,private api: AppService) {
-      this.postId = data.postId;
-    }
-  
-    ngOnInit(): void {
-
-  this.getPosteosInicio1(this.postId);
- }
-
-    getPosteosInicio1(postId: any) {
-      this.inicioTodosLikes = []; // Array para almacenar todos los likes
-      this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
-      // 1. Obtener todos los suarios de la instancia
-      this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
-        // 2. Para cada usuario, obtener sus posts
-        for (const usuario of users) {
-          this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
-            // 3. Buscar el post específico por su postId
-            const post = posts.find((p) => p.postId === postId);
-            if (post) {
-              // 4. Obtener los likes del post y agregarlos al array de likes
-              if (post.likes && post.likes.length > 0) {
-                this.inicioTodosLikes.push(...post.likes);
-              }
-            }
-          });
-          console.log(this.inicioTodosLikes);
-        }
-      });
-    }
-    
-    
+})
+export class DialogContentExample {
+  postId: any; // Declarar la propiedad postId
+  inicioTodosPost1: any;
+  inicioTodosLikes: any;
+  idInstanciaLocalHost: any;
+ 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService) {
+    this.postId = data.postId;
   }
+
+  ngOnInit(): void {
+
+     
+    this.getPosteosInicio1(this.postId);
+  }
+
+
+  getPosteosInicio1(postId: any) {
+    this.inicioTodosLikes = []; // Array para almacenar todos los likes
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+    // 1. Obtener todos los suarios de la instancia
+    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
+      // 2. Para cada usuario, obtener sus posts
+      for (const usuario of users) {
+        this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
+          // 3. Buscar el post específico por su postId
+          const post = posts.find((p) => p.postId === postId);
+          if (post) {
+            // 4. Obtener los likes del post y agregarlos al array de likes
+            if (post.likes && post.likes.length > 0) {
+              this.inicioTodosLikes.push(...post.likes);
+            }
+          }
+        });
+        console.log(this.inicioTodosLikes);
+      }
+    });
+  }
+
+
+}

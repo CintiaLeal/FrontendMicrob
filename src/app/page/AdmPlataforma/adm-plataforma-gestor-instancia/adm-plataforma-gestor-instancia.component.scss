@@ -6,3 +6,44 @@
     height: 100%;
     font-size:50px ;
   }
+
+
+  //INI IMG ERROR
+.imgError {
+  background: url('/assets/img/error.png') no-repeat center center;
+  width: 350px; /* Ancho deseado para el contenedor */
+  height: 350px; /* Alto deseado para el contenedor */
+  border: none;
+  background-size: 350px 350px; /* Establece el tamaño de la imagen deseado */
+  clip-path: inset(1% 1% 1% 1%);
+  --mdc-protected-button-container-color:#2E4159;
+}
+
+.btnError{
+  --mdc-protected-button-container-color: #2E4159;
+  --mdc-protected-button-label-text-color: #fff;
+  width: 30%;
+  font-family: 'Kanit', sans-serif; 
+  font-size: 30px;
+
+}
+.h1Error{
+  font-family: 'Kanit', sans-serif; 
+  font-size: 40px;
+}
+.contenedorError {
+  display: flex;
+  margin-top: -4%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Esto centra verticalmente en la ventana del navegador */
+}
+
+.cajaError {
+  width: 80%;
+  height:auto;
+  text-align: center;
+  padding: 20px;
+  margin: 10px 0;
+}

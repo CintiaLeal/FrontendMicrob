@@ -1,0 +1,122 @@
+
+mat-card {
+    width: 600px; /* Ajusta el ancho de la tarjeta según tu preferencia */
+    padding: 20px; /* Ajusta el relleno de la tarjeta según tu preferencia */
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px; /* Espacio entre los campos de entrada */
+  }
+  
+
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .image-container {
+    position: relative;
+    display: inline-block;
+    max-width: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+    max-height: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+    overflow: hidden;
+  }
+  
+  .img {
+    width: 100px; /* Ajusta el ancho máximo según tus preferencias */
+    height: 100px; /* Ajusta el alto máximo según tus preferencias */
+    object-fit: cover;
+  }
+  //
+  .color-rojo {
+    color: red;
+  }
+  
+  .b {
+    width: 100%;
+    height: 60px;
+    margin-top: 5px;
+  }
+  .pLikes{
+    font-size: 10px;
+  }
+  
+  //
+  .image-containerComentario {
+    position: relative;
+    display: inline-block;
+    max-width: 90px; /* Ajusta el tamaño máximo según tus preferencias */
+    max-height: 90; /* Ajusta el tamaño máximo según tus preferencias */
+    overflow: hidden;
+  }
+  
+  
+  .imgComentario {
+    width: 50px; /* Ajusta el ancho máximo según tus preferencias */
+    height: 50px; /* Ajusta el alto máximo según tus preferencias */
+    object-fit: cover;
+  }
+  
+  
+  .remove-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .remove-button mat-icon {
+    font-size: 16px; /* Ajusta el tamaño de la cruz según tus preferencias */
+  }
+  
+  
+//INI IMG ERROR
+.imgError {
+    background: url('/assets/img/error.png') no-repeat center center;
+    width: 350px; /* Ancho deseado para el contenedor */
+    height: 350px; /* Alto deseado para el contenedor */
+    border: none;
+    background-size: 350px 350px; /* Establece el tamaño de la imagen deseado */
+    clip-path: inset(1% 1% 1% 1%);
+    --mdc-protected-button-container-color:#2E4159;
+  }
+  
+  .btnError{
+    --mdc-protected-button-container-color: #2E4159;
+    --mdc-protected-button-label-text-color: #fff;
+    width: 30%;
+    font-family: 'Kanit', sans-serif; 
+    font-size: 30px;
+  
+  }
+  .h1Error{
+    font-family: 'Kanit', sans-serif; 
+    font-size: 40px;
+  }
+  .contenedorError {
+    display: flex;
+    margin-top: -4%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Esto centra verticalmente en la ventana del navegador */
+  }
+  
+  .cajaError {
+    width: 80%;
+    height:auto;
+    text-align: center;
+    padding: 20px;
+    margin: 10px 0;
+  }
+  

@@ -1,11 +1,16 @@
 
- <!-- Encabezado para administradores -->
- <mat-toolbar>
-    <img>
-    <a>Instancia</a>
-    <a mat-button routerLink="/admUsuario">Usuarios</a>
-    <a mat-button routerLink="/admPublicaciones">Reportes</a>
-    <span class="example-spacer"></span>
+  <p>
+    <mat-toolbar color="primary">
+    <img class="img"  *ngIf="instanciaActualParaHeader?.logo" src={{instanciaActualParaHeader?.logo}}>
+      <span>{{instanciaActualParaHeader?.nombre}} </span>
+      <button (click)="toggleModoOscuro()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>brightness_2</mat-icon>
+      </button>
 
-    <a mat-button class="aCerrar" >Cerrar Sesión</a>   
-  </mat-toolbar>
+      <div class="UserDiv">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+      </div>
+    </mat-toolbar>
+</p>

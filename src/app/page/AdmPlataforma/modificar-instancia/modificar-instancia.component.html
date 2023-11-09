@@ -1,5 +1,7 @@
 <app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
-<div *ngIf="tipoU === 'Platform-Administrator'">
+<app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
+
+<div *ngIf="tipoU === 'Platform-Administrator' || tipoU === 'Instance-Administrator'">
 <mat-card class="container">
     <p>
         <mat-toolbar  color="primary">
@@ -36,11 +38,56 @@
         <mat-form-field class="full-width">
           <mat-label>Temas y Colores</mat-label>
           <mat-select required formControlName="esquemaColores" [(ngModel)] = "Esquemas">
-            <mat-option value ="1">Común</mat-option>
-            <mat-option value ="2">Verde</mat-option>
+            <mat-option value ="0">Tema 1</mat-option>
+            <mat-option value ="1">Tema 2</mat-option>
           </mat-select>
         </mat-form-field>
-
+        <div class="full-width" style="display: flex; justify-content: center; gap: 10px;">
+          <div class="card-container change-colors2">
+            <mat-card class="example-card">
+              <p>
+                <mat-toolbar color="primary">
+                  <mat-toolbar-row>
+                    <span>Tema 1</span>
+                    <span class="example-spacer"></span>
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                      <mat-icon>menu</mat-icon>
+                    </button>
+                  </mat-toolbar-row>
+                </mat-toolbar>
+              </p>
+              <section>
+                <div class="button-container">
+                  <button mat-raised-button class="custom-button">Basic</button>
+                  <button mat-raised-button color="primary" class="custom-button">Primary</button>
+                  <button mat-raised-button color="accent" class="custom-button">Accent</button>
+                </div>
+              </section>
+            </mat-card>
+          </div>
+          <div class="card-container change-colors1">
+            <mat-card class="example-card">
+              <p>
+                <mat-toolbar color="primary">
+                  <mat-toolbar-row>
+                    <span>Tema 2</span>
+                    <span class="example-spacer"></span>
+                    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                      <mat-icon>menu</mat-icon>
+                    </button>
+                  </mat-toolbar-row>
+                </mat-toolbar>
+              </p>
+              <section>
+                <div class="button-container">
+                  <button mat-raised-button class="custom-button">Basic</button>
+                  <button mat-raised-button color="primary" class="custom-button">Primary</button>
+                  <button mat-raised-button color="accent" class="custom-button">Accent</button>
+                </div>
+              </section>
+            </mat-card>
+          </div>
+        </div>
         <mat-form-field class="full-width">
           <mat-label>Temática</mat-label>
           <mat-select required formControlName="tematica" [(ngModel)] = "Tematica" >
@@ -60,7 +107,7 @@
 </mat-card>
 </div> 
 
-<div *ngIf="tipoU !== 'Platform-Administrator'">
+<div *ngIf="tipoU !== 'Platform-Administrator' && tipoU === 'Instance-Administrator' ">
   <div class="contenedorError">
     <div class="cajaError">
       <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>

@@ -1,0 +1,49 @@
+//INI IMG PERFIL
+.img{
+	background: no-repeat center center;
+	width: 60px; /* Ancho deseado para el contenedor */
+	height: 60px; /* Alto deseado para el contenedor */
+	margin-right:10px;
+	clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+	background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
+
+.modo-oscuro{
+
+    background-color: #1F2024;
+    .mat-mdc-raised-button.mat-primary {
+        
+        background-color: #090d0d;
+        color: #ffffff;
+    }
+   
+    .mat-mdc-raised-button.mat-accent{
+        background-color: #192a29;
+        color: #ffffff;
+    }
+
+    .mat-toolbar.mat-primary{
+        background-color: #090d0d;
+        color: #ffffff;
+    }
+    .mat-mdc-card {
+        --mdc-elevated-card-container-color: #4B4952;
+    }
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+        background-color: #6d6b74;
+    }
+    .search-container[_ngcontent-ng-c1987760739] {
+        background-color: #6d6b74;
+    }
+    .search-card[_ngcontent-ng-c1987760739] {
+        background-color: #6d6b74;
+    }
+}
+
+.UserDiv {
+    float: left;
+    margin-inline-start: auto;
+    justify-content:right;
+    display: flex;
+    align-items: center;
+  }

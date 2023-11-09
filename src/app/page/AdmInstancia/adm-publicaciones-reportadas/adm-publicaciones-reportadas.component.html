@@ -1,5 +1,6 @@
-
-<div class="table-container" >
+<app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
+<app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
+<div class="table-container" *ngIf="tipoU === 'Instance-Administrator'" >
     <table mat-table [dataSource]="dataSource"
        class="mat-elevation-z8">
       <ng-container matColumnDef="Fecha">
@@ -36,7 +37,7 @@
 
   </div>
 
-  <div *ngIf="tipoU !== '1Instance-Administrator'">
+  <div *ngIf="tipoU !== 'Instance-Administrator'">
     <div class="contenedorError">
       <div class="cajaError">
         <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>

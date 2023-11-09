@@ -384,6 +384,19 @@ font-size: 13px;
 color: #807d7d;
 }
 
+/* Estilo para el contenedor de imágenes */
+.image-container {
+  display: flex;  /* Para alinear horizontalmente las imágenes */
+  gap: 10px;      /* Espacio entre las imágenes */
+}
+
+/* Estilo para las imágenes */
+button.mat-button img {
+  border-radius: 50%; /* Hace que la imagen sea redonda */
+  width: 2cm;         /* Establece el tamaño deseado (2 cm) */
+  height: 2cm;
+  object-fit: cover;  /* Ajusta la imagen al contenedor redondo */
+}
 
 mat-card-content {
   flex: 1; /* Hace que el contenido ocupe el espacio restante */
@@ -414,6 +427,10 @@ mat-expansion-panel-header{
   margin-left: 10px;
   margin-right: 10px;
 }
+.blue-text {
+  color: blue;
+}
+
 @media screen and (max-width: 900px) {
   .imgContenido {
       max-width: 100%;

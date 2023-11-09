@@ -1,0 +1,80 @@
+<app-header *ngIf="tipoU === 'Common-User'"></app-header>
+<app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
+<div class="contenedor" *ngIf="tipoU === 'Common-User' || tipoU === 'Moderator'">
+
+    <mat-card>
+        <mat-card-title>Modificar mi perfil</mat-card-title>
+        <mat-card-subtitle>{{usuario?.userName}}</mat-card-subtitle>
+        <hr>
+        <hr>
+        <br>
+            <form [formGroup]="registrarForm">
+                    <mat-form-field  class="example-full-width">
+                        <mat-label>{{usuario?.firstName}}</mat-label>
+                        <input matInput formControlName="firstName" type="text"  maxlength="25">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" >
+                        <mat-label>{{usuario?.lastName}}</mat-label>
+                        <input matInput formControlName="lastName" type="text"  maxlength="25">
+                    </mat-form-field>
+     
+                    <div *ngIf="base64Image" class="image-container">
+                        <img src="{{usuario?.profileImage}}" alt="Imagen" class="img">
+                        <button (click)="removeImage()" class="remove-button">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                      <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
+                     
+                      <button mat-icon-button color="primary" (click)="fileInput.click()" *ngIf="!base64Image">
+                        <mat-icon>image</mat-icon>
+                      </button>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="password" type="password"  maxlength="25">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" type="password">
+                        <mat-label>Repetir Contraseña</mat-label>
+                        <input matInput  formControlName="confirmPassword" type="password"  maxlength="25">
+                    </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Biografia: {{usuario?.biography}}</mat-label>
+                <input matInput  formControlName="biography" type="text"  maxlength="70">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Ocupación: {{usuario?.occupation}} </mat-label>
+                <input matInput formControlName="occupation" type="text"  maxlength="25">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Ciudad </mat-label>
+                <mat-select formControlName="city">
+                  <mat-option *ngFor="let city of listCitys" [value]="city.name">
+                    {{ city.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+                  
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Fecha de cumpleaños:  {{ usuario?.birthday | date:'dd/MM/yyyy' }} </mat-label>
+                <input matInput formControlName="birthday" type="date">
+            </mat-form-field>
+            <button mat-raised-button color="primary" mat-dialog-close >Modificar</button>
+           
+        
+        </form>
+         
+          
+      </mat-card>
+
+</div>
+<div *ngIf="tipoU !== 'Common-User' && tipoU !== 'Moderator'">
+    <div class="contenedorError">
+        <div class="cajaError">
+            <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+        </div>
+        <div class="cajaError"><img class="imgError"></div>
+        <div class="cajaError">
+        <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
+    </div>
+    </div>
+</div>

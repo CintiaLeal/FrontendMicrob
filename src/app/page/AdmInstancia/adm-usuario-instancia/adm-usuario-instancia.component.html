@@ -1,8 +1,7 @@
 <app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
-<app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
-
+<app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
 <div class="table-container">
-  <table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+  <table mat-table [dataSource]="usuarios" class="">
     <ng-container matColumnDef="nombre">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
@@ -39,7 +38,7 @@
   <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
 </div>
 
-<div *ngIf="tipoU === '1Instance-Administrator'">
+<div *ngIf="tipoU !== 'Instance-Administrator'">
   <div class="contenedorError">
     <div class="cajaError">
       <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>

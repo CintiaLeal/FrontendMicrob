@@ -42,7 +42,7 @@
                 <mat-label>Contraseña</mat-label>
                 <input matInput formControlName="password" type="password"  maxlength="25">
             </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" type="password">
                 <mat-label>Repetir Contraseña</mat-label>
                 <input matInput  formControlName="confirmPassword" type="confirmPassword"  maxlength="25">
             </mat-form-field>
@@ -66,8 +66,13 @@
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Ciudad</mat-label>
-        <input matInput formControlName="city" type="text"  maxlength="25">
-    </mat-form-field>
+        <mat-select formControlName="city">
+          <mat-option *ngFor="let city of listCitys" [value]="city.name">
+            {{ city.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+          
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Fecha de cumpleaños</mat-label>
         <input matInput formControlName="birthday" type="date">

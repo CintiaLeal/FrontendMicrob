@@ -17,6 +17,7 @@ import { ModeradorAdmComponent } from './page/moderador-adm/moderador-adm.compon
 import { VerDetalleInstanciaComponent } from './page/AdmPlataforma/ver-detalle-instancia/ver-detalle-instancia.component';
 import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-instancia/modificar-instancia.component';
 import { LoginRedSocialComponent } from './page/login-red-social/login-red-social.component';
+import { ModificarUsuarioComponent } from './page/modificar-usuario/modificar-usuario.component';
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: '', component: WebPrincipalComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'ModificarInstancia/:Dominio', component: ModificarInstanciaComponent },
   { path: 'VerDetalleInstancia/:Dominio', component: VerDetalleInstanciaComponent },
   { path: 'loginRedSocial', component: LoginRedSocialComponent},
+  {path:  'modificarUsuario', component : ModificarUsuarioComponent},
   { path: ':valorURL', component: URLComponent },
  
 ];

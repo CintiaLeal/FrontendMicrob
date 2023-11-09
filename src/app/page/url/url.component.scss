@@ -25,8 +25,8 @@
   }
   .img{
     clip-path: circle(50% at 50% 50%);
-    width: 250px; /* Ancho deseado para el contenedor */
-    height: 250px; /* Alto deseado para el contenedor */
+    width: 160px; /* Ancho deseado para el contenedor */
+    height: 160px; /* Alto deseado para el contenedor */
   }
 
 
@@ -174,11 +174,7 @@ body {
   overflow: hidden;
 }
 
-.img {
-  width: 100px; /* Ajusta el ancho máximo según tus preferencias */
-  height: 100px; /* Ajusta el alto máximo según tus preferencias */
-  object-fit: cover;
-}
+
 
 
 .remove-button {

@@ -36,14 +36,14 @@ export class AppService {
     return this.http.get<Instancia>(direccion);
   }
 
-  crearInstancias(instanciaNueva: Instancia): Observable<ResponseI> {
+  crearInstancias(form: any,userName: any,x:any): Observable<ResponseI> {
     const headers = new HttpHeaders({
-      'userEmail': 'anabrown@example.com'
+      'tenant': x
     });
+    const params = new HttpParams().set('userName', userName); // Agrega userName como parámetro
 
-    // Realiza la solicitud POST con el objeto instanciaData
-    let direccion = this.url + "/Instance/CreateInstance?userEmail=anabrown%40example.com";
-    return this.http.post<any>(direccion, instanciaNueva);
+    const direccion = this.url + "/Instance/CreateInstance";
+    return this.http.post<any>(direccion, form,{ headers: headers, params: params });
   }
 
   getInstancia(): Observable<InstanciaRetorno[]> {
@@ -60,6 +60,10 @@ export class AppService {
     return this.http.get<InstanciaRetorno>(url);
   }
 
+  getCity(){
+    const direccion = this.url +"/GeneralData/GetCities";
+    return this.http.get<any[]>(direccion);
+  }
 
  //Inicio Login por email 
  loginByEmail(form: Login, x:any) {

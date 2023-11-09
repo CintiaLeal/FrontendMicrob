@@ -24,6 +24,7 @@ export class InicioAdminInstanciaComponent {
   idinstancia: string | null = null;
   instanciaActual: InstanciaRetorno | null=null;
   tokenActual: string | null=null;
+  usuarios: any;
 
    //Para los desplegables
    foods: Filtro[] = [
@@ -54,7 +55,11 @@ export class InicioAdminInstanciaComponent {
       next: value => this.instanciaActual = value,
       error: err => { alert('Error al cargar las instancias: ' + err) }
     });
-    //this.app.cambiarUsuarioSegunToken(this.tokenActual);
+
+    this.api.obtenerUsuarios(this.idinstancia).subscribe({
+      next: value => this.usuarios = value,
+      error: err => { alert('Error al cargar las instancias: ' + err) }
+    });
   }
   
   toggleBadgeVisibility() {

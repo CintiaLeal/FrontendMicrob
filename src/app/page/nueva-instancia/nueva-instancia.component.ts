@@ -13,33 +13,43 @@ import { Observable, subscribeOn, Subscriber } from 'rxjs';
 })
 export class NuevaInstanciaComponent {
   public base64Image: any;
-  constructor(private api: AppService, private alerta: MatSnackBar ){ }
+  tipoU: string | null = null;
+  idInstancia: any;
+  userName: any;
+   constructor(public dialog: MatDialog,private api: AppService) {
+    this.tipoU = localStorage.getItem('tipoUsuario');
+
+  }
 //FORM desde el HTML
   registrarForm = new FormGroup({
     nombre: new FormControl('',Validators.required),
     esquemaColores: new FormControl('',Validators.required),
     tematica: new FormControl('',Validators.required),
     logo: new FormControl('',Validators.required),
+    dominio: new FormControl('',Validators.required),
+    description: new FormControl('',Validators.required),
   });
 
   onRegistrar() {
-    console.log("llega a la funcion");
-    let x: Instancia={
-      nombre: this.registrarForm.controls["nombre"].value  ? this.registrarForm.controls["nombre"].value : " ",
-      esquemaColores: 1,
-      tematica: this.registrarForm.controls["tematica"].value  ? this.registrarForm.controls["tematica"].value : " ",
-      logo:  this.base64Image,
-      dominio:  "lodko.com",
-      activo:true,
-      privacidad:1,
-      description: "Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input Lore Input"
+    this.idInstancia = localStorage.getItem('idInstancia');
+    this.userName = localStorage.getItem('userName');
 
+    let form: any={
+      nombre: this.registrarForm.controls["nombre"].value  ? this.registrarForm.controls["nombre"].value : " ",
+      dominio:  this.registrarForm.controls["dominio"].value  ? this.registrarForm.controls["dominio"].value : " ",
+      logo:  this.base64Image,
+      activo:true,
+      tematica: this.registrarForm.controls["tematica"].value  ? this.registrarForm.controls["tematica"].value : " ",
+     description: this.registrarForm.controls["description"].value  ? this.registrarForm.controls["description"].value : " ",
+     esquemaColores: 1,//this.registrarForm.controls["esquemaColores"].value  ? this.registrarForm.controls["esquemaColores"].value : " ",
+      privacidad:1,
+      
     }
-   
-    this.api.crearInstancias(x).subscribe(data => {
+  console.log(form,this.userName,this.idInstancia);
+    this.api.crearInstancias(form,this.userName,this.idInstancia).subscribe(data => {
       console.log(data);
     });
-    this.alerta.open("Creada con éxito", "OK!");
+
   }
 
   //INI PARA IMG COM BASE 64

@@ -54,16 +54,24 @@
               </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <p>
-                {{x.text}}
+              <p class="pComentario">
+                <ng-container *ngFor="let word of x.text.split(' '); let i = index">
+                  <ng-container *ngIf="word.startsWith('#'); else nonHashtag">
+                    <span class="blue-text">{{ word }} </span>
+                  </ng-container>
+                  <ng-template #nonHashtag>
+                    {{ word }} 
+                  </ng-template>
+                </ng-container>
               </p>
+              
               <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
               <a (click)="openDialog(x.postId)" class="mgPost">{{ x.likes.length }} ❤</a>
               
             </mat-card-content>
             <mat-card-actions>
               <div class="example-button-row">
-                <button mat-icon-button [ngClass]="{'color-rojo': colorRojoMap[x.postId]}" (click)="alternarVisibilidad(x.postId) ; addLink(x.postId)">
+                <button mat-icon-button [ngClass]="{'color-rojo': colorRojoMap[x.postId]}" (click)="alternarVisibilidad(x.postId) ; addLink(x.postId) ; x.likes.length = x.likes.length + 1">
                   <mat-icon class="icon">favorite</mat-icon>
                 </button>     
                 <button mat-icon-button (click)="mostrarDivComentario(x.postId)">
@@ -290,6 +298,7 @@
             <span class="count">300K</span>
           </li>
         </ul>
+
       </div>
     </div>
     <div class="caja3">
@@ -323,7 +332,7 @@
           <hr>
         </li>
         <li>
-          <a>
+          <a routerLink="/modificarUsuario">
             <mat-icon class="icon" [matMenuTriggerFor]="menu">settings</mat-icon>
             <span class="text">Ajustes</span>
           </a>
