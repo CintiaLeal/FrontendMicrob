@@ -30,7 +30,7 @@
   
       <ng-container matColumnDef="Tematica">
         <mat-header-cell *matHeaderCellDef> Tematica </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.tematica }} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{ row.tematica.name }} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="Editar">

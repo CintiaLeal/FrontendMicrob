@@ -46,7 +46,7 @@ export class ModificarInstanciaComponent {
   public getInstancias(){
     this.api.getInstanciaPorURL(this.rutaActiva.snapshot.params['Dominio']).subscribe(userData=>{
       this.Nombre = userData.nombre;
-      this.Tematica = userData.tematica;
+      this.Tematica = userData.tematica.name;
       this.base64Image = userData.logo;
       this.Esquemas = userData.esquemaColores;
       this.tenantInstanceId = userData.tenantInstanceId;
@@ -57,10 +57,10 @@ export class ModificarInstanciaComponent {
 
   onRegistrar() {
     console.log("llega a la funcion");
-    let x: InstanciaModificada={  
+    let x: any={  
       nombre: this.ModifyForm.controls["nombre"].value  ? this.ModifyForm.controls["nombre"].value : " ",
       esquemaColores: 1,
-      tematica: this.ModifyForm.controls["tematica"].value  ? this.ModifyForm.controls["tematica"].value : " ",
+      tematica: {  name: this.Tematica},//this.ModifyForm.controls["tematica"].value  ? this.ModifyForm.controls["tematica"].value : " ",
       logo:  this.base64Image,
       dominio: this.Dominio,
       activo:true,

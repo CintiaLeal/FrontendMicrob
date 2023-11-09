@@ -20,14 +20,14 @@ export class ModificarUsuarioComponent {
 
  
   registrarForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      password: new FormControl(''),
+      confirmPassword: new FormControl(''),
       biography: new FormControl(''),
       occupation: new FormControl(''),
       city: new FormControl(''),
-      birthday: new FormControl('')
+     // birthday: new FormControl('')
     
   });
   public base64Image: any;
@@ -37,6 +37,7 @@ export class ModificarUsuarioComponent {
   idInstanciaLocalHost: any | null;
   usuario: UsuarioRetorno | null = null;
   fechaCumpleanosUsuario: string | undefined; // O el tipo correcto de acuerdo a tu lógica
+ 
 
   constructor(public dialog: MatDialog,private api: AppService, private app: AppComponent) {
     this.tipoU = localStorage.getItem('tipoUsuario');
@@ -75,27 +76,35 @@ export class ModificarUsuarioComponent {
 
   onModificar() {
     let x: any = {
+     userId: this.usuario?.userId,
       firstName: this.registrarForm.controls['firstName'].value ?? this.usuario?.firstName ?? " ",
-      lastName: this.registrarForm.controls['lastName'].value ?? this.usuario?.lastName ?? " ",
+      lastName: this.usuario?.lastName ?? " ",
       email: this.usuario?.email,
-      password: this.registrarForm.controls['password'].value ?? " ",
-      confirmPassword: this.registrarForm.controls['confirmPassword'].value ?? " ",
       profileImage: this.base64Image,
-      role: 'Common-User',
+      birthday:  this.usuario?.birthday ?? " ",
       biography: this.registrarForm.controls['biography'].value ?? " ",
       occupation: this.registrarForm.controls['occupation'].value ?? " ",
-      city: {
-        name: this.registrarForm.controls['city'].value
-      },
-      birthday: this.registrarForm.controls['birthday'].value ?? " ",
-      isSanctioned: false,
-      username: this.usuario?.userName ?? " ",
+      city: this.usuario?.city
     };
   
+    /*{
+  "userId": 0,
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "profileImage": "string",
+  "birthday": "2023-11-09T21:41:31.345Z",
+  "biography": "string",
+  "occupation": "string",
+  "city": {
+    "id": 0,
+    "name": "string"
+  }
+}*/
     // Resto de la lógica...
   
   this.idInstancia=localStorage.getItem('idInstancia');
-  this.api.registrarUsuario(x,this.idInstancia).subscribe(data => {
+  this.api.modificarUsuario(x,this.idInstancia).subscribe(data => {
     console.log(data);
   });
 

@@ -1,5 +1,6 @@
 <app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
 <app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
+<app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
 <div class="table-container">
   <table mat-table [dataSource]="usuarios" class="">
     <ng-container matColumnDef="nombre">
@@ -30,6 +31,14 @@
         </button>
       </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="editar">
+      <mat-header-cell *matHeaderCellDef> Modificar </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+          <button mat-button (click)="openDialog()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
     <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
     <mat-row *matRowDef="let row; columns: columnas"></mat-row>
@@ -38,7 +47,7 @@
   <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
 </div>
 
-<div *ngIf="tipoU !== 'Instance-Administrator'">
+<div *ngIf="tipoU !== 'Instance-Administrator' && tipoU !== 'Moderator' && tipoU !== 'Platform-Administrator'">
   <div class="contenedorError">
     <div class="cajaError">
       <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>

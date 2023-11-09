@@ -194,9 +194,11 @@ export class InicioUsuarioComponent {
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.userName = localStorage.getItem('userName');
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+
     if (this.userName) {
       this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
         (value) => {
+       
           this.usuario = value; // Asigna el valor de 'value' a this.usuario
 
         },

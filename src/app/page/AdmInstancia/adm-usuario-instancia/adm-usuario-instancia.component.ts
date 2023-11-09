@@ -5,6 +5,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Usuario } from 'src/app/modelos/usuario';
 import { AppService } from 'src/app/servicios/app.service';
 import { UsuarioRetorno } from 'src/app/modelos/usuarioRetorno';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-adm-usuario-instancia',
@@ -13,12 +21,12 @@ import { UsuarioRetorno } from 'src/app/modelos/usuarioRetorno';
 })
 export class AdmUsuarioInstanciaComponent implements OnInit {
   tipoU: string | null = null;
-  columnas: string[] = ['nombre', 'apellido', 'rol', 'correo', 'borrar'];
+  columnas: string[] = ['nombre', 'apellido', 'rol', 'correo', 'borrar','editar'];
   dataSource = new MatTableDataSource<any>([]);
   public usuarios: UsuarioRetorno[] = [];
   idInstanciaLocalHost: any;
 
-  constructor(private api: AppService ){ }
+  constructor(private api: AppService,public dialog: MatDialog ){ }
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator; // Añadir el signo de exclamación (!) aquí
 
  
@@ -46,4 +54,20 @@ export class AdmUsuarioInstanciaComponent implements OnInit {
     // Puedes agregar lógica personalizada aquí si lo necesitas
   }
   
+
+openDialog() {
+  const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
 }
+}
+
+@Component({
+selector: 'detalle',
+templateUrl: 'detalle.html',
+standalone: true,
+imports: [MatDialogModule,MatSelectModule,MatFormFieldModule, MatButtonModule,MatCardModule,MatIconModule,MatDialogModule,MatRadioModule ],
+})
+export class DialogContentExampleDialog {}

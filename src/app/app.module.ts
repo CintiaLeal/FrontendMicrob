@@ -4,7 +4,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NuevaInstanciaComponent } from './page/nueva-instancia/nueva-instancia.component';
@@ -16,9 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './page/login/login.component';
 import { RegistrarUsuarioComponent } from './page/registrar-usuario/registrar-usuario.component';
-
 import {MatGridListModule} from '@angular/material/grid-list';
-
 import { MatMenuModule } from '@angular/material/menu'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -27,7 +24,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -53,26 +49,11 @@ import { HeaderInstanceAdministratorComponent } from './page/headerpage/header-i
 import { ModeradorAdmComponent } from './page/moderador-adm/moderador-adm.component';
 import { VerDetalleInstanciaComponent } from './page/AdmPlataforma/ver-detalle-instancia/ver-detalle-instancia.component';
 import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-instancia/modificar-instancia.component';
-import { SocialAuthService, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from 'angularx-social-login';
 import { LoginRedSocialComponent } from './page/login-red-social/login-red-social.component';
 import { MatNativeDateModule} from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ModificarUsuarioComponent } from './page/modificar-usuario/modificar-usuario.component';
 
-const config: SocialAuthServiceConfig = {
-  autoLogin: false, // Configura esto según tus necesidades
-  providers: [
-    {
-      id: GoogleLoginProvider.PROVIDER_ID,
-      provider: new GoogleLoginProvider('TUC_ID_DE_CLIENTE_DE_GOOGLE'),
-    },
-  ],
-};
 @NgModule({
   declarations: [
 
@@ -136,7 +117,6 @@ const config: SocialAuthServiceConfig = {
     MatPaginatorModule,
     MatDividerModule,
     MatBadgeModule,
-    SocialLoginModule,
     MatNativeDateModule,
     MatTooltipModule,
     BrowserModule
@@ -144,20 +124,7 @@ const config: SocialAuthServiceConfig = {
 
   ],
   providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false, // Puedes configurar otras opciones aquí
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('projects/microbuy-404320/logs/cloudaudit.googleapis.com%2Factivity'),
-          },
-          // Agrega otros proveedores si los necesitas
-        ],
-      } as SocialAuthServiceConfig,
-    },
-    SocialAuthService,
+   
   ],
   bootstrap: [AppComponent]
 })

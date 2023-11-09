@@ -54,11 +54,8 @@
                 </mat-select>
               </mat-form-field>
                   
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Fecha de cumpleaños:  {{ usuario?.birthday | date:'dd/MM/yyyy' }} </mat-label>
-                <input matInput formControlName="birthday" type="date">
-            </mat-form-field>
-            <button mat-raised-button color="primary" mat-dialog-close >Modificar</button>
+    
+            <button mat-raised-button color="primary" mat-dialog-close  (click)="onModificar()">Modificar</button>
            
         
         </form>

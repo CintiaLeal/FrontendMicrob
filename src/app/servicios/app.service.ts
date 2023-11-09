@@ -88,7 +88,7 @@ obtenerInfoUsuario(userName: string, x:any): Observable<UsuarioRetorno> {
     'tenant': x
   });
 let direccion = this.url + "/Account/GetUser?userName=" + encodeURIComponent(userName);
-return this.http.get<UsuarioRetorno>(direccion,{ headers: headers });
+return this.http.get<any>(direccion,{ headers: headers });
 }
 
 newPost(form: any, x: any, userName: any) {
@@ -141,4 +141,11 @@ darLikes(x: any, userName: any, postId: any) {
 }
 
 
+modificarUsuario (form:any, x:any): Observable<ResponseI> {  
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/ModifyUser";
+  return this.http.put<any>(direccion, form,{ headers: headers }); 
+}
 }
