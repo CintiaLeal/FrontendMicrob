@@ -1,0 +1,13 @@
+<mat-card class="contenedorDeSeguir">
+    <div class="perfil-containerImgUserSeguir">
+        <img class="imgPerfilUserSeguir" src={{usuario?.profileImage}}>
+    </div>
+    <h1 class="textoMiPerfil">{{usuario?.firstName}} {{usuario?.lastName}}</h1>
+    <h4 class="textoMiPerfilArroba">{{usuario?.userName}}</h4>
+    <h4>
+        <mat-icon class="iconDiaCumple">calendar_month</mat-icon>
+        {{ usuario?.birthday | date:'dd/MM/yyyy' }}
+    </h4>
+    <p>Seguidores {{misseguidores.length}}</p>
+    <button mat-button  color="primary" (click)="seguirUsuario()" >Seguir</button>
+</mat-card>

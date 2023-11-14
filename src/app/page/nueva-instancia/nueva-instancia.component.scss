@@ -102,3 +102,14 @@
   .mat-mdc-cardblanco{
     --mdc-elevated-card-container-color: #fbfbfb;
 }
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+  height: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+  overflow: hidden;
+}
+.img{
+  width: 150px; /* Ajusta el tamaño máximo según tus preferencias */
+  height: 150px;
+}

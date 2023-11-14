@@ -16,6 +16,7 @@ export class NuevaInstanciaComponent {
   tipoU: string | null = null;
   idInstancia: any;
   userName: any;
+  lisTematicas: any[] | null = null;
    constructor(public dialog: MatDialog,private api: AppService) {
     this.tipoU = localStorage.getItem('tipoUsuario');
 
@@ -29,6 +30,19 @@ export class NuevaInstanciaComponent {
     dominio: new FormControl('',Validators.required),
     description: new FormControl('',Validators.required),
   });
+  ngOnInit(): void {
+    this.getTematicas();
+  }
+  
+  getTematicas() {
+    this.api.verTematicas().subscribe(
+      (data: any[]) => {
+        this.lisTematicas = data;  // Guarda el array en la variable listCitys
+      },
+      error => {
+      }
+    );
+  }
 
   onRegistrar() {
     this.idInstancia = localStorage.getItem('idInstancia');
@@ -39,14 +53,13 @@ export class NuevaInstanciaComponent {
       dominio:  this.registrarForm.controls["dominio"].value  ? this.registrarForm.controls["dominio"].value : " ",
       logo:  this.base64Image,
       activo:true,
-      tematica: this.registrarForm.controls["tematica"].value  ? this.registrarForm.controls["tematica"].value : " ",
+      tematica: { name: this.registrarForm.controls["tematica"].value  ? this.registrarForm.controls["tematica"].value : " "},
      description: this.registrarForm.controls["description"].value  ? this.registrarForm.controls["description"].value : " ",
-     esquemaColores: 1,//this.registrarForm.controls["esquemaColores"].value  ? this.registrarForm.controls["esquemaColores"].value : " ",
-      privacidad:1,
+     esquemaColores: this.registrarForm.controls["esquemaColores"].value  ? this.registrarForm.controls["esquemaColores"].value : " ",
+      privacidad:0,
       
     }
-  console.log(form,this.userName,this.idInstancia);
-    this.api.crearInstancias(form,this.userName,this.idInstancia).subscribe(data => {
+    this.api.crearInstancias(form,this.userName).subscribe(data => {
       console.log(data);
     });
 

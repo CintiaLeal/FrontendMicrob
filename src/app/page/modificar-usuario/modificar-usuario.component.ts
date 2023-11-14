@@ -22,8 +22,6 @@ export class ModificarUsuarioComponent {
   registrarForm = new FormGroup({
       firstName: new FormControl(''),
       lastName: new FormControl(''),
-      password: new FormControl(''),
-      confirmPassword: new FormControl(''),
       biography: new FormControl(''),
       occupation: new FormControl(''),
       city: new FormControl(''),
@@ -78,37 +76,23 @@ export class ModificarUsuarioComponent {
     let x: any = {
      userId: this.usuario?.userId,
       firstName: this.registrarForm.controls['firstName'].value ?? this.usuario?.firstName ?? " ",
-      lastName: this.usuario?.lastName ?? " ",
-      email: this.usuario?.email,
-      profileImage: this.base64Image,
-      birthday:  this.usuario?.birthday ?? " ",
-      biography: this.registrarForm.controls['biography'].value ?? " ",
-      occupation: this.registrarForm.controls['occupation'].value ?? " ",
-      city: this.usuario?.city
-    };
-  
-    /*{
-  "userId": 0,
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "profileImage": "string",
-  "birthday": "2023-11-09T21:41:31.345Z",
-  "biography": "string",
-  "occupation": "string",
-  "city": {
-    "id": 0,
-    "name": "string"
-  }
-}*/
-    // Resto de la lógica...
-  
+      lastName: this.usuario?.lastName ??  this.usuario?.lastName ?? " ",
+      email: this.usuario?.email ??  this.usuario?.email ?? " ",
+      profileImage: this.base64Image ??  this.usuario?.profileImage ?? " ",
+      birthday:  this.usuario?.birthday ??   this.usuario?.birthday ?? " ",
+      biography: this.registrarForm.controls['biography'].value ??  this.usuario?.biography ?? " ",
+      occupation: this.registrarForm.controls['occupation'].value ?? this.usuario?.occupation ?? " ",
+      city: {
+        id: this.usuario?.city.id,
+        name: this.usuario?.city.name
+    }    
+    }
   this.idInstancia=localStorage.getItem('idInstancia');
   this.api.modificarUsuario(x,this.idInstancia).subscribe(data => {
     console.log(data);
   });
-
 }
+
 //INI PARA IMG COM BASE 64
 convertToBase64(file: File) {
 console.log(file);

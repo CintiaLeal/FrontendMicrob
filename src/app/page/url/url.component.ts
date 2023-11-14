@@ -32,6 +32,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Usuario } from 'src/app/modelos/usuario';
 import { Observable, subscribeOn, Subscriber } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { MessageService } from 'src/app/message.service';
 
 
 @Component({
@@ -55,7 +56,7 @@ export class URLComponent implements OnInit {
   });
   jwtHelper: any;
   
-  constructor(public dialog: MatDialog, private app: AppComponent,private router: Router,private route: ActivatedRoute,private api: AppService) {this.jwtHelper = new JwtHelperService();}
+  constructor(public dialog: MatDialog, private app: AppComponent,private router: Router,private route: ActivatedRoute,private api: AppService,private messageService: MessageService) {this.jwtHelper = new JwtHelperService();}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -78,19 +79,6 @@ export class URLComponent implements OnInit {
       }
     });
 
- /*   if (this.valorURL !== null) {
-      localStorage.setItem('valorURL', this.valorURL);
-
-      this.api.getInstanciaPorURL(this.valorURL).subscribe({
-        next: value => this.instanciaActual = value,
-        
-        error: err => {
-          this.errorEncontrado = 1; // Establecer errorEncontrado en 1 en caso de error
-        }
-      });
-    } else {
-      this.errorEncontrado = 1; // Establecer errorEncontrado en 1 si no se encuentra valorURL
-    }*/
     if (this.valorURL !== null) {
       localStorage.setItem('valorURL', this.valorURL);
       this.api.getInstanciaPorURL(this.valorURL).subscribe({
@@ -114,35 +102,49 @@ export class URLComponent implements OnInit {
       username: this.loginForm.controls["username"].value ? this.loginForm.controls["username"].value : " ",
       password: this.loginForm.controls["password"].value ? this.loginForm.controls["password"].value : " "
     }
-    this.api.loginByEmail(x,this.valorIdInstania).subscribe(data => {
-      localStorage.setItem("token", data.token);
-      this.tokens = data.token; 
-      localStorage.setItem("userName", x.username);
-      const decodedToken = this.jwtHelper.decodeToken(this.tokens);
-      this.tipoUsuario = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-      switch (this.tipoUsuario) {
-        case 'Platform-Administrator':
-          localStorage.setItem("tipoUsuario", 'Platform-Administrator');  
-          this.router.navigate(['/inicioAdmPlataformaGestorInstancia']);
-          break;
-        case 'Instance-Administrator':
-          localStorage.setItem("tipoUsuario", 'Instance-Administrator');  
-          this.router.navigate(['/inicioAdm']);
-          break;
-        case 'Moderator':
-          localStorage.setItem("tipoUsuario", 'Moderator');  
-          this.router.navigate(['/inicioUsuario']);
-          break;
-        case 'Common-User':
-          localStorage.setItem("tipoUsuario", 'Common-User');  
-          this.router.navigate(['/inicioUsuario']);
-          break;
-        default:
-          // Manejar otros roles o casos
-        break;
+  
+    this.api.loginByEmail(x, this.valorIdInstania).subscribe(
+      (data) => {
+        localStorage.setItem("token", data.token);
+        this.tokens = data.token;
+        localStorage.setItem("userName", x.username);
+        const decodedToken = this.jwtHelper.decodeToken(this.tokens);
+        this.tipoUsuario = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  
+        switch (this.tipoUsuario) {
+          case 'Platform-Administrator':
+            localStorage.setItem("tipoUsuario", 'Platform-Administrator');
+            this.router.navigate(['/inicioAdmPlataformaGestorInstancia']);
+            this.messageService.showSuccess('Inicio de sesión exitoso como administrador de plataforma');
+            break;
+          case 'Instance-Administrator':
+            localStorage.setItem("tipoUsuario", 'Instance-Administrator');
+            this.router.navigate(['/inicioAdm']);
+            this.messageService.showSuccess('Inicio de sesión exitoso como administrador de instancia');
+            break;
+          case 'Moderator':
+            localStorage.setItem("tipoUsuario", 'Moderator');
+            this.router.navigate(['/inicioUsuario']);
+            this.messageService.showSuccess('Inicio de sesión exitoso como Moderator');
+            break;
+          case 'Common-User':
+            localStorage.setItem("tipoUsuario", 'Common-User');
+            this.router.navigate(['/inicioUsuario']);
+            this.messageService.showSuccess('Inicio de sesión exitoso como usuario común');
+            break;
+          default:
+            // Manejar otros roles o casos
+            break;
+        }
+      },
+      (error) => {
+        // Ocurrió un error, mostrar un mensaje de error
+        this.messageService.showError('Error al iniciar sesión. Por favor, verifique sus credenciales e inténtelo de nuevo.');
+        console.error(error);
       }
-    });
+    );
   }
+  
 
   decodeToken(token: string) {
     console.log("llego al deco");
@@ -231,7 +233,7 @@ export class DialogContentExampleDialog {
   public birthday: Date | null =null;
   listCitys: any;
 
-  constructor(private _formBuilder: FormBuilder,private api: AppService) {}
+  constructor(private _formBuilder: FormBuilder,private api: AppService,private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.getCitys();
@@ -255,7 +257,7 @@ export class DialogContentExampleDialog {
         password: this.registrarForm.controls['password'].value ? this.registrarForm.controls["password"].value : " ",
         confirmPassword: this.registrarForm.controls['confirmPassword'].value ? this.registrarForm.controls["confirmPassword"].value : " ",
         profileImage: this.base64Image,
-        role: 'Common-User',
+        role: 'Common-User',//'Moderator',//
         biography: this.registrarForm.controls['biography'].value ? this.registrarForm.controls["biography"].value : " ",
         occupation: this.registrarForm.controls['occupation'].value ? this.registrarForm.controls["occupation"].value : " ",
         city: {
@@ -266,9 +268,18 @@ export class DialogContentExampleDialog {
         username: this.registrarForm.controls['username'].value ? this.registrarForm.controls["username"].value : " ",
       };     
     this.idInstancia=localStorage.getItem('idInstancia');
-    this.api.registrarUsuario(x,this.idInstancia).subscribe(data => {
-      console.log(data);
-    });
+    this.api.registrarUsuario(x, this.idInstancia).subscribe(
+      (data) => {
+          // La solicitud fue exitosa, mostrar un mensaje de éxito
+          this.messageService.showSuccess('Usuario registrado exitosamente');
+          console.log(data);
+        },
+        (error) => {
+          // Ocurrió un error, mostrar un mensaje de error
+          this.messageService.showError('Error al registrar el usuario. Por favor, inténtelo de nuevo.');
+          console.error(error);
+        }
+      );
   }
 //INI PARA IMG COM BASE 64
 convertToBase64(file: File) {

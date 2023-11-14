@@ -53,6 +53,9 @@ import { LoginRedSocialComponent } from './page/login-red-social/login-red-socia
 import { MatNativeDateModule} from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ModificarUsuarioComponent } from './page/modificar-usuario/modificar-usuario.component';
+import { NgChartsModule } from 'ng2-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @NgModule({
   declarations: [
@@ -119,7 +122,9 @@ import { ModificarUsuarioComponent } from './page/modificar-usuario/modificar-us
     MatBadgeModule,
     MatNativeDateModule,
     MatTooltipModule,
-    BrowserModule
+    BrowserModule,
+    NgChartsModule,
+    NgxChartsModule
   
 
   ],

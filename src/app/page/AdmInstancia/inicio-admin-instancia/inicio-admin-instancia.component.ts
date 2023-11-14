@@ -1,8 +1,12 @@
 import { Observable, subscribeOn, Subscriber } from 'rxjs';
 import { Component } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
-import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
+import { InstanciaRetorno} from 'src/app/modelos/instanciaRetorno';
 import { AppService } from 'src/app/servicios/app.service';
+import { ChartOptions, ChartType } from 'chart.js';
+import { ColorHelper } from '@swimlane/ngx-charts';
+
+
 
 interface Filtro {
   value: string;
@@ -25,6 +29,7 @@ export class InicioAdminInstanciaComponent {
   instanciaActual: InstanciaRetorno | null=null;
   tokenActual: string | null=null;
   usuarios: any;
+  view: [number, number] = [900, 400];
 
    //Para los desplegables
    foods: Filtro[] = [
@@ -45,7 +50,8 @@ export class InicioAdminInstanciaComponent {
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.app.ngOnInit();
    }
-
+ 
+ 
   ngOnInit(): void {
     this.idinstancia = localStorage.getItem('idInstancia');
     this.tokenActual = localStorage.getItem('token') ?? '';
@@ -60,8 +66,36 @@ export class InicioAdminInstanciaComponent {
       next: value => this.usuarios = value,
       error: err => { alert('Error al cargar las instancias: ' + err) }
     });
+
+    this.getCustomColors();
   }
-  
+  getCustomColors(): any {
+    return [
+      { name: 'Label 1', value: '#FF5733' },  // Personaliza el color para Label 1
+      { name: 'Label 2', value: '#33FF57' },  // Personaliza el color para Label 2
+      { name: 'Label 3', value: '#5733FF' }   // Personaliza el color para Label 3
+    ];
+  }
+  data = [
+    {
+      'name': 'Label 1',
+      'value': 300,
+      'color': '#FF5733'
+    },
+    {
+      'name': 'Label 2',
+      'value': 500,
+      'color': '#33FF57'
+    },
+    {
+      'name': 'Label 3',
+      'value': 200,
+      'color': '#5733FF'
+    }
+  ];
+  getCustomColorss(data: any[]): any {
+    return data.map(item => ({ name: item.name, value: item.color }));
+  }
   toggleBadgeVisibility() {
     this.hidden = !this.hidden;
   }

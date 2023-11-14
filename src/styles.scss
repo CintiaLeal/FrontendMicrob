@@ -1,3 +1,14 @@
+//Mensajes SnakBar
+.mat-mdc-snack-bar-handset .mdc-snackbar__surface {
+  width: 100%;
+  height: 120px;
+  --mdc-snackbar-container-color: #ffffff;
+  --mat-snack-bar-button-color: #011C40;
+  --mdc-snackbar-supporting-text-color: #45858C;
+}
+
+
+///
 .change-colors {
   .mat-mdc-raised-button.mat-primary {
       background-color: #04B2D9; 
@@ -41,14 +52,15 @@
   --mat-mdc-button-persistent-ripple-color: #04D98B;
   --mat-mdc-button-ripple-color: rgba(63, 81, 181, 0.1);
 }
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: #888585;
+  --mdc-snackbar-supporting-text-color: rgba(255, 255, 255, 0.87);
+  --mat-snack-bar-button-color:#011C40;
 }
-/*
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-1-hex { color: #011C40; }
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-2-hex { color: #03658C; }
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-3-hex { color: #04B2D9; }
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-4-hex { color: #04D9B2; }
-.Green-and-Blue-Neon-Light-with-Tropical-Leaves-5-hex { color: #04D98B; }
-*/
+
+
+}
 
 .change-colors2 {
 .mat-mdc-raised-button.mat-primary {
@@ -90,14 +102,13 @@
   --mdc-fab-icon-color: white;
   --mat-mdc-fab-color: #fff;
 }
+
+
+
 }
 
 
-  .Netherlands-🇳🇱-1-hex { color: #9BA7BF; }
-  .Netherlands-🇳🇱-2-hex { color: #0F1926; }
-  .Netherlands-🇳🇱-3-hex { color: #2E4159; }
-  .Netherlands-🇳🇱-4-hex { color: #566D8C; }
-  .Netherlands-🇳🇱-5-hex { color: #BF8136; }
+
 .modo-oscuro{
 
     background-color: #1F2024;

@@ -36,14 +36,9 @@ export class AppService {
     return this.http.get<Instancia>(direccion);
   }
 
-  crearInstancias(form: any,userName: any,x:any): Observable<ResponseI> {
-    const headers = new HttpHeaders({
-      'tenant': x
-    });
-    const params = new HttpParams().set('userName', userName); // Agrega userName como parámetro
-
-    const direccion = this.url + "/Instance/CreateInstance";
-    return this.http.post<any>(direccion, form,{ headers: headers, params: params });
+  crearInstancias(form: any,userName: any): Observable<ResponseI> {
+    const direccion = this.url + "/Instance/CreateInstance?userName="+userName;
+    return this.http.post<any>(direccion, form);
   }
 
   getInstancia(): Observable<InstanciaRetorno[]> {
@@ -147,5 +142,26 @@ modificarUsuario (form:any, x:any): Observable<ResponseI> {
   });
   let direccion = this.url + "/Account/ModifyUser";
   return this.http.put<any>(direccion, form,{ headers: headers }); 
+}
+
+verMisSeguidores(x:any,userName: any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/GetFollowers?userName=" +userName;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+seguirUsuario(userName: any, userNameToFollow: any, x: any): Observable<ResponseI> {
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/FollowUser?userName="+userName+"&userNameToFollow="+userNameToFollow;
+  return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+}
+
+verTematicas(){
+  let direccion = this.url + "/GeneralData/GetTematicas";
+  return this.http.get<any[]>(direccion); 
 }
 }

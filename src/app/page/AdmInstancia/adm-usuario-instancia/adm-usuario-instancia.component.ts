@@ -2,7 +2,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { Usuario } from 'src/app/modelos/usuario';
 import { AppService } from 'src/app/servicios/app.service';
 import { UsuarioRetorno } from 'src/app/modelos/usuarioRetorno';
 import { MatButtonModule } from '@angular/material/button';

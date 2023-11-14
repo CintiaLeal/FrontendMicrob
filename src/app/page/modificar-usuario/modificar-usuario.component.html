@@ -29,14 +29,6 @@
                       <button mat-icon-button color="primary" (click)="fileInput.click()" *ngIf="!base64Image">
                         <mat-icon>image</mat-icon>
                       </button>
-                    <mat-form-field class="example-full-width" appearance="fill">
-                        <mat-label>Contraseña</mat-label>
-                        <input matInput formControlName="password" type="password"  maxlength="25">
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width" type="password">
-                        <mat-label>Repetir Contraseña</mat-label>
-                        <input matInput  formControlName="confirmPassword" type="password"  maxlength="25">
-                    </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Biografia: {{usuario?.biography}}</mat-label>
                 <input matInput  formControlName="biography" type="text"  maxlength="70">

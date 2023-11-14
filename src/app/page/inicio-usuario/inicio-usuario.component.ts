@@ -30,7 +30,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { forkJoin } from 'rxjs';
+import { MessageService } from 'src/app/message.service';
 
 
 @Component({
@@ -60,6 +61,7 @@ export class InicioUsuarioComponent {
   mostrarBadge: boolean = true;
   inicioTodosLikes: any;
   public colorRojoMap: { [postId: number]: boolean } = {};
+  misseguidores:any[] = [];
 
   // Variable para controlar si el botón se ha hecho clic o no
   buttonClicked = false;
@@ -73,6 +75,44 @@ export class InicioUsuarioComponent {
   newComentario = new FormGroup({
     textComentario: new FormControl('', Validators.required),
   });
+
+  ngOnInit(): void {
+    this.tokenActual = localStorage.getItem('token') ?? '';
+    this.tipoU = localStorage.getItem('tipoUsuario');
+    this.userName = localStorage.getItem('userName');
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+
+    if (this.userName) {
+      this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
+        (value) => {  
+          this.usuario = value; // Asigna el valor de 'value' a this.usuario
+        },
+        (error) => {
+          alert('Error al cargar las instancias: ' + error);
+        }
+      );
+    }
+
+    if(this.userName){
+      this.api.verMisSeguidores(this.idInstanciaLocalHost,this.userName).subscribe(
+        (value) => {  
+          this.misseguidores = value; // Asigna el valor de 'value' a this.usuario
+        },
+        (error) => {
+          alert('Error al cargar las instancias: ' + error);
+        }
+      );
+
+      }
+
+    this.getMisPost();
+    this.getPosteosInicio();
+    this.getPosteosInicio1();
+    setInterval(() => {
+      this.tengoNewPostParaVer();
+    }, 3000); // 3000 milisegundos = 3 segundos
+
+  }
   mostrarContenido(contenido: string) {
     this.contenidoVisible = contenido;
 
@@ -189,33 +229,7 @@ export class InicioUsuarioComponent {
     }
   }
   //EXPANCION COMENTARIOS
-  ngOnInit(): void {
-    this.tokenActual = localStorage.getItem('token') ?? '';
-    this.tipoU = localStorage.getItem('tipoUsuario');
-    this.userName = localStorage.getItem('userName');
-    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
-
-    if (this.userName) {
-      this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
-        (value) => {
-       
-          this.usuario = value; // Asigna el valor de 'value' a this.usuario
-
-        },
-        (error) => {
-          alert('Error al cargar las instancias: ' + error);
-        }
-      );
-    }
-
-    this.getMisPost();
-    this.getPosteosInicio();
-    this.getPosteosInicio1();
-    setInterval(() => {
-      this.tengoNewPostParaVer();
-    }, 3000); // 3000 milisegundos = 3 segundos
-
-  }
+  
   mostrarDivComentario(postId: number) {
     this.mostrarDiv[postId] = !this.mostrarDiv[postId];
   }
@@ -280,6 +294,7 @@ export class InicioUsuarioComponent {
     }
   }
 
+ 
   getPosteosInicio() {
     this.inicioTodosPost = [];
     // 1. Obtener todos los suarios de la instancia
@@ -402,17 +417,6 @@ export class InicioUsuarioComponent {
       console.error('El nombre de usuario es nulo.');
     }
   }
-  openDialog(postId: any) {
-    const dialogRef = this.dialog.open(DialogContentExample, {
-      data: { postId: postId } // Pasar el valor de postId como dato al diálogo
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      // Puedes acceder al valor de postId aquí si es necesario.
-    });
-  }
-
   lediomg(postId: any, userName: any): number {
     this.inicioTodosLikes = []; // Array para almacenar todos los likes
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
@@ -443,11 +447,25 @@ export class InicioUsuarioComponent {
     return dioMeGusta;
 
   }
+  openDialog(postId: any) {
+    const dialogRef = this.dialog.open(DialogContentExample, {
+      data: { postId: postId } // Pasar el valor de postId como dato al diálogo
+    });
 
-
-
-
-
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      // Puedes acceder al valor de postId aquí si es necesario.
+    });
+  }
+  openDialogSeguir(userName: any) {
+    const dialogRefs = this.dialog.open(DialogSeguir, {
+      data: { userName: userName }
+    });
+    dialogRefs.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      // Puedes acceder al valor de postId aquí si es necesario.
+    });
+  }
 }
 
 @Component({
@@ -523,3 +541,100 @@ export class DialogContentExample {
 
 
 }
+
+
+
+
+@Component({
+  selector: 'darSeguir',
+  templateUrl: 'darSeguir.html',
+  standalone: true,
+  styleUrls: ['./inicio-usuario.component.scss'],
+  imports: [MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatGridListModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatDividerModule,
+    CommonModule]
+})
+export class DialogSeguir {
+  userName: any; // Declarar la propiedad postId
+  inicioTodosPost1: any;
+  inicioTodosLikes: any;
+  idInstanciaLocalHost: any;
+  usuario:any;
+  misseguidores: any;
+  miUsuario:any;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService,private messageService: MessageService) {
+    this.userName = data.userName;
+  }
+
+  ngOnInit(): void {
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+    if (this.userName) {
+      this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
+        (value) => {  
+          this.usuario = value; // Asigna el valor de 'value' a this.usuario
+        },
+        (error) => {
+          alert('Error al cargar las instancias: ' + error);
+        }
+      );
+    }
+    if(this.userName){
+      this.api.verMisSeguidores(this.idInstanciaLocalHost,this.userName).subscribe(
+        (value) => {  
+          this.misseguidores = value; // Asigna el valor de 'value' a this.usuario
+        },
+        (error) => {
+          alert('Error al cargar las instancias: ' + error);
+        }
+      );
+      }
+  }
+
+  seguirUsuario() {
+    this.miUsuario = localStorage.getItem('userName');
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+    console.log(this.miUsuario, this.userName, this.idInstanciaLocalHost);
+  
+    if (this.miUsuario && this.userName && this.idInstanciaLocalHost) {
+      this.api.seguirUsuario(this.miUsuario, this.userName, this.idInstanciaLocalHost).subscribe(
+        (data) => {
+        },
+        (error) => {
+          this.messageService.showError('Ya lo sigues.');
+        }
+      );
+    } else {
+      console.error('Valores faltantes para seguirUsuario');
+    }
+  }
+  
+  
+}
+
+function mergeMap(arg0: (users: UsuarioRetorno[]) => Observable<any[]>): import("rxjs").OperatorFunction<UsuarioRetorno[], unknown> {
+  throw new Error('Function not implemented.');
+}
+

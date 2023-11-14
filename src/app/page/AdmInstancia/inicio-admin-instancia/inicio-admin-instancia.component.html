@@ -31,8 +31,50 @@
     </ng-template>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Crear</ng-template>
-    <p>This content was rendered eagerly</p>
+    <ng-template matStepLabel>Estadicticas</ng-template>
+    <ngx-charts-advanced-pie-chart
+    [view]="[400, 300]" 
+    [scheme]="'cool'" 
+  
+    [results]="[
+      {
+        'name': 'Label 1',
+        'value': 300
+      },
+      {
+        'name': 'Label 2',
+        'value': 500
+      },
+      {
+        'name': 'Label 3',
+        'value': 200
+      }
+    ]"
+  ></ngx-charts-advanced-pie-chart>
+  <ngx-charts-advanced-pie-chart
+  [view]="[400, 300]"
+  [scheme]="'cool'"
+  [results]="[
+    {
+      'name': 'Label 1',
+      'value': 300
+    },
+    {
+      'name': 'Label 2',
+      'value': 500
+    },
+    {
+      'name': 'Label 3',
+      'value': 200
+    }
+  ]"
+  [customColors]="getCustomColors()"
+></ngx-charts-advanced-pie-chart>
+<ngx-charts-advanced-pie-chart
+  [view]="[400, 300]"
+  [results]="data"
+  [customColors]="getCustomColorss(data)"
+></ngx-charts-advanced-pie-chart>
     <button mat-button matStepperPrevious>Back</button>
   </mat-step>
 </mat-stepper>

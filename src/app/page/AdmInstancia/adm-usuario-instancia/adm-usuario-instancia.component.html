@@ -25,26 +25,24 @@
 
     <ng-container matColumnDef="borrar">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let user">
-        <button mat-icon-button>
+      <mat-cell *matCellDef="let user" >
+        <button mat-icon-button *ngIf="tipoU !== 'Moderator'">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="editar">
-      <mat-header-cell *matHeaderCellDef> Modificar </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-          <button mat-button (click)="openDialog()">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let row" >
+          <button mat-button (click)="openDialog()" *ngIf="tipoU !== 'Moderator'">
           <mat-icon>edit</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
-
     <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
     <mat-row *matRowDef="let row; columns: columnas"></mat-row>
   </table>
-
-  <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[3, 6]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
 </div>
 
 <div *ngIf="tipoU !== 'Instance-Administrator' && tipoU !== 'Moderator' && tipoU !== 'Platform-Administrator'">

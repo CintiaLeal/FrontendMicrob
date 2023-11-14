@@ -5,6 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 import { Login } from 'src/app/modelos/login';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppService } from 'src/app/servicios/app.service';
+import { MessageService } from 'src/app/message.service';
 
 @Component({
   selector: 'app-login',
@@ -18,66 +19,43 @@ export class LoginComponent {
   idT: string | null = null;
 
   loginForm = new FormGroup({
-    email: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
   jwtHelper: any;
 
-  constructor(private api: AppService, private router: Router, private app: AppComponent) { this.jwtHelper = new JwtHelperService(); }
+  constructor(private api: AppService, private router: Router, private app: AppComponent,private messageService: MessageService) { this.jwtHelper = new JwtHelperService(); }
 
   ngOnInit(): void {
   }
-
   onLogin() {
-    this.idT = localStorage.getItem("idInstancia");
     let x: Login = {
-      username: this.loginForm.controls["email"].value ? this.loginForm.controls["email"].value : " ",
+      username: this.loginForm.controls["username"].value ? this.loginForm.controls["username"].value : " ",
       password: this.loginForm.controls["password"].value ? this.loginForm.controls["password"].value : " "
     }
-    this.api.loginByEmail(x, 2).subscribe(data => {
-      localStorage.setItem("token", data.token);
-      this.tokens = data.token;
-      localStorage.setItem("userName", x.username);
-
-      if (this.tipoU && 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' in this.tipoU) {
-        if (this.tipoU['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Common-User') {
-          this.app.cambiarTipoUsuario(data.token);
-          localStorage.setItem("tipoUsuario", 'Common-User');
-          this.router.navigate(['/inicioUsuario']);
-        } else if (this.tipoU['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Instance-Administrator') {
-          this.app.cambiarTipoUsuario(data.token);
-          localStorage.setItem("tipoUsuario", 'Instance-Administrator');
-          this.router.navigate(['/inicioAdm']);
+  
+    this.api.loginByEmail(x,0).subscribe(
+      (data) => {
+        localStorage.setItem("token", data.token);
+        this.tokens = data.token;
+        localStorage.setItem("userName", x.username);
+        const decodedToken = this.jwtHelper.decodeToken(this.tokens);
+        this.tipoUsuario = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+        if(this.tipoUsuario == 'Platform-Administrator') {
+            localStorage.setItem("tipoUsuario", 'Platform-Administrator');
+            this.router.navigate(['/inicioAdmPlataformaGestorInstancia']);
+            this.messageService.showSuccess('Inicio de sesión exitoso como administrador de plataforma.');
         }
+        else{
+        this.messageService.showError('Solo pueden entrar de este modo los administrador de plataforma.');
+
+        }
+      },
+      (error) => {
+        this.messageService.showError('Error al iniciar sesión. Por favor, verifique sus credenciales e inténtelo de nuevo.');
       }
-    });
-
-
+    );
   }
-  //Common-User Moderator Platform-Administrator Instance-Administrator 
-
-  decodeToken(token: string) {
-    console.log("llego al deco");
-    const decodedToken = this.jwtHelper.decodeToken(token);
-    localStorage.setItem('token', token);
-    console.log("aud: ", decodedToken.aud);
-    console.log("exp: ", decodedToken.exp);
-    console.log("Role: ", decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
-    console.log("name: ", decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']);
-    console.log("iss: ", decodedToken.iss);
-
-    this.tipoUsuario = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-    localStorage.setItem('tipoUsuario', decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
-
-    this.app.cambiarTipoUsuario(decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
-  }
-
-  // Ejemplo de cómo verificar si un token ha expirado
-  isTokenExpired(token: string) {
-    const isExpired = this.jwtHelper.isTokenExpired(token);
-    console.log(`Token expired: ${isExpired}`);
-  }
-
 }
 
 

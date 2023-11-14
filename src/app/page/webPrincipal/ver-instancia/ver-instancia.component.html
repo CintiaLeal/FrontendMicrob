@@ -4,11 +4,11 @@
   <button class="btn-header" mat-button routerLink="/">Inicio</button>
   <button class="btn-header" mat-button routerLink="/verInstancia">Comunidad</button>
 </mat-toolbar>
-<body>
+<div *ngIf="instancias">
   <div class="backgroundBody">
   </div>
 
-  
+
   <div class="alineacionDesplegables">
     <mat-form-field class="desplegables">
       <mat-label>Privacidad</mat-label>
@@ -20,36 +20,42 @@
     </mat-form-field>
     <mat-form-field class="desplegables">
       <mat-label>Tematicas</mat-label>
-      <mat-select >
+      <mat-select>
         <mat-option *ngFor="let tematicas of tematicas" [value]="tematicas.value">
           {{tematicas.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
- 
-  <div class="container">
-    <div class="items-container">
-      <div class="item" *ngFor="let x of instancias">
-        <div>
-          <mat-card >
-          <mat-card-header>
-            <img mat-card-image class="imgPORTADA" src={{x.logo}} />
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              {{x.nombre}} <mat-chip disabled>{{x.tematica.name}}</mat-chip>
-            </p>
-            <p>
-              {{x.description}}
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button (click)="navegarAOtroComponente(x.tenantInstanceId,x.dominio)" class="btn">Unirme ya</button>
-          </mat-card-actions>
-        </mat-card>
+  <div *ngIf="instanciasCargadas; else noInstancias">
+    <div class="container">
+      <div class="items-container">
+        <div class="item" *ngFor="let x of instancias">
+          <div>
+            <mat-card>
+              <mat-card-header>
+                <img mat-card-image class="imgPORTADA" src={{x.logo}} />
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  {{x.nombre}} <mat-chip disabled>{{x.tematica.name}}</mat-chip>
+                </p>
+                <p>
+                  {{x.description}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button (click)="navegarAOtroComponente(x.tenantInstanceId,x.dominio)" class="btn">Unirme
+                  ya</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+        </div>
       </div>
+    </div>
   </div>
 </div>
-</div>
-</body>
+<ng-template #noInstancias>
+<button mat-raised-button color="primary" routerLink="/login">Ir a Login</button>
+</ng-template>

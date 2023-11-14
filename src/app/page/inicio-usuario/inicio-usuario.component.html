@@ -16,7 +16,7 @@
         <form [formGroup]="registrarForm">
           <mat-form-field class="example-full-width a">
             <mat-label>Escribir</mat-label>
-            <textarea class="colorletras a " matInput [value]="inputText" maxlength="250" formControlName="text"
+            <textarea class="colorletras a " matInput [value]="inputText" maxlength="130" formControlName="text"
               placeholder="Publica..."></textarea>
           </mat-form-field>
           <div *ngIf="base64Image" class="image-container">
@@ -48,7 +48,7 @@
               <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
                   src={{x.userOwner.profileImage}}>
               </div>
-              <mat-card-title> {{x.userOwner.firstName}}</mat-card-title>
+              <mat-card-title (click)="openDialogSeguir(x.userOwner.userName)"> {{x.userOwner.firstName}}</mat-card-title>
               <mat-card-subtitle >
                 {{ x.userOwner.userName }} | {{ x.created | date:'dd/MM/yyyy' }}
               </mat-card-subtitle>
@@ -230,7 +230,7 @@
             <mat-icon class="iconDiaCumple">calendar_month</mat-icon>
             {{ usuario?.birthday | date:'dd/MM/yyyy' }}
           </h4>
-          <p>Seguidores 1{{usuario?.followUsers}}</p>
+          <p>Seguidores  {{misseguidores.length}}</p>
         </div>
         <hr>
         <div *ngFor="let x of misPost">
@@ -247,20 +247,8 @@
                 {{x.text}}
               </p>
               <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
+              <a (click)="openDialog(x.postId)" class="mgPost">{{ x.likes.length }} ❤</a>
             </mat-card-content>
-            <mat-card-actions>
-              <div class="example-button-row">
-                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                  <mat-icon class="icon">favorite</mat-icon>
-                </button>
-                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                  <mat-icon class="icon">redo</mat-icon>
-                </button>
-                <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                  <mat-icon class="icon">chat_bubble</mat-icon>
-                </button>
-              </div>
-            </mat-card-actions>
           </mat-card>
         </div>
       </div>
@@ -306,7 +294,7 @@
         <li>
           <a (click)="mostrarContenido('home'); mostrarBange('home'); getPosteosInicio();">
             <mat-icon *ngIf="contador > 0" [matBadge]="contador" class="icon" (click)="getPosteosInicio()">home</mat-icon>
-  <mat-icon *ngIf="contador === 0" class="icon" (click)="getPosteosInicio()">home</mat-icon>
+  <mat-icon *ngIf="contador === 0" class="icon" >home</mat-icon>
             <span class="text">Home</span>
           </a>
         </li>

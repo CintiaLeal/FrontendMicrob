@@ -24,8 +24,8 @@
           <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
           <span class="file-name"></span>
       </div>
-      <div>
-        <img [src]="base64Image" alt="Imagen">
+      <div class="image-container">
+        <img [src]="base64Image" alt="Imagen" class="img">
       </div>
       
         <mat-form-field class="full-width">
@@ -81,25 +81,17 @@
             </mat-card>
           </div>
         </div>
-        
- 
-  
-        <!-- Campo Temática (desplegable) -->
-        <mat-form-field class="full-width">
+        <mat-form-field  class="full-width">
           <mat-label>Temática</mat-label>
-          <mat-select required formControlName="tematica">
-            <mat-option value="Fútbol">Fútbol</mat-option>
-            <mat-option value="Música">Música</mat-option>
-            <mat-option value="Películas">Películas</mat-option>
+          <mat-select formControlName="tematica">
+            <mat-option *ngFor="let tematica of lisTematicas" [value]="tematica.name">
+              {{ tematica.name }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
-
-
-<!-- Botón de Guardar -->
 <mat-card-actions>
     <button mat-stroked-button mat-button-lg color="primary"  (click)="onRegistrar()">Guardar</button>
 </mat-card-actions>
-
     </form>
 </mat-card-content>
 </mat-card>

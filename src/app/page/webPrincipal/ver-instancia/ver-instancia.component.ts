@@ -23,16 +23,19 @@ export class VerInstanciaComponent implements OnInit {
   constructor(private api: AppService, private router: Router, private app:AppComponent ){ }
   tematicaSeleccionada: string | null = null;
     //Para listar las instancias
-    public instancias: InstanciaRetorno[] = [];
-  
-    ngOnInit(): void {
+    instancias: any[] = []; // Asegúrate de ajustar el tipo según lo que devuelve tu API
+  instanciasCargadas: boolean = false;
 
+  ngOnInit(): void {
     this.api.getInstancia().subscribe({
-      
-      next: value => this.instancias = value,
-      error: err => { alert('Error al cargar las instancias: ' + err) }
+      next: value => {
+        this.instancias = value;
+        this.instanciasCargadas = true; // Marcamos que las instancias han sido cargadas
+      },
+      error: error => {
+        console.error('Error al obtener instancias:', error);
+      }
     });
-    console.log(this.instancias);
   }
 
   //Para los desplegables
