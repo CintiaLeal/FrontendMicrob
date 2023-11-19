@@ -29,22 +29,10 @@ export class InicioAdminInstanciaComponent {
   instanciaActual: InstanciaRetorno | null=null;
   tokenActual: string | null=null;
   usuarios: any;
-  view: [number, number] = [900, 400];
-
-   //Para los desplegables
-   foods: Filtro[] = [
-    {value: 'opcion0', viewValue: 'Todas'},
-    {value: 'opcion1', viewValue: 'Público'},
-    {value: 'opcion2', viewValue: 'Privados'}
-  ];
-  tematicas: Tematica[] = [
-    {value: '1', viewValue: 'Todas'},
-    {value: 'Música', viewValue: 'Música'},
-    {value: 'Fútbol', viewValue: 'Fútbol'},
-    {value: 'Películas', viewValue: 'Películas'}
-  ];
-
-  hidden = false;
+  cantUser:any;
+  cantMode:any;
+  cantPost: any;
+  ultimosUsuarios: any[] | any;
 
   constructor(private app:AppComponent, private api: AppService) {
     this.tipoU = localStorage.getItem('tipoUsuario');
@@ -56,49 +44,47 @@ export class InicioAdminInstanciaComponent {
     this.idinstancia = localStorage.getItem('idInstancia');
     this.tokenActual = localStorage.getItem('token') ?? '';
     this.tipoU = localStorage.getItem('tipoUsuario');
-    //window.location.reload();
+
     this.api.getInstanciaPorId(this.idinstancia).subscribe({
       next: value => this.instanciaActual = value,
       error: err => { alert('Error al cargar las instancias: ' + err) }
     });
+   this.panel();
+  }
 
+  panel() {
     this.api.obtenerUsuarios(this.idinstancia).subscribe({
-      next: value => this.usuarios = value,
-      error: err => { alert('Error al cargar las instancias: ' + err) }
+      next: users => {
+        // Llenar la variable cantUser con la cantidad de usuarios
+        this.cantUser = users.length;
+  
+        // Inicializar la variable cantPost en 0
+        this.cantPost = 0;
+  
+        // Recorrer los usuarios para contar la cantidad total de posts
+        users.forEach(user => {
+          this.cantPost += user.posts ? user.posts.length : 0;
+        });
+  
+        // Obtener los últimos 2 usuarios basándose en el ID más alto
+        this.ultimosUsuarios = users
+          .sort((a, b) => b.userId - a.userId)
+          .slice(0, 2);
+  
+        console.log('Cantidad de usuarios:', this.cantUser);
+        console.log('Cantidad total de posts:', this.cantPost);
+        console.log('Últimos 2 usuarios:', this.ultimosUsuarios);
+      },
+      error: err => {
+        alert('Error al cargar las instancias: ' + err);
+        console.error('Error al obtener usuarios:', err);
+      }
     });
+  }
+  
 
-    this.getCustomColors();
-  }
-  getCustomColors(): any {
-    return [
-      { name: 'Label 1', value: '#FF5733' },  // Personaliza el color para Label 1
-      { name: 'Label 2', value: '#33FF57' },  // Personaliza el color para Label 2
-      { name: 'Label 3', value: '#5733FF' }   // Personaliza el color para Label 3
-    ];
-  }
-  data = [
-    {
-      'name': 'Label 1',
-      'value': 300,
-      'color': '#FF5733'
-    },
-    {
-      'name': 'Label 2',
-      'value': 500,
-      'color': '#33FF57'
-    },
-    {
-      'name': 'Label 3',
-      'value': 200,
-      'color': '#5733FF'
-    }
-  ];
-  getCustomColorss(data: any[]): any {
-    return data.map(item => ({ name: item.name, value: item.color }));
-  }
-  toggleBadgeVisibility() {
-    this.hidden = !this.hidden;
-  }
+
+  
   //INI PARA IMG COM BASE 64
   convertToBase64(file: File) {
     console.log(file);

@@ -10,6 +10,15 @@
 
 .modo-oscuro{
 
+    .mat-h2, .mat-headline-6, .mat-typography .mat-h2, .mat-typography .mat-headline-6, .mat-typography h2 {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 32px;
+        font-family: Roboto, sans-serif;
+        letter-spacing: .0125em;
+        color: white;
+        margin: 0 0 16px;
+    }
     background-color: #1F2024;
     .mat-mdc-raised-button.mat-primary {
         

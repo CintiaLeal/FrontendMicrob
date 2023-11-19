@@ -44,7 +44,7 @@
       </mat-form-field>
       <mat-form-field class="example-full-width" type="password">
         <mat-label>Repetir Contraseña</mat-label>
-        <input matInput formControlName="confirmPassword" type="confirmPassword" maxlength="25">
+        <input matInput formControlName="confirmPassword" type="password" maxlength="25">
       </mat-form-field>
 
       <div>
@@ -62,8 +62,13 @@
       </mat-form-field>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Ocupación</mat-label>
-        <input matInput formControlName="occupation" type="text" maxlength="25">
+        <mat-select formControlName="occupation">
+          <mat-option *ngFor="let occupation of predefinedOccupations" [value]="occupation">
+            {{ occupation }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
+      
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Ciudad</mat-label>
         <mat-select formControlName="city">

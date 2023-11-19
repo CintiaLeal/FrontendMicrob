@@ -32,6 +32,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { forkJoin } from 'rxjs';
 import { MessageService } from 'src/app/message.service';
+import { AppnosqlService } from 'src/app/servicios/appnosql.service';
+import { JsonpInterceptor } from '@angular/common/http';
 
 
 @Component({
@@ -61,11 +63,13 @@ export class InicioUsuarioComponent {
   mostrarBadge: boolean = true;
   inicioTodosLikes: any;
   public colorRojoMap: { [postId: number]: boolean } = {};
-  misseguidores:any[] = [];
-
+  misseguidores: any[] = [];
+  losquesigo: any[] = [];
+  topHastagsInicio: any [] =[];
+ // miinfoUsuario:any;
   // Variable para controlar si el botón se ha hecho clic o no
   buttonClicked = false;
-  constructor(public dialog: MatDialog, private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
+  constructor(private appNosql: AppnosqlService, public dialog: MatDialog, private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
     this.tipoU = localStorage.getItem('tipoUsuario');
 
   }
@@ -93,25 +97,34 @@ export class InicioUsuarioComponent {
       );
     }
 
-    if(this.userName){
-      this.api.verMisSeguidores(this.idInstanciaLocalHost,this.userName).subscribe(
-        (value) => {  
+    if (this.userName) {
+      this.api.verMisSeguidores(this.idInstanciaLocalHost, this.userName).subscribe(
+        (value) => {
           this.misseguidores = value; // Asigna el valor de 'value' a this.usuario
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
         }
       );
-
-      }
+      this.api.verSeguidos(this.idInstanciaLocalHost, this.userName).subscribe(
+        (value) => {
+          this.losquesigo = value; // Asigna el valor de 'value' a this.usuario
+        },
+        (error) => {
+          alert('Error al cargar las instancias: ' + error);
+        }
+        );
+    }
 
     this.getMisPost();
     this.getPosteosInicio();
     this.getPosteosInicio1();
-    setInterval(() => {
+    this.obtenertopHastags(4);
+    
+ /*   setInterval(() => {
       this.tengoNewPostParaVer();
     }, 3000); // 3000 milisegundos = 3 segundos
-
+*/
   }
   mostrarContenido(contenido: string) {
     this.contenidoVisible = contenido;
@@ -127,6 +140,14 @@ export class InicioUsuarioComponent {
     this.inputText = text.replace(regex, (match: any) => `<span class="hashtag">${match}</span>`);
   }
 
+  obtenertopHastags(cantidad:any){
+    if(this.idInstanciaLocalHost){
+      this.appNosql.getHastgas(this.idInstanciaLocalHost,cantidad).subscribe(
+        (value) => {
+          this.topHastagsInicio = value;     
+        });
+      }
+  }
 
   addLink(postId: any) {
     // Obtener la instancia y el nombre de usuario
@@ -142,7 +163,12 @@ export class InicioUsuarioComponent {
     // Realizar la solicitud POST para agregar el like
     this.api.darLikes(this.idInstancia, this.userName, postId).subscribe(
       (data: any) => {
-        // Manejar la respuesta si es necesario
+   /*     const formatoMG: any = {
+          userId: this.miinfoUsuario.userId,
+          tenantId: data.tenantInstanceId, 
+          postId: data.postId
+        };
+     this.appNosql.darMgNOSQL(formatoMG);*/
       },
       (error: any) => {
         console.error('Error al agregar el like:', error);
@@ -184,6 +210,7 @@ export class InicioUsuarioComponent {
     this.idInstancia = localStorage.getItem('idInstancia');
 
     this.api.newComentarioPost(x, this.idInstanciaLocalHost, this.userName, postId).subscribe(data => {
+
     });
     this.imgComentario = '';
     this.newComentario.controls['textComentario'].reset();
@@ -229,7 +256,7 @@ export class InicioUsuarioComponent {
     }
   }
   //EXPANCION COMENTARIOS
-  
+
   mostrarDivComentario(postId: number) {
     this.mostrarDiv[postId] = !this.mostrarDiv[postId];
   }
@@ -267,14 +294,37 @@ export class InicioUsuarioComponent {
       hashtag: hashtags // Agrega los hashtags al array
     };
     this.idInstancia = localStorage.getItem('idInstancia');
-    this.api.newPost(x, this.idInstanciaLocalHost, this.userName).subscribe(data => {
-
-      this.getMisPost();
-      this.getPosteosInicio();
-    });
-    this.base64Image = '';
-    this.registrarForm.controls['text'].reset();
-  }
+    this.api.newPost(x, this.idInstanciaLocalHost, this.userName).subscribe(
+      (data) => {
+        const formatoPost: any = {
+          userId: data.userOwner.userId,
+          tenantId: this.idInstancia, // Cambié data['idInstancia'] a data.idInstancia
+          postId: data.postId,
+          postCreated: data.created,
+          isSanctioned: data.isSanctioned,
+          hashtags: data.hashtag
+        };
+        console.log("Data que le paso al crearPost" + JSON.stringify(formatoPost));
+        this.getMisPost();
+        this.getPosteosInicio();
+        this.base64Image = '';
+        this.registrarForm.controls['text'].reset();
+    
+        this.appNosql.crearPostNOSQL(formatoPost).subscribe(
+          (data) => {
+            // Manejar la respuesta del servicio appNosql.crearPostNOSQL si es necesario
+          },
+          (error) => {
+            console.log("Error en crearPostNOSQL:", error);
+          }
+        );
+      },
+      (error) => {
+        console.log("Error en newPost:", error);
+      }
+    );
+    
+    }
 
   getMisPost() {
     if (this.userName) {
@@ -294,21 +344,16 @@ export class InicioUsuarioComponent {
     }
   }
 
- 
+
   getPosteosInicio() {
     this.inicioTodosPost = [];
-    // 1. Obtener todos los suarios de la instancia
     this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
-      // 2. Para cada usuario, obtener sus posts
       for (const usuario of users) {
         this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
-          // 3. Agregar los posts del usuario actual a la lista de posts
           for (const post of posts) {
-            post.userOwner = usuario; // Asigna el usuario al post
+            post.userOwner = usuario;
           }
           this.inicioTodosPost.push(...posts);
-
-          // 4. Ordenar los posts por fecha (de más reciente a más antiguo)
           this.inicioTodosPost.sort((a, b) => {
             const dateA = new Date(a.created).getTime();
             const dateB = new Date(b.created).getTime();
@@ -319,6 +364,37 @@ export class InicioUsuarioComponent {
       console.log(this.inicioTodosPost);
     });
   }
+  /*
+  getPosteosInicio() {
+    // 1. Obtener todos los usuarios de la instancia
+    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((usuarios: UsuarioRetorno[]) => {
+      // 2. Crear un array para almacenar todos los posts con información de usuario
+      const inicioTodosPost: any[] = [];
+  
+      // 3. Iterar sobre cada usuario
+      usuarios.forEach(usuario => {
+        // 4. Iterar sobre los posts del usuario y agregar información del usuario al post
+        usuario.posts.forEach(post => {
+          inicioTodosPost.push({
+            post: post,
+            usuario: usuario
+          });
+        });
+      });
+  
+      // 5. Ordenar todos los posts por fecha
+      inicioTodosPost.sort((a, b) => {
+        const dateA = new Date(a.post.created).getTime();
+        const dateB = new Date(b.post.created).getTime();
+        return dateB - dateA;
+      });
+  
+      // 6. Ahora postsConUsuario contiene todos los posts con información de usuario ordenados por fecha
+      console.log(inicioTodosPost);
+    });
+  }*/
+  
+
   getPosteosInicio1() {
     this.inicioTodosPost1 = [];
     // 1. Obtener todos los suarios de la instancia
@@ -505,14 +581,14 @@ export class DialogContentExample {
   inicioTodosPost1: any;
   inicioTodosLikes: any;
   idInstanciaLocalHost: any;
- 
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService) {
     this.postId = data.postId;
   }
 
   ngOnInit(): void {
 
-     
+
     this.getPosteosInicio1(this.postId);
   }
 
@@ -582,10 +658,10 @@ export class DialogSeguir {
   inicioTodosPost1: any;
   inicioTodosLikes: any;
   idInstanciaLocalHost: any;
-  usuario:any;
+  usuario: any;
   misseguidores: any;
-  miUsuario:any;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService,private messageService: MessageService) {
+  miUsuario: any;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService, private messageService: MessageService) {
     this.userName = data.userName;
   }
 
@@ -593,7 +669,7 @@ export class DialogSeguir {
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
     if (this.userName) {
       this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
-        (value) => {  
+        (value) => {
           this.usuario = value; // Asigna el valor de 'value' a this.usuario
         },
         (error) => {
@@ -601,23 +677,23 @@ export class DialogSeguir {
         }
       );
     }
-    if(this.userName){
-      this.api.verMisSeguidores(this.idInstanciaLocalHost,this.userName).subscribe(
-        (value) => {  
+    if (this.userName) {
+      this.api.verMisSeguidores(this.idInstanciaLocalHost, this.userName).subscribe(
+        (value) => {
           this.misseguidores = value; // Asigna el valor de 'value' a this.usuario
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
         }
       );
-      }
+    }
   }
 
   seguirUsuario() {
     this.miUsuario = localStorage.getItem('userName');
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
     console.log(this.miUsuario, this.userName, this.idInstanciaLocalHost);
-  
+
     if (this.miUsuario && this.userName && this.idInstanciaLocalHost) {
       this.api.seguirUsuario(this.miUsuario, this.userName, this.idInstanciaLocalHost).subscribe(
         (data) => {
@@ -630,8 +706,8 @@ export class DialogSeguir {
       console.error('Valores faltantes para seguirUsuario');
     }
   }
-  
-  
+
+
 }
 
 function mergeMap(arg0: (users: UsuarioRetorno[]) => Observable<any[]>): import("rxjs").OperatorFunction<UsuarioRetorno[], unknown> {

@@ -3,8 +3,10 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscriber } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
+import { MessageService } from 'src/app/message.service';
 import { UsuarioRetorno } from 'src/app/modelos/usuarioRetorno';
 import { AppService } from 'src/app/servicios/app.service';
+import { AppnosqlService } from 'src/app/servicios/appnosql.service';
 
 @Component({
   selector: 'app-modificar-usuario',
@@ -35,12 +37,13 @@ export class ModificarUsuarioComponent {
   idInstanciaLocalHost: any | null;
   usuario: UsuarioRetorno | null = null;
   fechaCumpleanosUsuario: string | undefined; // O el tipo correcto de acuerdo a tu lógica
- 
+  predefinedOccupations = ['Maestro', 'Programador', 'Doctor', 'Enfermero', 'Albañil', 'Ingeniero', 'Diseñador', 'Cocinero', 'Artista', 'Economista'];
 
-  constructor(public dialog: MatDialog,private api: AppService, private app: AppComponent) {
+
+  constructor(private messageService: MessageService,public dialog: MatDialog,private api: AppService, private app: AppComponent,private appNosql: AppnosqlService) {
     this.tipoU = localStorage.getItem('tipoUsuario');
-
   }
+
   ngOnInit(): void {
     this.tokenActual = localStorage.getItem('token') ?? '';
     this.tipoU = localStorage.getItem('tipoUsuario');
@@ -51,7 +54,7 @@ export class ModificarUsuarioComponent {
       this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
         (value) => {
           this.usuario = value; // Asigna el valor de 'value' a this.usuario
-
+  
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
@@ -85,11 +88,29 @@ export class ModificarUsuarioComponent {
       city: {
         id: this.usuario?.city.id,
         name: this.usuario?.city.name
-    }    
+      },
+      role:  this.tipoU,
     }
   this.idInstancia=localStorage.getItem('idInstancia');
   this.api.modificarUsuario(x,this.idInstancia).subscribe(data => {
-    console.log(data);
+    this.messageService.showSuccess('Usuario modificado exitosamente.');
+
+    const formularioUser: any ={
+      userId: this.usuario?.userId,
+      tenantId: this.idInstancia,
+      userName:this.usuario?.userName,
+      occupation:  this.usuario?.occupation,
+      city: this.usuario?.city.name,
+      birthday: this.usuario?.birthday,
+      isSanctioned: true,
+      creationDate: this.usuario?.creationDate
+    }
+    this.appNosql.updateUserNOSQL(formularioUser).subscribe(
+      (data) => {}
+    );    
+  },
+  error => {
+    this.messageService.showError('Error al modificar el usuario. Por favor, inténtelo de nuevo.');
   });
 }
 

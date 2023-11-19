@@ -230,7 +230,7 @@
             <mat-icon class="iconDiaCumple">calendar_month</mat-icon>
             {{ usuario?.birthday | date:'dd/MM/yyyy' }}
           </h4>
-          <p>Seguidores  {{misseguidores.length}}</p>
+          <p>Seguidores  {{misseguidores.length}} Seguidos {{losquesigo.length}} </p>
         </div>
         <hr>
         <div *ngFor="let x of misPost">
@@ -271,22 +271,13 @@
   <div class="sect section3">
     <div class="caja">
       <div class="tendencias-container">
-        <h2>Tendencias</h2>
-        <ul class="tendencias-list">
+        <h2 (click)="obtenertopHastags(4)">Tendencias</h2>
+        <ul class="tendencias-list" *ngFor="let tendencia of topHastagsInicio" >
           <li class="tendencia">
-            <span class="hashtag">#TendenciaUsuarios</span>
-            <span class="count">500K</span>
-          </li>
-          <li class="tendencia">
-            <span class="hashtag">#Tendencia2</span>
-            <span class="count">300K</span>
-          </li>
-          <li class="tendencia">
-            <span class="hashtag">#Tendencia22</span>
-            <span class="count">300K</span>
+            <span class="hashtag">{{ '#' + tendencia.name }}</span>
+            <span class="count">{{ tendencia.relationshipCount }}</span>
           </li>
         </ul>
-
       </div>
     </div>
     <div class="caja3">
@@ -299,7 +290,7 @@
           </a>
         </li>
         <li>
-          <a (click)="mostrarContenido('perfil')">
+          <a (click)="mostrarContenido('perfil'); getMisPost(); ">
             <mat-icon class="icon">person</mat-icon>
             <span class="text">Mi Perfil</span>
           </a>

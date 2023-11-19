@@ -1,90 +1,88 @@
-
- /* Estilos para el formulario */
-.example-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  
-  /* Estilos para la mitad izquierda del formulario */
-  .half {
-    flex: 1;
-    width: 48%; /* Controla el ancho de cada mitad */
-    margin-right: 2%; /* Espacio entre las mitades */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Estilos para los campos de formulario */
-  .mat-form-field {
-    width: 100%;
-    margin-bottom: 16px; /* Espacio entre los campos */
-  }
-  
-  /* Estilos para el mat-slide-toggle */
-  .mat-slide-toggle {
-    margin-top: 16px; /* Espacio sobre el slide toggle */
-  }
-  
- /* Estilos para la imagen */
-.img {
-    width: 200px;
-    height: 200px;
-    background: url('/assets/img/1.png') no-repeat center center;
-    background-size: cover; /* Asegura que la imagen se ajuste al tamaño del contenedor */
-    margin: 0 auto; /* Centra horizontalmente la imagen en su contenedor */
-    display: block; /* Para asegurar que la imagen esté centrada correctamente */
-  }
-  
- 
- /* Estilos para la sección */
-.seccion {
-    display: flex;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Estilos para el icono de alerta */
-  .icono-alerta {
-    margin-right: 10px;
-    font-size: 36px;
-    color: #f44336; /* Color rojo para el ícono de alerta */
-  }
-  
-  /* Estilos para el icono de usuarios */
-  .icono-usuarios {
-    margin-left: auto; /* Empuja el icono de usuarios hacia la derecha */
-    margin-right: 10px;
-    font-size: 36px;
-    color: #2196F3; /* Color azul para el ícono de usuarios */
-  }
-  
-  /* Estilos para el texto "Publicaciones reportadas" y "230 Usuarios" */
- /* Estilos para el contenedor de contenido */
-.contenido {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Alinea el contenido verticalmente */
-    text-align: center; /* Centra el texto horizontalmente */
-  }
-  
-  .titulo {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px; /* Ajusta el margen superior según sea necesario */
-  }
-
-  
-@media (max-width: 768px) {
-    .half {
-        flex: 100%;
-    }
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px; /* Ajusta el padding según tus preferencias */
 }
 
+.title {
+  margin: 2%;
+  font-size: 20px;
+
+}
+
+.number {
+  font-size: 30px;
+ margin: 5%;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.card {
+  margin: 1cm;
+}
+
+.small-card {
+  width: 9cm;
+  height: 3cm;
+}
+.iconsUltimoUsuario{
+  font-size: 12px;
+  margin: 1%;
+  margin-right: 20%;
+  color: #2E4159;
+
+  .mat-icon, mat-icon.mat-primary, mat-icon.mat-accent, mat-icon.mat-warn {
+    
+}
+
+
+}
+.large-card-1 {
+  width: 30cm;
+  height: 15cm;
+}
+
+.large-card-2 {
+  width: 10cm;
+  height: 15cm;
+}
+
+//
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px; /* Ajusta el padding según tus preferencias */
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.label mat-icon {
+  margin-right: 5px; /* Ajusta el margen según tus preferencias */
+}
+
+.numbe {
+  margin-left: 5px; /* Ajusta el margen según tus preferencias */
+}
 //INI IMG ERROR
 .imgError {
   background: url('/assets/img/error.png') no-repeat center center;

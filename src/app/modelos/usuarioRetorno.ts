@@ -13,7 +13,8 @@ export class UsuarioRetorno {
   public isSanctioned: boolean;
   public creationDate: string;
   public administratedInstances: any[];
-  public followUsers: any[];
+  public following: any[];
+  public followers: any[];
   public blockUsers: any[];
   public muteUsers: any[];
   public posts: any[];
@@ -34,7 +35,8 @@ export class UsuarioRetorno {
       isSanctioned: boolean,
       creationDate: string,
       administratedInstances: any[],
-      followUsers: any[],
+      following: any[],
+      followers: any[],
       blockUsers: any[],
       muteUsers: any[],
       posts: any[],
@@ -54,7 +56,8 @@ export class UsuarioRetorno {
       this.isSanctioned = isSanctioned;
       this.creationDate = creationDate;
       this.administratedInstances = administratedInstances;
-      this.followUsers = followUsers;
+      this.following = following;
+      this.followers= followers;
       this.blockUsers = blockUsers;
       this.muteUsers = muteUsers;
       this.posts = posts;

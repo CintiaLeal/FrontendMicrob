@@ -33,6 +33,7 @@ import { Usuario } from 'src/app/modelos/usuario';
 import { Observable, subscribeOn, Subscriber } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MessageService } from 'src/app/message.service';
+import { AppnosqlService } from 'src/app/servicios/appnosql.service';
 
 
 @Component({
@@ -232,8 +233,9 @@ export class DialogContentExampleDialog {
   idInstancia: any | null = null;
   public birthday: Date | null =null;
   listCitys: any;
+  predefinedOccupations = ['Maestro', 'Programador', 'Doctor', 'Enfermero', 'Albañil', 'Ingeniero', 'Diseñador', 'Cocinero', 'Artista', 'Economista'];
 
-  constructor(private _formBuilder: FormBuilder,private api: AppService,private messageService: MessageService) {}
+  constructor(private _formBuilder: FormBuilder,private api: AppService,private messageService: MessageService,private appNosql: AppnosqlService) {}
 
   ngOnInit(): void {
     this.getCitys();
@@ -272,6 +274,20 @@ export class DialogContentExampleDialog {
       (data) => {
           // La solicitud fue exitosa, mostrar un mensaje de éxito
           this.messageService.showSuccess('Usuario registrado exitosamente');
+          console.log(data);
+          const form: any ={
+            userId: data.userId,
+            tenantId: this.idInstancia,
+            userName:data.userName,
+            occupation: data.occupation,
+            city: data.city.name,
+            birthday: data.birthday,
+            isSanctioned: data.isSanctioned,
+            creationDate: data.creationDate
+          }
+          this.appNosql.registrarUsuarioNOSQL(form).subscribe(
+            (data) => {}
+          );     
           console.log(data);
         },
         (error) => {

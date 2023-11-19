@@ -1,84 +1,79 @@
-
+<!-- app.component.html -->
 <app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
-<div  *ngIf="tipoU === 'Instance-Administrator'">
-<mat-stepper orientation="vertical">
-  <mat-step>
-    <ng-template matStepLabel>Información</ng-template>
-    <ng-template matStepContent>
-      <div class="seccion">
-        <div class="icono-alerta">
-         
-          <mat-icon class="icono"  matBadge="15" matBadgeColor="warn">error</mat-icon>
+<div *ngIf="tipoU === 'Instance-Administrator'">
+  <div class="card-container">
+    <mat-card class="card small-card estilo">
+      <div class="card-content">
+        <div class="title">Usuarios totales</div>
+        <div class="number-container" routerLink="/admUsuario">
+          <div class="number">{{cantUser}}
+            <p class="iconsUltimoUsuario">+12</p>
+          </div>
         </div>
-        
-        <div class="contenido">
-          <p class="titulo"  routerLink="/admPublicaciones">23 Publicaciones reportadas</p>
+      </div>
+    </mat-card>
+    <mat-card class="card small-card estilo">
+      <div class="card-content">
+        <div class="title" routerLink="/admUsuario">Aumento de usuarios</div>
+        <div class="number-container">
+          <div class="number">{{cantUser}}
+            <p class="iconsUltimoUsuario">+12</p>
+          </div>
         </div>
-        <div class="icono-usuarios">
-          <mat-icon class="icono">people</mat-icon>
+      </div>
+    </mat-card>
+    <mat-card class="card small-card estilo">
+      <div class="card-content">
+        <div class="title">Últimos ingresos</div>
+        <div class="number-container">
+          <div *ngFor="let usuario of ultimosUsuarios" class="iconsUltimoUsuario">
+            ☺ {{ usuario.userName }}
+          </div>
         </div>
-        <div class="contenido">
-          <p class="titulo" routerLink="/admUsuario">{{ usuarios?.length || 0 }} Usuarios</p>
+      </div>
+    </mat-card>
+
+  </div>
+
+  <div class="card-container">
+    <mat-card class="card large-card-1">
+      <!-- Contenido de la tarjeta grande 1 -->
+      <p>hs</p>
+    </mat-card>
+
+    <mat-card class="card large-card-2">
+      <mat-card-header class="estilo2">
+      <p>Usuarios por ciudad</p>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+      <div>
+        <p>14 Montevideo</p>
+      </div>
+      </mat-card-content>     
+    </mat-card>
+  </div>
+
+  <div class="card-container">
+    <mat-card class="card small-card estilo2">
+      <div class="card-content">
+        <div class="title">Posteos</div>
+        <div class="number-container">
+          <div class="number">{{cantPost}}</div>
+          <div class="example-button-container">
+            <button mat-fab color="accent" aria-label="Example icon button with a delete icon">
+              <mat-icon>forum</mat-icon>
+            </button>
+          </div>
         </div>
-      </div>      
-    </ng-template>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Gestinar</ng-template>
-    <ng-template matStepContent>
-      <br>
-      <a mat-button color="primary" [routerLink]="['/ModificarInstancia', instanciaActual?.dominio]">Editar Instancia</a>
-    </ng-template>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Estadicticas</ng-template>
-    <ngx-charts-advanced-pie-chart
-    [view]="[400, 300]" 
-    [scheme]="'cool'" 
-  
-    [results]="[
-      {
-        'name': 'Label 1',
-        'value': 300
-      },
-      {
-        'name': 'Label 2',
-        'value': 500
-      },
-      {
-        'name': 'Label 3',
-        'value': 200
-      }
-    ]"
-  ></ngx-charts-advanced-pie-chart>
-  <ngx-charts-advanced-pie-chart
-  [view]="[400, 300]"
-  [scheme]="'cool'"
-  [results]="[
-    {
-      'name': 'Label 1',
-      'value': 300
-    },
-    {
-      'name': 'Label 2',
-      'value': 500
-    },
-    {
-      'name': 'Label 3',
-      'value': 200
-    }
-  ]"
-  [customColors]="getCustomColors()"
-></ngx-charts-advanced-pie-chart>
-<ngx-charts-advanced-pie-chart
-  [view]="[400, 300]"
-  [results]="data"
-  [customColors]="getCustomColorss(data)"
-></ngx-charts-advanced-pie-chart>
-    <button mat-button matStepperPrevious>Back</button>
-  </mat-step>
-</mat-stepper>
+      </div>
+    </mat-card>
+  </div>
+
+
+
 </div>
+
 <div *ngIf="tipoU !== 'Instance-Administrator'">
   <div class="contenedorError">
     <div class="cajaError">

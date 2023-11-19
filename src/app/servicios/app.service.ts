@@ -18,8 +18,7 @@ export class AppService {
   url: string = "https://localhost:7131"; //URL BASE
   constructor(private http: HttpClient) { }
 
-
-  registrarUsuario(form: Usuario, x: any): Observable<ResponseI> {
+  registrarUsuario(form: Usuario, x: any): Observable<UsuarioRetorno> {
     let direccion = this.url + "/Account/Registration";
     const headers = new HttpHeaders({
       'tenant': x
@@ -86,7 +85,7 @@ let direccion = this.url + "/Account/GetUser?userName=" + encodeURIComponent(use
 return this.http.get<any>(direccion,{ headers: headers });
 }
 
-newPost(form: any, x: any, userName: any) {
+newPost(form: any, x: any, userName: any): Observable<any> {
   const headers = new HttpHeaders({
     'tenant': x,
   });
@@ -97,12 +96,12 @@ newPost(form: any, x: any, userName: any) {
   return this.http.post<any>(direccion, form, { headers: headers, params: params });
 }
 
-getMisPost(x:any, userName: string): Observable<Post[]> {
+getMisPost(x:any, userName: string): Observable<any> {
   const headers = new HttpHeaders({
     'tenant': x
   });
-let direccion = this.url + "/Post/GetPostByUser?userName=" + encodeURIComponent(userName);
-return this.http.get<Post[]>(direccion,{ headers: headers });
+let direccion = this.url + "/Post/GetPostByUser?userName=" + userName;
+return this.http.get<any>(direccion,{ headers: headers });
 
 }
 
@@ -136,7 +135,7 @@ darLikes(x: any, userName: any, postId: any) {
 }
 
 
-modificarUsuario (form:any, x:any): Observable<ResponseI> {  
+modificarUsuario (form:any, x:any): Observable<any> {  
   const headers = new HttpHeaders({
     'tenant': x,
   });
@@ -159,7 +158,14 @@ seguirUsuario(userName: any, userNameToFollow: any, x: any): Observable<Response
   let direccion = this.url + "/Account/FollowUser?userName="+userName+"&userNameToFollow="+userNameToFollow;
   return this.http.put<ResponseI>(direccion, {}, { headers: headers });
 }
-
+//https://localhost:7131/Account/GetFollowedUsers?userName=loco@uruweb
+verSeguidos(x:any,userName: any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/GetFollowedUsers?userName=" +userName;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
 verTematicas(){
   let direccion = this.url + "/GeneralData/GetTematicas";
   return this.http.get<any[]>(direccion); 

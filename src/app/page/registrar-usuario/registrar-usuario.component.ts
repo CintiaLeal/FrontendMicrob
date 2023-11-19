@@ -6,6 +6,7 @@ import { MessageService } from 'src/app/message.service';
 import { Usuario } from 'src/app/modelos/usuario';
 
 import { AppService } from 'src/app/servicios/app.service';
+import { AppnosqlService } from 'src/app/servicios/appnosql.service';
 @Component({
   selector: 'app-registrar-usuario',
   templateUrl: './registrar-usuario.component.html',
@@ -30,7 +31,7 @@ export class RegistrarUsuarioComponent {
   public birthday: Date | null = null;
   listCitys: any;
 
-  constructor(private _formBuilder: FormBuilder, private api: AppService, private messageService: MessageService) { }
+  constructor(private _formBuilder: FormBuilder, private api: AppService, private messageService: MessageService,private appNosql: AppnosqlService) { }
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -73,6 +74,19 @@ export class RegistrarUsuarioComponent {
       (data) => {
         // La solicitud fue exitosa, mostrar un mensaje de éxito
         this.messageService.showSuccess('Usuario registrado exitosamente');
+        const x: any ={
+          userId: data.userId,
+          tenantId: 0,
+          userName:data.userName,
+          occupation: data.occupation,
+          city: data.city,
+          birthday: data.birthday,
+          isSanctioned: data.isSanctioned,
+          creationDate: data.creationDate
+        }
+        this.appNosql.registrarUsuarioNOSQL(x).subscribe(
+          (data) => {}
+        );        
         console.log(data);
       },
       (error) => {

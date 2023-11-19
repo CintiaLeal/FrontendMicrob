@@ -35,7 +35,11 @@
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Ocupación: {{usuario?.occupation}} </mat-label>
-                <input matInput formControlName="occupation" type="text"  maxlength="25">
+                <mat-select formControlName="occupation">
+                  <mat-option *ngFor="let occupation of predefinedOccupations" [value]="occupation">
+                    {{ occupation }}
+                  </mat-option>
+                </mat-select>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Ciudad </mat-label>
