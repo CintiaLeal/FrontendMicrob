@@ -73,6 +73,7 @@ obtenerUsuarios(x:any): Observable<UsuarioRetorno[]> {
   const headers = new HttpHeaders({
     'tenant': x
   });
+  ///Account/GetUsersByInstance
 let direccion = this.url + "/Account/GetUsersByInstance";
 return this.http.get<UsuarioRetorno[]>(direccion,{ headers: headers });
 }
@@ -169,5 +170,46 @@ verSeguidos(x:any,userName: any){
 verTematicas(){
   let direccion = this.url + "/GeneralData/GetTematicas";
   return this.http.get<any[]>(direccion); 
+}
+
+verMiInicio(x:any,userName:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  //https://localhost:7131/Account/GetUserTimeline?userName=
+  let direccion = this.url + "/Account/GetUserTimeline?userName="+userName;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+bloquearUser(x:any,userName:any,userNameToBlock:any): Observable<ResponseI> {
+  //https://localhost:7131/Account/BlockUser?userName=juan&userNameToBlock=ana'
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/BlockUser?userName="+userName+"&userNameToBlock="+userNameToBlock;
+  return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+}
+
+mutUsuario(x:any,userName:any,userNameToBlock:any): Observable<ResponseI> {
+  //https://localhost:7131/Account/MuteUser?userName=ed&userNameToFollow=ed
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/MuteUser?userName="+userName+"&userNameToFollow="+userNameToBlock;
+  return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+}
+
+accesoGoogle(x: any, token: any): Observable<any> {
+  // Eliminar comillas alrededor del token si están presentes
+  const cleanToken = token.replace(/^"(.*)"$/, '$1');
+  console.log(cleanToken);
+
+  const headers = new HttpHeaders({
+    'tenant': x,
+    'Authorization': `Bearer ${cleanToken}`
+  });
+
+  let direccion = this.url + "/Account/LoginSocialMedia";
+  return this.http.post<any>(direccion, {}, { headers: headers });
 }
 }

@@ -39,7 +39,7 @@
   </div>
 
   <div class="section section2">
-    <div *ngIf="contenidoVisible === 'home'">
+    <div *ngIf="contenidoVisible === 'explorar'">
       <div class="scrollable-content" #scrollableContent>
         <div *ngFor="let x of inicioTodosPost">
           <br>
@@ -48,9 +48,9 @@
               <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
                   src={{x.userOwner.profileImage}}>
               </div>
-              <mat-card-title (click)="openDialogSeguir(x.userOwner.userName)"> {{x.userOwner.firstName}}</mat-card-title>
+              <mat-card-title (click)="openDialogSeguir(x.userOwner.userName,'explorar')"> {{x.userOwner?.firstName}}</mat-card-title>
               <mat-card-subtitle >
-                {{ x.userOwner.userName }} | {{ x.created | date:'dd/MM/yyyy' }}
+                {{ x.userOwner.userName }} | {{ x.created | date:'dd/MM/yyyy HH:mm'  }}
               </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
@@ -98,7 +98,7 @@
                       <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
                         src={{comentario.userOwner.profileImage}}>
                     </div>
-                      <mat-card-title>{{comentario.userOwner.firstName}}</mat-card-title>
+                      <mat-card-title>{{comentario.userOwner?.firstName}}</mat-card-title>
                       <mat-card-subtitle>
                         {{comentario.userOwner.userName}} | {{comentario.created | date:'dd/MM/yyyy HH:mm'}}
                       </mat-card-subtitle>
@@ -120,93 +120,84 @@
       <p>comentarpost</p>
     </div>
 
-    <div *ngIf="contenidoVisible === 'favorito'">
-      <div class="scrollable-content">
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
-              nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
+    <div *ngIf="contenidoVisible === 'home'">
+   
+      <div class="scrollable-content" #scrollableContent>
+        <div *ngFor="let x of postHome">
+          <br>
+          <mat-card>
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
+                  src={{x.userOwner?.profileImage}}>
+              </div>
+              <mat-card-title (click)="openDialogSeguir(x.userOwner.userName,'home')"> {{x.userOwner?.firstName}}</mat-card-title>
+              <mat-card-subtitle >
+                {{ x.userOwner.userName }} | {{ x.created | date:'dd/MM/yyyy HH:mm' }}
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p class="pComentario">
+                <ng-container *ngFor="let word of x.text.split(' '); let i = index">
+                  <ng-container *ngIf="word.startsWith('#'); else nonHashtag">
+                    <span class="blue-text">{{ word }} </span>
+                  </ng-container>
+                  <ng-template #nonHashtag>
+                    {{ word }} 
+                  </ng-template>
+                </ng-container>
+              </p>
+              
+              <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
+              <a (click)="openDialog(x.postId)" class="mgPost">{{ x.likes.length }} ❤</a>
+              
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="example-button-row">
+                <button mat-icon-button [ngClass]="{'color-rojo': colorRojoMap[x.postId]}" (click)="alternarVisibilidad(x.postId) ; addLink(x.postId) ; x.likes.length = x.likes.length + 1">
+                  <mat-icon class="icon">favorite</mat-icon>
+                </button>     
+                <button mat-icon-button (click)="mostrarDivComentario(x.postId)">
+                  <mat-icon class="icon">chat_bubble</mat-icon>
+                </button>
+              </div>
+            </mat-card-actions>
+
+            <div *ngIf="mostrarDiv[x.postId]">
+              <mat-card-content>
+                <form [formGroup]="newComentario">
+                  <input class="x" formControlName="textComentario">
+                  <button mat-mini-fab color="accent" [disabled]="!newComentario.get('textComentario')?.value"
+                    (click)="newComentarioPost(x.postId)">
+                    <mat-icon>arrow_forward</mat-icon>
+                  </button>
+                </form>
+                <mat-card-content>
+                  <div *ngFor="let comentario of x.comments">
+                    <br>
+                    <mat-card>                
+                    <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
+                        src={{comentario.userOwner?.profileImage}}>
+                    </div>
+                      <mat-card-title>{{comentario.userOwner?.firstName}}</mat-card-title>
+                      <mat-card-subtitle>
+                        {{comentario.userOwner.userName}} | {{comentario.created | date:'dd/MM/yyyy HH:mm'}}
+                      </mat-card-subtitle>
+                    </mat-card-header>
+                    <p  class="pComentario">
+                    {{ comentario.text }}
+                  </p>
+                    </mat-card>
+                  </div>
+                </mat-card-content>
+
+              </mat-card-content>
             </div>
-          </mat-card-actions>
-        </mat-card>
-        <br>
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              FAVORITO Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
-              nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
-        <br>
-        <mat-card>
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>
-              Regístrate hoy mismo para comenzar tu viaje en Microb y únete a la conversación global. ¡Te estamos
-              esperando! Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
-            </div>
-          </mat-card-actions>
-        </mat-card>
+          </mat-card>
+        </div>
       </div>
     </div>
+
     <div *ngIf="contenidoVisible === 'perfil'">
       <div class="scrollable-content">
         <div class="">
@@ -254,6 +245,7 @@
       </div>
     </div>
 
+
     <div *ngIf="contenidoVisible === 'notificacion'">
       <div class="scrollable-content">
         <mat-card>
@@ -283,7 +275,7 @@
     <div class="caja3">
       <ul class="menu-list">
         <li>
-          <a (click)="mostrarContenido('home'); mostrarBange('home'); getPosteosInicio();">
+          <a (click)="mostrarContenido('home'); mostrarBange('home'); ">
             <mat-icon *ngIf="contador > 0" [matBadge]="contador" class="icon" (click)="getPosteosInicio()">home</mat-icon>
   <mat-icon *ngIf="contador === 0" class="icon" >home</mat-icon>
             <span class="text">Home</span>
@@ -295,16 +287,11 @@
             <span class="text">Mi Perfil</span>
           </a>
         </li>
+
         <li>
-          <a (click)="mostrarContenido('notificacion')">
-            <mat-icon class="icon">notifications</mat-icon>
-            <span class="text">Notificaciones</span>
-          </a>
-        </li>
-        <li>
-          <a (click)="mostrarContenido('favorito')">
-            <mat-icon class="icon">favorite</mat-icon>
-            <span class="text">Favorito</span>
+          <a (click)="mostrarContenido('explorar'); getPosteosInicio();">
+            <mat-icon class="icon">explore</mat-icon>
+            <span class="text">Explorar</span>
           </a>
         </li>
         <li>

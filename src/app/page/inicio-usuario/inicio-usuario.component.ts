@@ -66,9 +66,9 @@ export class InicioUsuarioComponent {
   misseguidores: any[] = [];
   losquesigo: any[] = [];
   topHastagsInicio: any [] =[];
- // miinfoUsuario:any;
-  // Variable para controlar si el botón se ha hecho clic o no
+  postHome:any[] =[];
   buttonClicked = false;
+
   constructor(private appNosql: AppnosqlService, public dialog: MatDialog, private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
     this.tipoU = localStorage.getItem('tipoUsuario');
 
@@ -89,7 +89,7 @@ export class InicioUsuarioComponent {
     if (this.userName) {
       this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
         (value) => {  
-          this.usuario = value; // Asigna el valor de 'value' a this.usuario
+          this.usuario = value;       
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
@@ -115,7 +115,7 @@ export class InicioUsuarioComponent {
         }
         );
     }
-
+ this.getPostsHome();
     this.getMisPost();
     this.getPosteosInicio();
     this.getPosteosInicio1();
@@ -131,14 +131,13 @@ export class InicioUsuarioComponent {
 
   }
   alternarVisibilidad(postId: number) {
-    // Cambia el estado del botón correspondiente al postId
     this.colorRojoMap[postId] = !this.colorRojoMap[postId];
   }
-  onInputChange(event: any) {
+  /*onInputChange(event: any) {
     const text = event.target.value;
     const regex = /#(\w+)/g;
     this.inputText = text.replace(regex, (match: any) => `<span class="hashtag">${match}</span>`);
-  }
+  }*/
 
   obtenertopHastags(cantidad:any){
     if(this.idInstanciaLocalHost){
@@ -150,25 +149,13 @@ export class InicioUsuarioComponent {
   }
 
   addLink(postId: any) {
-    // Obtener la instancia y el nombre de usuario
     this.idInstancia = localStorage.getItem('idInstancia');
     this.userName = localStorage.getItem('userName');
-
-    // Verificar que tengas el ID de instancia y el nombre de usuario
     if (!this.idInstancia || !this.userName) {
-      console.error('Falta el ID de instancia o el nombre de usuario.');
       return;
     }
-
-    // Realizar la solicitud POST para agregar el like
     this.api.darLikes(this.idInstancia, this.userName, postId).subscribe(
       (data: any) => {
-   /*     const formatoMG: any = {
-          userId: this.miinfoUsuario.userId,
-          tenantId: data.tenantInstanceId, 
-          postId: data.postId
-        };
-     this.appNosql.darMgNOSQL(formatoMG);*/
       },
       (error: any) => {
         console.error('Error al agregar el like:', error);
@@ -176,7 +163,6 @@ export class InicioUsuarioComponent {
     );
   }
 
-  //EXPANCION COMENTARIOS
   toggleExpansionPanel() {
     this.panelOpenState = !this.panelOpenState;
   }
@@ -187,9 +173,7 @@ export class InicioUsuarioComponent {
     if (seccion === 'home') {
       this.contador = 0;
       this.mostrarBadge = false;
-      // Resto de la lógica para mostrar el contenido de 'home'
     }
-    // Otras secciones y lógica
   }
 
 
@@ -276,9 +260,6 @@ export class InicioUsuarioComponent {
 
   }
 
-
-
-
   newPost() {
     const textValue = this.registrarForm.controls['text'].value ? this.registrarForm.controls["text"].value : " ";
     let hashtags = [];
@@ -304,9 +285,9 @@ export class InicioUsuarioComponent {
           isSanctioned: data.isSanctioned,
           hashtags: data.hashtag
         };
-        console.log("Data que le paso al crearPost" + JSON.stringify(formatoPost));
         this.getMisPost();
         this.getPosteosInicio();
+        this.getPostsHome();
         this.base64Image = '';
         this.registrarForm.controls['text'].reset();
     
@@ -315,12 +296,10 @@ export class InicioUsuarioComponent {
             // Manejar la respuesta del servicio appNosql.crearPostNOSQL si es necesario
           },
           (error) => {
-            console.log("Error en crearPostNOSQL:", error);
           }
         );
       },
       (error) => {
-        console.log("Error en newPost:", error);
       }
     );
     
@@ -335,23 +314,36 @@ export class InicioUsuarioComponent {
             return new Date(b.created).getTime() - new Date(a.created).getTime();
           });
         },
-        error: (err) => {
-          console.error('Error al obtener los posts:', err);
+        error: (err) => {  
         },
       });
     } else {
       console.error('El nombre de usuario es nulo.');
     }
   }
+  getPostsHome() {
+    this.api.verMiInicio(this.idInstanciaLocalHost, this.userName).subscribe(
+      (postHome: any[]) => {
+        this.postHome = postHome;
+        this.postHome.sort((a, b) => {
+          return new Date(b.created).getTime() - new Date(a.created).getTime();
+        });
+      },
+      (error) => {
+        console.error('Error al cargar los posteos de inicio:', error);
+      }
+    );
+  }
+  
 
-
+ 
   getPosteosInicio() {
     this.inicioTodosPost = [];
     this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
-      for (const usuario of users) {
-        this.api.getMisPost(this.idInstanciaLocalHost, usuario.userName).subscribe((posts: PostTodos[]) => {
+      for (const userEncontrado of users) {
+        this.api.getMisPost(this.idInstanciaLocalHost, userEncontrado.userName).subscribe((posts: PostTodos[]) => {
           for (const post of posts) {
-            post.userOwner = usuario;
+            post.userOwner = userEncontrado;
           }
           this.inicioTodosPost.push(...posts);
           this.inicioTodosPost.sort((a, b) => {
@@ -360,40 +352,12 @@ export class InicioUsuarioComponent {
             return dateB - dateA;
           });
         });
-      }
-      console.log(this.inicioTodosPost);
+      }   
     });
   }
-  /*
-  getPosteosInicio() {
-    // 1. Obtener todos los usuarios de la instancia
-    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((usuarios: UsuarioRetorno[]) => {
-      // 2. Crear un array para almacenar todos los posts con información de usuario
-      const inicioTodosPost: any[] = [];
-  
-      // 3. Iterar sobre cada usuario
-      usuarios.forEach(usuario => {
-        // 4. Iterar sobre los posts del usuario y agregar información del usuario al post
-        usuario.posts.forEach(post => {
-          inicioTodosPost.push({
-            post: post,
-            usuario: usuario
-          });
-        });
-      });
-  
-      // 5. Ordenar todos los posts por fecha
-      inicioTodosPost.sort((a, b) => {
-        const dateA = new Date(a.post.created).getTime();
-        const dateB = new Date(b.post.created).getTime();
-        return dateB - dateA;
-      });
-  
-      // 6. Ahora postsConUsuario contiene todos los posts con información de usuario ordenados por fecha
-      console.log(inicioTodosPost);
-    });
-  }*/
-  
+
+
+
 
   getPosteosInicio1() {
     this.inicioTodosPost1 = [];
@@ -529,19 +493,18 @@ export class InicioUsuarioComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      // Puedes acceder al valor de postId aquí si es necesario.
+
     });
   }
-  openDialogSeguir(userName: any) {
+  openDialogSeguir(userName: any,origen:any) {
+    if(userName != this.usuario?.userName ){
     const dialogRefs = this.dialog.open(DialogSeguir, {
-      data: { userName: userName }
+      data: { userName: userName, origen:origen }
     });
     dialogRefs.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      // Puedes acceder al valor de postId aquí si es necesario.
     });
   }
+}
 }
 
 @Component({
@@ -584,6 +547,7 @@ export class DialogContentExample {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService) {
     this.postId = data.postId;
+  
   }
 
   ngOnInit(): void {
@@ -610,7 +574,6 @@ export class DialogContentExample {
             }
           }
         });
-        console.log(this.inicioTodosLikes);
       }
     });
   }
@@ -660,9 +623,11 @@ export class DialogSeguir {
   idInstanciaLocalHost: any;
   usuario: any;
   misseguidores: any;
+  origen: any;
   miUsuario: any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService, private messageService: MessageService) {
     this.userName = data.userName;
+    this.origen = data.origen;
   }
 
   ngOnInit(): void {
@@ -692,8 +657,6 @@ export class DialogSeguir {
   seguirUsuario() {
     this.miUsuario = localStorage.getItem('userName');
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
-    console.log(this.miUsuario, this.userName, this.idInstanciaLocalHost);
-
     if (this.miUsuario && this.userName && this.idInstanciaLocalHost) {
       this.api.seguirUsuario(this.miUsuario, this.userName, this.idInstanciaLocalHost).subscribe(
         (data) => {
@@ -707,6 +670,37 @@ export class DialogSeguir {
     }
   }
 
+  bloquear(){
+    this.miUsuario = localStorage.getItem('userName');
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+    if (this.miUsuario && this.userName && this.idInstanciaLocalHost) {
+      this.api.bloquearUser(this.idInstanciaLocalHost,this.miUsuario, this.userName ).subscribe(
+        (data) => {
+        },
+        (error) => {
+          this.messageService.showError('Bloqueado.');
+        }
+      );
+    } else {
+      console.error('Valores faltantes para bloquear.');
+    }
+  }
+
+  mutear(){
+    this.miUsuario = localStorage.getItem('userName');
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+    if (this.miUsuario && this.userName && this.idInstanciaLocalHost) {
+      this.api.mutUsuario(this.idInstanciaLocalHost,this.miUsuario, this.userName ).subscribe(
+        (data) => {
+        },
+        (error) => {
+          this.messageService.showError('Muteado.');
+        }
+      );
+    } else {
+      console.error('Valores faltantes para mutear.');
+    }
+  }
 
 }
 

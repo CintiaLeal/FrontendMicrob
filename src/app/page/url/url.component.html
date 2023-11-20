@@ -37,7 +37,11 @@
                             </mat-form-field>
                             <button mat-raised-button color="primary" class="btn" (click)="onLogin()">Iniciar sesión</button>
                         </form>
-                        <p class="registro-link">¿No tienes una cuenta? <a (click)="openDialog()">Registrarse</a></p>
+                        <p class="registro-link">¿No tienes una cuenta? <a (click)="openDialog();">Registrarse</a></p>
+                        <button (click)="signInWithGoogle()" class="btnGoogle">
+                            <img src="assets/img/loginGoogle.png" alt="Google Login" class="imgGoogle">
+                          </button>
+                          
                     </mat-card-content>
                 </mat-card>
             </div>

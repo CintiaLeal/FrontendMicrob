@@ -55,6 +55,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ModificarUsuarioComponent } from './page/modificar-usuario/modificar-usuario.component';
 import { NgChartsModule } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments/environment'; 
+
 
 
 @NgModule({
@@ -124,7 +129,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatTooltipModule,
     BrowserModule,
     NgChartsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
   
 
   ],
