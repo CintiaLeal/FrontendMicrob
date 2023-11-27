@@ -1,40 +1,27 @@
 <h2 mat-dialog-title>Detalle de la publicación</h2>
 <mat-dialog-content class="mat-typography">
-  <h3>Categoria: Acoso</h3>
 <div class="section section2">
-    
       <div class="scrollable-content">
         <mat-card>
           <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Grace Hopper</mat-card-title>
-            <mat-card-subtitle>@loremipsum</mat-card-subtitle>
+            <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
+              src={{infoPost?.userOwner.profileImage}}> 
+          </div>
+            <mat-card-title>{{infoPost?.userOwner.firstName}} {{infoPost?.userOwner.lastName}} </mat-card-title>
+            <mat-card-subtitle>{{infoPost?.userOwner.userName}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
-              nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
+              {{infoPost?.text}}
             </p>
+         
+             
+            <img class="imgContenido" src={{infoPost?.attachment}}>
+            <a class="mgPost">{{ infoPost?.likes.length }} ❤</a>          
           </mat-card-content>
-          <mat-card-actions>
-            <div class="example-button-row">
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">favorite</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">redo</mat-icon>
-              </button>
-              <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                <mat-icon class="icon">chat_bubble</mat-icon>
-              </button>
-            </div>
-          </mat-card-actions>
         </mat-card>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Informar al Usuario</mat-radio-button>
-        </mat-radio-group>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Reportar</button>
+  
 </mat-dialog-actions>

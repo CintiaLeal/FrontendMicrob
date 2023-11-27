@@ -44,23 +44,54 @@
   margin: 1%;
   margin-right: 20%;
   color: #2E4159;
-
-  .mat-icon, mat-icon.mat-primary, mat-icon.mat-accent, mat-icon.mat-warn {
-    
 }
-
-
+.tamanioletra{
+  font-size: 12px;
+}
+th{
+height: 10px;
+margin-top: -10%;
 }
 .large-card-1 {
   width: 30cm;
   height: 15cm;
 }
+.img{
+	background: no-repeat center center;
+	width: 30px; /* Ancho deseado para el contenedor */
+	height: 30px; /* Alto deseado para el contenedor */
+	margin-right:10px;
+	clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+	background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
 
+.container {
+  display: flex;
+  height: 100vh; /* Hace que el contenedor ocupe el 100% del alto de la ventana */
+}
+
+.column {
+  flex: 1; /* Hace que cada columna ocupe la misma cantidad de espacio disponible */
+  border: none; /* Borde para visualización */
+  padding: 10px; /* Espacio interno para visualización */
+}
 .large-card-2 {
   width: 10cm;
   height: 15cm;
 }
 
+.imgPostUser{
+  width: 40px; /* Ancho deseado para el contenedor */
+  height: 40px; /* Alto deseado para el contenedor */
+  border: none;
+
+  clip-path: circle(50% at 50% 50%);
+  align-items:end;
+}
+.example-header-image {
+  background: url('/assets/img/perfil.jpg') no-repeat center center;
+  background-size: cover;
+}
 //
 .card-content {
   display: flex;
@@ -121,4 +152,76 @@
   text-align: center;
   padding: 20px;
   margin: 10px 0;
+}
+
+
+
+///INI TENDENCIA tendencia 
+.tendencias-container {
+ 
+  padding: 16px;
+  border-radius: 8px;
+  margin-left: 5%;
+  
+}
+
+
+.tendencias-list {
+  list-style: none;
+  padding: 0;
+}
+.hashtag {
+  font-size: 16px;
+  color: #1da1f2; /* Color de Twitter */
+}
+
+.count {
+  font-size: 14px;
+  margin-left: 20px;
+ 
+}
+.tendencias-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tendencia {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 4px;
+  border-radius: 4px;
+  
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.imgContenido{
+  background:no-repeat center center;
+  width: 200px; /* Ancho deseado para el contenedor */
+  height: 100px; /* Alto deseado para el contenedor */
+  border: none;
+
+  align-items: center;
+  clip-path: inset(2% 2% 2% 2%);
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+
+}
+/* Estilo para ocultar la barra de desplazamiento */
+.container-with-scroll {
+  max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+  overflow: auto;
+}
+
+/* Estilo específico para ocultar la barra de desplazamiento en WebKit (Chrome, Safari, etc.) */
+.container-with-scroll::-webkit-scrollbar {
+  width: 0.5em; /* Ancho de la barra de desplazamiento */
+}
+
+.container-with-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Color del 'pulgón' de la barra de desplazamiento */
+}
+
+.container-with-scroll::-webkit-scrollbar-track {
+  background-color: transparent; /* Color del fondo de la barra de desplazamiento */
 }

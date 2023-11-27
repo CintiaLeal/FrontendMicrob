@@ -33,10 +33,13 @@ export class AppnosqlService {
 
   updateUserNOSQL(formularioUser:any):Observable<any>{
     //https://localhost:7131/SuggestUsers/UpdateUser
-    console.log("llega al servicio");
     let direccion = this.url + "/SuggestUsers/UpdateUser"
     return this.http.put<any>(direccion,formularioUser);
   }
 
-  ///SuggestUsers/GiveLike
+  getPostMasLike(tenant:any, cantidad:any){
+   let direccion = this.url + "/SuggestUsers/PostWhitMostLikeByTenant?tenantId="+tenant+"&topCant="+ cantidad;
+   return this.http.get<any>(direccion);
+  }
+
 }

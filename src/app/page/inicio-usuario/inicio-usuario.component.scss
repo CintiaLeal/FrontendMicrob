@@ -21,13 +21,6 @@
 }
 
 
-
-.mat-card-actions {
-  margin-top: 15px;
-}
-
-
-
 //
 .image-container {
   position: relative;
@@ -47,11 +40,7 @@
   color: red;
 }
 
-.b {
-  width: 100%;
-  height: 60px;
-  margin-top: 5px;
-}
+
 .pLikes{
   font-size: 10px;
 }
@@ -102,26 +91,15 @@
     height: 100%;
 
   }
-  //Contenido publicar
-  .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
+ 
   
-  .a {
-    width: 100%;
-    height: 200px;
-  }
   //Contenido publicar
   .section1 {
     
     width: 30%;
      /* Color de fondo para la sección 1 */
   }
-  .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
-    height: 200px;
-}
+
   
   .section2 {
     width: 60%;
@@ -172,16 +150,15 @@
 .menu-list a {
   text-decoration: none;
   list-style-type: none;
-  color: #807d7d; /* Cambia el color del texto según tu preferencia */
-  font-size: 20px; /* Tamaño de fuente más pequeño similar al de Twitter */
+  color: #807d7d; 
+  font-size: 20px; 
   display: flex;
   align-items: center;
 }
 
-/* Estilo para los iconos */
 .icon {
-  margin-right: 5px; /* Espacio entre el icono y el texto */
-  font-size: 20px; /* Tamaño de icono más pequeño similar al de Twitter */
+  margin-right: 5px; 
+  font-size: 20px; 
   
 }
 
@@ -197,20 +174,7 @@
 .iconDiaCumple {
   vertical-align: middle;
 }
-//FIN Menu 3 
-  
-//INI IMG LOGO
-.imglogo {
-  background: url('/assets/img/astronauta2.webp') no-repeat center center;
-  width: 80px; /* Ancho deseado para el contenedor */
-  height: 80px; /* Alto deseado para el contenedor */
-  border: none;
 
-  clip-path: inset(2% 2% 2% 3%);
-  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
-}
-
-//FIN IMG LOGO
 .divPerfilcolor{
   width: 100%;
   background-color: #2E4159;
@@ -235,41 +199,32 @@
 .perfil-container {
   display: flex;
   justify-content: flex-end;
-  align-items: center; /* Alinea verticalmente si es necesario */
+  align-items: center; 
 }
 .perfil-containerImgUser {
   display: flex;
   justify-content: flex-end;
-  align-items: center; /* Alinea verticalmente si es necesario */
-}
-//INI IMG PERFIL
-.imgPERFIL{
-  background: url('/assets/img/perfil.jpg') no-repeat center center;
-  width: 60px; /* Ancho deseado para el contenedor */
-  height: 60px; /* Alto deseado para el contenedor */
-  border: none;
-  clip-path: circle(50% at 50% 50%);
-  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+  align-items: center; 
 }
 
-.example-header-image {
-  background: url('/assets/img/perfil.jpg') no-repeat center center;
-  background-size: cover;
-}
-//FIN IMG PERFIL
-//INI IMG CONTENIDO POST
 .imgContenido{
   background:no-repeat center center;
-  width: 500px; /* Ancho deseado para el contenedor */
-  height: 300px; /* Alto deseado para el contenedor */
+  width: 500px; 
+  height: 300px; 
   border: none;
   margin-left: 10%;
   margin-right: 10%;
   align-items: center;
   clip-path: inset(2% 2% 2% 2%);
-  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+  background-size: contain; 
 
 }
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+
 .x{
   height: 35px;
   width: 90%;
@@ -278,45 +233,30 @@
 
 
 
-.imgIconoInstancia{
-  background: url('/assets/img/tl.webp') no-repeat center center;
-  width: 200px; /* Ancho deseado para el contenedor */
-  height: 100px; /* Alto deseado para el contenedor */
-  border: none;
-  clip-path: inset(8% 1% 6% 1%);
-  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
-}
-//FIN IMG CONTENIDO POST
-
-
 .textTitulo{
   font-size: 18px;
   font-weight: bold;
 }
-//TEXTO FIN
-.mat-toolbar {
-  color: var(--mat-toolbar-container-text-color);
-}
+
 
 .caja {
-  width: 80%; /* Ancho deseado */
-  margin-top: 20px; /* Espacio entre los div (ajusta según necesites) */
+  width: 80%; 
+  margin-top: 20px; 
 }
 .caja3 {
-  width: 80%; /* Ancho deseado */
-  margin-top: 50%; /* Espacio entre los div (ajusta según necesites) */
+  width: 80%; 
+  margin-top: 50%; 
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.caja4 { //Parte del icono de la instancia
-  width: 80%; /* Ancho deseado */
-  margin-top: 100%; /* Espacio entre los div (ajusta según necesites) */
+.caja4 { 
+  width: 80%;
+  margin-top: 100%; 
   margin-left: 10px;
   margin-right: 10px;
 }
 
-///INI TENDENCIA tendencia 
 .tendencias-container {
  
   padding: 16px;
@@ -351,7 +291,7 @@
 
 .hashtag {
   font-size: 16px;
-  color: #1da1f2; /* Color de Twitter */
+  color: #1da1f2;
 }
 
 .count {
@@ -370,20 +310,8 @@
   margin: 5%;
 }
 
-//INI IMG ERROR
-.imgError {
-  background: url('/assets/img/error.png') no-repeat center center;
-  width: 350px; /* Ancho deseado para el contenedor */
-  height: 350px; /* Alto deseado para el contenedor */
-  border: none;
-  background-size: 350px 350px; /* Establece el tamaño de la imagen deseado */
-  clip-path: inset(1% 1% 1% 1%);
-  --mdc-protected-button-container-color:#2E4159;
-}
 
 .btnError{
-  --mdc-protected-button-container-color: #2E4159;
-  --mdc-protected-button-label-text-color: #fff;
   width: 30%;
   font-family: 'Kanit', sans-serif; 
   font-size: 30px;
@@ -399,7 +327,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Esto centra verticalmente en la ventana del navegador */
+  height: 100vh; 
 }
 
 .cajaError {
@@ -415,36 +343,13 @@ font-size: 13px;
 color: #807d7d;
 }
 
-/* Estilo para el contenedor de imágenes */
+
 .image-container {
-  display: flex;  /* Para alinear horizontalmente las imágenes */
-  gap: 10px;      /* Espacio entre las imágenes */
+  display: flex;  
+  gap: 10px;      
 }
 
-/* Estilo para las imágenes */
-button.mat-button img {
-  border-radius: 50%; /* Hace que la imagen sea redonda */
-  width: 2cm;         /* Establece el tamaño deseado (2 cm) */
-  height: 2cm;
-  object-fit: cover;  /* Ajusta la imagen al contenedor redondo */
-}
 
-mat-card-content {
-  flex: 1; /* Hace que el contenido ocupe el espacio restante */
-}
-
-mat-accordion {
-  width: 100%;
-  margin-top: auto; /* Coloca el acordeón al final de la tarjeta */
-}
-
-mat-expansion-panel {
-  width: 100%;
-}
-
-mat-expansion-panel-header{
-  height: 90px;
-}
 
 .divSeccionMg{
   width: 600px;

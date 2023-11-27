@@ -1,16 +1,18 @@
 <p>
     <mat-toolbar color="primary">
-    <img class="img" src={{instanciaActualParaHeader?.logo}}>
-      <span>{{instanciaActualParaHeader?.nombre}} </span>
+    <img class="img" routerLink="/inicioUsuario" src={{instanciaActualParaHeader?.logo}}>
+      <span routerLink="/inicioUsuario">{{instanciaActualParaHeader?.nombre}} </span>
       <button (click)="toggleModoOscuro()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>brightness_2</mat-icon>
       </button>
 
-      <button mat-button routerLink="/admUsuario">
+      <button mat-button routerLink="/moderadormodo">
         Modo Moderador
       </button>
-      <button mat-icon-button  (click)="logout()">
+      <div class="UserDiv">
+      <button mat-icon-button class="example-icon" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
+    </div>
     </mat-toolbar>
 </p>

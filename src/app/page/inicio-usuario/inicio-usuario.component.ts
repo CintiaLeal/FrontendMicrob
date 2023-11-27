@@ -1,5 +1,7 @@
 import { Component, Inject, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
 
+
+
 import { AppService } from 'src/app/servicios/app.service';
 import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
 import { UsuarioRetorno } from 'src/app/modelos/usuarioRetorno';
@@ -68,8 +70,10 @@ export class InicioUsuarioComponent {
   topHastagsInicio: any [] =[];
   postHome:any[] =[];
   buttonClicked = false;
-
-  constructor(private appNosql: AppnosqlService, public dialog: MatDialog, private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
+  postHome1:any [] = [];
+  isLoading = false;
+  isLoading2 = false;
+  constructor(private messageService: MessageService,private appNosql: AppnosqlService, public dialog: MatDialog, private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
     this.tipoU = localStorage.getItem('tipoUsuario');
 
   }
@@ -81,6 +85,8 @@ export class InicioUsuarioComponent {
   });
 
   ngOnInit(): void {
+    this.isLoading = true;
+    this.isLoading2 = true;
     this.tokenActual = localStorage.getItem('token') ?? '';
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.userName = localStorage.getItem('userName');
@@ -89,7 +95,8 @@ export class InicioUsuarioComponent {
     if (this.userName) {
       this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
         (value) => {  
-          this.usuario = value;       
+          this.usuario = value; 
+
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
@@ -115,35 +122,54 @@ export class InicioUsuarioComponent {
         }
         );
     }
- this.getPostsHome();
+    this.getPostsHome();
     this.getMisPost();
+    this.getPostsHome1();
     this.getPosteosInicio();
-    this.getPosteosInicio1();
+   /* this.getPosteosInicio1();*/
+
     this.obtenertopHastags(4);
     
- /*   setInterval(() => {
+    setInterval(() => {
       this.tengoNewPostParaVer();
-    }, 3000); // 3000 milisegundos = 3 segundos
-*/
+    }, 5000); // 3000 milisegundos = 3 segundos
+
   }
   mostrarContenido(contenido: string) {
     this.contenidoVisible = contenido;
+  
 
   }
   alternarVisibilidad(postId: number) {
     this.colorRojoMap[postId] = !this.colorRojoMap[postId];
   }
-  /*onInputChange(event: any) {
-    const text = event.target.value;
-    const regex = /#(\w+)/g;
-    this.inputText = text.replace(regex, (match: any) => `<span class="hashtag">${match}</span>`);
-  }*/
-
+ 
+  getSeguidos(){
+    if (this.userName) {
+      this.api.verMisSeguidores(this.idInstanciaLocalHost, this.userName).subscribe(
+        (value) => {
+          this.misseguidores = value; // Asigna el valor de 'value' a this.usuario
+        },
+        (error) => {
+          alert('Error al cargar las instancias: ' + error);
+        }
+      );
+      this.api.verSeguidos(this.idInstanciaLocalHost, this.userName).subscribe(
+        (value) => {
+          this.losquesigo = value; // Asigna el valor de 'value' a this.usuario
+        },
+        (error) => {
+          alert('Error al cargar las instancias: ' + error);
+        }
+        );
+    }
+  }
   obtenertopHastags(cantidad:any){
     if(this.idInstanciaLocalHost){
       this.appNosql.getHastgas(this.idInstanciaLocalHost,cantidad).subscribe(
         (value) => {
           this.topHastagsInicio = value;     
+          this.isLoading2 = false;
         });
       }
   }
@@ -156,9 +182,34 @@ export class InicioUsuarioComponent {
     }
     this.api.darLikes(this.idInstancia, this.userName, postId).subscribe(
       (data: any) => {
+
+        let x: any = {
+            userId: this.usuario?.userId,
+            tenantId: this.idInstancia,
+            postId: postId
+        };
+        this.appNosql.darMgNOSQL(x).subscribe(data => {
+        });
       },
       (error: any) => {
         console.error('Error al agregar el like:', error);
+      }
+    );
+  }
+
+
+  reportPosteo(postId: any) {
+    this.idInstancia = localStorage.getItem('idInstancia');
+    this.userName = localStorage.getItem('userName');
+    if (!this.idInstancia || !this.userName) {
+      return;
+    }
+    this.api.reportPost(this.idInstancia, this.userName, postId).subscribe(
+      (data: any) => {
+        this.messageService.showSuccess('Reportado Correctamente.');
+      },
+      (error: any) => {
+        this.messageService.showSuccess('Error al reportar');
       }
     );
   }
@@ -172,7 +223,7 @@ export class InicioUsuarioComponent {
   mostrarBange(seccion: string) {
     if (seccion === 'home') {
       this.contador = 0;
-      this.mostrarBadge = false;
+      this.mostrarBadge = true;
     }
   }
 
@@ -246,21 +297,16 @@ export class InicioUsuarioComponent {
   }
 
   tengoNewPostParaVer() {
-    // Almacena los posts actuales en una variable separada
-    const postsActuales = this.inicioTodosPost1;
+    const postsActuales = this.postHome;
+    this.getPostsHome1();
 
-    // Llama a getPosteosInicio para actualizar this.inicioTodosPost
-    this.getPosteosInicio1();
-
-    // Compara los posts actuales con los nuevos
-    const diferencia = postsActuales.length - this.inicioTodosPost.length;
-
-    // Actualiza la variable contador con la diferencia
+    const diferencia = this.postHome1.length - postsActuales.length ;
     this.contador = diferencia;
-
+    console.log(diferencia);
   }
 
   newPost() {
+  
     const textValue = this.registrarForm.controls['text'].value ? this.registrarForm.controls["text"].value : " ";
     let hashtags = [];
     const hashtagRegex = /#(\w+)/g;
@@ -335,9 +381,23 @@ export class InicioUsuarioComponent {
     );
   }
   
+  getPostsHome1() {
+    this.api.verMiInicio(this.idInstanciaLocalHost, this.userName).subscribe(
+      (postHome: any[]) => {
+        this.postHome1 = postHome;
+        this.postHome1.sort((a, b) => {
+          return new Date(b.created).getTime() - new Date(a.created).getTime();
+        });
+      },
+      (error) => {
+        console.error('Error al cargar los posteos de inicio:', error);
+      }
+    );
+  }
 
  
   getPosteosInicio() {
+    this.isLoading = true;
     this.inicioTodosPost = [];
     this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
       for (const userEncontrado of users) {
@@ -350,7 +410,9 @@ export class InicioUsuarioComponent {
             const dateA = new Date(a.created).getTime();
             const dateB = new Date(b.created).getTime();
             return dateB - dateA;
+            
           });
+          this.isLoading = false;
         });
       }   
     });

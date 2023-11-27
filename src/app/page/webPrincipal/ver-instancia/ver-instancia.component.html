@@ -9,24 +9,7 @@
   </div>
 
 
-  <div class="alineacionDesplegables">
-    <mat-form-field class="desplegables">
-      <mat-label>Privacidad</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let filtro of foods" [value]="filtro.value">
-          {{filtro.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="desplegables">
-      <mat-label>Tematicas</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let tematicas of tematicas" [value]="tematicas.value">
-          {{tematicas.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+
   <div *ngIf="instanciasCargadas; else noInstancias">
     <div class="container">
       <div class="items-container">

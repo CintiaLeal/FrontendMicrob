@@ -12,7 +12,39 @@
     th.mat-sort-header-sorted {
       color: black;
     }
-
+    .imgPostUser{
+      width: 40px; /* Ancho deseado para el contenedor */
+      height: 40px; /* Alto deseado para el contenedor */
+      border: none;
+    
+      clip-path: circle(50% at 50% 50%);
+      align-items:end;
+    }
+    .imgContenido{
+      background:no-repeat center center;
+      width: 500px; /* Ancho deseado para el contenedor */
+      height: 300px; /* Alto deseado para el contenedor */
+      border: none;
+      margin-left: 10%;
+      margin-right: 10%;
+      align-items: center;
+      clip-path: inset(2% 2% 2% 2%);
+      background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+    
+    }
+    .mgPost{
+      font-size: 13px;
+      color: #807d7d;
+      }
+      
+    .blue-text {
+      color: blue;
+    }
+    .pComentario{
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    
 //INI IMG ERROR
 .imgError {
   background: url('/assets/img/error.png') no-repeat center center;

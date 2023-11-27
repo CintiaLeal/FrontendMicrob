@@ -1,6 +1,76 @@
 <app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
-<div class="container" *ngIf="tipoU === 'Moderator'">
-   
+<div *ngIf="tipoU === 'Moderator'">
+  <div class="card-container">
+    <mat-card class="card small-card ">
+      <div class="card-content">
+        <div class="title">Usuarios totales</div>
+        <div class="number-container" routerLink="/admUsuario">
+          <div class="number">{{cantUser}}
+            <p class="iconsUltimoUsuario">+{{cantUser}}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="card small-card estilo">
+      <div class="card-content">
+        <div class="title">Cantidad de posteos</div>
+        <div class="number-container">
+          <div class="number">{{cantPost}}
+
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="card small-card ">
+      <div class="card-content">
+        <div class="title">Últimos ingresos</div>
+        <div class="number-container">
+          <div *ngFor="let usuario of ultimosUsuarios" class="iconsUltimoUsuario">
+            ☺ {{ usuario.userName }}
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
+
+  <div class="card-container">
+    <mat-card class="card large-card-2">
+      <div class="container">
+        <div class="column">
+          <h2 (click)="obtenertopHastags(4)">Tendencias</h2>
+          <ul class="tendencias-list" *ngFor="let tendencia of topHastagsInicio">
+            <li class="tendencia">
+              <span class="hashtag">{{ '#' + tendencia.name }}</span>
+              <span class="count">{{ tendencia.relationshipCount }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="card large-card-2">
+      <mat-card-header>
+        <p>Resumen de Ciudades y Usuarios</p>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <table mat-table [dataSource]="usuariosForCity">
+          <ng-container matColumnDef="city">
+            <th class="tamanioletra" *matHeaderCellDef></th>
+            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.key }}</td>
+          </ng-container>
+          <ng-container matColumnDef="userCount">
+            <th class="tamanioletra" *matHeaderCellDef>Cantidad</th>
+            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.value }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="['city', 'userCount']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['city', 'userCount']"></tr>
+        </table>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
 
 
 

@@ -1,29 +1,35 @@
 <!-- app.component.html -->
+<link href="https://cdn.jsdelivr.net/npm/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+
 <app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
 <div *ngIf="tipoU === 'Instance-Administrator'">
   <div class="card-container">
-    <mat-card class="card small-card estilo">
-      <div class="card-content">
+    
+    <mat-card class="card small-card " >
+      <mat-progress-spinner *ngIf="isLoading1" mode="indeterminate"></mat-progress-spinner>
+      <div class="card-content" *ngIf="!isLoading1">
         <div class="title">Usuarios totales</div>
         <div class="number-container" routerLink="/admUsuario">
           <div class="number">{{cantUser}}
-            <p class="iconsUltimoUsuario">+12</p>
+            <p class="iconsUltimoUsuario">+{{cantUser}}</p>
           </div>
         </div>
       </div>
     </mat-card>
     <mat-card class="card small-card estilo">
-      <div class="card-content">
-        <div class="title" routerLink="/admUsuario">Aumento de usuarios</div>
+      <mat-progress-spinner *ngIf="isLoading1" mode="indeterminate"></mat-progress-spinner>
+      <div class="card-content" *ngIf="!isLoading1">
+        <div class="title" >Cantidad de posteos</div>
         <div class="number-container">
-          <div class="number">{{cantUser}}
-            <p class="iconsUltimoUsuario">+12</p>
+          <div class="number">{{cantPost}}
           </div>
+          <p routerLink="/admPublicaciones">Reportados</p>
         </div>
       </div>
     </mat-card>
-    <mat-card class="card small-card estilo">
-      <div class="card-content">
+    <mat-card class="card small-card ">
+      <mat-progress-spinner *ngIf="isLoading1" mode="indeterminate"></mat-progress-spinner>
+      <div class="card-content" *ngIf="!isLoading1">
         <div class="title">Últimos ingresos</div>
         <div class="number-container">
           <div *ngFor="let usuario of ultimosUsuarios" class="iconsUltimoUsuario">
@@ -37,38 +43,85 @@
 
   <div class="card-container">
     <mat-card class="card large-card-1">
-      <!-- Contenido de la tarjeta grande 1 -->
-      <p>hs</p>
+      
+<p>
+  <mat-toolbar color="primary">
+      <img class="img" *ngIf="instanciaActual?.logo" [src]="instanciaActual?.logo">
+      <span routerLink="/inicioUsuario" >{{instanciaActual?.nombre}} </span>
+  </mat-toolbar>
+
+</p>
+<div class="container">
+  <div class="column">  
+    <div class="container-with-scroll">
+    <div *ngFor="let post of postMaslike">
+    <mat-card >
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"><img class="imgPostUser" [src]="post.userOwner.profileImage">
+        </div>
+        <mat-card-title>{{ post.userOwner.firstName }} {{ post.userOwner.lastName }}</mat-card-title>
+        <mat-card-subtitle style="font-size: 10px;">
+          {{ post.userOwner.userName }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="pComentario">
+          {{ post.text }}
+        </p>
+        
+        <img class="imgContenido" *ngIf="post.attachment"  [src]="post.attachment">
+        <div>
+        <a class="mgPost">{{ post.likes.length }}❤</a>
+      </div>
+      </mat-card-content>
+    </mat-card>
+    <br>
+  </div>
+</div>
+
+
+
+  </div>
+  <mat-progress-spinner *ngIf="isLoading2" mode="indeterminate"></mat-progress-spinner>
+  <div class="column" *ngIf="!isLoading2" >
+
+    <h2 (click)="obtenertopHastags(4)">Tendencias</h2>
+    <ul class="tendencias-list" *ngFor="let tendencia of topHastagsInicio" >
+      <li class="tendencia">
+        <span class="hashtag">{{ '#' + tendencia.name }}</span>
+        <span class="count">{{ tendencia.relationshipCount }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
     </mat-card>
 
     <mat-card class="card large-card-2">
-      <mat-card-header class="estilo2">
-      <p>Usuarios por ciudad</p>
+      
+      <mat-card-header>
+        <p>Resumen de Ciudades y Usuarios</p>
       </mat-card-header>
       <mat-divider></mat-divider>
-      <mat-card-content>
-      <div>
-        <p>14 Montevideo</p>
-      </div>
-      </mat-card-content>     
+     
+      <mat-card-content >
+        <mat-progress-spinner *ngIf="isLoading3" mode="indeterminate"></mat-progress-spinner>
+        <table mat-table [dataSource]="usuariosForCity" *ngIf="!isLoading3">
+          <ng-container matColumnDef="city">
+            <th class="tamanioletra" *matHeaderCellDef></th>
+            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.key }}</td>
+          </ng-container>
+          <ng-container matColumnDef="userCount">
+            <th class="tamanioletra" *matHeaderCellDef>Cantidad</th>
+            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.value }}</td>
+          </ng-container>      
+          <tr mat-header-row *matHeaderRowDef="['city', 'userCount']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['city', 'userCount']"></tr>
+        </table>
+        
+      </mat-card-content>
     </mat-card>
   </div>
-
-  <div class="card-container">
-    <mat-card class="card small-card estilo2">
-      <div class="card-content">
-        <div class="title">Posteos</div>
-        <div class="number-container">
-          <div class="number">{{cantPost}}</div>
-          <div class="example-button-container">
-            <button mat-fab color="accent" aria-label="Example icon button with a delete icon">
-              <mat-icon>forum</mat-icon>
-            </button>
-          </div>
-        </div>
-      </div>
-    </mat-card>
-  </div>
+  
 
 
 

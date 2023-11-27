@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NuevaInstanciaComponent } from './page/nueva-instancia/nueva-instancia.component';
 import { LoginComponent } from './page/login/login.component';
 import { RegistrarUsuarioComponent } from './page/registrar-usuario/registrar-usuario.component';
-import { InicioComponent } from './page/inicio/inicio.component';
 import { WebPrincipalComponent } from './page/webPrincipal/web-principal/web-principal.component';
 import { InicioUsuarioComponent } from './page/inicio-usuario/inicio-usuario.component';
 import { VerInstanciaComponent } from './page/webPrincipal/ver-instancia/ver-instancia.component';
@@ -19,7 +18,6 @@ import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-inst
 import { LoginRedSocialComponent } from './page/login-red-social/login-red-social.component';
 import { ModificarUsuarioComponent } from './page/modificar-usuario/modificar-usuario.component';
 const routes: Routes = [
-  { path: 'inicio', component: InicioComponent },
   { path: '', component: WebPrincipalComponent },
   { path: 'inicioUsuario', component: InicioUsuarioComponent },
   { path: 'registrarInstancia', component: NuevaInstanciaComponent },

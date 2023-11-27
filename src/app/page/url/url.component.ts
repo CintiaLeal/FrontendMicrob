@@ -58,6 +58,7 @@ export class URLComponent implements OnInit {
   });
   jwtHelper: any;
   infoSesionGoogle: any;
+  dom: any;
 
   constructor(private authService: AuthService, public dialog: MatDialog, private app: AppComponent, private router: Router, private route: ActivatedRoute, private api: AppService, private messageService: MessageService) { this.jwtHelper = new JwtHelperService(); }
 
@@ -115,11 +116,19 @@ export class URLComponent implements OnInit {
             else {
 
               localStorage.setItem("token", response.token);
+              console.log(response.token);
               this.tokens = response.token;
               const decodedTokens: any = this.jwtHelper.decodeToken(response.token);
 
               const userName: string = decodedTokens['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
 
+             
+             this.dom = this.instanciaActual?.dominio;
+
+// Separar el nombre de usuario y el dominio
+      const [nombreUsuario, dominioUsuario] = userName.split('@');
+if (dominioUsuario === this.dom) {
+              //if(userName = this.instanciaActual.dominio)
               localStorage.setItem("userName", userName);
               const decodedToken = this.jwtHelper.decodeToken(this.tokens);
               this.tipoUsuario = decodedTokens['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
@@ -148,6 +157,8 @@ export class URLComponent implements OnInit {
                   break;
               }
             }
+          }
+          this.messageService.showError('Error al iniciar sesión. Por favor, verifique sus credenciales e inténtelo de nuevo.');
           },
           (error) => {
             console.error('Error en la solicitud:', error);

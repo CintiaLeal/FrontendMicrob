@@ -26,14 +26,6 @@ export class AppService {
     return this.http.post<any>(direccion, form, { headers: headers });
   }
 
-  obtenerInstancias(): Observable<Instancia[]> {
-    let direccion = this.url + "/instancia/listar";// Ruta correspondiente a la obtención de instancias
-    return this.http.get<Instancia[]>(direccion);
-  }
-  obtenerInstanciaConMayorId(): Observable<Instancia> {
-    const direccion = `${this.url}/instancia/obtener-mayor-id`; // Ruta correspondiente para obtener la instancia con el mayor ID
-    return this.http.get<Instancia>(direccion);
-  }
 
   crearInstancias(form: any,userName: any): Observable<ResponseI> {
     const direccion = this.url + "/Instance/CreateInstance?userName="+userName;
@@ -41,7 +33,7 @@ export class AppService {
   }
 
   getInstancia(): Observable<InstanciaRetorno[]> {
-    return this.http.get<InstanciaRetorno[]>(this.url + "/Instance/GetActiveInstances");
+    return this.http.get<InstanciaRetorno[]>(this.url + "/Instance/GetActiveInstances?Page=1&ItemsPerPage=50");
   }
 
   getInstanciaPorId(x: any): Observable<InstanciaRetorno> {
@@ -177,7 +169,7 @@ verMiInicio(x:any,userName:any){
     'tenant': x,
   });
   //https://localhost:7131/Account/GetUserTimeline?userName=
-  let direccion = this.url + "/Account/GetUserTimeline?userName="+userName;
+  let direccion = this.url + "/Account/GetUserTimeline?Page=1&ItemsPerPage=50&userName="+userName;
   return this.http.get<any[]>(direccion,{ headers: headers }); 
 }
 
@@ -212,4 +204,60 @@ accesoGoogle(x: any, token: any): Observable<any> {
   let direccion = this.url + "/Account/LoginSocialMedia";
   return this.http.post<any>(direccion, {}, { headers: headers });
 }
+
+
+getPostId(x:any,idPost:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  //https://localhost:7131/Post/GetPostById?postId=1
+  let direccion = this.url + "/Post/GetPostById?postId="+idPost;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+//Funcionalidad de reportar Posteo
+reportPost(x:any,userName:any,postId:any): Observable<ResponseI> {
+//https://localhost:7131/Post/ReportPost?postId=1&userName=sd
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Post/ReportPost?postId="+postId+"&userName="+userName;
+  return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+}
+
+getPostReportados(x:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+   //https://localhost:7131/Post/GetReportedPost
+  let direccion = this.url + "/Post/GetReportedPost";
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+//https://localhost:7131/Post/DismissReportedPost?postId=1
+dismissReport(x:any,postId:any): Observable<ResponseI> {
+    const headers = new HttpHeaders({
+      'tenant': x,
+    });
+    let direccion = this.url + "/Post/DismissReportedPost?postId="+postId;
+    return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+}
+
+//https://localhost:7131/Post/PunishPost?postId=11
+punishPost(x:any,postId:any): Observable<ResponseI> {
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Post/PunishPost?postId="+postId;
+  return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+}
+//https://localhost:7131/Post/DeletePostById?postId=111
+deletePost(x:any,postId:any): Observable<ResponseI> {
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Post/DeletePostById?postId="+postId;
+  return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+}
+
 }
