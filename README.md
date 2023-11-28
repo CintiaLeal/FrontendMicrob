@@ -1,4 +1,4 @@
-# Nombre del Proyecto
+# MICROB.uy
 
 Descripción completa y clara del proyecto. Proporciona un resumen conciso y atractivo para que los usuarios tengan una idea rápida de lo que hace tu aplicación.
 
@@ -39,14 +39,6 @@ Explica cómo utilizar la aplicación, cómo iniciar sesión, y proporciona ejem
 
 ## Capturas de Pantalla
 
-Incluye capturas de pantalla o imágenes para mostrar cómo se ve la aplicación en acción.
-
-## Contribución
-
-¡Las contribuciones son bienvenidas! Si tienes sugerencias, problemas o quieres contribuir de alguna manera, por favor crea una solicitud de extracción o un problema.
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE.md](LICENSE.md) para obtener más detalles.
-
 ![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/c27893c9-6ed4-496d-87bc-95fb9e4748af)
+
+
