@@ -16,8 +16,6 @@ export class AuthService {
 
       const infoSesion = result.user;
 
-      //const accessToken = (result.credential as { accessToken?: string })?.accessToken;
-
       const accessToken = (result.user as any)._delegate.accessToken;
       console.log(accessToken);
       localStorage.setItem("infoSesionGoogle", JSON.stringify(infoSesion));

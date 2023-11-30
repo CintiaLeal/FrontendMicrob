@@ -4,14 +4,15 @@
 <app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
 <div *ngIf="tipoU === 'Instance-Administrator'">
   <div class="card-container">
-    
+    	
+<canvas >{{ chart }}</canvas>
     <mat-card class="card small-card " >
-      <mat-progress-spinner *ngIf="isLoading1" mode="indeterminate"></mat-progress-spinner>
-      <div class="card-content" *ngIf="!isLoading1">
+     
+      <div class="card-content" >
         <div class="title">Usuarios totales</div>
         <div class="number-container" routerLink="/admUsuario">
           <div class="number">{{cantUser}}
-            <p class="iconsUltimoUsuario">+{{cantUser}}</p>
+            <p class="iconsUltimoUsuario">+{{cantUserMonth}}</p>
           </div>
         </div>
       </div>
@@ -80,7 +81,6 @@
 </div>
 
 
-
   </div>
   <mat-progress-spinner *ngIf="isLoading2" mode="indeterminate"></mat-progress-spinner>
   <div class="column" *ngIf="!isLoading2" >
@@ -108,11 +108,11 @@
         <table mat-table [dataSource]="usuariosForCity" *ngIf="!isLoading3">
           <ng-container matColumnDef="city">
             <th class="tamanioletra" *matHeaderCellDef></th>
-            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.key }}</td>
+            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.city }}</td>
           </ng-container>
           <ng-container matColumnDef="userCount">
             <th class="tamanioletra" *matHeaderCellDef>Cantidad</th>
-            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.value }}</td>
+            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.userId }}</td>
           </ng-container>      
           <tr mat-header-row *matHeaderRowDef="['city', 'userCount']"></tr>
           <tr mat-row *matRowDef="let row; columns: ['city', 'userCount']"></tr>

@@ -195,6 +195,7 @@ accesoGoogle(x: any, token: any): Observable<any> {
   // Eliminar comillas alrededor del token si están presentes
   const cleanToken = token.replace(/^"(.*)"$/, '$1');
   console.log(cleanToken);
+  console.log("token aqui"+token);
 
   const headers = new HttpHeaders({
     'tenant': x,
@@ -260,4 +261,33 @@ deletePost(x:any,postId:any): Observable<ResponseI> {
   return this.http.put<ResponseI>(direccion, {}, { headers: headers });
 }
 
+
+getCantidadUsuariosAllTenant(x:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+   //https://localhost:7131/Statistics/CantUsersAllTenant
+  let direccion = this.url + "/Statistics/CantUsersAllTenant";
+  return this.http.get<any>(direccion,{ headers: headers }); 
+}
+
+
+getCantUsersThisMonthAllTenant(x:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  //https://localhost:7131/Statistics/CantUsersThisMonthAllTenant
+  let direccion = this.url + "/Statistics/CantUsersThisMonthAllTenant";
+  return this.http.get<any>(direccion,{ headers: headers }); 
+}
+
+
+getCantUsersByCityAllTenan(x:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+//https://localhost:7131/Statistics/CantUsersByCityAllTenant?cantTop=10
+  let direccion = this.url + "/Statistics/CantUsersByCityAllTenant?cantTop=20";
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
 }

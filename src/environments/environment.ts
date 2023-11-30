@@ -1,5 +1,6 @@
 export const environment = {
     production: false,
+    apiUrl: 'http://microbuyapi.azurewebsites.net', 
     firebaseConfig: {
       apiKey: "AIzaSyAV-RqsJm1tPx3AiLKHNcZqMtOW8Q4KHQg",
       authDomain: "laboratorionet-e6d3f.firebaseapp.com",

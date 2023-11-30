@@ -18,9 +18,9 @@
       <br>
       <mat-card-content>
         <form [formGroup]="registrarForm">
-          <mat-form-field class="example-full-width a">
+          <mat-form-field class="example-full-width">
             <mat-label>Escribir</mat-label>
-            <textarea class="colorletras a " matInput [value]="inputText" maxlength="130" formControlName="text"
+            <textarea style="height: 1000px;" class="colorletras" matInput [value]="inputText" maxlength="100" formControlName="text"
               placeholder="Publica..."></textarea>
           </mat-form-field>
           <div *ngIf="base64Image" class="image-container">
@@ -164,7 +164,10 @@
               </p>
               
               <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
-              <a (click)="openDialog(x.postId)" class="mgPost">{{ x.likes.length }} ❤</a>
+              <div>
+                <a (click)="openDialog(x.postId)" class="mgPost">{{ x.likes.length }} ❤</a>
+              </div>
+
               
             </mat-card-content>
             <mat-card-actions>

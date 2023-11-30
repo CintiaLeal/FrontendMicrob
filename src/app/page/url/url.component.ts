@@ -122,7 +122,6 @@ export class URLComponent implements OnInit {
 
               const userName: string = decodedTokens['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
 
-             
              this.dom = this.instanciaActual?.dominio;
 
 // Separar el nombre de usuario y el dominio
