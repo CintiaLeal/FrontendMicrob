@@ -1,27 +1,44 @@
-# Prueba1
+# MICROB.uy
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
+Descripción completa y clara del proyecto. Proporciona un resumen conciso y atractivo para que los usuarios tengan una idea rápida de lo que hace tu aplicación.
 
-## Development server
+## Características Principales
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Inicio de Sesión con Google:** Utiliza Firebase Authentication para permitir que los usuarios inicien sesión mediante Google.
 
-## Code scaffolding
+- **Comunicación con Backend en .NET:** La aplicación se comunica con un backend implementado en .NET para manejar operaciones del servidor.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Autenticación Multitenant:** Admite múltiples usuarios con sus propias vistas y permisos dentro de la aplicación.
 
-## Build
+- **Persistencia de Datos con LocalStorage:** Utiliza localStorage para almacenar datos localmente en el navegador del usuario.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Angular Material:** Se utiliza Angular Material como framework CSS para una interfaz de usuario moderna y consistente.
 
-## Running unit tests
+## Estructura del Proyecto
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Descripción de la estructura de carpetas y archivos importantes en tu proyecto.
 
-## Running end-to-end tests
+## Tecnologías Utilizadas
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- [Angular](https://angular.io/)
+- [Firebase](https://firebase.google.com/)
+- [Angular Material](https://material.angular.io/)
+- [.NET](https://dotnet.microsoft.com/)
 
-## Further help
+## Instalación
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Proporciona instrucciones claras sobre cómo instalar y configurar el proyecto. Asegúrate de incluir todos los requisitos previos y pasos necesarios.
+
+## Configuración
+
+Describe la configuración necesaria, como variables de entorno, claves de API, etc.
+
+## Uso
+
+Explica cómo utilizar la aplicación, cómo iniciar sesión, y proporciona ejemplos de código si es necesario.
+
+## Capturas de Pantalla
+
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/c27893c9-6ed4-496d-87bc-95fb9e4748af)
+
+
