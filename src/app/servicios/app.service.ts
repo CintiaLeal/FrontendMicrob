@@ -290,4 +290,13 @@ getCantUsersByCityAllTenan(x:any){
   let direccion = this.url + "/Statistics/CantUsersByCityAllTenant?cantTop=20";
   return this.http.get<any[]>(direccion,{ headers: headers }); 
 }
+
+getNewMonthlyRegistrationsAllTenant(x:any,cant:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+//https://localhost:7131/Statistics/NewMonthlyRegistrationsAllTenant?cantTop=10
+  let direccion = this.url + "/Statistics/NewMonthlyRegistrationsAllTenant?cantTop="+cant;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
 }

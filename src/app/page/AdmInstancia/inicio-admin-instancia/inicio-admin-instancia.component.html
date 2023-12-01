@@ -3,16 +3,20 @@
 
 <app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
 <div *ngIf="tipoU === 'Instance-Administrator'">
+
+  
   <div class="card-container">
-    	
-<canvas >{{ chart }}</canvas>
     <mat-card class="card small-card " >
-     
+  
       <div class="card-content" >
         <div class="title">Usuarios totales</div>
         <div class="number-container" routerLink="/admUsuario">
-          <div class="number">{{cantUser}}
-            <p class="iconsUltimoUsuario">+{{cantUserMonth}}</p>
+          <div class="number" style="display: flex; ">{{cantUser}} 
+            <p class="iconsUltimoUsuario" [style.color]="increaseUserMonth > 0 ? 'green' : 'red'">
+              {{ increaseUserMonth }}%
+            </p>
+            <img *ngIf="increaseUserMonth < 0"  class="imgValores" >
+            <img *ngIf="increaseUserMonth > 0" class="imgValoresSubida" >
           </div>
         </div>
       </div>
@@ -42,6 +46,60 @@
 
   </div>
 
+  <div class="card-container">
+    <mat-card class="card large-card-1">
+
+    
+        
+      <div class="vcard-container">
+        <div class="vcard">
+          <div class="vcontador">
+            <mat-icon (click)="decrement()">chevron_left</mat-icon>
+            <p class="vp">{{ rangeText }}</p>
+            <mat-icon (click)="increment()">chevron_right</mat-icon>
+          </div>
+        </div>
+      </div>
+  
+      
+      
+      <div class="chart-wrapper">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [type]="barChartType"> <!-- Cambiado de [chartType] a [type] -->
+        </canvas>
+      </div>
+    </mat-card>
+
+    <mat-card class="card large-card-2">
+      
+      <mat-card-header>
+        <p>Resumen de Ciudades y Usuarios</p>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+     
+      <mat-card-content >
+        <mat-progress-spinner *ngIf="isLoading3" mode="indeterminate"></mat-progress-spinner>
+        <table mat-table [dataSource]="usuariosForCity" *ngIf="!isLoading3">
+          <ng-container matColumnDef="city">
+            <th class="tamanioletra" *matHeaderCellDef></th>
+            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.city }}</td>
+          </ng-container>
+          <ng-container matColumnDef="userCount">
+            <th class="tamanioletra" *matHeaderCellDef>Cantidad</th>
+            <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.userId }}</td>
+          </ng-container>      
+          <tr mat-header-row *matHeaderRowDef="['city', 'userCount']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['city', 'userCount']"></tr>
+        </table>
+        
+      </mat-card-content>
+    </mat-card>
+  </div>
   <div class="card-container">
     <mat-card class="card large-card-1">
       

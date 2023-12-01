@@ -1,5 +1,5 @@
 import { Observable, subscribeOn, Subscriber } from 'rxjs';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { InstanciaRetorno} from 'src/app/modelos/instanciaRetorno';
 import { AppService } from 'src/app/servicios/app.service';
@@ -7,6 +7,10 @@ import { Chart, ChartOptions, ChartType } from 'chart.js';
 import { ColorHelper } from '@swimlane/ngx-charts';
 import { AppnosqlService } from 'src/app/servicios/appnosql.service';
 import { forkJoin } from 'rxjs';
+import { ChartDataset } from 'chart.js';
+import 'chart.js/auto';
+import { ChartItem } from 'chart.js/auto';
+import { MatPaginator } from '@angular/material/paginator';
 
 interface Filtro {
   value: string;
@@ -21,7 +25,9 @@ interface Tematica {
   templateUrl: './inicio-admin-instancia.component.html',
   styleUrls: ['./inicio-admin-instancia.component.scss']
 })
-export class InicioAdminInstanciaComponent {
+
+  export class InicioAdminInstanciaComponent  {
+
   public base64Image: any;
   panelOpenState = false;
   tipoU: string | null = null;
@@ -42,62 +48,36 @@ export class InicioAdminInstanciaComponent {
   isLoading3 = false;
   postIdMasLike:any[] =[];
   postMaslike:any[]= [];
- 
-  // Inicializa chart como un objeto vacío
-  public chart: Chart = {} as Chart;
+  graficaUserMes:any[]= [];
+  middleText:any;
+  increaseUserMonth:any;
+  rangeOptions = [
+    { start: 3, end: 20 },
+    { start: 6, end: 20 },
+    { start: 9, end: 20 },
+    { start: 12, end: 20 }
+  ];
+  
   constructor(private appNosql: AppnosqlService,private app:AppComponent, private api: AppService) {
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.app.ngOnInit();
-    
-   }
+   
+  }
 
+  barChartOptions: ChartOptions = {
+    responsive: true,
+  };
 
+  barChartLabels: string[] = []; // Aquí almacenarás los meses
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins = [];
+
+  barChartData: ChartDataset[] = [
+    { data: [], label: 'Total Usuarios', backgroundColor: '#6d6b74'  },
+    { data: [], label: 'Nuevos Usuarios', backgroundColor: '#04b2d975' },
+  ];
   ngOnInit(): void {
- 
-
-///
- // datos
- const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 80, 81, 56, 55, 40],
-    backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(255, 205, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(201, 203, 207, 0.2)'
-    ],
-    borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
-      'rgb(54, 162, 235)',
-      'rgb(153, 102, 255)',
-      'rgb(201, 203, 207)'
-    ],
-    borderWidth: 1
-  }]
-};
-
-// Creamos la gráfica
-this.chart = new Chart("chart", {
-  type: 'bar' as ChartType, // tipo de la gráfica 
-  data: data, // datos 
-  options: { // opciones de la gráfica 
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  },
-});
-
-    ///
     this.isLoading1 = true;
     this.isLoading2 = true;
     this.isLoading3 = true;
@@ -115,6 +95,8 @@ this.chart = new Chart("chart", {
    this.obtenertopHastags(8);
    this.texto = "Buenas";
    this.getPostMasLike(4);
+   //
+   this.graficaUserMeses(3);
   }
 
   obtenertopHastags(cantidad:any){
@@ -142,6 +124,8 @@ this.chart = new Chart("chart", {
     this.api.getCantUsersThisMonthAllTenant(this.idinstancia).subscribe(
       data => {
         this.cantUserMonth = data.total;
+        this.increaseUserMonth = data.increase;
+        
         this.isLoading3 = false;
       },
       error => {
@@ -151,7 +135,44 @@ this.chart = new Chart("chart", {
     );
 
   }
-  
+  currentRangeIndex = 0;
+
+  get rangeText(): string {
+    const { start, end } = this.rangeOptions[this.currentRangeIndex];
+    return `${start}-${end}`;
+  }
+
+
+  decrement() {
+    this.currentRangeIndex = (this.currentRangeIndex - 1 + this.rangeOptions.length) % this.rangeOptions.length;
+    this.graficaUserMeses(this.rangeOptions[this.currentRangeIndex].start);
+  }
+
+  increment() {
+    this.currentRangeIndex = (this.currentRangeIndex + 1) % this.rangeOptions.length;
+    this.graficaUserMeses(this.rangeOptions[this.currentRangeIndex].start);
+  }
+
+  graficaUserMeses(cant:any){
+//getNewMonthlyRegistrationsAllTenant(x:any,cant:any)
+this.api.getNewMonthlyRegistrationsAllTenant(this.idinstancia,cant).subscribe(
+  data => {
+    this.graficaUserMes = data;
+    console.log(this.graficaUserMes);
+    this.isLoading3 = false;
+        // Llena las etiquetas del gráfico con los meses
+        this.barChartLabels = this.graficaUserMes.map((data) => data.month);
+
+        // Llena los datos de la gráfica con los valores del backend
+        this.barChartData[0].data = this.graficaUserMes.map((data) => data.newTotalUser);
+        this.barChartData[1].data = this.graficaUserMes.map((data) => data.newTotalInstance);
+  },
+  error => {
+    this.isLoading3 = false;
+    console.error('Error al obtener la cantidad de usuarios:', error);
+  }
+);
+  }
   
 
   obtenerCitys() {
@@ -203,3 +224,7 @@ this.chart = new Chart("chart", {
   
   
 }
+function ViewChild(arg0: string): (target: InicioAdminInstanciaComponent, propertyKey: "chartCanvas") => void {
+  throw new Error('Function not implemented.');
+}
+
