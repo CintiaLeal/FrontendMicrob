@@ -36,7 +36,7 @@ interface Tematica {
   tokenActual: string | null=null;
   usuarios: any;
   cantUser:any;
-  cantUserMonth:any;
+  cantUserMes:any;
   cantMode:any;
   cantPost: any;
   ultimosUsuarios: any[] | any;
@@ -50,7 +50,8 @@ interface Tematica {
   postMaslike:any[]= [];
   graficaUserMes:any[]= [];
   middleText:any;
-  increaseUserMonth:any;
+  increaseUser:any;
+  increaseUserMes:any;
   rangeOptions = [
     { start: 3, end: 20 },
     { start: 6, end: 20 },
@@ -113,6 +114,7 @@ interface Tematica {
     this.api.getCantidadUsuariosAllTenant(this.idinstancia).subscribe(
       data => {
         this.cantUser = data.total;
+        this.increaseUser = data.increase;
         this.isLoading3 = false;
       },
       error => {
@@ -123,8 +125,8 @@ interface Tematica {
 
     this.api.getCantUsersThisMonthAllTenant(this.idinstancia).subscribe(
       data => {
-        this.cantUserMonth = data.total;
-        this.increaseUserMonth = data.increase;
+        this.cantUserMes = data.total;
+        this.increaseUserMes = data.increase;
         
         this.isLoading3 = false;
       },

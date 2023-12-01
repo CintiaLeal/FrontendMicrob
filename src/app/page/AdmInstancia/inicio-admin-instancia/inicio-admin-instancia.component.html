@@ -12,26 +12,29 @@
         <div class="title">Usuarios totales</div>
         <div class="number-container" routerLink="/admUsuario">
           <div class="number" style="display: flex; ">{{cantUser}} 
-            <p class="iconsUltimoUsuario" [style.color]="increaseUserMonth > 0 ? 'green' : 'red'">
-              {{ increaseUserMonth }}%
+            <p class="iconsUltimoUsuario" [style.color]="increaseUser > 0 ? 'green' : 'red'">
+              {{ increaseUser }}%
             </p>
-            <img *ngIf="increaseUserMonth < 0"  class="imgValores" >
-            <img *ngIf="increaseUserMonth > 0" class="imgValoresSubida" >
+            <img *ngIf="increaseUser < 0"  class="imgValores" >
+            <img *ngIf="increaseUser > 0" class="imgValoresSubida" >
           </div>
         </div>
       </div>
     </mat-card>
-    <mat-card class="card small-card estilo">
-      <mat-progress-spinner *ngIf="isLoading1" mode="indeterminate"></mat-progress-spinner>
-      <div class="card-content" *ngIf="!isLoading1">
-        <div class="title" >Cantidad de posteos</div>
-        <div class="number-container">
-          <div class="number">{{cantPost}}
-          </div>
-          <p routerLink="/admPublicaciones">Reportados</p>
+    <mat-card class="card small-card " >
+    <div class="card-content" >
+      <div class="title">Usuarios del Mes</div>
+      <div class="number-container" routerLink="/admUsuario">
+        <div class="number" style="display: flex; ">{{cantUserMes}} 
+          <p class="iconsUltimoUsuario" [style.color]="increaseUserMes > 0 ? 'green' : 'red'">
+            {{ increaseUserMes }}%
+          </p>
+          <img *ngIf="increaseUserMes < 0"  class="imgValores" >
+          <img *ngIf="increaseUserMes > 0" class="imgValoresSubida" >
         </div>
       </div>
-    </mat-card>
+    </div>
+  </mat-card>
     <mat-card class="card small-card ">
       <mat-progress-spinner *ngIf="isLoading1" mode="indeterminate"></mat-progress-spinner>
       <div class="card-content" *ngIf="!isLoading1">
