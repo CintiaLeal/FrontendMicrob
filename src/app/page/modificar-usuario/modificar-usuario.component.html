@@ -2,67 +2,104 @@
 <app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
 <div class="contenedor" *ngIf="tipoU === 'Common-User' || tipoU === 'Moderator'">
 
-    <mat-card>
-        <mat-card-title>Modificar mi perfil</mat-card-title>
-        <mat-card-subtitle>{{usuario?.userName}}</mat-card-subtitle>
-        <hr>
-        <hr>
-        <br>
-            <form [formGroup]="registrarForm">
-                    <mat-form-field  class="example-full-width">
-                        <mat-label>{{usuario?.firstName}}</mat-label>
-                        <input matInput formControlName="firstName" type="text"  maxlength="25">
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width" >
-                        <mat-label>{{usuario?.lastName}}</mat-label>
-                        <input matInput formControlName="lastName" type="text"  maxlength="25">
-                    </mat-form-field>
-     
-                    <div *ngIf="base64Image" class="image-container">
-                        <img src="{{usuario?.profileImage}}" alt="Imagen" class="img">
-                        <button (click)="removeImage()" class="remove-button">
-                          <mat-icon>close</mat-icon>
-                        </button>
-                      </div>
-                      <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
-                     
-                      <button mat-icon-button color="primary" (click)="fileInput.click()" *ngIf="!base64Image">
-                        <mat-icon>image</mat-icon>
-                      </button>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Biografia: {{usuario?.biography}}</mat-label>
-                <input matInput  formControlName="biography" type="text"  maxlength="70">
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Ocupación: {{usuario?.occupation}} </mat-label>
-                <mat-select formControlName="occupation">
-                  <mat-option *ngFor="let occupation of predefinedOccupations" [value]="occupation">
-                    {{ occupation }}
-                  </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Ciudad </mat-label>
-                <mat-select formControlName="city">
-                  <mat-option *ngFor="let city of listCitys" [value]="city.name">
-                    {{ city.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-                  
+   
+
+
+
+<div class="card-container">
+  <mat-card class="card large-card-1">
+
+    <form [formGroup]="registrarForm">
+      <mat-form-field  class="example-full-width">
+          <mat-label>{{usuario?.firstName}}</mat-label>
+          <input matInput formControlName="firstName" type="text"  maxlength="25">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" >
+          <mat-label>{{usuario?.lastName}}</mat-label>
+          <input matInput formControlName="lastName" type="text"  maxlength="25">
+      </mat-form-field>
+
+      <div *ngIf="base64Image" class="image-container">
+          <img src="{{usuario?.profileImage}}" alt="Imagen" class="img">
+          <button (click)="removeImage()" class="remove-button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="logo">
+       
+        <button mat-icon-button color="primary" (click)="fileInput.click()" *ngIf="!base64Image">
+          <mat-icon>image</mat-icon>
+        </button>
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Biografia: {{usuario?.biography}}</mat-label>
+  <input matInput  formControlName="biography" type="text"  maxlength="70">
+</mat-form-field>
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Ocupación: {{usuario?.occupation}} </mat-label>
+  <mat-select formControlName="occupation">
+    <mat-option *ngFor="let occupation of predefinedOccupations" [value]="occupation">
+      {{ occupation }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>Ciudad </mat-label>
+  <mat-select formControlName="city">
+    <mat-option *ngFor="let city of listCitys" [value]="city.name">
+      {{ city.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
     
-            <button mat-raised-button color="primary" mat-dialog-close  (click)="onModificar()">Modificar</button>
-           
-        
-        </form>
-         
-          
-      </mat-card>
 
-</div>
+<button mat-raised-button color="primary" mat-dialog-close  (click)="onModificar()">Modificar</button>
 
-<div>
-  <a>hola</a>
+
+</form>
+</mat-card>
+<mat-card class="card large-card-2">
+  <mat-tab-group>
+    <mat-tab label="Seguidos">
+      <div *ngFor="let x of losquesigo" class="divSeccionMg">
+        <mat-card class="separaciondivsccionmg">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image">
+              <img class="imgPostUser" [src]="x.profileImage">
+            </div>
+            <mat-card-title>{{x.firstName}}</mat-card-title>
+            <mat-card-subtitle>{{x.userName}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Seguidores">
+      <div *ngFor="let x of misseguidores" class="divSeccionMg">
+        <mat-card class="separaciondivsccionmg">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image">
+              <img class="imgPostUser" [src]="x.profileImage">
+            </div>
+            <mat-card-title>{{x.firstName}}</mat-card-title>
+            <mat-card-subtitle>{{x.userName}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Bloqueados">
+      <div *ngFor="let x of userBloqueados" class="divSeccionMg">
+        <mat-card class="separaciondivsccionmg">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image">
+              <img class="imgPostUser" [src]="x.profileImage">
+            </div>
+            <mat-card-title>{{x.firstName}}</mat-card-title>
+            <mat-card-subtitle>{{x.userName}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
 </div>
 <div *ngIf="tipoU !== 'Common-User' && tipoU !== 'Moderator'">
     <div class="contenedorError">

@@ -9,6 +9,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import { AppnosqlService } from 'src/app/servicios/appnosql.service';
 import { AppComponent } from 'src/app/app.component';
 import { AppService } from 'src/app/servicios/app.service';
+import { MessageService } from 'src/app/message.service';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-adm-publicaciones-reportadas',
@@ -23,7 +26,7 @@ export class AdmPublicacionesReportadasComponent {
   idinstancia: any;
   instanciaActual:any;
   postReportado:any[] |any;
-  columnas: string[] = ['postId', 'detalle'/* otras columnas */];
+  columnas: string[] = ['postId','fecha' ,'detalle'/* otras columnas */];
 
   constructor(public dialog: MatDialog,private appNosql: AppnosqlService,private app:AppComponent, private api: AppService) {}
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator; // Añadir el signo de exclamación (!) aquí
@@ -88,14 +91,14 @@ if (this.idinstancia) {
   selector: 'detalle',
   templateUrl: 'detalle.html',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule,MatCardModule,MatIconModule,MatDialogModule,MatRadioModule ],
+  imports: [FormsModule,MatCheckboxModule,MatDialogModule, MatButtonModule,MatCardModule,MatIconModule,MatDialogModule,MatRadioModule ],
 })
 export class DialogContentExampleDialog {
   postId: any; 
   idInstanciaLocalHost: any;
   infoPost:any;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService) {
+  checked: boolean = false;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService,private messageService: MessageService) {
     this.postId = data.postId;
   }
 
@@ -115,4 +118,40 @@ export class DialogContentExampleDialog {
    
   }
 
+  delete(){
+    this.api.deletePost(this.idInstanciaLocalHost, this.postId).subscribe(
+      (data) => {
+       
+        if(this.checked===true){
+   
+        }
+        this.messageService.showSuccess('Posteo Eliminado.');
+
+      },
+      (error) => {
+        this.messageService.showSuccess('Error al Eliminado.');
+      });
+  }
+
+  sancionarUsuario(){
+    this.api.sancionarUsuario(this.idInstanciaLocalHost, this.infoPost.userOwner.userName).subscribe(
+      (data) => {
+        this.messageService.showSuccess('Usuario Sancionado');
+      
+      },
+      (error) => {
+        this.messageService.showSuccess('Sancionar Usuario.');
+      });
+  }
+
+  dismissReport(){
+    this.api.dismissReport(this.idInstanciaLocalHost, this.postId).subscribe(
+      (data) => {
+        this.messageService.showSuccess('Descartado');
+        
+      },
+      (error) => {
+        this.messageService.showSuccess('Error al descartar.');
+      });
+  }
 }

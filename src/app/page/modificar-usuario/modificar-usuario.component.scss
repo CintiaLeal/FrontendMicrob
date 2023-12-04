@@ -120,3 +120,43 @@ mat-card {
     margin: 10px 0;
   }
   
+
+  //
+
+  .card-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+
+  .large-card-2 {
+    width: 20cm;
+    height: 16cm;
+  }
+  .large-card-1 {
+    width: 20cm;
+    height: 16cm;
+  }
+  .card {
+    margin: 1cm;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between; /* Puedes usar también "space-around" o "space-evenly" según tu preferencia */
+    align-items: center;
+  }
+
+  
+
+.imgPostUser{
+  width: 40px; /* Ancho deseado para el contenedor */
+  height: 40px; /* Alto deseado para el contenedor */
+  border: none;
+
+  clip-path: circle(50% at 50% 50%);
+  align-items:end;
+}

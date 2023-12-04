@@ -70,7 +70,7 @@ let direccion = this.url + "/Account/GetUsersByInstance";
 return this.http.get<UsuarioRetorno[]>(direccion,{ headers: headers });
 }
 
-obtenerInfoUsuario(userName: string, x:any): Observable<UsuarioRetorno> {
+obtenerInfoUsuario(userName: string, x:any): Observable<any> {
   const headers = new HttpHeaders({
     'tenant': x
   });
@@ -140,7 +140,7 @@ verMisSeguidores(x:any,userName: any){
   const headers = new HttpHeaders({
     'tenant': x,
   });
-  let direccion = this.url + "/Account/GetFollowers?userName=" +userName;
+  let direccion = this.url + "/Account/GetFollowers?Page=1&ItemsPerPage=100&userName=" +userName;
   return this.http.get<any[]>(direccion,{ headers: headers }); 
 }
 
@@ -156,7 +156,8 @@ verSeguidos(x:any,userName: any){
   const headers = new HttpHeaders({
     'tenant': x,
   });
-  let direccion = this.url + "/Account/GetFollowedUsers?userName=" +userName;
+  //https://localhost:7131/Account/GetFollowedUsers?Page=1&ItemsPerPage=100&userName=Luna987@uruweb
+  let direccion = this.url + "/Account/GetFollowedUsers?Page=1&ItemsPerPage=100&userName=" +userName;
   return this.http.get<any[]>(direccion,{ headers: headers }); 
 }
 verTematicas(){
@@ -266,8 +267,8 @@ getCantidadUsuariosAllTenant(x:any){
   const headers = new HttpHeaders({
     'tenant': x,
   });
-   //https://localhost:7131/Statistics/CantUsersAllTenant
-  let direccion = this.url + "/Statistics/CantUsersAllTenant";
+   //https://localhost:7131/Statistics/CantUsersByTenant
+  let direccion = this.url + "/Statistics/CantUsersByTenant";
   return this.http.get<any>(direccion,{ headers: headers }); 
 }
 
@@ -277,7 +278,7 @@ getCantUsersThisMonthAllTenant(x:any){
     'tenant': x,
   });
   //https://localhost:7131/Statistics/CantUsersThisMonthAllTenant
-  let direccion = this.url + "/Statistics/CantUsersThisMonthAllTenant";
+  let direccion = this.url + "/Statistics/CantUsersThisMonthByTenant";
   return this.http.get<any>(direccion,{ headers: headers }); 
 }
 
@@ -287,7 +288,7 @@ getCantUsersByCityAllTenan(x:any){
     'tenant': x,
   });
 //https://localhost:7131/Statistics/CantUsersByCityAllTenant?cantTop=10
-  let direccion = this.url + "/Statistics/CantUsersByCityAllTenant?cantTop=20";
+  let direccion = this.url + "/Statistics/CantUsersByCityByTenant?cantTop=20";
   return this.http.get<any[]>(direccion,{ headers: headers }); 
 }
 
@@ -296,7 +297,72 @@ getNewMonthlyRegistrationsAllTenant(x:any,cant:any){
     'tenant': x,
   });
 //https://localhost:7131/Statistics/NewMonthlyRegistrationsAllTenant?cantTop=10
-  let direccion = this.url + "/Statistics/NewMonthlyRegistrationsAllTenant?cantTop="+cant;
+  let direccion = this.url + "/Statistics/NewMonthlyRegistrationsByTenant?cantTop="+cant;
   return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+getPosteosInstanciaCant(x:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Post/GetCountPost";
+  return this.http.get<any>(direccion,{ headers: headers }); 
+}
+
+//GETUSERPaginado
+//https://localhost:7131/Account/GetUsersByInstance?Page=0&ItemsPerPage=10
+getGetUsersByInstancePaginado(x:any,Page:any,ItemsPerPage:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/GetUsersByInstance?Page="+Page + "&ItemsPerPage=" +ItemsPerPage;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+//SANCIONAR USUARIO
+//https://localhost:7131/Account/SancionateUser?userName=paco
+sancionarUsuario(x:any,userName:any): Observable<ResponseI> {
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/SancionateUser?userName="+userName;
+  return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+}
+
+//SECCION EXPLORAR TODOS LOS POST PAGINADOS
+getAllPost(x:any,Page:any,ItemsPerPage:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Post/GetAllPost?Page="+Page + "&ItemsPerPage=" +ItemsPerPage;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+//https://localhost:7131/Account/GetBlockedUsers?Page=1&ItemsPerPage=10&userName=jua
+getBlockedUsers(x:any,Page:any,ItemsPerPage:any,userName:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/GetBlockedUsers?Page=1&ItemsPerPage=10&userName=" +userName;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+//nueva funcion para activar
+//https://localhost:7131/Account/GetInactiveUsers?Page=1&ItemsPerPage=100  
+getUsuariosPorAcivar(x:any,Page:any,ItemsPerPage:any){
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/GetInactiveUsers?Page="+Page + "&ItemsPerPage=" +ItemsPerPage;
+  return this.http.get<any[]>(direccion,{ headers: headers }); 
+}
+
+//https://localhost:7131/Account/ActiveUser?userName=sd
+activarUsuario(x:any,userName:any): Observable<ResponseI> {
+  const headers = new HttpHeaders({
+    'tenant': x,
+  });
+  let direccion = this.url + "/Account/ActiveUser?userName="+userName;
+  return this.http.put<ResponseI>(direccion, {}, { headers: headers });
 }
 }

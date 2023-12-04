@@ -211,6 +211,14 @@ mat-card {
   margin-top: -10%;
   align-items:end;
 }
+.imgPERFIL{
+  background: url('/assets/img/perfil.jpg') no-repeat center center;
+  width: 60px; /* Ancho deseado para el contenedor */
+  height: 60px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: circle(50% at 50% 50%);
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
 .perfil-container {
   display: flex;
   justify-content: flex-end;
@@ -241,7 +249,7 @@ mat-card {
 
 
 .x{
-  height: 50px;
+  height: 30px;
   width: 90%;
   border-radius: 3px;
 }
@@ -413,4 +421,13 @@ color: #807d7d;
 
 .count {
   text-align: right;
+}
+
+.example-button-row {
+  display: flex;
+  align-items: center; /* Alinea verticalmente los elementos */
+}
+
+.x {
+  margin-right: 10px; /* Espacio entre el input y el botón */
 }

@@ -1,7 +1,9 @@
 <app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
 <app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
 <app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
-<div class="table-container">
+<div *ngIf="tipoU === 'Platform-Administrator' || tipoU === 'Moderator' || tipoU === 'Instance-Administrator'">
+<button mat-button *ngIf="instanciaActual.privacidad !== 0" (click)="toggleMostrarTabla()">Aprobar Usuarios</button>
+<div *ngIf="mostrarTabla; else otraDivision" class="table-container">
   <table mat-table [dataSource]="usuarios" class="">
     <ng-container matColumnDef="nombre">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
@@ -22,15 +24,8 @@
       <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
     </ng-container>
+    
 
-    <ng-container matColumnDef="borrar">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let user" >
-        <button mat-icon-button *ngIf="tipoU !== 'Moderator'">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
     <ng-container matColumnDef="editar">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let user" >
@@ -42,9 +37,59 @@
     <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
     <mat-row *matRowDef="let row; columns: columnas"></mat-row>
   </table>
-  <mat-paginator [pageSizeOptions]="[3, 6]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+  <mat-paginator [length]="cantUser"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 20, 30, cantUser]"
+  aria-label="Select page"
+  (page)="getGetUsersByInstancePaginado($event.pageIndex + 1, $event.pageSize)"
+  showFirstLastButtons>
+</mat-paginator>
 </div>
+<ng-template #otraDivision>
 
+
+  <table mat-table [dataSource]="usuariosPorArobar" class="">
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.lastName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rol">
+      <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.userName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="correo">
+      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+    </ng-container>
+    
+
+    <ng-container matColumnDef="editar">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let user" >
+          <button mat-button (click)="aprobar(user.userName)">
+          <mat-icon>done</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnas"></mat-row>
+  </table>
+  <mat-paginator [length]="cantUser"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 20, 30, cantUser]"
+  aria-label="Select page"
+  (page)="getGetUsersByInstancePaginado($event.pageIndex + 1, $event.pageSize)"
+  showFirstLastButtons>
+</mat-paginator>
+</ng-template>
+</div>
 <div *ngIf="tipoU !== 'Instance-Administrator' && tipoU !== 'Moderator' && tipoU !== 'Platform-Administrator'">
   <div class="contenedorError">
     <div class="cajaError">

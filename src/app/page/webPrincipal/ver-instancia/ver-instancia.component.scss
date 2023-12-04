@@ -1,54 +1,88 @@
 .backgroundBody {
-    margin-top: -2%;
-    padding: 0;
-    background: url('/assets/img/Fondo2.png') no-repeat center center;
-    background-size: cover;
-    width: 100%;
-    height: 450px;
-    overflow: hidden;
+  margin-top: -2%;
+  padding: 0;
+  background: url('/assets/img/Fondo2.png') no-repeat center center;
+  background-size: cover;
+  width: 100%; /* Ancho deseado para el contenedor */
+  height: 450px; /* Alto deseado para el contenedor */
+  overflow: hidden;
 
-  }
- 
+}
+
+.example-card {
+  width: 8cm;
+  height: 9cm;
+  display: flex;
+  flex-direction: column; /* Apila los elementos en dirección vertical */
+  justify-content: space-between; /* Coloca los elementos en el inicio y al final */
+  overflow: hidden; 
+}
+
+
+.Netherlands-🇳🇱-1-hex { color: #9BA7BF; }
+.Netherlands-🇳🇱-2-hex { color: #0F1926; }
+.Netherlands-🇳🇱-3-hex { color: #2E4159; }
+.Netherlands-🇳🇱-4-hex { color: #566D8C; }
+.Netherlands-🇳🇱-5-hex { color: #BF8136; }
+
+
+
+
 .imgPORTADA{
-  width: 7cm; 
-  height: 4cm;
-  background-size: contain;
+
+width: 7cm; /* Ancho deseado para el contenedor */
+height: 4cm; /* Alto deseado para el contenedor */
+background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
 }
 .btn{
-  background-color:#2E4159;
-  color: rgb(255, 255, 255);
+background-color:#2E4159;
+color: rgb(255, 255, 255);
 }
 .mat-card-actions {
-  margin-top: auto; 
+margin-top: auto; /* Empuja el contenedor de acciones al final de la tarjeta */
+}
+//DIV
+
+.alineacionDesplegables {
+display: flex;
+justify-content: RIGHT;
+margin-right: 15%;
+align-items: center; /* Centra verticalmente */
 }
 
+.desplegables{
+margin-left: 10px;
+}
 
 .mat-mdc-card-content {
-  height: 130px;
-  width: 100%;
+height: 130px;
+width: 100%;
 }
 .container {
-  display: flex;
-  justify-content: center;
-  margin-left: 20%;
-  margin-right: 10%;
+display: flex;
+justify-content: center;
+margin-left: 20%;
+margin-right: 10%;
 
 }
+mat-mdc-card-content{
 
+height: 9cm;
+}
 .items-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start; 
+display: flex;
+flex-wrap: wrap;
+justify-content: flex-start; /* Alinear los elementos a la izquierda */
 }
 .mat-mdc-button:not(:disabled) {
-  color: white;
+color: white;
 }
 .item {
-  margin: 5px; 
-  padding: 10px; 
-  box-sizing: border-box;
-  width: calc(30% - 10px);
-  font-family: 'Kanit', sans-serif;
+margin: 5px; /* Ajusta el margen para acercar los elementos */
+padding: 10px; /* Añade un espacio interno entre los elementos */
+box-sizing: border-box;
+width: calc(30% - 10px); /* Ajusta el ancho para que haya 3 elementos por fila */
+font-family: 'Kanit', sans-serif;
 }
 
 
@@ -58,26 +92,6 @@
 
 
 @media screen and (max-width: 500px) {
-
-    .alineacionDesplegables {
-      display: flex;
-      justify-content: center;
-      align-items: center; /* Centra verticalmente */
-    }
-
-    .imgPORTADA{
-      width: 5cm; /* Ancho deseado para el contenedor */
-      height: 2cm; /* Alto deseado para el contenedor */
-      background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
-    }
-    .item {
-      grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
-    }
-    p{
-      font-size: 10px;
-    }
-}
-@media screen and (max-width: 900px) {
 
   .alineacionDesplegables {
     display: flex;
@@ -94,29 +108,53 @@
     grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
   }
   p{
-    font-size: 5px;
+    font-size: 10px;
   }
-  
+}
+@media screen and (max-width: 900px) {
+
+.alineacionDesplegables {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centra verticalmente */
+}
+
+.imgPORTADA{
+  width: 5cm; /* Ancho deseado para el contenedor */
+  height: 2cm; /* Alto deseado para el contenedor */
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
+.item {
+  grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
+}
+p{
+  font-size: 5px;
+}
+
+}
+.formatoDes{
+  font-family: 'Kanit', sans-serif;
+  font-size: 5px;
 }
 //header
 /* Estilo para la barra de herramientas (toolbar) */
 .mat-toolbar {
-  background-color: #2E4159; /* Color de fondo */
-  height: 3cm; /* Grosor de 4 centímetros */
-  display: flex;
-  justify-content: center; /* Centrar los elementos horizontalmente */
-  align-items: center; /* Centrar los elementos verticalmente */
+background-color: #2E4159; /* Color de fondo */
+height: 3cm; /* Grosor de 4 centímetros */
+display: flex;
+justify-content: center; /* Centrar los elementos horizontalmente */
+align-items: center; /* Centrar los elementos verticalmente */
 }
 
 /* Estilo para los botones en la barra de herramientas */
 .mat-toolbar button {
- // background-color: #1A2B3F; /* Color de fondo más oscuro para los botones */
-  color: white; /* Color del texto en los botones */
-  margin: 0 1rem; /* Espacio entre los botones */
-  border-radius: 0.5rem; /* Bordes redondeados para los botones */
+// background-color: #1A2B3F; /* Color de fondo más oscuro para los botones */
+color: white; /* Color del texto en los botones */
+margin: 0 1rem; /* Espacio entre los botones */
+border-radius: 0.5rem; /* Bordes redondeados para los botones */
 }
 
 /* Estilo para el botón activo */
 .mat-toolbar button.router-link-active {
-  background-color: #FF5722; /* Cambiar el color de fondo para el botón activo */
+background-color: #FF5722; /* Cambiar el color de fondo para el botón activo */
 }

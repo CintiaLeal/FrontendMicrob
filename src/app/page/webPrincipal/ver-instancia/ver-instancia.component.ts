@@ -30,6 +30,7 @@ export class VerInstanciaComponent implements OnInit {
     this.api.getInstancia().subscribe({
       next: value => {
         this.instancias = value;
+        console.log(this.instancias);
         this.instanciasCargadas = true; // Marcamos que las instancias han sido cargadas
       },
       error: error => {

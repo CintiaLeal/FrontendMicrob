@@ -1,3 +1,17 @@
+
+  <mat-dialog-content class="mat-typography">
+  <mat-card class="contenedorDeSeguir">
+
+    <h1 class="textoMiPerfilc">{{usuario?.firstName}} {{usuario?.lastName}}</h1>
+    <h4 >{{usuario?.userName}}</h4>
+
+    <p>Opucación: {{usuario?.occupation}}</p>
+    <p>Ciudad: {{usuario?.city.name}}</p>
+    <button mat-button  color="primary"  [mat-dialog-close]="true"   *ngIf="origen === 'explorar'">Seguir</button>
+  
+  </mat-card>
+<br>
+<br>
 <mat-form-field appearance="fill">
   <mat-label>Selecciona un Rol</mat-label>
   <mat-select [(value)]="rolSeleccionado">
@@ -6,8 +20,12 @@
     <mat-option value="Instance-Administrator">Administrador de Instancia</mat-option>
   </mat-select>
 </mat-form-field>
-
+<br>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" class="primary" (click)="onCambiar(rolSeleccionado)">Cambiar</button>
+  <button mat-stroked-button color="warn" [mat-dialog-close]="true"  (click)="sancionar()">Sansionar Usuario</button>
+  <button mat-stroked-button color="primary" [mat-dialog-close]="true" (click)="onCambiar(rolSeleccionado)">Cambiar Rol</button>
 </mat-dialog-actions>
+
+
+</mat-dialog-content>

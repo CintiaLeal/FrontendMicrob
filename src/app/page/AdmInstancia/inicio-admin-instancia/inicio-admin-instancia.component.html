@@ -36,12 +36,12 @@
     </div>
   </mat-card>
     <mat-card class="card small-card ">
-      <mat-progress-spinner *ngIf="isLoading1" mode="indeterminate"></mat-progress-spinner>
-      <div class="card-content" *ngIf="!isLoading1">
-        <div class="title">Últimos ingresos</div>
+      <div class="card-content">
+        <div class="title">Total Usuarios Bloqueados</div>
         <div class="number-container">
-          <div *ngFor="let usuario of ultimosUsuarios" class="iconsUltimoUsuario">
-            ☺ {{ usuario.userName }}
+          <div class="number" style="display: flex; ">
+              {{cantidadUsuariosReportado}}
+            <img  class="imgErrorUser" >
           </div>
         </div>
       </div>
@@ -103,6 +103,46 @@
       </mat-card-content>
     </mat-card>
   </div>
+  <div class="card-container">
+    <mat-card class="card large-card-7">
+      <mat-card-header>
+        <p routerLink="/admPublicaciones">Posteos de la instancia</p>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+   
+
+<div>
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [legend]="pieChartLegend"
+          [type]="pieChartType">
+  </canvas>
+</div>
+
+    </mat-card>
+
+    <mat-card class="card large-card-8">
+      
+    
+        <mat-card-header>
+          <p >Tendencias</p>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+     
+        <ul class="tendencias-list" *ngFor="let tendencia of topHastagsInicio" >
+          <li class="tendencia">
+            <span class="hashtag">{{ '#' + tendencia.name }}</span>
+            <span class="count">{{ tendencia.relationshipCount }}</span>
+          </li>
+        </ul>
+    
+    </mat-card>
+  </div>
+  
+
   <div class="card-container">
     <mat-card class="card large-card-1">
       
@@ -183,8 +223,6 @@
     </mat-card>
   </div>
   
-
-
 
 </div>
 

@@ -22,11 +22,17 @@
               <mat-card-content>
                 <p>
                   {{x.nombre}} <mat-chip disabled>{{x.tematica.name}}</mat-chip>
+                  <mat-chip disabled *ngIf="x.privacidad === 1">Autorizacion</mat-chip>
+                  <mat-chip disabled *ngIf="x.privacidad === 2">Invitacion</mat-chip>
+                  <mat-chip disabled *ngIf="x.privacidad === 3">Cerrada</mat-chip>
+                  <mat-chip disabled *ngIf="x.privacidad !== 1 && x.privacidad !== 2 && x.privacidad !== 3">Abierta</mat-chip>
+
                 </p>
-                <p>
-                  {{x.description}}
-                </p>
+                {{x.description}}
               </mat-card-content>
+          
+          
+     
               <mat-card-actions>
                 <button mat-button (click)="navegarAOtroComponente(x.tenantInstanceId,x.dominio)" class="btn">Unirme
                   ya</button>
@@ -40,5 +46,5 @@
   </div>
 </div>
 <ng-template #noInstancias>
-<button mat-raised-button color="primary" routerLink="/login">Ir a Login</button>
+  <button mat-raised-button color="primary" routerLink="/login">Ir a Login</button>
 </ng-template>

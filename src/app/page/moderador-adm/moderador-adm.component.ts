@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { ChartOptions, ChartData, ChartType } from 'chart.js';
 import { AppComponent } from 'src/app/app.component';
 import { InstanciaRetorno } from 'src/app/modelos/instanciaRetorno';
 import { AppService } from 'src/app/servicios/app.service';
@@ -26,7 +27,33 @@ export class ModeradorAdmComponent {
   topHastagsInicio: any [] =[];
   texto:string = '';
   isLoading = false;
+  cantUserMes:any;
+  increaseUserMes:any;
+  increaseUser:any;
+  cantTodalusuarios:any;
+  cantidadUsuariosReportado:any;
+  cantPostInst:any;
+  cantPostReportados:any;
+  //
+  pieChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
 
+  pieChartLabels: string[] = ['Total de Posteos', 'Cantidad Reportados'];
+  pieChartData: ChartData = {
+    labels: ['Posteos', 'Reportados'],
+    datasets: [
+      {
+        data: [40, 60],
+        backgroundColor: [ '#04b2d975','#6d6b74']
+      }
+    ]
+  };
+  pieChartType: ChartType = 'pie';
+  pieChartLegend = true;
+  pieChartPlugins = [];
+  //
   constructor(private appNosql: AppnosqlService,private app:AppComponent, private api: AppService) {
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.app.ngOnInit();
@@ -42,10 +69,19 @@ export class ModeradorAdmComponent {
       next: value => this.instanciaActual = value,
       error: err => { alert('Error al cargar las instancias: ' + err) }
     });
-   this.panel();
+   
    this.obtenerCitys();
    this.obtenertopHastags(8);
-   this.texto = "Buenas #Hola"
+   this.texto = "Buenas #Hola";
+   this.panel();
+
+   this.api.getPostReportados(this.idinstancia).subscribe(
+    (info)=>{
+      this.cantPostReportados = info.length;
+      this.getPosteosInstanciaCant(this.cantPostReportados);
+    });
+
+   
   }
 
   obtenertopHastags(cantidad:any){
@@ -57,72 +93,80 @@ export class ModeradorAdmComponent {
       }
   }
 
-  panel() {
-    this.api.obtenerUsuarios(this.idinstancia).subscribe({
-      next: users => {
-        // Llenar la variable cantUser con la cantidad de usuarios
-        this.cantUser = users.length;
-  
-        // Inicializar la variable cantPost en 0
-        this.cantPost = 0;
-  
-        // Recorrer los usuarios para contar la cantidad total de posts
-        users.forEach(user => {
-          this.cantPost += user.posts ? user.posts.length : 0;
-        });
-  
-        // Obtener los últimos 2 usuarios basándose en el ID más alto
-        this.ultimosUsuarios = users
-          .sort((a, b) => b.userId - a.userId)
-          .slice(0, 2);
-  
-        console.log('Cantidad de usuarios:', this.cantUser);
-        console.log('Cantidad total de posts:', this.cantPost);
-        console.log('Últimos 2 usuarios:', this.ultimosUsuarios);
-      },
-      error: err => {
-        alert('Error al cargar las instancias: ' + err);
-        console.error('Error al obtener usuarios:', err);
-      }
-    });
-  }
+
   
 
   obtenerCitys() {
-    this.api.obtenerUsuarios(this.idinstancia).subscribe({
-      next: users => {
-        // Crear un objeto para almacenar la cantidad de usuarios por ciudad
-        const usuariosPorCiudad: { [cityName: string]: number } = {};
-
-        users.forEach(user => {
-
-          if (user.city && user.city.name) {
-            const cityName = user.city.name;
-  
-            // Incrementar el contador de la ciudad actual
-            usuariosPorCiudad[cityName] = (usuariosPorCiudad[cityName] || 0) + 1;
-          }
-        });
-  
-        // Ordenar el objeto por la cantidad de usuarios de manera descendente
-        const ciudadesOrdenadas: { key: string; value: number }[] = Object.entries(usuariosPorCiudad)
-          .sort(([, a], [, b]) => b - a)
-          .map(([key, value]) => ({ key, value }));
-  
-        // Loguear la cantidad de usuarios por ciudad ordenada
-        console.log('Cantidad de usuarios por ciudad (ordenada):', ciudadesOrdenadas);
-  
-        // Asignar el array ordenado a this.usuariosForCity
-        this.usuariosForCity = ciudadesOrdenadas;
+    this.api.getCantUsersByCityAllTenan(this.idinstancia).subscribe(
+      data => {
+        this.usuariosForCity = data;
+        console.log(this.usuariosForCity);
+       
       },
-      error: err => {
-        alert('Error al cargar las instancias: ' + err);
-        console.error('Error al obtener usuarios:', err);
+      error => {
+     
+        console.error('Error al obtener la cantidad de usuarios:', error);
       }
-    });
+    );
   }
   
-  
+  getPosteosInstanciaCant(x:any) {
+    this.api.getPosteosInstanciaCant(this.idinstancia).subscribe(
+      (data) => {
+     
+        if(this.cantPostReportados){
+        this.cantPostInst = data;
+        console.log(this.cantPostInst);
+        this.pieChartLabels = ['Total de Posteos','Cantidad Sancionados', 'Cantidad Reportados'];
+        this.pieChartData = {
+          labels: ['Posteos', 'Sancionados', 'Reportados'],
+          datasets: [
+            {
+              data: [data.total, data.sancionados,this.cantPostReportados],
+              backgroundColor: [ '#04b2d975','#6d6b74','#E97A62']
+            }
+          ]
+        };
+      }},
+      error => {
+        console.error('Error al obtener la cantidad de usuarios:', error);
+      }
+    );
+  }
+
+  panel() {
+    this.api.getCantidadUsuariosAllTenant(this.idinstancia).subscribe(
+      data => {
+        this.cantUser = data.total;
+        this.increaseUser = data.increase;
+       
+
+        this.api.getGetUsersByInstancePaginado(this.idinstancia, 1, 500).subscribe((users: any[]) => {
+          this.cantTodalusuarios = users.length;
+          this.cantidadUsuariosReportado = this.cantUser - this.cantTodalusuarios;
+        }, (error) => {
+        });
+      },
+      error => {
+      
+        console.error('Error al obtener la cantidad de usuarios:', error);
+      }
+    );
+
+    this.api.getCantUsersThisMonthAllTenant(this.idinstancia).subscribe(
+      data => {
+        this.cantUserMes = data.total;
+        this.increaseUserMes = data.increase;
+        
+   
+      },
+      error => {
+       
+        console.error('Error al obtener la cantidad de usuarios:', error);
+      }
+    );
+
+  }
   
   
 

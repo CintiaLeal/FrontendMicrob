@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { InstanciaRetorno} from 'src/app/modelos/instanciaRetorno';
 import { AppService } from 'src/app/servicios/app.service';
-import { Chart, ChartOptions, ChartType } from 'chart.js';
+import { Chart, ChartData, ChartOptions, ChartType } from 'chart.js';
 import { ColorHelper } from '@swimlane/ngx-charts';
 import { AppnosqlService } from 'src/app/servicios/appnosql.service';
 import { forkJoin } from 'rxjs';
@@ -52,18 +52,44 @@ interface Tematica {
   middleText:any;
   increaseUser:any;
   increaseUserMes:any;
+  cantTodalusuarios:any;
+  cantPostReportados:any;
   rangeOptions = [
     { start: 3, end: 20 },
     { start: 6, end: 20 },
     { start: 9, end: 20 },
     { start: 12, end: 20 }
   ];
-  
+  cantPostInst:any[]= [];
+  cantidadUsuariosReportado:any;
+  //
+  pieChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+
+  pieChartLabels: string[] = ['Total de Posteos', 'Cantidad Reportados'];
+  pieChartData: ChartData = {
+    labels: ['Posteos', 'Reportados'],
+    datasets: [
+      {
+        data: [40, 60],
+        backgroundColor: [ '#04b2d975','#6d6b74']
+      }
+    ]
+  };
+  pieChartType: ChartType = 'pie';
+  pieChartLegend = true;
+  pieChartPlugins = [];
+  //
+
   constructor(private appNosql: AppnosqlService,private app:AppComponent, private api: AppService) {
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.app.ngOnInit();
    
   }
+
+
 
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -75,7 +101,8 @@ interface Tematica {
   barChartPlugins = [];
 
   barChartData: ChartDataset[] = [
-    { data: [], label: 'Total Usuarios', backgroundColor: '#6d6b74'  },
+    { data: [], label: 'Total Usuarios', backgroundColor: '#6d6b7480' },
+    //                                             ^^^^^^^^
     { data: [], label: 'Nuevos Usuarios', backgroundColor: '#04b2d975' },
   ];
   ngOnInit(): void {
@@ -98,6 +125,12 @@ interface Tematica {
    this.getPostMasLike(4);
    //
    this.graficaUserMeses(3);
+   this.api.getPostReportados(this.idinstancia).subscribe(
+    (info)=>{
+      this.cantPostReportados = info.length;
+      this.getPosteosInstanciaCant(this.cantPostReportados);
+    });
+
   }
 
   obtenertopHastags(cantidad:any){
@@ -116,6 +149,12 @@ interface Tematica {
         this.cantUser = data.total;
         this.increaseUser = data.increase;
         this.isLoading3 = false;
+
+        this.api.getGetUsersByInstancePaginado(this.idinstancia, 1, 500).subscribe((users: any[]) => {
+          this.cantTodalusuarios = users.length;
+          this.cantidadUsuariosReportado = this.cantUser - this.cantTodalusuarios;
+        }, (error) => {
+        });
       },
       error => {
         this.isLoading3 = false;
@@ -137,6 +176,12 @@ interface Tematica {
     );
 
   }
+
+
+
+
+
+
   currentRangeIndex = 0;
 
   get rangeText(): string {
@@ -154,27 +199,64 @@ interface Tematica {
     this.currentRangeIndex = (this.currentRangeIndex + 1) % this.rangeOptions.length;
     this.graficaUserMeses(this.rangeOptions[this.currentRangeIndex].start);
   }
-
-  graficaUserMeses(cant:any){
-//getNewMonthlyRegistrationsAllTenant(x:any,cant:any)
-this.api.getNewMonthlyRegistrationsAllTenant(this.idinstancia,cant).subscribe(
-  data => {
-    this.graficaUserMes = data;
-    console.log(this.graficaUserMes);
-    this.isLoading3 = false;
+  graficaUserMeses(cant: any) {
+    //getNewMonthlyRegistrationsAllTenant(x:any,cant:any)
+    this.api.getNewMonthlyRegistrationsAllTenant(this.idinstancia, cant).subscribe(
+      data => {
+        this.graficaUserMes = data;
+        console.log(this.graficaUserMes);
+        this.isLoading3 = false;
+  
         // Llena las etiquetas del gráfico con los meses
         this.barChartLabels = this.graficaUserMes.map((data) => data.month);
-
+  
         // Llena los datos de la gráfica con los valores del backend
         this.barChartData[0].data = this.graficaUserMes.map((data) => data.newTotalUser);
-        this.barChartData[1].data = this.graficaUserMes.map((data) => data.newTotalInstance);
-  },
-  error => {
-    this.isLoading3 = false;
-    console.error('Error al obtener la cantidad de usuarios:', error);
+  
+        // Configura la línea como una serie de datos en la misma escala y eje Y que la serie de barras
+        this.barChartData[1] = {
+          data: this.graficaUserMes.map((data) => data.newTotalInstance),
+          label: 'Nuevos Usuarios',
+          type: 'line'
+          //yAxisID: 'y-axis-1'
+        };
+      },
+      error => {
+        this.isLoading3 = false;
+        console.error('Error al obtener la cantidad de usuarios:', error);
+      }
+    );
   }
-);
+  
+  
+
+
+  getPosteosInstanciaCant(x:any) {
+    this.api.getPosteosInstanciaCant(this.idinstancia).subscribe(
+      (data) => {
+     
+        if(this.cantPostReportados){
+        this.cantPostInst = data;
+        console.log(this.cantPostInst);
+        this.pieChartLabels = ['Total de Posteos','Cantidad Sancionados', 'Cantidad Reportados'];
+        this.pieChartData = {
+          labels: ['Posteos', 'Sancionados', 'Reportados'],
+          datasets: [
+            {
+              data: [data.total, data.sancionados,this.cantPostReportados],
+              backgroundColor: [ '#04b2d975','#6d6b74','#E97A62']
+            }
+          ]
+        };
+      }},
+      error => {
+        console.error('Error al obtener la cantidad de usuarios:', error);
+      }
+    );
   }
+  
+  
+  
   
 
   obtenerCitys() {
@@ -229,4 +311,3 @@ this.api.getNewMonthlyRegistrationsAllTenant(this.idinstancia,cant).subscribe(
 function ViewChild(arg0: string): (target: InicioAdminInstanciaComponent, propertyKey: "chartCanvas") => void {
   throw new Error('Function not implemented.');
 }
-

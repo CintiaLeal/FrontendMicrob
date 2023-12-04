@@ -1,28 +1,32 @@
 <app-header-instance-administrator *ngIf="tipoU === 'Instance-Administrator'"></app-header-instance-administrator>
 <app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
-<div class="table-container" *ngIf="tipoU === 'Instance-Administrator'" >
+<app-header-moderator *ngIf="tipoU === 'Moderator'"></app-header-moderator>
+
+<div class="table-container" *ngIf="tipoU === 'Platform-Administrator' || tipoU === 'Moderator' || tipoU === 'Instance-Administrator'">
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="postId">
-      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Identificador </mat-header-cell>
       <mat-cell *matCellDef="let post"> {{ post.postId }} </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="fecha">
+      <mat-header-cell *matHeaderCellDef> Fecha de creación </mat-header-cell>
+      <mat-cell *matCellDef="let post"> {{ post.created }} </mat-cell>
+    </ng-container>
     <ng-container matColumnDef="detalle">
-      <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
       <mat-cell *matCellDef="let post"> <button mat-button (click)="openDialog(post.postId)">Ver Detalle</button> </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
     <mat-row *matRowDef="let row; columns: columnas"></mat-row>
   </table>
-  
-  <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Select page of items"></mat-paginator>
-  
+
 
   </div>
 
-  <div *ngIf="tipoU !== 'Instance-Administrator'">
+  <div *ngIf="tipoU !== 'Platform-Administrator'  &&  tipoU !== 'Moderator'  &&  tipoU !== 'Instance-Administrator'">
     <div class="contenedorError">
       <div class="cajaError">
         <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>

@@ -56,7 +56,7 @@ export class InicioUsuarioComponent {
   tokenActual: string | null = null;
   idInstanciaLocalHost: any;
   inputText: any;
-  inicioTodosPost: Post[] = [];
+  inicioTodosPost: any[] = [];
   inicioTodosPost1: Post[] = [];
   private scrollPos = 0;
   panelOpenState = false;
@@ -385,9 +385,7 @@ export class InicioUsuarioComponent {
     this.api.verMiInicio(this.idInstanciaLocalHost, this.userName).subscribe(
       (postHome: any[]) => {
         this.postHome1 = postHome;
-        this.postHome1.sort((a, b) => {
-          return new Date(b.created).getTime() - new Date(a.created).getTime();
-        });
+        console.log(postHome);
       },
       (error) => {
         console.error('Error al cargar los posteos de inicio:', error);
@@ -395,31 +393,20 @@ export class InicioUsuarioComponent {
     );
   }
 
- 
+  
   getPosteosInicio() {
     this.isLoading = true;
     this.inicioTodosPost = [];
-    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
-      for (const userEncontrado of users) {
-        this.api.getMisPost(this.idInstanciaLocalHost, userEncontrado.userName).subscribe((posts: PostTodos[]) => {
-          for (const post of posts) {
-            post.userOwner = userEncontrado;
-          }
-          this.inicioTodosPost.push(...posts);
-          this.inicioTodosPost.sort((a, b) => {
-            const dateA = new Date(a.created).getTime();
-            const dateB = new Date(b.created).getTime();
-            return dateB - dateA;
-            
-          });
-          this.isLoading = false;
-        });
-      }   
-    });
-  }
+        this.api.getAllPost(this.idInstanciaLocalHost,1,10).subscribe((posts: any[]) => {
+          this.inicioTodosPost = posts;
+          console.log("PostEplore"+this.inicioTodosPost);
+         },
+         (error) => {
+           console.error('Error al cargar los posteos de inicio:', error);
+         });
+  }   
 
-
-
+  
 
   getPosteosInicio1() {
     this.inicioTodosPost1 = [];
@@ -614,8 +601,8 @@ export class DialogContentExample {
 
   ngOnInit(): void {
 
-
-    this.getPosteosInicio1(this.postId);
+    this.getPosteosInicio(this.postId); 
+    //this.getPosteosInicio1(this.postId);
   }
 
 
@@ -640,11 +627,24 @@ export class DialogContentExample {
     });
   }
 
+  //getPostId(x:any,idPost:any)
+  getPosteosInicio(postId: any) {
+    this.inicioTodosLikes = [];
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+    
+    this.api.getPostId(this.idInstanciaLocalHost, postId).subscribe((data: any) => {
+      // Asegúrate de que estás accediendo al array de likes dentro del objeto del post
+      this.inicioTodosLikes = data.likes;
+    }, (error) => {
+      console.error('Error al cargar los likes del post:', error);
+    });
+  }
+  
 
-}
 
 
 
+  }
 
 @Component({
   selector: 'darSeguir',

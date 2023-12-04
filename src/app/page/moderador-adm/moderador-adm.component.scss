@@ -184,7 +184,9 @@ margin-top: -10%;
   list-style: none;
   padding: 0;
 }
-
+.tamanioletra{
+  font-size: 12px;
+}
 .tendencia {
   display: flex;
   justify-content: space-between;
@@ -194,4 +196,41 @@ margin-top: -10%;
   
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+.imgErrorUser{
+  background: url('/assets/img/ErrorUsuerios.png') no-repeat center center;
+  width: 50px; /* Ancho deseado para el contenedor */
+  height: 50px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: inset(2% 2% 2% 3%);
+  margin-left: 25%;
+  margin-top: -8%;
+}
+
+.imgValores{
+  background: url('/assets/img/Bajada.png') no-repeat center center;
+  width: 80px; /* Ancho deseado para el contenedor */
+  height: 80px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: inset(2% 2% 2% 3%);
+  margin-left: 25%;
+  margin-top: -10%;
+}
+.imgValoresSubida{
+  background: url('/assets/img/Subida.png') no-repeat center center;
+  width: 80px; /* Ancho deseado para el contenedor */
+  height: 80px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: inset(2% 2% 2% 3%);
+  margin-left: 25%;
+  margin-top: -10%;
+}
+
+.large-card-7 {
+  width: 30cm;
+  height: 10cm;
+}
+.large-card-8 {
+  width: 10cm;
+  height: 10cm;
 }

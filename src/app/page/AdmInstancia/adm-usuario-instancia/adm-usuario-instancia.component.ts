@@ -12,8 +12,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MessageService } from 'src/app/message.service';
 
-
-
 @Component({
   selector: 'app-adm-usuario-instancia',
   templateUrl: './adm-usuario-instancia.component.html',
@@ -21,27 +19,91 @@ import { MessageService } from 'src/app/message.service';
 })
 export class AdmUsuarioInstanciaComponent implements OnInit {
   tipoU: string | null = null;
-  columnas: string[] = ['nombre', 'apellido', 'rol', 'correo', 'borrar','editar'];
+  columnas: string[] = ['nombre', 'apellido', 'rol', 'correo', 'editar'];
   dataSource = new MatTableDataSource<any>([]);
   public usuarios: UsuarioRetorno[] = [];
   idInstanciaLocalHost: any;
+  totalUsuarios: number = 0;
+  pageSizeOptions: number[] = [3, 6];
+  pageSize: number = this.pageSizeOptions[0];
+  cantUser:any;
+  usuariosPorArobar:any;
+  mostrarTabla: boolean = true;
+  instanciaActual:any;
 
-  constructor(private api: AppService,public dialog: MatDialog ){ }
+  constructor( private messageService: MessageService,private api: AppService,public dialog: MatDialog ){ }
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator; // Añadir el signo de exclamación (!) aquí
 
  
     ngOnInit(): void {
       this.tipoU = localStorage.getItem('tipoUsuario');
       this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
-      this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
-        this.usuarios = users; // Asigna los usuarios al arreglo usuarios
-        this.dataSource = new MatTableDataSource(this.usuarios); // Actualiza la fuente de datos de la tabla
-       
+      
+   
+      this.dataSource.paginator = this.paginator;
+      this.getGetUsersByInstancePaginado(1, 10);
+
+      this.api.getInstanciaPorId(this.idInstanciaLocalHost).subscribe(
+        data => {
+          this.instanciaActual = data;
+        },
+        error => {
+          console.error('Error al obtener la cantidad de usuarios:', error);
+        }
+      );
+
+        
+      
+
+      this.api.getCantidadUsuariosAllTenant(this.idInstanciaLocalHost).subscribe(
+        data => {
+          this.cantUser = data.total;
+        },
+        error => {
+          console.error('Error al obtener la cantidad de usuarios:', error);
+        }
+      );
+
+      this.obtenerUsuariosParaAprobar();
+    }
+
+    aprobar(userName:any){
+      this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+        this.api.activarUsuario(this.idInstanciaLocalHost,userName).subscribe(data => {
+          this.messageService.showSuccess('Usuario Aprobado.');
+          this.obtenerUsuariosParaAprobar();
+        },
+        error => {
+          this.messageService.showError('Error');
+        });
+      
+    }
+    toggleMostrarTabla() {
+      this.mostrarTabla = !this.mostrarTabla;
+    }
+    onPageChange(event: any) {
+      const page = event.pageIndex + 1; // Páginas en el backend generalmente comienzan desde 1
+      const itemsPerPage = event.pageSize;
+  
+      // Llamada al servicio backend
+      this.getGetUsersByInstancePaginado(page, itemsPerPage);
+    }
+
+    getGetUsersByInstancePaginado(page: number, itemsPerPage: number) {
+      // Evitar llamadas de página fuera de rango
+      if (page < 1 || page > this.cantUser / itemsPerPage) {
+        return;
+      }
+    
+      this.api.getGetUsersByInstancePaginado(this.idInstanciaLocalHost, page, itemsPerPage).subscribe((users: any[]) => {
+        this.usuarios = users;
+        this.dataSource = new MatTableDataSource(this.usuarios);
+        this.dataSource.paginator = this.paginator;
       }, (error) => {
         // Manejo del error
       });
-      
     }
+
   eliminarRegistro(registro: any): void {
     const index = this.dataSource.data.indexOf(registro);
     if (index >= 0) {
@@ -64,6 +126,16 @@ export class AdmUsuarioInstanciaComponent implements OnInit {
     });
   }
   
+  //getUsuariosPorAcivar(x:any,Page:any,ItemsPerPage:any)
+  obtenerUsuariosParaAprobar(){
+    if(this.idInstanciaLocalHost){
+      this.api.getUsuariosPorAcivar(this.idInstanciaLocalHost,1,30).subscribe(
+        (value) => {
+          this.usuariosPorArobar = value; 
+          console.log("Para APROBAR" +value);    
+        });
+      }
+  }
 }
 
 @Component({
@@ -74,10 +146,11 @@ imports: [MatDialogModule,MatSelectModule,MatFormFieldModule, MatButtonModule,Ma
 })
 export class DialogContentExampleDialog {
   dataSource = new MatTableDataSource<any>([]);
-  public usuarios: UsuarioRetorno[] = [];
+  miusuario: any; 
   idInstanciaLocalHost: any;
   userNamePasado: any ;
   rolSeleccionado: string = '';
+  usuario:any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -89,11 +162,13 @@ export class DialogContentExampleDialog {
   }
 
   ngOnInit(): void {
+    console.log(this.userNamePasado);
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
-    this.api.obtenerUsuarios(this.idInstanciaLocalHost).subscribe((users: UsuarioRetorno[]) => {
-      this.usuarios = users; // Asigna los usuarios al arreglo usuarios
-      this.dataSource = new MatTableDataSource(this.usuarios); // Actualiza la fuente de datos de la tabla
-     
+    this.api.obtenerInfoUsuario(this.userNamePasado,this.idInstanciaLocalHost).subscribe((data: any[]) => {
+      this.miusuario = data;
+      this.usuario = data; // Asigna los usuarios al arreglo usuarios
+      this.dataSource = new MatTableDataSource(this.miusuario); // Actualiza la fuente de datos de la tabla
+     console.log(this.miusuario);
     }, (error) => {
       // Manejo del error
     });
@@ -101,23 +176,20 @@ export class DialogContentExampleDialog {
   }
 
   onCambiar(rolSeleccionado: string) {
-    const usuarioEncontrado: any | undefined = this.usuarios.find(
-      (usuario: any) => usuario.userName === this.userNamePasado
-    );
-  
-    if (usuarioEncontrado) {
+
+    if (this.userNamePasado) {
       let x: any = {
-        userId: usuarioEncontrado.userId,
-        firstName: usuarioEncontrado.firstName ?? " ",
-        lastName: usuarioEncontrado.lastName ?? usuarioEncontrado.lastName ?? " ",
-        email:  usuarioEncontrado.email ?? " ",
-        profileImage:  usuarioEncontrado.profileImage ?? " ",
-        birthday: usuarioEncontrado.birthday ?? usuarioEncontrado.birthday ?? " ",
-        biography: usuarioEncontrado.biography ?? " ",
-        occupation:  usuarioEncontrado.occupation ?? " ",
+        userId: this.miusuario?.userId ?? " ",
+        firstName: this.miusuario?.firstName ?? " ",
+        lastName: this.miusuario?.lastName ?? this.miusuario?.lastName ?? " ",
+        email:  this.miusuario?.email ?? " ",
+        profileImage:  this.miusuario?.profileImage ?? " ",
+        birthday: this.miusuario?.birthday ?? this.miusuario?.birthday ?? " ",
+        biography: this.miusuario?.biography ?? " ",
+        occupation:  this.miusuario?.occupation ?? " ",
         city: {
-          id: usuarioEncontrado.city.id,
-          name: usuarioEncontrado.city.name
+          id: this.miusuario?.city.id,
+          name: this.miusuario?.city.name
         },
         role: rolSeleccionado
       };
@@ -133,4 +205,13 @@ export class DialogContentExampleDialog {
     }
   }
   
+  sancionar(){
+    //sancionarUsuario
+    this.api.sancionarUsuario(this.idInstanciaLocalHost,this.userNamePasado).subscribe(data => {
+      this.messageService.showSuccess('Usuario Sancionado.');
+    },
+    error => {
+      this.messageService.showError('Error');
+    });
+  }
 }

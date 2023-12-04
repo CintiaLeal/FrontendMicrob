@@ -1,14 +1,14 @@
-
 <div *ngFor="let x of inicioTodosLikes" class="divSeccionMg">
-    <mat-card class="separaciondivsccionmg">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
-            src={{x.profileImage}}>
-        </div>
-        <mat-card-title> {{x.firstName}}</mat-card-title>
-        <mat-card-subtitle >
-          {{ x.userName }}
-        </mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
+  <mat-card class="separaciondivsccionmg">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <img class="imgPostUser" [src]="x.profileImage">
+      </div>
+      <mat-card-title>{{x.firstName}}</mat-card-title>
+      <mat-card-subtitle>{{x.userName}}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
 </div>
+
+
+

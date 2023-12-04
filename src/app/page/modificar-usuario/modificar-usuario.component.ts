@@ -19,8 +19,9 @@ export class ModificarUsuarioComponent {
   idInstancia: any | null = null;
   public birthday: Date | null =null;
   listCitys: any;
-
- 
+  misseguidores:any;
+  losquesigo:any;
+  userBloqueados:any;
   registrarForm = new FormGroup({
       firstName: new FormControl(''),
       lastName: new FormControl(''),
@@ -61,7 +62,7 @@ export class ModificarUsuarioComponent {
         }
       );
     }
-   
+    this.getSeguidos();
   }
 
   getCitys() {
@@ -157,5 +158,36 @@ if (this.base64Image) {
 }
 }
 
+getSeguidos(){
+  this.idInstancia=localStorage.getItem('idInstancia');
+  if (this.userName) {
+    this.api.verMisSeguidores(this.idInstancia, this.userName).subscribe(
+      (value) => {
+        this.misseguidores = value; // Asigna el valor de 'value' a this.usuario
+      },
+      (error) => {
+        alert('Error al cargar las instancias: ' + error);
+      }
+    );
+    this.api.verSeguidos(this.idInstancia, this.userName).subscribe(
+      (value) => {
+        this.losquesigo = value; // Asigna el valor de 'value' a this.usuario
+      },
+      (error) => {
+        alert('Error al cargar las instancias: ' + error);
+      }
+    );
+    //GetBlockedUsers(x:any,Page:any,ItemsPerPage:any,userName:any)
+    this.api.getBlockedUsers(this.idInstancia,2,4, this.userName).subscribe(
+      (value) => {
+        this.userBloqueados = value; // Asigna el valor de 'value' a this.usuario
+      },
+      (error) => {
+        alert('Error al cargar las instancias: ' + error);
+      }
+    );
+
+  }
+}
 
 }
