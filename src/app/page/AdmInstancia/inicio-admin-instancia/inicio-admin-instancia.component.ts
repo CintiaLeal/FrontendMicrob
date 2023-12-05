@@ -280,15 +280,16 @@ interface Tematica {
   
   getPostMasLike(cantidad: any) {
     if (this.idinstancia) {
-      this.appNosql.getPostMasLike(this.idinstancia, cantidad).subscribe(
-        (postIdMasLike) => {
+      this.appNosql.getPostMasLike(2, cantidad).subscribe(
 
+        (postIdMasLike) => {
+console.log(postIdMasLike);
           for (const postIdObject of postIdMasLike) {
             const postId = postIdObject.postId;
             this.api.getPostId(this.idinstancia, postId).subscribe(
               (postDetails) => {
                 // postDetails contiene la información del post, haz lo que necesites con ella
-                console.log('Detalles del post:', postDetails);
+                console.log('Detalles del post con mas like:', postDetails);
   
                 // Agrega el postDetails a la lista postMaslike (asumiendo que es un array)
                 this.postMaslike.push(postDetails);

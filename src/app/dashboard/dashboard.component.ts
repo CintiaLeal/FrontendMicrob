@@ -11,6 +11,7 @@ import { ChartDataset } from 'chart.js';
 import 'chart.js/auto';
 import { ChartItem } from 'chart.js/auto';
 import { MatPaginator } from '@angular/material/paginator';
+import { MessageService } from '../message.service';
 
 interface Filtro {
   value: string;
@@ -64,7 +65,7 @@ export class DashboardComponent {
     { start: 12, end: 20 }
   ];
   
-  constructor(private appNosql: AppnosqlService,private app:AppComponent, private api: AppService) {
+  constructor(private messageService: MessageService,private appNosql: AppnosqlService,private app:AppComponent, private api: AppService) {
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.app.ngOnInit();
    
@@ -110,6 +111,7 @@ export class DashboardComponent {
     };
     console.log(x);
     this.appNosql.SenttingSuggestUsersAllTenantL(x).subscribe(data => {
+      this.messageService.showSuccess('Modificación correcta.');
     });
 }
   obtenertopHastags(cantidad:any){

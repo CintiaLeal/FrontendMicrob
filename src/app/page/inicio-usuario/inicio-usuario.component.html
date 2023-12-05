@@ -266,18 +266,53 @@
 
     <div *ngIf="contenidoVisible === 'notificacion'">
       <div class="scrollable-content">
-        <mat-card>
-          <mat-card-content>
-            <p>Notificacion
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt urna quis velit commodo,
-              nec fringilla lorem dictum. Integer vehicula massa at nisl tristique, eu hendrerit ex malesuada.
-              Vivamus in pharetra urna, vel iaculis orci.
-            </p>
-          </mat-card-content>
-        </mat-card>
+        <div class="">
+          <div class="divPerfilcolor">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+          <div class="perfil-containerImgUser">
+            <img class="imgPerfilUser" src={{usuarioVer?.profileImage}} (click)="openDialogSeguir(usuarioVer?.userName,'home')">
+          </div>
+          <h1 class="textoMiPerfil">{{usuarioVer?.firstName}} {{usuarioVer?.lastName}}</h1>
+          <h4 class="textoMiPerfilArroba">{{usuarioVer?.userName}}</h4>
+          <div>
+            <p>{{usuarioVer?.biography}}</p>
+          </div>
+
+          <h4>
+            <mat-icon class="iconDiaCumple">calendar_month</mat-icon>
+            {{ usuarioVer?.birthday | date:'dd/MM/yyyy' }}
+          </h4>
+          <p (click)="openDialogSeguir(usuarioVer?.userName,'home')">Seguidores  {{misseguidoresVer.length}} Seguidos {{losquesigoVer.length}} </p>
+        </div>
+        <hr>
+        <div *ngFor="let x of misPostVer">
+          <br>
+          <mat-card>
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"><img class="imgPostUser" src={{usuarioVer?.profileImage}}>
+              </div>
+              <mat-card-title> {{usuarioVer?.firstName}}</mat-card-title>
+              <mat-card-subtitle> {{usuarioVer?.userName}} | {{ x.created | date:'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                {{x.text}}
+              </p>
+              <img class="imgContenido" *ngIf="x.attachment" src={{x.attachment}}>
+              <a (click)="openDialog(x.postId)" class="mgPost">{{ x.likes.length }} ❤</a>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div>
     </div>
   </div>
+
   <div class="sect section3">
     <div class="caja">
       <mat-progress-spinner *ngIf="isLoading2" mode="indeterminate"></mat-progress-spinner>
@@ -292,6 +327,20 @@
           </li>
         </ul>
       </div>
+      <br>
+      <mat-progress-spinner *ngIf="isLoading3" mode="indeterminate"></mat-progress-spinner>
+      <h2 >Usuarios Sugeridos</h2>
+      <div class="sugerencia-container" *ngIf="usuariosParaMostrar">
+        
+        <div *ngFor="let usuari of usuariosParaMostrar" class="sugerencia-item" >
+       
+          <img   [src]="usuari?.profileImage" class="sugerencia-imagen" (click)="mostrarContenido('notificacion'); verPerfilSugerido(usuari?.userName)">
+          <div>
+          <span  class="sugerencia-texto">{{usuari?.firstName}} {{usuari?.lastName}}</span>
+        </div>
+      </div>
+      </div>
+      
     </div>
     <div class="caja3">
       <ul class="menu-list">

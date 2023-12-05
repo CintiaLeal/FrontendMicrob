@@ -39,7 +39,7 @@ export class AppnosqlService {
 
   getPostMasLike(tenant:any, cantidad:any){
    let direccion = this.url + "/SuggestUsers/PostWhitMostLikeByTenant?tenantId="+tenant+"&topCant="+ cantidad;
-   return this.http.get<any>(direccion);
+   return this.http.get<any[]>(direccion);
   }
 
 
@@ -55,4 +55,11 @@ export class AppnosqlService {
     let direccion = this.url + "/SuggestUsers/TopHashtagAllTenant?topCant=" + cantidad;
     return this.http.get<any>(direccion);
     }
+
+  //https://localhost:7131/SuggestUsers/SuggestUsersByTenant?tenantId=1&userId=5&topCant=10
+  suggestUsersByTenant(tenantId:any,userId:any,topCant:any):Observable<any>{
+    let direccion = this.url + "/SuggestUsers/SuggestUsersByTenant?tenantId=" + tenantId + "&userId=" +userId+ "&topCant="+ topCant;
+    return this.http.get<any[]>(direccion);
+  }
+
 }

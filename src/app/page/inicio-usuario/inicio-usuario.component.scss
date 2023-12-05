@@ -431,3 +431,27 @@ color: #807d7d;
 .x {
   margin-right: 10px; /* Espacio entre el input y el botón */
 }
+
+/* Estilos para el contenedor principal */
+.sugerencia-container {
+  display: flex;
+}
+
+/* Estilos para cada elemento de sugerencia */
+.sugerencia-item {
+  margin-right: 20px; /* Ajusta según tus necesidades */
+}
+
+/* Estilos para las imágenes redondas */
+.sugerencia-imagen {
+  width: 50px; /* Ajusta según tus necesidades */
+  height: 50px; /* Ajusta según tus necesidades */
+  border-radius: 50%; /* Hace la imagen redonda */
+  overflow: hidden; /* Asegura que la imagen no sobresalga del círculo */
+}
+
+/* Estilos para el texto al lado de cada imagen */
+.sugerencia-texto {
+  margin-left: 5px; /* Ajusta según tus necesidades */
+  font-size: 10px;
+}

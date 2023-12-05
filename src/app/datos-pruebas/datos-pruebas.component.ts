@@ -111,7 +111,7 @@ export class DatosPruebasComponent {
   }
   
   seguirUsuario(usuarioOrigen: string, usuarioDestino: string, instancia: number) {
-    this.api.seguirUsuario(usuarioOrigen + "@alluruweb", usuarioDestino + "@alluruweb", instancia).subscribe(
+    this.api.seguirUsuario(usuarioOrigen + "@uruweb", usuarioDestino + "@uruweb", instancia).subscribe(
       (data) => {
         console.log(`Usuario ${usuarioOrigen} sigue a ${usuarioDestino}`);
       },
@@ -154,7 +154,7 @@ export class DatosPruebasComponent {
   }
   
   crearPublicacion(post: any, userName: string) {
-    this.api.newPost(post, this.intancia, `${userName}@alluruweb`).subscribe(
+    this.api.newPost(post, this.intancia, `${userName}@uruweb`).subscribe(
       (data) => {
         const formatoPost: any = {
           userId: data.userOwner.userId,
@@ -181,7 +181,7 @@ export class DatosPruebasComponent {
 
   addLike() {
     const postIds = [1, 2, 3, 4, 5, 6, 7, 8];
-    const userNames = ["Leandroarol@alluruweb", "AnaGomez@alluruweb", "JuanRodriguez@alluruweb", "MaríaFernandez@alluruweb", "PedroAlvarez@alluruweb", "LauraPerez@alluruweb", "DiegoGarcia@alluruweb", "CarlaMartinez@alluruweb", "AndrésDiaz@alluruweb", "ValentinaRuiz@alluruweb"];
+    const userNames = ["Leandroarol@uruweb", "AnaGomez@uruweb", "JuanRodriguez@uruweb", "MaríaFernandez@uruweb"];
   
     userNames.forEach((userName) => {
       postIds.forEach((postId) => {

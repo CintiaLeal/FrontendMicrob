@@ -48,10 +48,12 @@ export class InicioUsuarioComponent {
   public imgComentario: any;
   public idInstancia: any;
   misPost: Post[] = [];
+  misPostVer: Post[] = [];
   contenidoVisible: string = 'home'; // Inicialmente, muestra el primer contenido
   tipoU: string | null = null;
   userName: string | null = null;
-  usuario: UsuarioRetorno | null = null;
+  usuario: any | null = null;
+  usuarioVer: any | null = null;
   instanciaActual: InstanciaRetorno | null = null;
   tokenActual: string | null = null;
   idInstanciaLocalHost: any;
@@ -67,12 +69,18 @@ export class InicioUsuarioComponent {
   public colorRojoMap: { [postId: number]: boolean } = {};
   misseguidores: any[] = [];
   losquesigo: any[] = [];
+  misseguidoresVer: any[] = [];
+  losquesigoVer: any[] = [];
   topHastagsInicio: any [] =[];
   postHome:any[] =[];
   buttonClicked = false;
   postHome1:any [] = [];
   isLoading = false;
   isLoading2 = false;
+  isLoading3 = false;
+  userSugeridos: any[] = [];
+  idUsuario:any;
+  usuariosParaMostrar:any[] = [];
   constructor(private messageService: MessageService,private appNosql: AppnosqlService, public dialog: MatDialog, private api: AppService, private app: AppComponent, private el: ElementRef, private renderer: Renderer2) {
     this.tipoU = localStorage.getItem('tipoUsuario');
 
@@ -87,6 +95,7 @@ export class InicioUsuarioComponent {
   ngOnInit(): void {
     this.isLoading = true;
     this.isLoading2 = true;
+    this.isLoading3= true;
     this.tokenActual = localStorage.getItem('token') ?? '';
     this.tipoU = localStorage.getItem('tipoUsuario');
     this.userName = localStorage.getItem('userName');
@@ -96,7 +105,8 @@ export class InicioUsuarioComponent {
       this.api.obtenerInfoUsuario(this.userName, this.idInstanciaLocalHost).subscribe(
         (value) => {  
           this.usuario = value; 
-
+          this.idUsuario = value.userId;
+          this.suggestUsersByTenant(3);
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
@@ -107,7 +117,8 @@ export class InicioUsuarioComponent {
     if (this.userName) {
       this.api.verMisSeguidores(this.idInstanciaLocalHost, this.userName).subscribe(
         (value) => {
-          this.misseguidores = value; // Asigna el valor de 'value' a this.usuario
+          this.misseguidores = value; 
+          
         },
         (error) => {
           alert('Error al cargar las instancias: ' + error);
@@ -134,6 +145,7 @@ export class InicioUsuarioComponent {
       this.tengoNewPostParaVer();
     }, 5000); // 3000 milisegundos = 3 segundos
 
+    
   }
   mostrarContenido(contenido: string) {
     this.contenidoVisible = contenido;
@@ -144,6 +156,48 @@ export class InicioUsuarioComponent {
     this.colorRojoMap[postId] = !this.colorRojoMap[postId];
   }
  
+
+  verPerfilSugerido(userName:any){
+
+      this.api.obtenerInfoUsuario(userName, this.idInstanciaLocalHost).subscribe(
+        (value) => {  
+          this.usuarioVer = value; 
+
+          this.api.verMisSeguidores(this.idInstanciaLocalHost, userName).subscribe(
+            (value) => {
+              this.misseguidoresVer = value; // Asigna el valor de 'value' a this.usuario
+            },
+            (error) => {
+              alert('Error al cargar las instancias: ' + error);
+            }
+          );
+          this.api.verSeguidos(this.idInstanciaLocalHost, userName).subscribe(
+            (value) => {
+              this.losquesigoVer = value; // Asigna el valor de 'value' a this.usuario
+            },
+            (error) => {
+              alert('Error al cargar las instancias: ' + error);
+            }
+            );
+
+            this.api.getMisPost(this.idInstanciaLocalHost, userName).subscribe({
+              next: (value: Post[]) => {
+                // Ordena los posts por fecha en orden descendente (de más reciente a más antiguo)
+                this.misPostVer = value.sort((a, b) => {
+                  return new Date(b.created).getTime() - new Date(a.created).getTime();
+                });
+              },
+              error: (err) => {  
+              },
+            });
+          
+        },
+        (error) => {
+          alert('Error al cargar las instancias: ' + error);
+        }
+      );
+  }
+  
   getSeguidos(){
     if (this.userName) {
       this.api.verMisSeguidores(this.idInstanciaLocalHost, this.userName).subscribe(
@@ -350,6 +404,50 @@ export class InicioUsuarioComponent {
     );
     
     }
+
+    suggestUsersByTenant(cantidad: any) {
+      console.log("Información que le pasa la backend: " + this.idUsuario);
+      
+      this.appNosql.suggestUsersByTenant(this.idInstanciaLocalHost, this.idUsuario, cantidad).subscribe(
+        (userSugeridos: any[]) => {
+          this.userSugeridos = userSugeridos;
+          console.log(userSugeridos);
+    
+          // Utilizamos un bucle for...of para recorrer la lista de usuarios sugeridos
+          for (const user of this.userSugeridos) {
+            // Verificamos si la respuesta de la API es válida antes de agregarla al array
+            if (user && user.userName) {
+              this.api.obtenerInfoUsuario(user.userName, this.idInstanciaLocalHost).subscribe(
+                (value) => {  
+                  if (value) {
+                    this.usuariosParaMostrar.push(value);
+                    this.isLoading3 = false;
+                    console.log(this.usuariosParaMostrar);
+                  } else {
+                    console.warn('La respuesta de la API no es válida:', value);
+                  }
+                },
+                (error) => {
+                  console.error('Error al cargar la información del usuario:', error);
+                }
+              );
+            }
+          }
+        },
+        (error) => {
+          console.error('Error al cargar los usuarios sugeridos:', error);
+        }
+      );
+    }
+    
+    
+    // Método para verificar si un usuario ya existe en el array
+    usuarioYaExiste(usuario: any): boolean {
+      return this.usuariosParaMostrar.some(u => u.userId === usuario.userId);
+    }
+    
+    
+
 
   getMisPost() {
     if (this.userName) {

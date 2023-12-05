@@ -40,6 +40,22 @@
     .blue-text {
       color: blue;
     }
+    /* Estilos para las imágenes redondas */
+.sugerencia-imagen {
+  width: 30px; /* Ajusta según tus necesidades */
+  height: 30px; /* Ajusta según tus necesidades */
+  border-radius: 50%; /* Hace la imagen redonda */
+  overflow: hidden; /* Asegura que la imagen no sobresalga del círculo */
+}
+
+    .imgPostUser{
+      width: 40px; /* Ancho deseado para el contenedor */
+      height: 40px; /* Alto deseado para el contenedor */
+      border: none;
+    
+      clip-path: circle(50% at 50% 50%);
+      align-items:end;
+    }
     .pComentario{
       margin-left: 10px;
       margin-right: 10px;

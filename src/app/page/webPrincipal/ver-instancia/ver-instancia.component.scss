@@ -8,25 +8,17 @@
   overflow: hidden;
 
 }
-
-.example-card {
+mat-card{
   width: 8cm;
+}
+.example-card {
+  width: 10cm;
   height: 9cm;
   display: flex;
   flex-direction: column; /* Apila los elementos en dirección vertical */
   justify-content: space-between; /* Coloca los elementos en el inicio y al final */
   overflow: hidden; 
 }
-
-
-.Netherlands-🇳🇱-1-hex { color: #9BA7BF; }
-.Netherlands-🇳🇱-2-hex { color: #0F1926; }
-.Netherlands-🇳🇱-3-hex { color: #2E4159; }
-.Netherlands-🇳🇱-4-hex { color: #566D8C; }
-.Netherlands-🇳🇱-5-hex { color: #BF8136; }
-
-
-
 
 .imgPORTADA{
 
@@ -67,7 +59,7 @@ margin-right: 10%;
 }
 mat-mdc-card-content{
 
-height: 9cm;
+height: 10cm;
 }
 .items-container {
 display: flex;
@@ -131,10 +123,6 @@ p{
   font-size: 5px;
 }
 
-}
-.formatoDes{
-  font-family: 'Kanit', sans-serif;
-  font-size: 5px;
 }
 //header
 /* Estilo para la barra de herramientas (toolbar) */
