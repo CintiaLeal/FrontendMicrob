@@ -186,7 +186,7 @@ if (dominioUsuario === this.dom) {
         switch (this.tipoUsuario) {
           case 'Platform-Administrator':
             localStorage.setItem("tipoUsuario", 'Platform-Administrator');
-            this.router.navigate(['/inicioAdmPlataformaGestorInstancia']);
+            this.router.navigate(['/inicioAdmPlataforma']);
             this.messageService.showSuccess('Inicio de sesión exitoso como administrador de plataforma');
             break;
           case 'Instance-Administrator':

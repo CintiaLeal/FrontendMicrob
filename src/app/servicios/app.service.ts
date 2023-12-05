@@ -9,6 +9,7 @@ import { InstanciaRetorno } from '../modelos/instanciaRetorno';
 import { UsuarioRetorno } from '../modelos/usuarioRetorno';
 import {Post} from '../modelos/post';
 import { InstanciaModificada } from '../modelos/InstanciaModficada';
+import { Tematica } from '../modelos/Tematica';
 @Injectable({
   providedIn: 'root'
 })
@@ -263,7 +264,7 @@ deletePost(x:any,postId:any): Observable<ResponseI> {
 }
 
 
-getCantidadUsuariosAllTenant(x:any){
+getCantidadUsuariosByTenant(x:any){
   const headers = new HttpHeaders({
     'tenant': x,
   });
@@ -273,7 +274,7 @@ getCantidadUsuariosAllTenant(x:any){
 }
 
 
-getCantUsersThisMonthAllTenant(x:any){
+getCantUsersThisMonthByTenant(x:any){
   const headers = new HttpHeaders({
     'tenant': x,
   });
@@ -282,8 +283,13 @@ getCantUsersThisMonthAllTenant(x:any){
   return this.http.get<any>(direccion,{ headers: headers }); 
 }
 
+getCantUsersThisMonthAllTenant(){
+  //https://localhost:7131/Statistics/CantUsersThisMonthAllTenant
+  let direccion = this.url + "/Statistics/CantUsersThisMonthAllTenant";
+  return this.http.get<any>(direccion); 
+}
 
-getCantUsersByCityAllTenan(x:any){
+getCantUsersByCityByTenan(x:any){
   const headers = new HttpHeaders({
     'tenant': x,
   });
@@ -292,7 +298,7 @@ getCantUsersByCityAllTenan(x:any){
   return this.http.get<any[]>(direccion,{ headers: headers }); 
 }
 
-getNewMonthlyRegistrationsAllTenant(x:any,cant:any){
+getNewMonthlyRegistrationsByTenant(x:any,cant:any){
   const headers = new HttpHeaders({
     'tenant': x,
   });
@@ -365,4 +371,64 @@ activarUsuario(x:any,userName:any): Observable<ResponseI> {
   let direccion = this.url + "/Account/ActiveUser?userName="+userName;
   return this.http.put<ResponseI>(direccion, {}, { headers: headers });
 }
+
+//facu
+
+getNewMonthlyRegistrationsAllTenant(cant:any){
+  //https://localhost:7131/Statistics/NewMonthlyRegistrationsAllTenant?cantTop=10
+    let direccion = this.url + "/Statistics/NewMonthlyRegistrationsAllTenant?cantTop="+cant;
+    return this.http.get<any[]>(direccion); 
+  }
+  
+  getCantUsersByCityAllTenan(){
+  //https://localhost:7131/Statistics/CantUsersByCityAllTenant?cantTop=10
+    let direccion = this.url + "/Statistics/CantUsersByCityAllTenant?cantTop=20";
+    return this.http.get<any[]>(direccion); 
+  }
+  
+  getInstanceMetricsAllTenant(cant:any){
+      const headers = new HttpHeaders({
+        'tenant': 0,
+      });
+    //https://localhost:7131/Statistics/NewMonthlyRegistrationsAllTenant?cantTop=10
+      let direccion = this.url + "/Statistics/InstanceMetricsAllTenant?cantTop="+cant;
+      return this.http.get<any[]>(direccion,{ headers: headers }); 
+    }
+    
+    getCantidadUsuariosAllTenant(){
+      //https://localhost:7131/Statistics/CantUsersAllTenant
+     let direccion = this.url + "/Statistics/CantUsersAllTenant";
+     return this.http.get<any>(direccion); 
+   }
+
+   BorrarInstancias ( x:any): Observable<ResponseI> {  
+    const headers = new HttpHeaders({
+      'tenant': x,
+    });
+    let direccion = this.url + "/Instance/DeleteInstance";
+    return this.http.put<any>(direccion,{ headers: headers }); 
+  }
+  getThemes(){
+    const direccion = this.url +"/GeneralData/GetTematicas";
+    return this.http.get<any[]>(direccion);
+  }
+  crearTematica(x: any): Observable<Tematica> {
+    const direccion = this.url + "/GeneralData/CreateTematicas";
+    return this.http.post<any>(direccion, x);
+  }
+  DeshabilitarInstancias ( x:any): Observable<ResponseI> {  
+    const headers = new HttpHeaders({
+      'tenant': x,
+    });
+    let direccion = this.url + "/Instance/DisableInstance";
+    return this.http.put<any>(direccion,{ headers: headers }); 
+  }
+  
+  ActivarInstancias ( x:any): Observable<ResponseI> {  
+    const headers = new HttpHeaders({
+      'tenant': x,
+    });
+    let direccion = this.url + "/Instance/ActiveInstance";
+    return this.http.put<any>(direccion,{ headers: headers }); 
+  }
 }

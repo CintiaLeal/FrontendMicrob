@@ -42,4 +42,17 @@ export class AppnosqlService {
    return this.http.get<any>(direccion);
   }
 
+
+  //https://localhost:7131/SuggestUsers/SenttingSuggestUsersAllTenant
+  SenttingSuggestUsersAllTenantL(formu:any):Observable<any>{
+    let direccion = this.url + "/SuggestUsers/UpdateUser"
+    return this.http.put<any>(direccion,formu);
+
+  }
+
+  //Facu
+  obtenertopHastags(cantidad:any): Observable<any> {
+    let direccion = this.url + "/SuggestUsers/TopHashtagAllTenant?topCant=" + cantidad;
+    return this.http.get<any>(direccion);
+    }
 }

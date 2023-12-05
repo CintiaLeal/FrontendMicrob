@@ -154,4 +154,16 @@ export class DialogContentExampleDialog {
         this.messageService.showSuccess('Error al descartar.');
       });
   }
-}
+
+  punishPost(){
+    this.api.punishPost(this.idInstanciaLocalHost, this.postId).subscribe(
+      (data) => {
+        this.messageService.showSuccess('Validar Report');
+        
+      },
+      (error) => {
+        this.messageService.showSuccess('Validar Report');
+      });
+  }
+  }
+

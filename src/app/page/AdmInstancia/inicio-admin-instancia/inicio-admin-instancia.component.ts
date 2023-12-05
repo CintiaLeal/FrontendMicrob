@@ -144,7 +144,7 @@ interface Tematica {
   }
 
   panel() {
-    this.api.getCantidadUsuariosAllTenant(this.idinstancia).subscribe(
+    this.api.getCantidadUsuariosByTenant(this.idinstancia).subscribe(
       data => {
         this.cantUser = data.total;
         this.increaseUser = data.increase;
@@ -162,7 +162,7 @@ interface Tematica {
       }
     );
 
-    this.api.getCantUsersThisMonthAllTenant(this.idinstancia).subscribe(
+    this.api.getCantUsersThisMonthByTenant(this.idinstancia).subscribe(
       data => {
         this.cantUserMes = data.total;
         this.increaseUserMes = data.increase;
@@ -200,8 +200,8 @@ interface Tematica {
     this.graficaUserMeses(this.rangeOptions[this.currentRangeIndex].start);
   }
   graficaUserMeses(cant: any) {
-    //getNewMonthlyRegistrationsAllTenant(x:any,cant:any)
-    this.api.getNewMonthlyRegistrationsAllTenant(this.idinstancia, cant).subscribe(
+    //getNewMonthlyRegistrationsByTenant(x:any,cant:any)
+    this.api.getNewMonthlyRegistrationsByTenant(this.idinstancia, cant).subscribe(
       data => {
         this.graficaUserMes = data;
         console.log(this.graficaUserMes);
@@ -260,7 +260,7 @@ interface Tematica {
   
 
   obtenerCitys() {
-    this.api.getCantUsersByCityAllTenan(this.idinstancia).subscribe(
+    this.api.getCantUsersByCityByTenan(this.idinstancia).subscribe(
       data => {
         this.usuariosForCity = data;
         console.log(this.usuariosForCity);

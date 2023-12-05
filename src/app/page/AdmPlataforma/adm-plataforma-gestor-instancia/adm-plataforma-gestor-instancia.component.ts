@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 })
 
 export class AdmPlataformaGestorInstanciaComponent {
-  columnas: string[] = ['Nombre','Dominio','Tematica','Editar','Borrar','Detalle'];
+  columnas: string[] = ['Nombre','Dominio','Tematica','Editar','Borrar','Deshabilitar','Activar','Detalle'];
   dataSource = new MatTableDataSource<any>([]);
   panelOpenState = false;
   Projects =  new Observable<Array<InstanciaRetorno>>();
@@ -70,6 +70,23 @@ export class AdmPlataformaGestorInstanciaComponent {
   navigateToDetails(row: InstanciaRetorno) {
     this.router.navigate(['VerDetalleInstancia/'+row.dominio]);
   } 
+
+  navigateToDeletes(row: InstanciaRetorno) {
+    this.router.navigate(['BorrarInstancia/'+row.dominio]);
+  } 
+  DisableRow(row: InstanciaRetorno){
+    this.api.DeshabilitarInstancias(row.tenantInstanceId).subscribe(data => {
+      console.log(data);
+    });
+    this.alerta.open("Deshabilitada con éxito", "OK!");
+  }
+  ActiveRow(row: InstanciaRetorno){
+    this.api.ActivarInstancias(row.tenantInstanceId).subscribe(data => {
+      console.log(data);
+    });
+    this.alerta.open("Activada con éxito", "OK!");
+  }
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

@@ -1,9 +1,63 @@
 <app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
 <div *ngIf="tipoU === 'Platform-Administrator'">
-<p>inicio-adm-plataforma works!</p>
+
+  <p>
+    <mat-toolbar style="color: rgb(3, 3, 3); margin-bottom: 35px;">
+      <mat-toolbar-row>
+        <mat-card-title class="center-content">Gestion de la plataforma</mat-card-title>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </p>   
 
 
-<button mat-raised-button routerLink="/inicioAdmPlataformaGestorInstancia" color="primary">Ir gestionar Instancias</button>
+  <Div class="button-container ">
+    
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Menu de gestion de tematicas</mat-card-title>
+        </mat-card-title-group>
+      </mat-card-header>
+      <img mmat-card-xl-image src=\assets\img\Gestiondetematicas.png >
+      <mat-card-content>
+        <p class="p">Menu para administrar las tematicas de las instancias.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="button" routerLink="/GestionTematicas">Ir gestionar tematicas</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Menu de gestion de instancias</mat-card-title>
+        </mat-card-title-group>
+      </mat-card-header>
+      <img mmat-card-xl-image src=\assets\img\GestiondeInstancias.png >
+      <mat-card-content>
+        <p class="p">Menu para administrar las instancias de la paltaforma.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="button" routerLink="/inicioAdmPlataformaGestorInstancia">Ir gestionar instancias</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Menu de gestion de estaditicas</mat-card-title>
+        </mat-card-title-group>
+      </mat-card-header>
+      <img mmat-card-xl-image src=\assets\img\Gestiondeestaditicas.png >
+      <mat-card-content>
+        <p class="p">Menu para adminstrar las estaditicas de la plataforma.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="button" routerLink="/GestionEstadisticas">Ir gestionar estaditicas</button>
+      </mat-card-actions>
+    </mat-card>
+  </Div>
+
 </div>
 <div *ngIf="tipoU !== 'Platform-Administrator'">
     <div class="contenedorError">

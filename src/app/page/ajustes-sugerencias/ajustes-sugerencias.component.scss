@@ -1,0 +1,50 @@
+
+  mat-slider {
+    width: 300px;
+  }
+  .large-card-7 {
+    width: 30cm;
+    height: 15cm;
+    align-items: center;
+  }
+  .card {
+    margin: 1cm;
+  }
+
+
+ 
+  .card-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  
+/* Agrega estas reglas CSS a tu archivo de estilos */
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  margin-top: 10px;
+  }
+  
+  .label-container {
+    flex: 1;
+  }
+  
+  .mat-slider {
+    flex: 2; /* Ajusta según sea necesario para dar más espacio al slider */
+  }
+  
+  .alileft {
+    vertical-align: middle;
+    margin-right: 10px; /* Espacio entre la palabra y el slider */
+  }
+  
+  
+
+ 
+  

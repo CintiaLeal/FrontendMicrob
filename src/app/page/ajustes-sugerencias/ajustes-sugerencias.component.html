@@ -1,0 +1,80 @@
+<div class="card-container">
+<mat-card class="card large-card-7">
+    <mat-card-header>
+        <h4>Ajustar las relevancias que tiene cada relación al recomendar un usuario.</h4>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+    <div class="slider-container">
+        <div class="label-container">
+            <span class="alileft">Preferencias</span>
+        </div>
+        <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+            <input matSliderThumb [(ngModel)]="like">
+        </mat-slider>
+        <div class="label-container">
+            <span>{{like}}/100</span>
+        </div>
+    </div>
+    <div class="slider-container">
+        <div class="label-container">
+            <span class="alileft">Ubicación</span>
+        </div>
+        <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+            <input matSliderThumb [(ngModel)]="live">
+        </mat-slider>
+        <div class="label-container">
+            <span>{{live}}/100</span>
+        </div>
+    </div>
+    <div class="slider-container">
+        <div class="label-container">
+            <span class="alileft">Ocupación</span>
+        </div>
+        <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+            <input matSliderThumb [(ngModel)]="have">
+        </mat-slider>
+        <div class="label-container">
+            <span>{{have}}/100</span>
+        </div>
+    </div>
+    <div class="slider-container">
+        <div class="label-container">
+            <span class="alileft">Lugar de Nacimiento</span>
+        </div>
+        <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+            <input matSliderThumb [(ngModel)]="born">
+        </mat-slider>
+        <div class="label-container">
+            <span>{{born}}/100</span>
+        </div>
+    </div>
+    <div class="slider-container">
+        <div class="label-container">
+            <span class="alileft">Hashtag más usados</span>
+        </div>
+        <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+            <input matSliderThumb [(ngModel)]="withHashtag">
+        </mat-slider>
+        <div class="label-container">
+            <span>{{withHashtag}}/100</span>
+        </div>
+    </div>
+    <div class="slider-container">
+        <div class="label-container">
+            <span class="alileft">posted</span>
+        </div>
+        <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+            <input matSliderThumb [(ngModel)]="posted">
+        </mat-slider>
+        <div class="label-container">
+            <span>{{posted}}/100</span>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+</mat-card-content>
+<mat-card-actions align="end">
+    <button mat-raised-button (click)="senttingSuggestUsersAllTenantL(like,live,have,born,withHashtag,posted)">Cambiar</button>
+  </mat-card-actions>
+</mat-card>
+</div>

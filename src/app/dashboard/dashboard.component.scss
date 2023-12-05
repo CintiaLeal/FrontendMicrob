@@ -1,0 +1,530 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+.dashboard-card-content-TotalUser {
+  text-align: left;
+}
+/* app.component.css */
+.table-container {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom:20px;
+}
+
+table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+//INI IMG ERROR
+.imgError {
+background: url('/assets/img/error.png') no-repeat center center;
+width: 350px; /* Ancho deseado para el contenedor */
+height: 350px; /* Alto deseado para el contenedor */
+border: none;
+background-size: 350px 350px; /* Establece el tamaño de la imagen deseado */
+clip-path: inset(1% 1% 1% 1%);
+--mdc-protected-button-container-color:#2E4159;
+}
+
+.btnError{
+--mdc-protected-button-container-color: #2E4159;
+--mdc-protected-button-label-text-color: #fff;
+width: 30%;
+font-family: 'Kanit', sans-serif; 
+font-size: 30px;
+
+}
+.h1Error{
+font-family: 'Kanit', sans-serif; 
+font-size: 40px;
+}
+.contenedorError {
+display: flex;
+margin-top: -4%;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh; /* Esto centra verticalmente en la ventana del navegador */
+}
+
+.cajaError {
+width: 80%;
+height:auto;
+text-align: center;
+padding: 20px;
+margin: 10px 0;
+}
+//FIN ERROR
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px; /* Ajusta el padding según tus preferencias */
+}
+
+.title {
+  margin: 2%;
+  font-size: 20px;
+
+}
+
+.number {
+  font-size: 30px;
+ margin: 5%;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.card {
+  margin: 1cm;
+}
+
+.small-card {
+  width: 9cm;
+  height: 3cm;
+}
+.iconsUltimoUsuario{
+  font-size: 12px;
+  margin: 1%;
+  margin-right: 20%;
+  color: #2E4159;
+
+  .mat-icon, mat-icon.mat-primary, mat-icon.mat-accent, mat-icon.mat-warn {
+    
+}
+
+
+}
+.large-card-1 {
+  width: 30cm;
+  height: 15cm;
+}
+
+.large-card-2 {
+  width: 10cm;
+  height: 15cm;
+}
+
+//
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px; /* Ajusta el padding según tus preferencias */
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.label mat-icon {
+  margin-right: 5px; /* Ajusta el margen según tus preferencias */
+}
+
+.numbe {
+  margin-left: 5px; /* Ajusta el margen según tus preferencias */
+}
+//INI IMG ERROR
+.imgError {
+  background: url('/assets/img/error.png') no-repeat center center;
+  width: 350px; /* Ancho deseado para el contenedor */
+  height: 350px; /* Alto deseado para el contenedor */
+  border: none;
+  background-size: 350px 350px; /* Establece el tamaño de la imagen deseado */
+  clip-path: inset(1% 1% 1% 1%);
+  --mdc-protected-button-container-color:#2E4159;
+}
+
+.btnError{
+  --mdc-protected-button-container-color: #2E4159;
+  --mdc-protected-button-label-text-color: #fff;
+  width: 30%;
+  font-family: 'Kanit', sans-serif; 
+  font-size: 30px;
+
+}
+.h1Error{
+  font-family: 'Kanit', sans-serif; 
+  font-size: 40px;
+}
+.contenedorError {
+  display: flex;
+  margin-top: -4%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Esto centra verticalmente en la ventana del navegador */
+}
+
+.cajaError {
+  width: 80%;
+  height:auto;
+  text-align: center;
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px; /* Ajusta el padding según tus preferencias */
+}
+
+.title {
+  margin: 2%;
+  font-size: 20px;
+
+}
+
+.number {
+  font-size: 30px;
+ margin: 5%;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.card {
+  margin: 1cm;
+}
+
+.small-card {
+  width: 9cm;
+  height: 3cm;
+}
+.iconsUltimoUsuario{
+  font-size: 12px;
+  margin: 1%;
+  margin-right: 20%;
+  color: #2e5159;
+}
+.tamanioletra{
+  font-size: 12px;
+}
+.imgValores{
+  background: url('/assets/img/Bajada.png') no-repeat center center;
+  width: 80px; /* Ancho deseado para el contenedor */
+  height: 80px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: inset(2% 2% 2% 3%);
+  margin-left: 25%;
+  margin-top: -10%;
+}
+.imgValoresSubida{
+  background: url('/assets/img/Subida.png') no-repeat center center;
+  width: 80px; /* Ancho deseado para el contenedor */
+  height: 80px; /* Alto deseado para el contenedor */
+  border: none;
+  clip-path: inset(2% 2% 2% 3%);
+  margin-left: 25%;
+  margin-top: -10%;
+}
+th{
+height: 10px;
+margin-top: -10%;
+}
+.large-card-1 {
+  width: 30cm;
+  height: 15cm;
+}
+.img{
+	background: no-repeat center center;
+	width: 30px; /* Ancho deseado para el contenedor */
+	height: 30px; /* Alto deseado para el contenedor */
+	margin-right:10px;
+	clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+	background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+}
+
+.container {
+  display: flex;
+  height: 100vh; /* Hace que el contenedor ocupe el 100% del alto de la ventana */
+}
+
+.column {
+  flex: 1; /* Hace que cada columna ocupe la misma cantidad de espacio disponible */
+  border: none; /* Borde para visualización */
+  padding: 10px; /* Espacio interno para visualización */
+}
+.large-card-2 {
+  width: 10cm;
+  height: 15cm;
+}
+
+.imgPostUser{
+  width: 40px; /* Ancho deseado para el contenedor */
+  height: 40px; /* Alto deseado para el contenedor */
+  border: none;
+
+  clip-path: circle(50% at 50% 50%);
+  align-items:end;
+}
+.example-header-image {
+  background: url('/assets/img/perfil.jpg') no-repeat center center;
+  background-size: cover;
+}
+//
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px; /* Ajusta el padding según tus preferencias */
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.label mat-icon {
+  margin-right: 5px; /* Ajusta el margen según tus preferencias */
+}
+
+.numbe {
+  margin-left: 5px; /* Ajusta el margen según tus preferencias */
+}
+//INI IMG ERROR
+.imgError {
+  background: url('/assets/img/error.png') no-repeat center center;
+  width: 350px; /* Ancho deseado para el contenedor */
+  height: 350px; /* Alto deseado para el contenedor */
+  border: none;
+  background-size: 350px 350px; /* Establece el tamaño de la imagen deseado */
+  clip-path: inset(1% 1% 1% 1%);
+  --mdc-protected-button-container-color:#2E4159;
+}
+
+.btnError{
+  --mdc-protected-button-container-color: #2E4159;
+  --mdc-protected-button-label-text-color: #fff;
+  width: 30%;
+  font-family: 'Kanit', sans-serif; 
+  font-size: 30px;
+
+}
+.h1Error{
+  font-family: 'Kanit', sans-serif; 
+  font-size: 40px;
+}
+.contenedorError {
+  display: flex;
+  margin-top: -4%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Esto centra verticalmente en la ventana del navegador */
+}
+
+.cajaError {
+  width: 80%;
+  height:auto;
+  text-align: center;
+  padding: 20px;
+  margin: 10px 0;
+}
+
+
+
+///INI TENDENCIA tendencia 
+.tendencias-container {
+ 
+  padding: 16px;
+  border-radius: 8px;
+  margin-left: 5%;
+  
+}
+
+
+.tendencias-list {
+  list-style: none;
+  padding: 0;
+}
+.hashtag {
+  font-size: 16px;
+  color: #1da1f2; /* Color de Twitter */
+}
+
+.count {
+  font-size: 14px;
+  margin-left: 20px;
+ 
+}
+.tendencias-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tendencia {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 4px;
+  border-radius: 4px;
+  
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.imgContenido{
+  background:no-repeat center center;
+  width: 200px; /* Ancho deseado para el contenedor */
+  height: 100px; /* Alto deseado para el contenedor */
+  border: none;
+
+  align-items: center;
+  clip-path: inset(2% 2% 2% 2%);
+  background-size: contain; /* Ajusta el tamaño para que quepa dentro del contenedor sin recortar */
+
+}
+/* Estilo para ocultar la barra de desplazamiento */
+.container-with-scroll {
+  max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+  overflow: auto;
+}
+
+/* Estilo específico para ocultar la barra de desplazamiento en WebKit (Chrome, Safari, etc.) */
+.container-with-scroll::-webkit-scrollbar {
+  width: 0.5em; /* Ancho de la barra de desplazamiento */
+}
+
+.container-with-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Color del 'pulgón' de la barra de desplazamiento */
+}
+
+.container-with-scroll::-webkit-scrollbar-track {
+  background-color: transparent; /* Color del fondo de la barra de desplazamiento */
+}
+
+
+.vcard-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  
+}
+
+.vcard {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border:none;
+}
+
+.vcontador {
+  display: flex;
+  align-items: center;
+}
+.vp{
+  margin-top: 10px;
+}
+mat-icon {
+  cursor: pointer;
+}
+
+
+
+
+mat-slider {
+  width: 300px;
+}
+.large-card-7c {
+  width: 28cm;
+  height: 15cm;
+  align-items: center;
+}
+
+.cardc {
+  margin: 1cm;
+}
+
+
+
+.card-containerc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* Agrega estas reglas CSS a tu archivo de estilos */
+
+.slider-containerc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+margin-top: 10px;
+}
+
+.label-containerc {
+  flex: 1;
+}
+
+.mat-sliderc {
+  flex: 2; /* Ajusta según sea necesario para dar más espacio al slider */
+}
+
+.alileftc {
+  vertical-align: middle;
+  margin-right: 10px; /* Espacio entre la palabra y el slider */
+}
+
+
+
+

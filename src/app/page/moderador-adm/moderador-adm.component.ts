@@ -97,7 +97,7 @@ export class ModeradorAdmComponent {
   
 
   obtenerCitys() {
-    this.api.getCantUsersByCityAllTenan(this.idinstancia).subscribe(
+    this.api.getCantUsersByCityByTenan(this.idinstancia).subscribe(
       data => {
         this.usuariosForCity = data;
         console.log(this.usuariosForCity);
@@ -135,7 +135,7 @@ export class ModeradorAdmComponent {
   }
 
   panel() {
-    this.api.getCantidadUsuariosAllTenant(this.idinstancia).subscribe(
+    this.api.getCantidadUsuariosByTenant(this.idinstancia).subscribe(
       data => {
         this.cantUser = data.total;
         this.increaseUser = data.increase;
@@ -153,7 +153,7 @@ export class ModeradorAdmComponent {
       }
     );
 
-    this.api.getCantUsersThisMonthAllTenant(this.idinstancia).subscribe(
+    this.api.getCantUsersThisMonthByTenant(this.idinstancia).subscribe(
       data => {
         this.cantUserMes = data.total;
         this.increaseUserMes = data.increase;

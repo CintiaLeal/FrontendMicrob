@@ -1,0 +1,251 @@
+<link href="https://cdn.jsdelivr.net/npm/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+
+<app-header-instance-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-instance-administrator>
+<div *ngIf="tipoU === 'Platform-Administrator'">
+  <div class="card-container">
+      <mat-card class="card small-card " >
+    
+        <div class="card-content" >
+          <div class="title">Usuarios totales</div>
+          <div class="number-container" routerLink="/admUsuario">
+            <div class="number" style="display: flex; ">{{cantUser}} 
+              <p class="iconsUltimoUsuario" [style.color]="increaseUser > 0 ? 'green' : 'red'">
+                {{ increaseUser }}%
+              </p>
+              <img *ngIf="increaseUser < 0"  class="imgValores" >
+              <img *ngIf="increaseUser > 0" class="imgValoresSubida" >
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="card small-card " >
+      <div class="card-content" >
+        <div class="title">Usuarios del Mes</div>
+        <div class="number-container" routerLink="/admUsuario">
+          <div class="number" style="display: flex; ">{{cantUserMes}} 
+            <p class="iconsUltimoUsuario" [style.color]="increaseUserMes > 0 ? 'green' : 'red'">
+              {{ increaseUserMes }}%
+            </p>
+            <img *ngIf="increaseUserMes < 0"  class="imgValores" >
+            <img *ngIf="increaseUserMes > 0" class="imgValoresSubida" >
+          </div>
+        </div>
+      </div>
+    </mat-card>
+     
+  
+    </div>
+  
+    <div class="card-container">
+      <mat-card class="card large-card-1">
+  
+      
+          
+        <div class="vcard-container">
+          <div class="vcard">
+            <div class="vcontador">
+              <mat-icon (click)="decrement()">chevron_left</mat-icon>
+              <p class="vp">{{ rangeText }}</p>
+              <mat-icon (click)="increment()">chevron_right</mat-icon>
+            </div>
+          </div>
+        </div>
+    
+        
+        
+        <div class="chart-wrapper">
+          <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
+                  [type]="barChartType"> <!-- Cambiado de [chartType] a [type] -->
+          </canvas>
+        </div>
+      </mat-card>
+  
+      <mat-card class="card large-card-2">
+        
+        <mat-card-header>
+          <p>Resumen de Ciudades y Usuarios</p>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+       
+        <mat-card-content >
+          <mat-progress-spinner *ngIf="isLoading3" mode="indeterminate"></mat-progress-spinner>
+          <table mat-table [dataSource]="usuariosForCity" *ngIf="!isLoading3">
+            <ng-container matColumnDef="city">
+              <th class="tamanioletra" *matHeaderCellDef>Ciudad</th>
+              <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.city }}</td>
+            </ng-container>
+            <ng-container matColumnDef="userCount">
+              <th class="tamanioletra" *matHeaderCellDef>Cantidad</th>
+              <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.userId }}</td>
+            </ng-container>      
+            <tr mat-header-row *matHeaderRowDef="['city', 'userCount']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['city', 'userCount']"></tr>
+          </table>
+          
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="card-container">
+      <mat-card class="card large-card-1">
+        <mat-card-content >
+          <mat-progress-spinner *ngIf="isLoading3" mode="indeterminate"></mat-progress-spinner>
+          <table mat-table [dataSource]="Metricas" *ngIf="!isLoading3">
+            <ng-container matColumnDef="positionTop">
+              <th class="tamanioletra" *matHeaderCellDef>Top</th>
+              <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.positionTop }}</td>
+            </ng-container>
+            <ng-container matColumnDef="instanceName">
+              <th class="tamanioletra" *matHeaderCellDef>Nombre</th>
+              <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.instanceName }}</td>
+            </ng-container>
+            <ng-container matColumnDef="totalPost">
+              <th class="tamanioletra" *matHeaderCellDef>Post Totales</th>
+              <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.totalPost }}</td>
+            </ng-container>
+            <ng-container matColumnDef="totalUsers">
+              <th class="tamanioletra" *matHeaderCellDef>Usuarios Totales</th>
+              <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.totalUsers }}</td>
+            </ng-container>
+            <ng-container matColumnDef="percentUserPlatform">
+              <th class="tamanioletra" *matHeaderCellDef>Porcentaje de Usuarios</th>
+              <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.percentUserPlatform }} %</td>
+            </ng-container>
+            <ng-container matColumnDef="creationDate">
+              <th class="tamanioletra" *matHeaderCellDef>Fecha de Creacion</th>
+              <td class="tamanioletra" mat-cell *matCellDef="let element">{{ element.creationDate | date:'dd/MM/yyyy'}}   </td>
+            </ng-container>      
+            <tr mat-header-row *matHeaderRowDef="['positionTop', 'instanceName', 'totalPost' ,'totalUsers' ,'percentUserPlatform','creationDate']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['positionTop', 'instanceName', 'totalPost' ,'totalUsers' ,'percentUserPlatform','creationDate']"></tr>
+          </table>
+          
+        </mat-card-content>
+  
+  
+ 
+      </mat-card>
+  
+      <mat-card class="card large-card-2">
+        
+        <mat-card-header>
+          <p>Top de Tendencias</p>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+       
+        <mat-card-content >
+          <mat-progress-spinner *ngIf="isLoading3" mode="indeterminate"></mat-progress-spinner>
+          <div class="column" *ngIf="!isLoading3" >
+      
+            <ul class="tendencias-list" *ngFor="let tendencia of topHastagsInicio" >
+              <li class="tendencia">
+                <span class="hashtag">{{ '#' + tendencia.name }}</span>
+                <span class="count">{{ tendencia.relationshipCount }}</span>
+              </li>
+            </ul>
+          </div>
+          
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+
+    <div class="card-container">
+      <mat-card class="card large-card-7c">
+          <mat-card-header>
+              <h4>Ajustar las relevancias que tiene cada relación al recomendar un usuario.</h4>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+          <div class="slider-containerc">
+              <div class="label-containerc">
+                  <span class="alileftc">Preferencias</span>
+              </div>
+              <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+                  <input matSliderThumb [(ngModel)]="like">
+              </mat-slider>
+              <div class="label-containerc">
+                  <span>{{like}}/100</span>
+              </div>
+          </div>
+          <div class="slider-containerc">
+              <div class="label-containerc">
+                  <span class="alileft">Ubicación</span>
+              </div>
+              <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+                  <input matSliderThumb [(ngModel)]="live">
+              </mat-slider>
+              <div class="label-containerc">
+                  <span>{{live}}/100</span>
+              </div>
+          </div>
+          <div class="slider-containerc">
+              <div class="label-containerc">
+                  <span class="alileftc">Ocupación</span>
+              </div>
+              <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+                  <input matSliderThumb [(ngModel)]="have">
+              </mat-slider>
+              <div class="label-containerc">
+                  <span>{{have}}/100</span>
+              </div>
+          </div>
+          <div class="slider-containerc">
+              <div class="label-containerc">
+                  <span class="alileftc">Lugar de Nacimiento</span>
+              </div>
+              <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+                  <input matSliderThumb [(ngModel)]="born">
+              </mat-slider>
+              <div class="label-containerc">
+                  <span>{{born}}/100</span>
+              </div>
+          </div>
+          <div class="slider-containerc">
+              <div class="label-containerc">
+                  <span class="alileftc">Hashtag más usados</span>
+              </div>
+              <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+                  <input matSliderThumb [(ngModel)]="withHashtag">
+              </mat-slider>
+              <div class="label-containerc">
+                  <span>{{withHashtag}}/100</span>
+              </div>
+          </div>
+          <div class="slider-containerc">
+              <div class="label-containerc">
+                  <span class="alileftc">posted</span>
+              </div>
+              <mat-slider min="0" max="100" step="1" showTickMarks discrete>
+                  <input matSliderThumb [(ngModel)]="posted">
+              </mat-slider>
+              <div class="label-containerc">
+                  <span>{{posted}}/100</span>
+              </div>
+          </div>
+          <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-actions align="end">
+          <button mat-raised-button (click)="senttingSuggestUsersAllTenantL(like,live,have,born,withHashtag,posted)">Cambiar</button>
+        </mat-card-actions>
+      </mat-card>
+      </div>
+
+
+</div>
+
+<div *ngIf="tipoU !== 'Platform-Administrator'">
+  <div class="contenedorError">
+    <div class="cajaError">
+      <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
+    </div>
+    <div class="cajaError"><img class="imgError"></div>
+    <div class="cajaError">
+      <button mat-raised-button routerLink="/" color="primary" class="btnError">Volver</button>
+    </div>
+  </div>
+
+</div>

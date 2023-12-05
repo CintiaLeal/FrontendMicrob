@@ -45,12 +45,27 @@
       <ng-container matColumnDef="Borrar">
         <mat-header-cell *matHeaderCellDef> Borrar </mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <button mat-button (click)="openDialog()">
+            <button mat-button (click)="navigateToDeletes(row)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
-
+      <ng-container matColumnDef="Deshabilitar">
+        <mat-header-cell *matHeaderCellDef> Deshabilitar </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-button (click)="DisableRow(row)">
+            <mat-icon>block</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Activar">
+        <mat-header-cell *matHeaderCellDef> Activar </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-button (click)="ActiveRow(row)">
+            <mat-icon>check</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
       <ng-container matColumnDef="Detalle">
         <mat-header-cell *matHeaderCellDef> Detalle </mat-header-cell>
         <mat-cell *matCellDef="let row">

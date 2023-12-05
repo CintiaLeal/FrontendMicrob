@@ -55,7 +55,7 @@ export class AdmUsuarioInstanciaComponent implements OnInit {
         
       
 
-      this.api.getCantidadUsuariosAllTenant(this.idInstanciaLocalHost).subscribe(
+      this.api.getCantidadUsuariosByTenant(this.idInstanciaLocalHost).subscribe(
         data => {
           this.cantUser = data.total;
         },
@@ -214,4 +214,6 @@ export class DialogContentExampleDialog {
       this.messageService.showError('Error');
     });
   }
+
+
 }

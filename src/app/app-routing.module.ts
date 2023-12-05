@@ -17,6 +17,12 @@ import { VerDetalleInstanciaComponent } from './page/AdmPlataforma/ver-detalle-i
 import { ModificarInstanciaComponent } from './page/AdmPlataforma/modificar-instancia/modificar-instancia.component';
 import { LoginRedSocialComponent } from './page/login-red-social/login-red-social.component';
 import { ModificarUsuarioComponent } from './page/modificar-usuario/modificar-usuario.component';
+import { DatosPruebasComponent } from './datos-pruebas/datos-pruebas.component';
+import { AjustesSugerenciasComponent } from './page/ajustes-sugerencias/ajustes-sugerencias.component'; 
+import { GestionTematicaComponent } from './gestion-tematica/gestion-tematica.component';
+import { BorrarInstanciaComponent } from './page/AdmPlataforma/borrar-instancia/borrar-instancia.component';
+import { GestionEstadisticasComponent } from './gestion-estadisticas/gestion-estadisticas.component';
+
 const routes: Routes = [
   { path: '', component: WebPrincipalComponent },
   { path: 'inicioUsuario', component: InicioUsuarioComponent },
@@ -34,6 +40,11 @@ const routes: Routes = [
   { path: 'VerDetalleInstancia/:Dominio', component: VerDetalleInstanciaComponent },
   { path: 'loginRedSocial', component: LoginRedSocialComponent},
   {path:  'modificarUsuario', component : ModificarUsuarioComponent},
+  {path:  'datos', component : DatosPruebasComponent},
+  {path:  'ajusteSugerencia', component : AjustesSugerenciasComponent},
+  { path: 'GestionTematicas', component: GestionTematicaComponent },  
+  { path: 'BorrarInstancia/:Dominio', component: BorrarInstanciaComponent },
+  { path: 'GestionEstadisticas', component: GestionEstadisticasComponent },
   { path: ':valorURL', component: URLComponent },
  
 ];

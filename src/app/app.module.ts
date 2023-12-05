@@ -59,14 +59,23 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment'; 
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatSliderModule} from '@angular/material/slider';
 
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSortModule } from '@angular/material/sort';
 
 import {MatListModule} from '@angular/material/list';
+import { DatosPruebasComponent } from './datos-pruebas/datos-pruebas.component';
+import { AjustesSugerenciasComponent } from './page/ajustes-sugerencias/ajustes-sugerencias.component';
+import { BorrarInstanciaComponent } from './page/AdmPlataforma/borrar-instancia/borrar-instancia.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GestionEstadisticasComponent } from './gestion-estadisticas/gestion-estadisticas.component';
+import { GestionTematicaComponent } from './gestion-tematica/gestion-tematica.component';
 
 
 @NgModule({
   declarations: [
-
     AppComponent,
     NuevaInstanciaComponent,
     LoginComponent,
@@ -88,9 +97,19 @@ import {MatListModule} from '@angular/material/list';
     ModificarInstanciaComponent,
     VerDetalleInstanciaComponent,
     LoginRedSocialComponent,
-    ModificarUsuarioComponent
+    ModificarUsuarioComponent,
+    DatosPruebasComponent,
+    AjustesSugerenciasComponent,
+    BorrarInstanciaComponent,
+    NavigationComponent,
+    DashboardComponent,
+    GestionEstadisticasComponent,
+    GestionTematicaComponent
   ],
   imports: [
+    MatSortModule,
+    MatSidenavModule,
+    MatSliderModule,
     HttpClientModule,
     BrowserModule,
     MatRadioModule,
