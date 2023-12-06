@@ -1,4 +1,3 @@
-# MICROB.uy
 ![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/ecad806b-c9c5-4e99-b3de-e619c644e903)
 
 ## Características Principales
@@ -13,36 +12,36 @@
 
 - **Angular Material:** Se utiliza Angular Material como framework CSS para una interfaz de usuario moderna y consistente.
 
-## Estructura del Proyecto
-
-Descripción de la estructura de carpetas y archivos importantes en tu proyecto.
-
-## Tecnologías Utilizadas
-
-- [Angular](https://angular.io/)
-- [Firebase](https://firebase.google.com/)
-- [Angular Material](https://material.angular.io/)
-- [.NET](https://dotnet.microsoft.com/)
-
-# Nombre del Proyecto
-
 Descripción breve del proyecto.
 
 ## Requisitos Previos
-- Tener Instalado y levantado el backend en .NET
+
 - [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/) instalados.
 - [Angular CLI](https://angular.io/cli) instalado globalmente.
 
+## Cómo Levantar el Proyecto
 
-2. **Configuración de la API:**
+1. **Clonar el Repositorio:**
+    ```bash
+    git clone https://github.com/CintiaLeal/FrontendMicrob
+    cd nombre-del-proyecto-angular
+    ```
+
+2. **Instalar Dependencias:**
+    ```bash
+    npm install
+    ```
+
+3. **Configurar la API (si es necesario):**
     - Asegúrate de que la configuración de la API en `src/environments/environment.ts` apunta al backend correcto.
 
-3. **Ejecución:**
+4. **Iniciar el Servidor de Desarrollo:**
     ```bash
     ng serve
     ```
 
-    Visita `http://localhost:4200` en tu navegador.
+5. **Ver el Proyecto en el Navegador:**
+   - Visita `http://localhost:4200` en tu navegador.
 
 ## Capturas de Pantalla
 
