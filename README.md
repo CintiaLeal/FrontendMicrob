@@ -70,6 +70,8 @@ Descripción breve del proyecto.
 
 ## Capturas de Pantalla
 
-![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/1a621e90-f1c7-4109-bc82-732ef67ab00e)
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/58f0b18c-204b-4828-a7d2-8d4b98f87b1a)
 
-![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/1dfc16fb-45be-4c36-80e7-0fcbdfd15e94)
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/9bab8a4f-0f54-48c4-b7ab-984eb54f706c)
+
+
