@@ -25,20 +25,51 @@ Descripción de la estructura de carpetas y archivos importantes en tu proyecto.
 - [Angular Material](https://material.angular.io/)
 - [.NET](https://dotnet.microsoft.com/)
 
-## Instalación
+# Nombre del Proyecto
 
-Proporciona instrucciones claras sobre cómo instalar y configurar el proyecto. Asegúrate de incluir todos los requisitos previos y pasos necesarios.
+Descripción breve del proyecto.
 
-## Configuración
+## Requisitos Previos
+- Tener Instalado y levantado el backend en .NET
+- [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/) instalados.
+- [Angular CLI](https://angular.io/cli) instalado globalmente.
 
-Describe la configuración necesaria, como variables de entorno, claves de API, etc.
+## Configuración del Backend (.NET)
 
-## Uso
+1. **Instalación de Dependencias:**
+    ```bash
+    dotnet restore
+    ```
 
-Explica cómo utilizar la aplicación, cómo iniciar sesión, y proporciona ejemplos de código si es necesario.
+2. **Configuración de la Base de Datos (si es necesario):**
+    - Actualiza la cadena de conexión en `appsettings.json`.
+
+3. **Ejecución:**
+    ```bash
+    dotnet run
+    ```
+
+    Visita `http://localhost:5000` en tu navegador.
+
+## Configuración del Frontend (Angular)
+
+1. **Instalación de Dependencias:**
+    ```bash
+    npm install
+    ```
+
+2. **Configuración de la API:**
+    - Asegúrate de que la configuración de la API en `src/environments/environment.ts` apunta al backend correcto.
+
+3. **Ejecución:**
+    ```bash
+    ng serve
+    ```
+
+    Visita `http://localhost:4200` en tu navegador.
 
 ## Capturas de Pantalla
 
-![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/c27893c9-6ed4-496d-87bc-95fb9e4748af)
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/1a621e90-f1c7-4109-bc82-732ef67ab00e)
 
-
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/1dfc16fb-45be-4c36-80e7-0fcbdfd15e94)
