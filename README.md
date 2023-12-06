@@ -1,6 +1,5 @@
 # MICROB.uy
-
-Descripción completa y clara del proyecto. Proporciona un resumen conciso y atractivo para que los usuarios tengan una idea rápida de lo que hace tu aplicación.
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/ecad806b-c9c5-4e99-b3de-e619c644e903)
 
 ## Características Principales
 
