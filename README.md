@@ -34,29 +34,6 @@ Descripción breve del proyecto.
 - [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/) instalados.
 - [Angular CLI](https://angular.io/cli) instalado globalmente.
 
-## Configuración del Backend (.NET)
-
-1. **Instalación de Dependencias:**
-    ```bash
-    dotnet restore
-    ```
-
-2. **Configuración de la Base de Datos (si es necesario):**
-    - Actualiza la cadena de conexión en `appsettings.json`.
-
-3. **Ejecución:**
-    ```bash
-    dotnet run
-    ```
-
-    Visita `http://localhost:5000` en tu navegador.
-
-## Configuración del Frontend (Angular)
-
-1. **Instalación de Dependencias:**
-    ```bash
-    npm install
-    ```
 
 2. **Configuración de la API:**
     - Asegúrate de que la configuración de la API en `src/environments/environment.ts` apunta al backend correcto.
