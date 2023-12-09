@@ -1,6 +1,4 @@
-# MICROB.uy
-
-Descripción completa y clara del proyecto. Proporciona un resumen conciso y atractivo para que los usuarios tengan una idea rápida de lo que hace tu aplicación.
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/ecad806b-c9c5-4e99-b3de-e619c644e903)
 
 ## Características Principales
 
@@ -14,31 +12,41 @@ Descripción completa y clara del proyecto. Proporciona un resumen conciso y atr
 
 - **Angular Material:** Se utiliza Angular Material como framework CSS para una interfaz de usuario moderna y consistente.
 
-## Estructura del Proyecto
+Descripción breve del proyecto.
 
-Descripción de la estructura de carpetas y archivos importantes en tu proyecto.
+## Requisitos Previos
 
-## Tecnologías Utilizadas
+- [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/) instalados.
+- [Angular CLI](https://angular.io/cli) instalado globalmente.
 
-- [Angular](https://angular.io/)
-- [Firebase](https://firebase.google.com/)
-- [Angular Material](https://material.angular.io/)
-- [.NET](https://dotnet.microsoft.com/)
+## Cómo Levantar el Proyecto
 
-## Instalación
+1. **Clonar el Repositorio:**
+    ```bash
+    git clone https://github.com/CintiaLeal/FrontendMicrob
+    cd nombre-del-proyecto-angular
+    ```
 
-Proporciona instrucciones claras sobre cómo instalar y configurar el proyecto. Asegúrate de incluir todos los requisitos previos y pasos necesarios.
+2. **Instalar Dependencias:**
+    ```bash
+    npm install
+    ```
 
-## Configuración
+3. **Configurar la API (si es necesario):**
+    - Asegúrate de que la configuración de la API en `src/environments/environment.ts` apunta al backend correcto.
 
-Describe la configuración necesaria, como variables de entorno, claves de API, etc.
+4. **Iniciar el Servidor de Desarrollo:**
+    ```bash
+    ng serve
+    ```
 
-## Uso
-
-Explica cómo utilizar la aplicación, cómo iniciar sesión, y proporciona ejemplos de código si es necesario.
+5. **Ver el Proyecto en el Navegador:**
+   - Visita `http://localhost:4200` en tu navegador.
 
 ## Capturas de Pantalla
 
-![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/c27893c9-6ed4-496d-87bc-95fb9e4748af)
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/58f0b18c-204b-4828-a7d2-8d4b98f87b1a)
+
+![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/9bab8a4f-0f54-48c4-b7ab-984eb54f706c)
 
 
