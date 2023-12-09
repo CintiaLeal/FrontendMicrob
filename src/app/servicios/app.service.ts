@@ -431,4 +431,12 @@ getNewMonthlyRegistrationsAllTenant(cant:any){
     let direccion = this.url + "/Instance/ActiveInstance";
     return this.http.put<any>(direccion,{ headers: headers }); 
   }
+
+  dejarSeguirUsu(x:any,user:any,userDejar:any): Observable<ResponseI>{
+    const headers = new HttpHeaders({
+      'tenant': x,
+    });
+    let direccion = this.url + "/Account/UnFollowUser?userName="+user+"&userNameToUnFollow="+userDejar;
+    return this.http.put<ResponseI>(direccion, {}, { headers: headers });
+  }
 }

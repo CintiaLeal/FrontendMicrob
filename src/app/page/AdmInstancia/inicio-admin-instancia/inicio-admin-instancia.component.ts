@@ -101,9 +101,8 @@ interface Tematica {
   barChartPlugins = [];
 
   barChartData: ChartDataset[] = [
-    { data: [], label: 'Total Usuarios', backgroundColor: '#6d6b7480' },
-    //                                             ^^^^^^^^
-    { data: [], label: 'Nuevos Usuarios', backgroundColor: '#04b2d975' },
+    { data: [], label: 'Total usuarios de cada mes', backgroundColor: '#6d6b7480' },
+ 
   ];
   ngOnInit(): void {
     this.isLoading1 = true;
@@ -213,13 +212,8 @@ interface Tematica {
         // Llena los datos de la gráfica con los valores del backend
         this.barChartData[0].data = this.graficaUserMes.map((data) => data.newTotalUser);
   
-        // Configura la línea como una serie de datos en la misma escala y eje Y que la serie de barras
-        this.barChartData[1] = {
-          data: this.graficaUserMes.map((data) => data.newTotalInstance),
-          label: 'Nuevos Usuarios',
-          type: 'line'
-          //yAxisID: 'y-axis-1'
-        };
+  
+        
       },
       error => {
         this.isLoading3 = false;

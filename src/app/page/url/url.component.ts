@@ -297,6 +297,7 @@ export class DialogContentExampleDialog {
     this.getCitys();
     this.infoSesionGoogle = localStorage.getItem('infoSesionGoogle') ?? '';
     if (this.infoSesionGoogle) {
+      console.log("Aqui"+this.infoSesionGoogle);
       const usuario = JSON.parse(this.infoSesionGoogle);
       this.registrarForm.patchValue({
         firstName: usuario.displayName,

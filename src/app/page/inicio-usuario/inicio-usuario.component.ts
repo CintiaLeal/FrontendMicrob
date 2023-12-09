@@ -862,6 +862,20 @@ export class DialogSeguir {
     }
   }
 
+  //dejanUsu(x:any,user:any,userDejar:any)
+  dejarSeguir(){
+    this.miUsuario = localStorage.getItem('userName');
+    this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
+    this.api.dejarSeguirUsu(this.idInstanciaLocalHost,this.miUsuario, this.userName ).subscribe(
+      (data) => {
+      },
+      (error) => {
+        this.messageService.showError('Ya no sigues al usuario.');
+      }
+    );
+
+  }
+  
 }
 
 function mergeMap(arg0: (users: UsuarioRetorno[]) => Observable<any[]>): import("rxjs").OperatorFunction<UsuarioRetorno[], unknown> {

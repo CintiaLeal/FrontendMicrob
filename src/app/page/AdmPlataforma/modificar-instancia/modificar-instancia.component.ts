@@ -29,7 +29,6 @@ export class ModificarInstanciaComponent {
   instanciaActual: InstanciaRetorno | null=null;
   tipoU: string | null = null;
   constructor(private api: AppService, private alerta: MatSnackBar,private rutaActiva: ActivatedRoute ,private router:Router){ }
-//FORM desde el HTML
     ModifyForm = new FormGroup({
     nombre: new FormControl('',Validators.required),
     esquemaColores: new FormControl('',Validators.required),

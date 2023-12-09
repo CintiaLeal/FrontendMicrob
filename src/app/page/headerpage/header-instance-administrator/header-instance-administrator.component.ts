@@ -11,7 +11,7 @@ import { AppService } from 'src/app/servicios/app.service';
 })
 export class HeaderInstanceAdministratorComponent {
   constructor(private router: Router,private api: AppService, private appPrincipal:AppComponent) {}
-  instanciaActualParaHeader: InstanciaRetorno | null=null;
+  instanciaActualParaHeader: any | null=null;
   idinstancia: any | null = null;
   modoOscuro = false;
 
@@ -23,7 +23,9 @@ export class HeaderInstanceAdministratorComponent {
       }
     });
   }
-  
+  navigateTo() {
+    this.router.navigate(['/ModificarInstancia/' + this.instanciaActualParaHeader.dominio]);
+  }
   logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");

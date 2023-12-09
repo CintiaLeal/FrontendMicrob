@@ -218,3 +218,191 @@ margin-top:-9%;
 .mat-toolbar button.router-link-active {
   background-color: #FF5722;
 }
+
+
+@media (min-width: 1600px) {
+  h1 {
+    margin-top: 2%;
+    font-size: 30px;
+    letter-spacing: 2px;
+    line-height: 1.5;  
+  }
+  p{
+    font-size: 18px;
+    letter-spacing: 1px; 
+    line-height: 1.5; 
+  }
+  .backgroundBody {
+    margin-top: -2%;
+    background: url('/assets/img/principal.png') no-repeat center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%; /* Ancho deseado para el contenedor */
+    height: 700px; /* Alto deseado para el contenedor */
+    overflow: hidden;
+    clip-path: ellipse(76% 100% at 56% 0%);
+   
+  }
+
+ 
+
+  .imgAstronauta{
+   margin-top: 20px;
+   
+  }
+  .imgcontenido{
+    background: url('/assets/img/contenido.png') no-repeat center center;
+    width: 700px; /* Ancho deseado para el contenedor */
+    height: 700px; /* Alto deseado para el contenedor */
+    border: none;
+    clip-path: inset(2% 2% 2% 3%);
+
+  }
+
+  .backgroundPie {
+    background: url('/assets/img/pie.png') no-repeat center center;
+    object-fit: cover;
+    overflow: hidden;
+    width: 100%;
+    height: 300px; /* Cambiar la altura a 300px o el valor que desees */
+    clip-path: ellipse(76% 100% at 65% 100%);
+  }
+
+  //INI ESTILOS PARA LOS DIV GRIS Y BLANCO
+  /* Estilos para los divs */
+  .color-box {
+    margin: 60px;
+    border: none;
+    text-align: center;
+    padding: 0;
+  }
+  .white-bg {
+    background-color: #ffffff;
+  }
+  
+  .light-gray-bg {
+  
+    background-color: #f0f0f0;
+  }
+  .mat-toolbar[_ngcontent-ng-c2644220856] button[_ngcontent-ng-c2644220856] {
+    color: white;
+    font-size: 20px;
+}
+/* Estilos para el contenedor */
+.container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    border: none;
+
+}
+.boxprueba {
+margin-top:-9%;
+  text-align: center;
+  line-height: 100%;/* Centra el contenido verticalmente */
+  border: none;
+
+}
+/* Estilos para los divs */
+.box {
+
+    text-align: center;
+    line-height: 100%;/* Centra el contenido verticalmente */
+    border: none;
+  
+}
+
+
+.box1 {
+
+    width: 40%;
+    height: 100%;
+    border: none;
+    text-align: left;
+    margin-left: 1%; 
+    margin-right: 2%;
+}
+
+.box2 {
+    text-align: left;
+}
+
+
+.box3 {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: left;
+    margin-left: 300px; 
+}
+
+.box4 {
+    text-align: left;
+}
+
+.box5 {
+    width: 50%;
+    border: none;
+    align-items:end;
+  
+}
+
+.box6 {
+  text-align: left; 
+  align-items:left;
+    width: 50%;
+    border: none;
+ margin-left: -20px;
+
+}
+
+
+.button-container {
+    display: flex;
+    margin-top: 1%;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+   
+  }
+
+
+  
+
+
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+  .backgroundBody {
+    height: 400px;
+  }
+
+  .imgAstronauta {
+    width: 300px;
+    height: 350px;
+  }
+
+  .imgcontenido {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+/* Estilos para tabletas */
+@media (min-width: 768px) and (max-width: 1220px) {
+  .backgroundBody {
+    height: 700px;
+  }
+
+  .imgAstronauta {
+    width: 350px;
+    height: 400px;
+  }
+
+  .imgcontenido {
+    width: 700px;
+    height: 700px;
+  }
+}

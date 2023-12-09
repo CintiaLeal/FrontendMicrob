@@ -9,7 +9,8 @@
         {{ usuario?.birthday | date:'dd/MM/yyyy' }}
     </h4>
     <p>Seguidores {{misseguidores.length}}</p>
-    <button mat-button  color="primary"  [mat-dialog-close]="true"   *ngIf="origen === 'explorar'"  (click)="seguirUsuario()">Seguir</button>
+    <button mat-button  color="primary"  *ngIf="origen !='home'" [mat-dialog-close]="true"     (click)="seguirUsuario()">Seguir</button>
+    <button mat-button  color="warn"   *ngIf="origen ==='home'" [mat-dialog-close]="true"     (click)="dejarSeguir()">Dejar de Seguir</button>
     <button mat-button  color="primary"   [mat-dialog-close]="true"  (click)="mutear()">Mutear</button>
     <button mat-button  color="warn"  [mat-dialog-close]="true"  (click)="bloquear()">Bloquear</button>
 </mat-card>

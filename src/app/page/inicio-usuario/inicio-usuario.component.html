@@ -10,7 +10,7 @@
     <mat-card class="example-card posicion">
       <mat-card-header>
         <mat-card-title-group>
-          <mat-card-title>{{usuario?.firstName}} </mat-card-title>
+          <mat-card-title >{{usuario?.firstName}} </mat-card-title>
           <mat-card-subtitle>{{usuario?.userName}}</mat-card-subtitle>
           <img class="imgPERFIL" src={{usuario?.profileImage}} *ngIf="contenidoVisible !== 'perfil'">
         </mat-card-title-group>
@@ -51,7 +51,7 @@
           <mat-card>
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
-                  src={{x.userOwner.profileImage}}> 
+                  src={{x.userOwner.profileImage}} (click)="openDialogSeguir(x.userOwner.userName,'explorar')"> 
               </div>
               <mat-card-title (click)="openDialogSeguir(x.userOwner.userName,'explorar')"> {{x.userOwner?.firstName}}</mat-card-title>
 
@@ -134,7 +134,7 @@
           <mat-card>
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"><img class="imgPostUser"
-                  src={{x.userOwner?.profileImage}}>
+                  src={{x.userOwner?.profileImage}} (click)="openDialogSeguir(x.userOwner.userName,'home')">
               </div>
               <mat-card-title (click)="openDialogSeguir(x.userOwner.userName,'home')"> {{x.userOwner?.firstName}}</mat-card-title>
               <button mat-icon-button class="options-button" [matMenuTriggerFor]="menu">

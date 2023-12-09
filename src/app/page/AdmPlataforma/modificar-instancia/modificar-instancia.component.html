@@ -100,7 +100,7 @@
 </mat-card>
 </div> 
 
-<div *ngIf="tipoU !== 'Platform-Administrator' && tipoU === 'Instance-Administrator' ">
+<div *ngIf="tipoU !== 'Platform-Administrator' && tipoU !== 'Instance-Administrator' ">
   <div class="contenedorError">
     <div class="cajaError">
       <h1 class="h1Error">No tienes permiso para acceder aquí. Volviendo al inicio.</h1>
