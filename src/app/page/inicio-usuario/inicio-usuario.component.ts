@@ -36,6 +36,7 @@ import { forkJoin } from 'rxjs';
 import { MessageService } from 'src/app/message.service';
 import { AppnosqlService } from 'src/app/servicios/appnosql.service';
 import { JsonpInterceptor } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -152,9 +153,7 @@ export class InicioUsuarioComponent {
   
 
   }
-  alternarVisibilidad(postId: number) {
-    this.colorRojoMap[postId] = !this.colorRojoMap[postId];
-  }
+
  
 
   verPerfilSugerido(userName:any){
@@ -236,7 +235,6 @@ export class InicioUsuarioComponent {
     }
     this.api.darLikes(this.idInstancia, this.userName, postId).subscribe(
       (data: any) => {
-
         let x: any = {
             userId: this.usuario?.userId,
             tenantId: this.idInstancia,
@@ -244,6 +242,8 @@ export class InicioUsuarioComponent {
         };
         this.appNosql.darMgNOSQL(x).subscribe(data => {
         });
+        this.colorRojoMap[postId] = !this.colorRojoMap[postId];   
+          
       },
       (error: any) => {
         console.error('Error al agregar el like:', error);
@@ -297,9 +297,11 @@ export class InicioUsuarioComponent {
       hashtag: hashtags
     };
     this.idInstancia = localStorage.getItem('idInstancia');
+   /* let x = [];
+    x.find(x=> x.loquesea = "loquesea");*/
 
     this.api.newComentarioPost(x, this.idInstanciaLocalHost, this.userName, postId).subscribe(data => {
-
+      this.getPostsHome();
     });
     this.imgComentario = '';
     this.newComentario.controls['textComentario'].reset();
@@ -646,7 +648,7 @@ export class InicioUsuarioComponent {
   openDialogSeguir(userName: any,origen:any) {
     if(userName != this.usuario?.userName ){
     const dialogRefs = this.dialog.open(DialogSeguir, {
-      data: { userName: userName, origen:origen }
+      data: { userName: userName, origen:origen,componente: this }
     });
     dialogRefs.afterClosed().subscribe(result => {
     });
@@ -785,9 +787,11 @@ export class DialogSeguir {
   misseguidores: any;
   origen: any;
   miUsuario: any;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService, private messageService: MessageService) {
+  componente:any;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private router: Router,private api: AppService, private messageService: MessageService) {
     this.userName = data.userName;
     this.origen = data.origen;
+    this.componente = data.componente;
   }
 
   ngOnInit(): void {
@@ -820,6 +824,7 @@ export class DialogSeguir {
     if (this.miUsuario && this.userName && this.idInstanciaLocalHost) {
       this.api.seguirUsuario(this.miUsuario, this.userName, this.idInstanciaLocalHost).subscribe(
         (data) => {
+          
         },
         (error) => {
           this.messageService.showError('Ya lo sigues.');
@@ -836,14 +841,18 @@ export class DialogSeguir {
     if (this.miUsuario && this.userName && this.idInstanciaLocalHost) {
       this.api.bloquearUser(this.idInstanciaLocalHost,this.miUsuario, this.userName ).subscribe(
         (data) => {
+          this.componente.getPostsHome();
         },
         (error) => {
+          this.componente.getPostsHome();
           this.messageService.showError('Bloqueado.');
         }
       );
     } else {
       console.error('Valores faltantes para bloquear.');
     }
+    this.componente.getPostsHome();
+
   }
 
   mutear(){
@@ -852,9 +861,11 @@ export class DialogSeguir {
     if (this.miUsuario && this.userName && this.idInstanciaLocalHost) {
       this.api.mutUsuario(this.idInstanciaLocalHost,this.miUsuario, this.userName ).subscribe(
         (data) => {
+          this.componente.getPostsHome();
         },
         (error) => {
           this.messageService.showError('Muteado.');
+          this.componente.getPostsHome();
         }
       );
     } else {
@@ -868,8 +879,10 @@ export class DialogSeguir {
     this.idInstanciaLocalHost = localStorage.getItem('idInstancia');
     this.api.dejarSeguirUsu(this.idInstanciaLocalHost,this.miUsuario, this.userName ).subscribe(
       (data) => {
+        this.componente.getPostsHome();
       },
       (error) => {
+        this.componente.getPostsHome();
         this.messageService.showError('Ya no sigues al usuario.');
       }
     );

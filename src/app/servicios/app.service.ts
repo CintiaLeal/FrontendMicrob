@@ -15,8 +15,9 @@ import { Tematica } from '../modelos/Tematica';
 })
 
 export class AppService {
-
-  url: string = "https://localhost:7131"; //URL BASE
+  
+  url: string = "https://microbuyapi.azurewebsites.net";
+  //url: string = "https://localhost:7131"; //URL BASE
   constructor(private http: HttpClient) { }
 
   registrarUsuario(form: Usuario, x: any): Observable<UsuarioRetorno> {
@@ -42,7 +43,7 @@ export class AppService {
     return this.http.get<InstanciaRetorno>(url);
   }
 
-  getInstanciaPorURL(x:any):Observable<InstanciaRetorno> {
+  getInstanciaPorURL(x:any):Observable<any> {
     const url = `${this.url}/Instance/GetInstanceByDomain?domain=${x}`;
     return this.http.get<InstanciaRetorno>(url);
   }
@@ -406,7 +407,7 @@ getNewMonthlyRegistrationsAllTenant(cant:any){
       'tenant': x,
     });
     let direccion = this.url + "/Instance/DeleteInstance";
-    return this.http.put<any>(direccion,{ headers: headers }); 
+    return this.http.put<ResponseI>(direccion,{},{ headers: headers }); 
   }
   getThemes(){
     const direccion = this.url +"/GeneralData/GetTematicas";
@@ -421,7 +422,7 @@ getNewMonthlyRegistrationsAllTenant(cant:any){
       'tenant': x,
     });
     let direccion = this.url + "/Instance/DisableInstance";
-    return this.http.put<any>(direccion,{ headers: headers }); 
+    return this.http.put<ResponseI>(direccion,{},{ headers: headers }); 
   }
   
   ActivarInstancias ( x:any): Observable<ResponseI> {  
@@ -429,7 +430,7 @@ getNewMonthlyRegistrationsAllTenant(cant:any){
       'tenant': x,
     });
     let direccion = this.url + "/Instance/ActiveInstance";
-    return this.http.put<any>(direccion,{ headers: headers }); 
+    return this.http.put<ResponseI>(direccion,{},{ headers: headers }); 
   }
 
   dejarSeguirUsu(x:any,user:any,userDejar:any): Observable<ResponseI>{

@@ -7,40 +7,30 @@
 <div *ngIf="instancias">
   <div class="backgroundBody">
   </div>
-
-
-
-  <div *ngIf="instanciasCargadas; else noInstancias">
+  <div>
     <div class="container">
       <div class="items-container">
         <div class="item" *ngFor="let x of instancias">
           <div>
             <mat-card>
               <mat-card-header>
-                <img mat-card-image class="imgPORTADA" src={{x.logo}} />
-                
+                <img mat-card-image class="imgPORTADA" src={{x.logo}} />               
               </mat-card-header>
              <div>
               {{x.nombre}} 
              </div>
              <mat-chip-listbox aria-label="Fish selection">
-              <mat-chip disabled>{{x.tematica.name}}</mat-chip>
-              
+              <mat-chip disabled>{{x.tematica.name}}</mat-chip>           
                 <mat-chip disabled  *ngIf="x.privacidad === 1">Autorizacion</mat-chip>
                 <mat-chip disabled *ngIf="x.privacidad === 2">Invitacion</mat-chip>
                 <mat-chip disabled *ngIf="x.privacidad === 3">Cerrada</mat-chip>
                 <mat-chip disabled *ngIf="x.privacidad !== 1 && x.privacidad !== 2 && x.privacidad !== 3">Abierta</mat-chip>
               </mat-chip-listbox>
-              <mat-card-content>
-            
+              <mat-card-content>            
                 <p>
                   {{x.description}}
-                </p>
-                
-              </mat-card-content>
-        
-          
-     
+                </p>               
+              </mat-card-content> 
               <mat-card-actions>
                 <button mat-button (click)="navegarAOtroComponente(x.tenantInstanceId,x.dominio)" class="btn">Unirme
                   ya</button>
@@ -52,7 +42,7 @@
       </div>
     </div>
   </div>
-</div>
-<ng-template #noInstancias>
   <button mat-raised-button color="primary" routerLink="/login">Ir a Login</button>
-</ng-template>
+</div>
+
+  

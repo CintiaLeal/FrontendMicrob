@@ -67,6 +67,7 @@ export class URLComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.valorURL = params['valorURL'];
       if (this.valorURL !== null) {
+        
         localStorage.setItem('valorURL', this.valorURL);
         this.api.getInstanciaPorURL(this.valorURL).subscribe({
           next: value => {
@@ -134,7 +135,7 @@ if (dominioUsuario === this.dom) {
               switch (this.tipoUsuario) {
                 case 'Platform-Administrator':
                   localStorage.setItem("tipoUsuario", 'Platform-Administrator');
-                  this.router.navigate(['/inicioAdmPlataformaGestorInstancia']);
+                  this.router.navigate(['/inicioAdmPlataforma']);
                   this.messageService.showSuccess('Inicio de sesión exitoso como administrador de plataforma');
                   break;
                 case 'Instance-Administrator':
@@ -340,6 +341,7 @@ export class DialogContentExampleDialog {
     this.api.registrarUsuario(x, this.idInstancia).subscribe(
       (data) => {
         // La solicitud fue exitosa, mostrar un mensaje de éxito
+        console.log(data);
         this.messageService.showSuccess('Usuario registrado exitosamente');
         const form: any = {
           userId: data.userId,

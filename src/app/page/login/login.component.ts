@@ -43,7 +43,7 @@ export class LoginComponent {
         this.tipoUsuario = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
         if(this.tipoUsuario == 'Platform-Administrator') {
             localStorage.setItem("tipoUsuario", 'Platform-Administrator');
-            this.router.navigate(['/inicioAdmPlataformaGestorInstancia']);
+            this.router.navigate(['/inicioAdmPlataforma']);
             this.messageService.showSuccess('Inicio de sesión exitoso como administrador de plataforma.');
         }
         else{

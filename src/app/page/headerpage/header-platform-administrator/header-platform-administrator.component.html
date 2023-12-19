@@ -1,10 +1,10 @@
 <p>
   <mat-toolbar color="primary">  
+    <button mat-button  routerLink="/inicioAdmPlataforma">Inicio</button>
     <button (click)="toggleModoOscuro()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>brightness_2</mat-icon>
     </button>
-    <div class="UserDiv">
-      <span>{{userName}}</span>
+    <div >
       <button mat-icon-button  (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>

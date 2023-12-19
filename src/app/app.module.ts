@@ -73,6 +73,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GestionEstadisticasComponent } from './gestion-estadisticas/gestion-estadisticas.component';
 import { GestionTematicaComponent } from './gestion-tematica/gestion-tematica.component';
 
+import { MsalModule, MsalRedirectComponent } from "@azure/msal-angular";
+import { PublicClientApplication } from "@azure/msal-browser";
+
+const isIE =
+  window.navigator.userAgent.indexOf("MSIE ") > -1 ||
+  window.navigator.userAgent.indexOf("Trident/") > -1;
+
 
 @NgModule({
   declarations: [

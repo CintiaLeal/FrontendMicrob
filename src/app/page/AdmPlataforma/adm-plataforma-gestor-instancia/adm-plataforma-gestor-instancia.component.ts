@@ -35,6 +35,7 @@ export class AdmPlataformaGestorInstanciaComponent {
     this.getInstancias();
     //this.dataSource.paginator = this.paginator;
     this.tipoU = localStorage.getItem('tipoUsuario');
+    this.getInstancias();
   }
 
   public getInstancias(){

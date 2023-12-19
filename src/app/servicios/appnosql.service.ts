@@ -6,7 +6,8 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class AppnosqlService {
-  url: string = "https://localhost:7131"; //URL BASE
+  url: string = "https://microbuyapi.azurewebsites.net";
+  // url: string = "https://localhost:7131"; //URL BASE
   constructor(private http: HttpClient) { }
   
   registrarUsuarioNOSQL(form: any): Observable<any>{

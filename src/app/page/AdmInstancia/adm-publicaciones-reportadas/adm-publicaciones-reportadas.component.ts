@@ -78,7 +78,7 @@ if (this.idinstancia) {
 
   openDialog(postId: any) {
     const dialogRef = this.dialog.open(DialogContentExampleDialog, {
-      data: { postId: postId } // Pasar el valor de postId como dato al diálogo
+      data: { postId: postId,componente: this } // Pasar el valor de postId como dato al diálogo
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -98,8 +98,10 @@ export class DialogContentExampleDialog {
   idInstanciaLocalHost: any;
   infoPost:any;
   checked: boolean = false;
+  componente:any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private api: AppService,private messageService: MessageService) {
     this.postId = data.postId;
+    this.componente = data.componente;
   }
 
   ngOnInit(): void {
@@ -118,15 +120,16 @@ export class DialogContentExampleDialog {
    
   }
 
+
   delete(){
     this.api.deletePost(this.idInstanciaLocalHost, this.postId).subscribe(
       (data) => {
-       
         if(this.checked===true){
-   
-        }
+          this.sancionarUsuario();
+          this.componente.ngOnInit();
+         }
         this.messageService.showSuccess('Posteo Eliminado.');
-
+        this.componente.ngOnInit();
       },
       (error) => {
         this.messageService.showSuccess('Error al Eliminado.');
@@ -159,7 +162,10 @@ export class DialogContentExampleDialog {
     this.api.punishPost(this.idInstanciaLocalHost, this.postId).subscribe(
       (data) => {
         this.messageService.showSuccess('Validar Report');
-        
+        if(this.checked===true){
+         this.sancionarUsuario();
+         this.componente.ngOnInit();
+        }
       },
       (error) => {
         this.messageService.showSuccess('Validar Report');

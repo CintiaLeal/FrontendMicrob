@@ -1,9 +1,9 @@
 <app-header-platform-administrator *ngIf="tipoU === 'Platform-Administrator'"></app-header-platform-administrator>
 <div *ngIf="tipoU === 'Platform-Administrator'">
     <p>
-        <mat-toolbar style="color: white;">
+        <mat-toolbar >
           <mat-toolbar-row>
-            <mat-card-title class="center-content">Gestion de Instancias</mat-card-title>
+            <mat-card-title class="center-content" style="color: black;">Gestion de Instancias</mat-card-title>
           </mat-toolbar-row>
         </mat-toolbar>
     </p>    
@@ -45,7 +45,7 @@
       <ng-container matColumnDef="Borrar">
         <mat-header-cell *matHeaderCellDef> Borrar </mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <button mat-button (click)="navigateToDeletes(row)">
+            <button mat-button routerLink="/BorrarInstancia/{{row.dominio}}">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>

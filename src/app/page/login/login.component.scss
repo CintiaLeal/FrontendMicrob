@@ -2,9 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: -10%;
     height: calc(100vh - 100px); /* 100px es la distancia desde la parte superior */
   }
-  
+  .backgroundBody {
+
+    background: url('/assets/img/pie.png') no-repeat center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%; /* Ancho deseado para el contenedor */
+    height: 300px; /* Alto deseado para el contenedor */
+    overflow: hidden;
+   
+  }
   mat-card {
     width: 500px;
   }
