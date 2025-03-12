@@ -12,8 +12,6 @@
 
 - **Angular Material:** Se utiliza Angular Material como framework CSS para una interfaz de usuario moderna y consistente.
 
-Descripción breve del proyecto.
-
 ## Requisitos Previos
 
 - [Node.js](https://nodejs.org/) y [npm](https://www.npmjs.com/) instalados.
