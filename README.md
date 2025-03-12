@@ -47,6 +47,6 @@ Descripción breve del proyecto.
 
 ![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/58f0b18c-204b-4828-a7d2-8d4b98f87b1a)
 
-![image](https://github.com/CintiaLeal/FrontendMicrob/assets/66495366/9bab8a4f-0f54-48c4-b7ab-984eb54f706c)
+
 
 
